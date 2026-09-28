@@ -435,7 +435,7 @@ function buildGemeloDigitalContent(): HTMLElement {
                 .map(
                   ({ id, tramo }) => `
               <div class="sim-corte-item">
-                <span>${tramo?.nombreCalle ?? '(sin nombre)'} <span class="sim-corte-sentido">— ${ETIQUETA_SENTIDO[tramo?.sentido ?? ''] ?? ''}</span></span>
+                <span>${escapeHtml(tramo?.nombreCalle ?? '(sin nombre)')} <span class="sim-corte-sentido">— ${escapeHtml(ETIQUETA_SENTIDO[tramo?.sentido ?? ''] ?? '')}</span></span>
                 <button type="button" class="sim-corte-quitar" data-id="${id}" title="Quitar corte">✕</button>
               </div>`,
                 )
