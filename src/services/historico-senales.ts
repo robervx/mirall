@@ -56,54 +56,67 @@ export async function escribirHistoricoSenales(
   let escritas = 0;
 
   try {
-    for (const s of relevantes) {
-      const idOrigen = idOrigenDe(s.id);
-      const previas = (await sql`
-        select id, severidad, descripcion from senal
-        where fuente_id = ${s.fuenteId} and id_origen = ${idOrigen}
-        order by observado_en desc
-        limit 1
-      `) as FilaPrevia[];
-      const previa = previas[0];
+    // Fase 1: fila previa de cada señal — lecturas independientes entre sí,
+    // en paralelo (antes se hacía una a una; con el driver HTTP de Neon cada
+    // consulta es un round-trip de red completo, así que secuencial escalaba
+    // linealmente con el nº de señales relevantes del ciclo).
+    const conPrevia = await Promise.all(
+      relevantes.map(async (s) => {
+        const idOrigen = idOrigenDe(s.id);
+        const previas = (await sql`
+          select id, severidad, descripcion from senal
+          where fuente_id = ${s.fuenteId} and id_origen = ${idOrigen}
+          order by observado_en desc
+          limit 1
+        `) as FilaPrevia[];
+        return { s, idOrigen, previa: previas[0] };
+      }),
+    );
 
-      if (previa && previa.severidad === s.severidad && previa.descripcion === s.descripcion) {
-        idsPersistidos.set(s.id, previa.id);
-        continue;
-      }
+    // Fase 2: insertar en paralelo solo las que cambiaron (o no tenían fila previa).
+    await Promise.all(
+      conPrevia.map(async ({ s, idOrigen, previa }) => {
+        if (previa && previa.severidad === s.severidad && previa.descripcion === s.descripcion) {
+          idsPersistidos.set(s.id, previa.id);
+          return;
+        }
 
-      const insertadas = (await sql`
-        insert into senal (fuente_id, id_origen, dominio, distrito_codigo, calle, lat, lon, severidad, descripcion, payload, observado_en, ingerido_en)
-        values (${s.fuenteId}, ${idOrigen}, ${s.tipo}, ${s.distritoCodigo}, ${s.calle}, ${s.lat}, ${s.lon}, ${s.severidad}, ${s.descripcion}, ${JSON.stringify({ fuenteSpec: s.fuenteSpec })}, ${s.observedAt}, ${s.fetchedAt})
-        on conflict (fuente_id, id_origen, observado_en) do nothing
-        returning id
-      `) as { id: string }[];
+        const insertadas = (await sql`
+          insert into senal (fuente_id, id_origen, dominio, distrito_codigo, calle, lat, lon, severidad, descripcion, payload, observado_en, ingerido_en)
+          values (${s.fuenteId}, ${idOrigen}, ${s.tipo}, ${s.distritoCodigo}, ${s.calle}, ${s.lat}, ${s.lon}, ${s.severidad}, ${s.descripcion}, ${JSON.stringify({ fuenteSpec: s.fuenteSpec })}, ${s.observedAt}, ${s.fetchedAt})
+          on conflict (fuente_id, id_origen, observado_en) do nothing
+          returning id
+        `) as { id: string }[];
 
-      if (insertadas[0]) {
-        idsPersistidos.set(s.id, insertadas[0].id);
-        escritas++;
-      } else if (previa) {
-        // conflicto de idempotencia (mismo ciclo reintentado) — reutiliza la fila ya existente
-        idsPersistidos.set(s.id, previa.id);
-      }
-    }
+        if (insertadas[0]) {
+          idsPersistidos.set(s.id, insertadas[0].id);
+          escritas++;
+        } else if (previa) {
+          // conflicto de idempotencia (mismo ciclo reintentado) — reutiliza la fila ya existente
+          idsPersistidos.set(s.id, previa.id);
+        }
+      }),
+    );
 
-    // Asociaciones: solo entre señales que sí se persistieron (aviso/urgente).
-    // Las relaciones con señales informativo/cámara no persistidas se quedan
-    // solo en la respuesta en caliente — no rompen nada, simplemente no
-    // generan una fila de `asociacion`.
+    // Fase 3: asociaciones, también en paralelo — solo entre señales que sí
+    // se persistieron (aviso/urgente). Las relaciones con señales
+    // informativo/cámara no persistidas se quedan solo en la respuesta en
+    // caliente — no rompen nada, simplemente no generan una fila de `asociacion`.
+    const asociaciones: Promise<unknown>[] = [];
     for (const s of relevantes) {
       const idPropio = idsPersistidos.get(s.id);
       if (!idPropio) continue;
       for (const relacionadaId of s.relacionadas) {
         const idRelacionado = idsPersistidos.get(relacionadaId);
         if (!idRelacionado || idRelacionado === idPropio) continue;
-        await sql`
+        asociaciones.push(sql`
           insert into asociacion (senal_id, asociada_id, criterio)
           values (${idPropio}, ${idRelacionado}, 'correlacion-047')
           on conflict (senal_id, asociada_id, criterio) do nothing
-        `;
+        `);
       }
     }
+    await Promise.all(asociaciones);
   } catch (err) {
     console.error('Fallo al escribir histórico de señales (degradando, sin romper la respuesta):', err);
   }
@@ -120,26 +133,32 @@ export async function escribirHistoricoRecomendaciones(
 ): Promise<void> {
   if (!sql || recomendaciones.length === 0) return;
   try {
-    for (const r of recomendaciones) {
-      const idsSenal = r.situacionAsociada.map((id) => idsPersistidos.get(id)).filter((id): id is string => Boolean(id));
-      if (idsSenal.length === 0) continue; // ninguna señal motivadora se persistió (no debería pasar, pero no bloquea)
+    // Recomendaciones independientes entre sí — en paralelo por el mismo
+    // motivo que en escribirHistoricoSenales (round-trip HTTP por sentencia).
+    await Promise.all(
+      recomendaciones.map(async (r) => {
+        const idsSenal = r.situacionAsociada.map((id) => idsPersistidos.get(id)).filter((id): id is string => Boolean(id));
+        if (idsSenal.length === 0) return; // ninguna señal motivadora se persistió (no debería pasar, pero no bloquea)
 
-      const insertadas = (await sql`
-        insert into recomendacion (distrito_codigo, zona, texto, tipo_actuacion, modelo)
-        values (${r.distritoCodigo}, ${r.zona}, ${r.texto}, ${r.tipoActuacionSugerida}, ${modelo})
-        returning id
-      `) as { id: string }[];
-      const recomendacionId = insertadas[0]?.id;
-      if (!recomendacionId) continue;
+        const insertadas = (await sql`
+          insert into recomendacion (distrito_codigo, zona, texto, tipo_actuacion, modelo)
+          values (${r.distritoCodigo}, ${r.zona}, ${r.texto}, ${r.tipoActuacionSugerida}, ${modelo})
+          returning id
+        `) as { id: string }[];
+        const recomendacionId = insertadas[0]?.id;
+        if (!recomendacionId) return;
 
-      for (const senalId of idsSenal) {
-        await sql`
-          insert into recomendacion_senal (recomendacion_id, senal_id)
-          values (${recomendacionId}, ${senalId})
-          on conflict do nothing
-        `;
-      }
-    }
+        await Promise.all(
+          idsSenal.map(
+            (senalId) => sql`
+              insert into recomendacion_senal (recomendacion_id, senal_id)
+              values (${recomendacionId}, ${senalId})
+              on conflict do nothing
+            `,
+          ),
+        );
+      }),
+    );
   } catch (err) {
     console.error('Fallo al escribir histórico de recomendaciones (degradando, sin romper la respuesta):', err);
   }
