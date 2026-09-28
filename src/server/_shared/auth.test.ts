@@ -118,6 +118,11 @@ describe('leerCookie / construirSetCookie', () => {
     expect(leerCookie(null, 'imc_session')).toBeUndefined();
   });
 
+  it('no lanza con un valor %-encoded mal formado (trata la cookie como ausente)', () => {
+    expect(leerCookie('imc_session=%', 'imc_session')).toBeUndefined();
+    expect(leerCookie('imc_session=%zz', 'imc_session')).toBeUndefined();
+  });
+
   it('con "recordar" añade Max-Age de 30 días; sin él, no', () => {
     expect(construirSetCookie('t', true)).toContain(`Max-Age=${Math.floor(DURACION_RECORDAR_MS / 1000)}`);
     expect(construirSetCookie('t', false)).not.toContain('Max-Age');

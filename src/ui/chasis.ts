@@ -33,6 +33,7 @@ import {
   type EstadoModoSimulacion,
 } from './modo-simulacion-cortes';
 import { buildGlosarioContent } from './glosario';
+import { escapeHtml } from './panel-utils';
 
 export interface SidebarSectionDefinition {
   key: string;
@@ -40,8 +41,8 @@ export interface SidebarSectionDefinition {
   icono: string;
   estado: 'disponible' | 'placeholder';
   specId?: string;
-  /** Contenido desplegable bajo la fila — solo si estado === 'disponible'. */
-  render?: () => HTMLElement;
+  /** Contenido desplegable bajo la fila. */
+  render: () => HTMLElement;
 }
 
 function filaResultado<T extends { nombre: string }>(r: ResultadoCercania<T>): string {
@@ -182,7 +183,7 @@ function buildCordonIncidenteContent(): HTMLElement {
       cuerpo.innerHTML = `
         <p class="cordon-intro">Haz clic en el punto del mapa donde está el incidente.</p>
         ${e.cargandoGrafo ? '<p class="proximidad-estado">Cargando grafo viario…</p>' : ''}
-        ${e.errorGrafo ? `<p class="proximidad-estado" style="color:#f87171">${e.errorGrafo}</p>` : ''}
+        ${e.errorGrafo ? `<p class="proximidad-estado" style="color:#f87171">${escapeHtml(e.errorGrafo)}</p>` : ''}
         <button type="button" class="proximidad-boton" id="cordon-cancelar">Cancelar</button>
       `;
       cuerpo.querySelector('#cordon-cancelar')?.addEventListener('click', () => salirModoCordon());
@@ -221,7 +222,7 @@ function buildCordonIncidenteContent(): HTMLElement {
           Necesidad de desalojo
         </label>
         <label>Observaciones (sin nombres ni datos identificativos)
-          <textarea id="cordon-observaciones" rows="2">${f.observaciones ?? ''}</textarea>
+          <textarea id="cordon-observaciones" rows="2">${escapeHtml(f.observaciones ?? '')}</textarea>
         </label>
         ${pii ? '<div class="cordon-pii-error">⚠️ Este texto parece incluir un dato identificativo (DNI, teléfono, email…). Quítalo para poder confirmar.</div>' : ''}
         <button type="button" class="proximidad-boton" id="cordon-cambiar-ubicacion">Cambiar ubicación</button>
@@ -237,7 +238,7 @@ function buildCordonIncidenteContent(): HTMLElement {
     if (!resultado) {
       resultadoRoot.innerHTML = '<p class="proximidad-estado">Calculando propuesta…</p>';
     } else if (!resultado.ok) {
-      resultadoRoot.innerHTML = `<p class="proximidad-estado" style="color:#f87171">${resultado.error}</p>`;
+      resultadoRoot.innerHTML = `<p class="proximidad-estado" style="color:#f87171">${escapeHtml(resultado.error)}</p>`;
     } else {
       const p = resultado.propuesta;
       resultadoRoot.innerHTML = `
@@ -286,7 +287,7 @@ function buildCordonIncidenteContent(): HTMLElement {
           .map((id) => {
             const t = getTramoPorIdCordon(id);
             return `<div class="sim-corte-item">
-              <span>${t?.nombreCalle ?? '(sin nombre)'} <span class="sim-corte-sentido">— ${ETIQUETA_SENTIDO[t?.sentido ?? ''] ?? ''}</span></span>
+              <span>${escapeHtml(t?.nombreCalle ?? '(sin nombre)')} <span class="sim-corte-sentido">— ${escapeHtml(ETIQUETA_SENTIDO[t?.sentido ?? ''] ?? '')}</span></span>
               <button type="button" class="sim-corte-quitar" data-corte="${id}" title="Quitar corte">✕</button>
             </div>`;
           })
@@ -306,7 +307,7 @@ function buildCordonIncidenteContent(): HTMLElement {
         tramos.length === 0
           ? ''
           : `<div class="${clase}">${titulo}<ul>${nombresUnicos(tramos)
-              .map((n) => `<li>${n}</li>`)
+              .map((n) => `<li>${escapeHtml(n)}</li>`)
               .join('')}</ul></div>`;
       propRoot.innerHTML =
         `<div class="proximidad-seccion__titulo">⚠️ Efecto en cadena fuera del cordón</div>` +

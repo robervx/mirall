@@ -80,6 +80,31 @@ describe('POST /api/auth/v1/login', () => {
     expect((await bloqueado.json()).retryAfterS).toBeGreaterThan(0);
   });
 
+  it('el rate-limit por IP no se puede saltar falsificando el primer valor de X-Forwarded-For', async () => {
+    // El primer valor de x-forwarded-for lo declara el cliente (falsificable);
+    // el de confianza es el ÚLTIMO que añade la red de Vercel. Un atacante que
+    // varía el valor que él mismo declara en cada intento no debe librarse del
+    // límite si el último salto (la IP real) no cambia.
+    for (let i = 0; i < 5; i++) {
+      const r = await handler(
+        new Request('http://localhost/api/auth/v1/login', {
+          method: 'POST',
+          headers: { 'content-type': 'application/json', 'x-forwarded-for': `1.2.3.${i}, 10.0.0.9` },
+          body: JSON.stringify({ usuario: 'rcerdan', pin: 'malo' }),
+        }),
+      );
+      expect(r.status).toBe(401);
+    }
+    const bloqueado = await handler(
+      new Request('http://localhost/api/auth/v1/login', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json', 'x-forwarded-for': '9.9.9.9, 10.0.0.9' },
+        body: JSON.stringify({ usuario: 'rcerdan', pin: '123456' }),
+      }),
+    );
+    expect(bloqueado.status).toBe(429);
+  });
+
   it('400 si el cuerpo no es JSON válido', async () => {
     const res = await handler(
       new Request('http://localhost/api/auth/v1/login', {

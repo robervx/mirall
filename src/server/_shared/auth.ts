@@ -179,7 +179,14 @@ export function leerCookie(header: string | null | undefined, nombre: string): s
     const idx = parte.indexOf('=');
     if (idx < 0) continue;
     if (parte.slice(0, idx).trim() === nombre) {
-      return decodeURIComponent(parte.slice(idx + 1).trim());
+      try {
+        return decodeURIComponent(parte.slice(idx + 1).trim());
+      } catch {
+        // Valor con % mal formado — se trata como si la cookie no existiera
+        // en vez de dejar que el URIError tumbe con 500 al llamador (el
+        // gate de acceso se ejecuta en cada petición a una ruta protegida).
+        return undefined;
+      }
     }
   }
   return undefined;

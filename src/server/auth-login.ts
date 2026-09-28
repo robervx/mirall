@@ -48,7 +48,13 @@ export default async function handler(req: Request): Promise<Response> {
   const pin = typeof body.pin === 'string' ? body.pin : '';
   const recordar = body.recordar !== false; // por defecto true
 
-  const ip = (req.headers.get('x-forwarded-for') ?? '').split(',')[0]?.trim() || 'desconocida';
+  // `x-real-ip` es la IP de cliente que añade la propia red de Vercel (de
+  // confianza). El PRIMER valor de `x-forwarded-for` lo declara el cliente
+  // (falsificable a voluntad); el de confianza es el ÚLTIMO que añade el
+  // proxy de Vercel — nunca el primero, o cualquiera se salta el rate-limit
+  // por IP mandando un valor distinto en cada intento.
+  const xff = (req.headers.get('x-forwarded-for') ?? '').split(',');
+  const ip = req.headers.get('x-real-ip')?.trim() || xff[xff.length - 1]?.trim() || 'desconocida';
   const claves = [`ip:${ip}`, `u:${usuario}`];
 
   for (const clave of claves) {
