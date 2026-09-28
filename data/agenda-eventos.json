@@ -17,7 +17,7 @@
           "bajaConfianza": false
         }
       ],
-      "fetchedAt": "2026-09-28T13:00:22.244Z",
+      "fetchedAt": "2026-09-28T22:57:55.939Z",
       "source": "ajuntament-valencia-scraping"
     },
     {
@@ -29,7 +29,7 @@
       "resumen": "El Ayuntamiento de València ha organizado las jornadas XATS, dedicadas a la salud mental, una iniciativa impulsada desde la Concejalía de Servicios Sociales, bajo el lema “Sentir, crecer y sanar”. El carácter diferencial de XATS es que une a los destacados profesionales del ámbito científico, clínic…",
       "url": "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/jornadas-xats-salud-mental-y-cultura",
       "distritosMencionados": [],
-      "fetchedAt": "2026-09-28T13:00:22.244Z",
+      "fetchedAt": "2026-09-28T22:57:55.939Z",
       "source": "ajuntament-valencia-scraping"
     },
     {
@@ -56,7 +56,7 @@
           "bajaConfianza": false
         }
       ],
-      "fetchedAt": "2026-09-28T13:00:22.244Z",
+      "fetchedAt": "2026-09-28T22:57:55.939Z",
       "source": "ajuntament-valencia-scraping"
     },
     {
@@ -68,7 +68,7 @@
       "resumen": "Si te gusta el ambiente de los mercados, los productos de temporada y compartir plan con los más peques de la casa, aquí tienes una selección de fechas donde estas plazas de abastos de València se convierten en un auténtico parque de experiencias. Cada cita gira alrededor de un producto típico y de…",
       "url": "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/mercafestes-en-los-mercados-municipales",
       "distritosMencionados": [],
-      "fetchedAt": "2026-09-28T13:00:22.244Z",
+      "fetchedAt": "2026-09-28T22:57:55.939Z",
       "source": "ajuntament-valencia-scraping"
     },
     {
@@ -80,7 +80,7 @@
       "resumen": "Cultura als Barris es un proyecto del Ayuntamiento de València cuyo objetivo es ampliar los lugares, los públicos y la oferta de actividades culturales gratuitas para la ciudadanía, llegando a los barrios periféricos de València.\n\nLa cultura no puede quedarse en determinados espacios ni tampoco en z…",
       "url": "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/cultura-als-barris-2026",
       "distritosMencionados": [],
-      "fetchedAt": "2026-09-28T13:00:22.244Z",
+      "fetchedAt": "2026-09-28T22:57:55.939Z",
       "source": "ajuntament-valencia-scraping"
     },
     {
@@ -92,7 +92,7 @@
       "resumen": "La ciudad de València se suma un año más a la Semana Europea del Deporte, bajo el lema europeo ‘#BeActive your way’, con una programación de actividades deportivas y de promoción de la actividad física dirigida a toda la ciudadanía. El Ayuntamiento de València, a través de la Fundación Deportiva Mun…",
       "url": "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/semana-europea-del-deporte-2026",
       "distritosMencionados": [],
-      "fetchedAt": "2026-09-28T13:00:22.244Z",
+      "fetchedAt": "2026-09-28T22:57:55.939Z",
       "source": "ajuntament-valencia-scraping"
     },
     {
@@ -104,7 +104,7 @@
       "resumen": "El Palau de la Música es un auditorio de prestigio internacional y un punto de referencia esencial en la vida cultural de la ciudad. Inaugurado en 1987, contiene varias salas para audiciones musicales, congresos, exposiciones, espectáculos y proyecciones de cine, entre otras actividades. Es la sede…",
       "url": "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/palau-de-la-musica-programacion-2026",
       "distritosMencionados": [],
-      "fetchedAt": "2026-09-28T13:00:22.244Z",
+      "fetchedAt": "2026-09-28T22:57:55.939Z",
       "source": "ajuntament-valencia-scraping"
     },
     {
@@ -116,7 +116,7 @@
       "resumen": "Durante los meses de septiembre y octubre València celebra el festival del diseño València Design Fest, que reúne a empresas y profesionales nacionales e internacionales con los que descubrir de primera mano el talento local y la efervescencia creativa de nuestra ciudad, designada por UNESCO como Ci…",
       "url": "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/valencia-design-fest-2026",
       "distritosMencionados": [],
-      "fetchedAt": "2026-09-28T13:00:22.244Z",
+      "fetchedAt": "2026-09-28T22:57:55.939Z",
       "source": "ajuntament-valencia-scraping"
     },
     {
@@ -128,7 +128,19 @@
       "resumen": "La Oficina de l'Energia es un servicio público y gratuito de la fundación València Clima i Energia, del Ajuntament de València. Se trata de un espacio de información y formación dirigido a la ciudadanía, donde se proporciona asesoramiento personalizado, talleres y actividades relacionados con la ene…",
       "url": "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/oficina-de-l-energia-actividades-gratuitas",
       "distritosMencionados": [],
-      "fetchedAt": "2026-09-28T13:00:22.244Z",
+      "fetchedAt": "2026-09-28T22:57:55.939Z",
+      "source": "ajuntament-valencia-scraping"
+    },
+    {
+      "id": "centros-culturales-municipales",
+      "titulo": "CENTROS CULTURALES MUNICIPALES",
+      "categoria": "AGENDA INFANTIL",
+      "fechaInicio": "2026-08-31T00:00:00.000Z",
+      "fechaFin": "2026-12-30T00:00:00.000Z",
+      "resumen": "València cuenta con cinco centros culturales a disposición de la ciudadanía, diseñados para fomentar la participación ciudadana, promover la cultura local y revitalizar los barrios mediante una programación accesible y gratuita. Su programación cuenta con talleres, teatro, música, cuentacuentos, cha…",
+      "url": "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/centros-culturales-municipales",
+      "distritosMencionados": [],
+      "fetchedAt": "2026-09-28T22:57:55.939Z",
       "source": "ajuntament-valencia-scraping"
     },
     {
@@ -148,7 +160,7 @@
           "bajaConfianza": false
         }
       ],
-      "fetchedAt": "2026-09-28T13:00:22.244Z",
+      "fetchedAt": "2026-09-28T22:57:55.939Z",
       "source": "ajuntament-valencia-scraping"
     },
     {
@@ -168,19 +180,7 @@
           "bajaConfianza": false
         }
       ],
-      "fetchedAt": "2026-09-28T13:00:22.244Z",
-      "source": "ajuntament-valencia-scraping"
-    },
-    {
-      "id": "centros-culturales-municipales",
-      "titulo": "CENTROS CULTURALES MUNICIPALES",
-      "categoria": "AGENDA INFANTIL",
-      "fechaInicio": "2026-08-31T00:00:00.000Z",
-      "fechaFin": "2026-12-30T00:00:00.000Z",
-      "resumen": "València cuenta con cinco centros culturales a disposición de la ciudadanía, diseñados para fomentar la participación ciudadana, promover la cultura local y revitalizar los barrios mediante una programación accesible y gratuita. Su programación cuenta con talleres, teatro, música, cuentacuentos, cha…",
-      "url": "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/centros-culturales-municipales",
-      "distritosMencionados": [],
-      "fetchedAt": "2026-09-28T13:00:22.244Z",
+      "fetchedAt": "2026-09-28T22:57:55.939Z",
       "source": "ajuntament-valencia-scraping"
     },
     {
@@ -192,7 +192,7 @@
       "resumen": "La Alqueria dels moros es un edificio catalogado como Bien de Interés Cultural (BIC) desde 2004, que puede visitarse gratuitamente con cita previa. Se trata de un edificio residencial compendio de la arquitectura señorial y rural de la huerta valenciana de los siglos XIV, XVI y XVIII, que ofrece ele…",
       "url": "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/alqueria-dels-moros-visitas-gratuitas",
       "distritosMencionados": [],
-      "fetchedAt": "2026-09-28T13:00:22.244Z",
+      "fetchedAt": "2026-09-28T22:57:55.939Z",
       "source": "ajuntament-valencia-scraping"
     },
     {
@@ -204,7 +204,7 @@
       "resumen": "El Centro Cultural Nave 3 Ribes es un espacio de encuentro y creación colectiva, ubicado en el Parque Central, que funciona como un laboratorio abierto para el desarrollo de fórmulas innovadoras de participación, aprendizaje y dinamización cultural. La programación cuenta con talleres, cine, teatro,…",
       "url": "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/cc-nave-3-ribes-cas",
       "distritosMencionados": [],
-      "fetchedAt": "2026-09-28T13:00:22.244Z",
+      "fetchedAt": "2026-09-28T22:57:55.939Z",
       "source": "ajuntament-valencia-scraping"
     },
     {
@@ -224,7 +224,7 @@
           "bajaConfianza": false
         }
       ],
-      "fetchedAt": "2026-09-28T13:00:22.244Z",
+      "fetchedAt": "2026-09-28T22:57:55.939Z",
       "source": "ajuntament-valencia-scraping"
     },
     {
@@ -236,7 +236,7 @@
       "resumen": "El Paleontològic acoge la exposición “MacroArte”, del fotógrafo Tony Tirado, una invitación a detener el ritmo cotidiano para descubrir la belleza de aquello que normalmente pasa desapercibido. Un recorrido que demuestra que la ciencia comienza con la observación, pero que el conocimiento también pu…",
       "url": "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/exposicion-macroarte-de-tony-tirado-el-paleontologic",
       "distritosMencionados": [],
-      "fetchedAt": "2026-09-28T13:00:22.244Z",
+      "fetchedAt": "2026-09-28T22:57:55.939Z",
       "source": "ajuntament-valencia-scraping"
     },
     {
@@ -248,7 +248,7 @@
       "resumen": "La Sala Municipal de Exposiciones del Ajuntament de València inaugura ALTRES, una recuperación histórica que se aproxima a un episodio singular de la historia reciente del arte valenciano: Els altres 75 anys de pintura valenciana, una contraexposición organizada en 1976 por el Col·lectiu de Pintors…",
       "url": "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/exposicion-altres",
       "distritosMencionados": [],
-      "fetchedAt": "2026-09-28T13:00:22.244Z",
+      "fetchedAt": "2026-09-28T22:57:55.939Z",
       "source": "ajuntament-valencia-scraping"
     },
     {
@@ -260,7 +260,7 @@
       "resumen": "La Fundación Deportiva Municipal (FDM) ha programado ‘Un estiu amb molt d’esport’, con propuestas deportivas para todas las edades que se desarrollarán durante los meses estivales en piscinas y otras instalaciones municipales. El programa incluye propuestas para todos los públicos y edades: desde cu…",
       "url": "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/un-estiu-amb-molt-d-esport-2026",
       "distritosMencionados": [],
-      "fetchedAt": "2026-09-28T13:00:22.244Z",
+      "fetchedAt": "2026-09-28T22:57:55.939Z",
       "source": "ajuntament-valencia-scraping"
     },
     {
@@ -272,7 +272,7 @@
       "resumen": "Anualmente, la Federació Cultural Valenciana de Vela Llatina patrocina las exhibiciones de Vela Latina que organizan las distintas associaciomes de los municipios que bordean el lago de l'Albufera. Estos acontecimientos reunen a asociaciones náuticas y vecinos con el objetivo de poner en valor el pa…",
       "url": "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/exhibiciones-de-vela-latina-lago-de-la-albufera-2026",
       "distritosMencionados": [],
-      "fetchedAt": "2026-09-28T13:00:22.244Z",
+      "fetchedAt": "2026-09-28T22:57:55.939Z",
       "source": "ajuntament-valencia-scraping"
     },
     {
@@ -284,7 +284,7 @@
       "resumen": "Con motivo de la celebración del III Año Jubilar Santo Cáliz, se han organizado visitas guiadas gratuitas para descubrir la historia del Santo Cáliz. Las rutas recorrerán distintos puntos históricos de la ciudad relacionados con la reliquia, pasando por enclaves emblemáticos como las Torres de Serra…",
       "url": "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/ruta-santo-caliz-visitas-guiadas",
       "distritosMencionados": [],
-      "fetchedAt": "2026-09-28T13:00:22.244Z",
+      "fetchedAt": "2026-09-28T22:57:55.939Z",
       "source": "ajuntament-valencia-scraping"
     },
     {
@@ -296,7 +296,7 @@
       "resumen": "La Casa Museo Blasco Ibáñez acoge una exposición temporal que, con el título de ‘La València de Blasco Ibáñez’, rememora escenarios emblemáticos de la ciudad y de su entorno, así como algunos tipos característicos de la sociedad valenciana de finales del XIX y principios del XX. La muestra, comisari…",
       "url": "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/exposicion-la-valencia-de-blasco-ibanez",
       "distritosMencionados": [],
-      "fetchedAt": "2026-09-28T13:00:22.244Z",
+      "fetchedAt": "2026-09-28T22:57:55.939Z",
       "source": "ajuntament-valencia-scraping"
     },
     {
@@ -308,7 +308,7 @@
       "resumen": "En BIOPARC València se recrea la naturaleza salvaje del continente africano: el bosque ecuatorial, Madagascar, los grandes humedales y la sabana. Los animales, la vegetación y el paisaje forman un conjunto que permite al visitante aprender sobre las relaciones entre los organismos y elementos que co…",
       "url": "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/bioparc-valencia",
       "distritosMencionados": [],
-      "fetchedAt": "2026-09-28T13:00:22.244Z",
+      "fetchedAt": "2026-09-28T22:57:55.939Z",
       "source": "ajuntament-valencia-scraping"
     },
     {
@@ -320,7 +320,7 @@
       "resumen": "Ciencia, género, arte y nuevas tecnologías se conjugan en esta iniciativa de la Universitat Politècnica de València y el centro de innovación Las Naves del Ayuntamiento de València, que cuenta con la colaboración de la Fundación Española para la Ciencia y la Tecnología (FECYT) del Ministerio de Cien…",
       "url": "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/ruta-dones-de-ciencia",
       "distritosMencionados": [],
-      "fetchedAt": "2026-09-28T13:00:22.244Z",
+      "fetchedAt": "2026-09-28T22:57:55.939Z",
       "source": "ajuntament-valencia-scraping"
     },
     {
@@ -332,7 +332,7 @@
       "resumen": "Las cinco rutas de los árboles monumentales de València es una forma muy original y ecológica de visitar la ciudad. Se trata de recorrer varias zonas de la ciudad a través de sus árboles más curiosos. Árboles que por su tamaño, forma, edad, rareza, origen biológico, belleza o por ser protagonistas d…",
       "url": "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/ruta-dels-arbres-monumentals-de-valencia",
       "distritosMencionados": [],
-      "fetchedAt": "2026-09-28T13:00:22.244Z",
+      "fetchedAt": "2026-09-28T22:57:55.939Z",
       "source": "ajuntament-valencia-scraping"
     },
     {
@@ -344,7 +344,7 @@
       "resumen": "El anillo ciclista de la ciudad permite disfrutar a su paso de edificios y lugares emblemáticos de València. Todo un gusto ir en bicicleta y poder empaparse de la cultura y la historia de la ciudad.\n\nLa ruta te llevará a lugares tan icónicos como la Estación del Norte, diseñada por el arquitecto Dem…",
       "url": "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/ruta-cultural-anell-ciclista",
       "distritosMencionados": [],
-      "fetchedAt": "2026-09-28T13:00:22.244Z",
+      "fetchedAt": "2026-09-28T22:57:55.939Z",
       "source": "ajuntament-valencia-scraping"
     },
     {
@@ -356,7 +356,7 @@
       "resumen": "El Museo de Prehistoria se crea en el año 1927 como una institución científica dedicada a conservar, investigar y difundir el rico patrimonio arqueológico valenciano. En el año 1982 se ubicó definitivamente en la antigua Beneficencia y en 1995 se abrieron al público las actuales Salas de Prehistoria…",
       "url": "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/museu-de-prehistoria-de-valencia",
       "distritosMencionados": [],
-      "fetchedAt": "2026-09-28T13:00:22.244Z",
+      "fetchedAt": "2026-09-28T22:57:55.939Z",
       "source": "ajuntament-valencia-scraping"
     },
     {
@@ -368,7 +368,7 @@
       "resumen": "La Alquería de Félix cuenta con una exposición permanente que tiene por objetivo dar a conocer su historia y explicar cómo era antes la vida en la huerta. \n\nLa exposición está formada por ocho paneles expositivos que tienen por objetivo divulgar la historia y la arquitectura del edificio, su evoluci…",
       "url": "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/exposicio-permanent-a-l-alqueria-de-felix",
       "distritosMencionados": [],
-      "fetchedAt": "2026-09-28T13:00:22.244Z",
+      "fetchedAt": "2026-09-28T22:57:55.939Z",
       "source": "ajuntament-valencia-scraping"
     },
     {
@@ -380,7 +380,7 @@
       "resumen": "En el espectacular edificio diseñado por Santiago Calatrava los visitantes cuentan con más de 26.000 metros cuadrados de exposiciones relacionadas con la actualidad científica y tecnológica. La interactividad llena es una de sus señales de identidad, debajo el lema “Prohibido no tocar, no sentir, no…",
       "url": "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/programacio-cultural-museu-de-les-ciencies",
       "distritosMencionados": [],
-      "fetchedAt": "2026-09-28T13:00:22.244Z",
+      "fetchedAt": "2026-09-28T22:57:55.939Z",
       "source": "ajuntament-valencia-scraping"
     },
     {
@@ -392,7 +392,7 @@
       "resumen": "LocoClub está ubicado en pleno centro de la ciudad de València. Es un espacio amplio y abierto donde se realizan diferentes actividades, principalmente conciertos y música en directo, pero también ofrece la posibilidad de celebrar otro tipo de eventos. Con una programación variada que abarca desde r…",
       "url": "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/loco-club-programaci%C3%B3",
       "distritosMencionados": [],
-      "fetchedAt": "2026-09-28T13:00:22.244Z",
+      "fetchedAt": "2026-09-28T22:57:55.939Z",
       "source": "ajuntament-valencia-scraping"
     },
     {
@@ -404,7 +404,7 @@
       "resumen": "El Ajuntament de València, a través de la Concejalía de Acció Cultural, gestiona este espacio escénico ubicado en la calle Joan Verdeguer. Artistas valencianos y propuestas internacionales, con el denominador común de los nuevos lenguajes escénicos, se han convertido en el motor de una nueva etapa c…",
       "url": "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/la-mutant-espai-d-arts-vives",
       "distritosMencionados": [],
-      "fetchedAt": "2026-09-28T13:00:22.244Z",
+      "fetchedAt": "2026-09-28T22:57:55.939Z",
       "source": "ajuntament-valencia-scraping"
     },
     {
@@ -424,7 +424,7 @@
           "bajaConfianza": false
         }
       ],
-      "fetchedAt": "2026-09-28T13:00:22.244Z",
+      "fetchedAt": "2026-09-28T22:57:55.939Z",
       "source": "ajuntament-valencia-scraping"
     },
     {
@@ -436,7 +436,7 @@
       "resumen": "En el siglo VIII se construyó sobre su solar la mezquita mayor de Balansiya, que sirvió de catedral tras la fundación del Reino cristiano de València por Jaime I el Conquistador en 1238, y el 22 de junio de 1262 el Obispo Fray Andrés de Albalat O. P. puso la primera piedra de la actual Catedral. En…",
       "url": "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/catedral-de-valencia",
       "distritosMencionados": [],
-      "fetchedAt": "2026-09-28T13:00:22.244Z",
+      "fetchedAt": "2026-09-28T22:57:55.939Z",
       "source": "ajuntament-valencia-scraping"
     },
     {
@@ -448,7 +448,7 @@
       "resumen": null,
       "url": "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/ivac-filmoteca-programacio",
       "distritosMencionados": [],
-      "fetchedAt": "2026-09-28T13:00:22.244Z",
+      "fetchedAt": "2026-09-28T22:57:55.939Z",
       "source": "ajuntament-valencia-scraping"
     },
     {
@@ -460,123 +460,7 @@
       "resumen": "Caixaforum València se ubica en el complejo arquitectónico de la Ciutat de les Arts i les Ciències, un conjunto único dedicado a la divulgación científica y cultural. Caixaforum, el estandarte cultural de la Fundación ”la Caixa”, apuesta por la divulgación del conocimiento, la cultura y la ciencia c…",
       "url": "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/programacio-cultural-caixaforum-valencia",
       "distritosMencionados": [],
-      "fetchedAt": "2026-09-28T13:00:22.244Z",
-      "source": "ajuntament-valencia-scraping"
-    },
-    {
-      "id": "programacio-fins-a-final-d-any-carme-teatre",
-      "titulo": "Carme Teatre - Programación",
-      "categoria": "TEATRO",
-      "fechaInicio": "2026-01-01T00:00:00.000Z",
-      "fechaFin": "2026-12-30T00:00:00.000Z",
-      "resumen": "Una escena que abre nuevos ámbitos de conexión con el público. Teatro de proximidad, independiente, alternativo, próximo, a tu lado y en València. Desde la comedia al drama, pasando por la tragedia y la tragicomedia: todas las experiencias son posibles en Sala Carme Teatre València. Amor y pasión po…",
-      "url": "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/programacio-fins-a-final-d-any-carme-teatre",
-      "distritosMencionados": [],
-      "fetchedAt": "2026-09-28T13:00:22.244Z",
-      "source": "ajuntament-valencia-scraping"
-    },
-    {
-      "id": "teatre-olympia-programaci%C3%B3",
-      "titulo": "Teatro Olympia - Programación",
-      "categoria": "TEATRO",
-      "fechaInicio": "2026-01-01T00:00:00.000Z",
-      "fechaFin": "2026-12-30T00:00:00.000Z",
-      "resumen": null,
-      "url": "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/teatre-olympia-programaci%C3%B3",
-      "distritosMencionados": [],
-      "fetchedAt": "2026-09-28T13:00:22.244Z",
-      "source": "ajuntament-valencia-scraping"
-    },
-    {
-      "id": "teatre-talia-programacio",
-      "titulo": "Teatro Talia - Programación",
-      "categoria": "TEATRO",
-      "fechaInicio": "2026-01-01T00:00:00.000Z",
-      "fechaFin": "2026-12-30T00:00:00.000Z",
-      "resumen": "Teatro Talia está ubicado en el casco antiguo de València. Se inauguró en 1928. En sus inicios, se representaban obras locales, tanto en valenciano como en castellano. Es de los teatros más pequeños de la Generalitat, con un aforo de unos 350 espectadores. Durante todo el año nos ofrece una amplia p…",
-      "url": "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/teatre-talia-programacio",
-      "distritosMencionados": [],
-      "fetchedAt": "2026-09-28T13:00:22.244Z",
-      "source": "ajuntament-valencia-scraping"
-    },
-    {
-      "id": "drassanes-del-grau",
-      "titulo": "Atarazanas del Grao",
-      "categoria": "EXPOSICIONES",
-      "fechaInicio": "2026-01-01T00:00:00.000Z",
-      "fechaFin": "2026-12-30T00:00:00.000Z",
-      "resumen": "Las Atarazanas de València, construidas a finales del siglo XIV, fueron un importante centro para la construcción, reparación y almacenamiento de embarcaciones y mercancías, reflejando el papel clave del puerto de València en el comercio mediterráneo durante los siglos XIV al XVI. Declaradas Monumen…",
-      "url": "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/drassanes-del-grau",
-      "distritosMencionados": [
-        {
-          "distritoCodigo": "11",
-          "distritoNombre": "Poblats Maritims",
-          "coincidencia": "barrio",
-          "textoCoincidente": "El Grao",
-          "bajaConfianza": false
-        }
-      ],
-      "fetchedAt": "2026-09-28T13:00:22.244Z",
-      "source": "ajuntament-valencia-scraping"
-    },
-    {
-      "id": "centre-cultural-bancaixa",
-      "titulo": "Centro Cultural Bancaja - Actividades",
-      "categoria": "EXPOSICIONES",
-      "fechaInicio": "2026-01-01T00:00:00.000Z",
-      "fechaFin": "2026-12-30T00:00:00.000Z",
-      "resumen": "Entidad privada sin ánimo de lucro que trabaja en favor del progreso de las personas y la sociedad valenciana,  que fomenta la participación y el acceso a la cultura. Sus actividades culturales se centran en exposiciones, talleres didácticos, ciclos de conferencias, premios y el apoyo de la lengua y…",
-      "url": "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/centre-cultural-bancaixa",
-      "distritosMencionados": [],
-      "fetchedAt": "2026-09-28T13:00:22.244Z",
-      "source": "ajuntament-valencia-scraping"
-    },
-    {
-      "id": "pogramacio-cultural-jardi-botanic",
-      "titulo": "Jardín Botánico - Programación",
-      "categoria": "CURSOS",
-      "fechaInicio": "2026-01-01T00:00:00.000Z",
-      "fechaFin": "2026-12-30T00:00:00.000Z",
-      "resumen": "El Jardín Botánico de la Universitat de València es un museo vivo situado al casco histórico de la ciudad, un espacio universitario abierto al público que tiene como misión popularizar el mundo vegetal fomentando su estudio, enseñanza, divulgación y conservación, así como también su uso sostenible.…",
-      "url": "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/pogramacio-cultural-jardi-botanic",
-      "distritosMencionados": [],
-      "fetchedAt": "2026-09-28T13:00:22.244Z",
-      "source": "ajuntament-valencia-scraping"
-    },
-    {
-      "id": "black-note-club-programacio",
-      "titulo": "Black Note Club - Programación",
-      "categoria": "MÚSICA",
-      "fechaInicio": "2026-01-01T00:00:00.000Z",
-      "fechaFin": "2026-12-30T00:00:00.000Z",
-      "resumen": "Desde hace más de tres décadas, Black Note Club ha sido el epicentro de la música en directo en València y un referente a nivel nacional, ofreciendo una plataforma para artistas emergentes y consagrados. Black Note Club se ha convertido en el lugar de encuentro para los amantes de la música en vivo.…",
-      "url": "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/black-note-club-programacio",
-      "distritosMencionados": [],
-      "fetchedAt": "2026-09-28T13:00:22.244Z",
-      "source": "ajuntament-valencia-scraping"
-    },
-    {
-      "id": "pogramacio-cultural-ateneo",
-      "titulo": "Ateneo Mercantil - Programación cultural",
-      "categoria": "CINE",
-      "fechaInicio": "2026-01-01T00:00:00.000Z",
-      "fechaFin": "2026-12-30T00:00:00.000Z",
-      "resumen": "La institución nace el 23 de marzo de 1879 para “atender las necesidades culturales y de formación, en su profesión, de los empleados del comercio”. En sus 139 años de vida, se ha consolidado como una de las instituciones de referencia de la sociedad civil valenciana, en materia cultural, mercantil…",
-      "url": "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/pogramacio-cultural-ateneo",
-      "distritosMencionados": [],
-      "fetchedAt": "2026-09-28T13:00:22.244Z",
-      "source": "ajuntament-valencia-scraping"
-    },
-    {
-      "id": "palau-de-congressos-de-valencia-activitats",
-      "titulo": "Palacio de Congresos de València - Actividades",
-      "categoria": "CONGRESOS",
-      "fechaInicio": "2026-01-01T00:00:00.000Z",
-      "fechaFin": "2026-12-30T00:00:00.000Z",
-      "resumen": "El edificio del Palacio de Congresos de València fue diseñado por el célebre arquitecto británico Norman Foster e  inaugurado en 1998. Dispone de tres auditorios, una gran sala de exposiciones y diversas salas de reuniones. En su programación, que ofrece eventos nacionales e internacionales, destaca…",
-      "url": "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/palau-de-congressos-de-valencia-activitats",
-      "distritosMencionados": [],
-      "fetchedAt": "2026-09-28T13:00:22.244Z",
+      "fetchedAt": "2026-09-28T22:57:55.939Z",
       "source": "ajuntament-valencia-scraping"
     },
     {
@@ -588,7 +472,7 @@
       "resumen": "La Fundación Cañada Blanch es un espacio dedicado a la cultura contemporánea, donde personas referentes en diferentes áreas comparten sus conocimientos y vivencias, permitiéndonos reflexionar sobre la realidad que nos rodea.\nLiteratura, arte, música, filosofía, género, ciencia, sociedad, humanidades…",
       "url": "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/fundacion-canada-blanch-programacion-cultural",
       "distritosMencionados": [],
-      "fetchedAt": "2026-09-28T13:00:22.244Z",
+      "fetchedAt": "2026-09-28T22:57:55.939Z",
       "source": "ajuntament-valencia-scraping"
     },
     {
@@ -608,7 +492,7 @@
           "bajaConfianza": false
         }
       ],
-      "fetchedAt": "2026-09-28T13:00:22.244Z",
+      "fetchedAt": "2026-09-28T22:57:55.939Z",
       "source": "ajuntament-valencia-scraping"
     },
     {
@@ -620,7 +504,7 @@
       "resumen": null,
       "url": "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/el-centre-museistic-la-beneficencia",
       "distritosMencionados": [],
-      "fetchedAt": "2026-09-28T13:00:22.244Z",
+      "fetchedAt": "2026-09-28T22:57:55.939Z",
       "source": "ajuntament-valencia-scraping"
     },
     {
@@ -632,7 +516,7 @@
       "resumen": "El Escalante es el proyecto escénico para la Infancia y la Juventud de la Diputación de València. Nacido en 1985, fue el primer teatro en España que apostó por ofrecer producciones y exhibiciones de calidad para los niños y a los jóvenes que, hasta entonces, solo se encontraban en el teatro para adu…",
       "url": "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/teatre-escalante-programacio",
       "distritosMencionados": [],
-      "fetchedAt": "2026-09-28T13:00:22.244Z",
+      "fetchedAt": "2026-09-28T22:57:55.939Z",
       "source": "ajuntament-valencia-scraping"
     },
     {
@@ -644,7 +528,7 @@
       "resumen": "El Teatro Principal de València, inaugurado en 1832 y ubicado en pleno corazón de la ciudad, es uno de los espacios culturales más icónicos y emblemáticos de la Comunidad Valenciana. Su historia y tradición lo han consolidado como el escenario perfecto para acoger los espectáculos más destacados de…",
       "url": "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/teatre-principal-programacio",
       "distritosMencionados": [],
-      "fetchedAt": "2026-09-28T13:00:22.244Z",
+      "fetchedAt": "2026-09-28T22:57:55.939Z",
       "source": "ajuntament-valencia-scraping"
     },
     {
@@ -656,7 +540,7 @@
       "resumen": "El Colegio Mayor Rector Peset se ha consolidado en la ciudad de Valencia como un punto de encuentro de la universidad, la sociedad civil y las entidades sociales y culturales de la ciudad de Valencia, en la programación de sus actividades culturales, formativas y en la transmisión de sus experiencia…",
       "url": "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/collegi-major-rector-peset-programacio",
       "distritosMencionados": [],
-      "fetchedAt": "2026-09-28T13:00:22.244Z",
+      "fetchedAt": "2026-09-28T22:57:55.939Z",
       "source": "ajuntament-valencia-scraping"
     },
     {
@@ -668,7 +552,7 @@
       "resumen": "El actual Museo Fallero de València está instalado desde 1971 en el antiguo Convento de la Casa Misión de San Vicente de Paúl está integrado por la colección de ninots indultados grandes, e infantiles, así como por los carteles anunciadores ganadores y finalistas de las Fallas, los cuadros que retra…",
       "url": "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/museu-faller-de-valencia",
       "distritosMencionados": [],
-      "fetchedAt": "2026-09-28T13:00:22.244Z",
+      "fetchedAt": "2026-09-28T22:57:55.939Z",
       "source": "ajuntament-valencia-scraping"
     },
     {
@@ -680,7 +564,123 @@
       "resumen": "El TEM es algo más que un teatro, se ha convertido en un centro cultural al servicio del ciudadano y de sus asociaciones, un laboratorio de escena que también ofrece talleres y actividades participativas. Ubicado en el barrio Cabanyal, es un edificio emblemático. \nCon una programación de primerísimo…",
       "url": "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/teatre-el-musical-programacio",
       "distritosMencionados": [],
-      "fetchedAt": "2026-09-28T13:00:22.244Z",
+      "fetchedAt": "2026-09-28T22:57:55.939Z",
+      "source": "ajuntament-valencia-scraping"
+    },
+    {
+      "id": "programacio-fins-a-final-d-any-carme-teatre",
+      "titulo": "Carme Teatre - Programación",
+      "categoria": "TEATRO",
+      "fechaInicio": "2026-01-01T00:00:00.000Z",
+      "fechaFin": "2026-12-30T00:00:00.000Z",
+      "resumen": "Una escena que abre nuevos ámbitos de conexión con el público. Teatro de proximidad, independiente, alternativo, próximo, a tu lado y en València. Desde la comedia al drama, pasando por la tragedia y la tragicomedia: todas las experiencias son posibles en Sala Carme Teatre València. Amor y pasión po…",
+      "url": "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/programacio-fins-a-final-d-any-carme-teatre",
+      "distritosMencionados": [],
+      "fetchedAt": "2026-09-28T22:57:55.939Z",
+      "source": "ajuntament-valencia-scraping"
+    },
+    {
+      "id": "teatre-olympia-programaci%C3%B3",
+      "titulo": "Teatro Olympia - Programación",
+      "categoria": "TEATRO",
+      "fechaInicio": "2026-01-01T00:00:00.000Z",
+      "fechaFin": "2026-12-30T00:00:00.000Z",
+      "resumen": null,
+      "url": "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/teatre-olympia-programaci%C3%B3",
+      "distritosMencionados": [],
+      "fetchedAt": "2026-09-28T22:57:55.939Z",
+      "source": "ajuntament-valencia-scraping"
+    },
+    {
+      "id": "teatre-talia-programacio",
+      "titulo": "Teatro Talia - Programación",
+      "categoria": "TEATRO",
+      "fechaInicio": "2026-01-01T00:00:00.000Z",
+      "fechaFin": "2026-12-30T00:00:00.000Z",
+      "resumen": "Teatro Talia está ubicado en el casco antiguo de València. Se inauguró en 1928. En sus inicios, se representaban obras locales, tanto en valenciano como en castellano. Es de los teatros más pequeños de la Generalitat, con un aforo de unos 350 espectadores. Durante todo el año nos ofrece una amplia p…",
+      "url": "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/teatre-talia-programacio",
+      "distritosMencionados": [],
+      "fetchedAt": "2026-09-28T22:57:55.939Z",
+      "source": "ajuntament-valencia-scraping"
+    },
+    {
+      "id": "drassanes-del-grau",
+      "titulo": "Atarazanas del Grao",
+      "categoria": "EXPOSICIONES",
+      "fechaInicio": "2026-01-01T00:00:00.000Z",
+      "fechaFin": "2026-12-30T00:00:00.000Z",
+      "resumen": "Las Atarazanas de València, construidas a finales del siglo XIV, fueron un importante centro para la construcción, reparación y almacenamiento de embarcaciones y mercancías, reflejando el papel clave del puerto de València en el comercio mediterráneo durante los siglos XIV al XVI. Declaradas Monumen…",
+      "url": "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/drassanes-del-grau",
+      "distritosMencionados": [
+        {
+          "distritoCodigo": "11",
+          "distritoNombre": "Poblats Maritims",
+          "coincidencia": "barrio",
+          "textoCoincidente": "El Grao",
+          "bajaConfianza": false
+        }
+      ],
+      "fetchedAt": "2026-09-28T22:57:55.939Z",
+      "source": "ajuntament-valencia-scraping"
+    },
+    {
+      "id": "centre-cultural-bancaixa",
+      "titulo": "Centro Cultural Bancaja - Actividades",
+      "categoria": "EXPOSICIONES",
+      "fechaInicio": "2026-01-01T00:00:00.000Z",
+      "fechaFin": "2026-12-30T00:00:00.000Z",
+      "resumen": "Entidad privada sin ánimo de lucro que trabaja en favor del progreso de las personas y la sociedad valenciana,  que fomenta la participación y el acceso a la cultura. Sus actividades culturales se centran en exposiciones, talleres didácticos, ciclos de conferencias, premios y el apoyo de la lengua y…",
+      "url": "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/centre-cultural-bancaixa",
+      "distritosMencionados": [],
+      "fetchedAt": "2026-09-28T22:57:55.939Z",
+      "source": "ajuntament-valencia-scraping"
+    },
+    {
+      "id": "pogramacio-cultural-jardi-botanic",
+      "titulo": "Jardín Botánico - Programación",
+      "categoria": "CURSOS",
+      "fechaInicio": "2026-01-01T00:00:00.000Z",
+      "fechaFin": "2026-12-30T00:00:00.000Z",
+      "resumen": "El Jardín Botánico de la Universitat de València es un museo vivo situado al casco histórico de la ciudad, un espacio universitario abierto al público que tiene como misión popularizar el mundo vegetal fomentando su estudio, enseñanza, divulgación y conservación, así como también su uso sostenible.…",
+      "url": "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/pogramacio-cultural-jardi-botanic",
+      "distritosMencionados": [],
+      "fetchedAt": "2026-09-28T22:57:55.939Z",
+      "source": "ajuntament-valencia-scraping"
+    },
+    {
+      "id": "black-note-club-programacio",
+      "titulo": "Black Note Club - Programación",
+      "categoria": "MÚSICA",
+      "fechaInicio": "2026-01-01T00:00:00.000Z",
+      "fechaFin": "2026-12-30T00:00:00.000Z",
+      "resumen": "Desde hace más de tres décadas, Black Note Club ha sido el epicentro de la música en directo en València y un referente a nivel nacional, ofreciendo una plataforma para artistas emergentes y consagrados. Black Note Club se ha convertido en el lugar de encuentro para los amantes de la música en vivo.…",
+      "url": "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/black-note-club-programacio",
+      "distritosMencionados": [],
+      "fetchedAt": "2026-09-28T22:57:55.939Z",
+      "source": "ajuntament-valencia-scraping"
+    },
+    {
+      "id": "pogramacio-cultural-ateneo",
+      "titulo": "Ateneo Mercantil - Programación cultural",
+      "categoria": "CINE",
+      "fechaInicio": "2026-01-01T00:00:00.000Z",
+      "fechaFin": "2026-12-30T00:00:00.000Z",
+      "resumen": "La institución nace el 23 de marzo de 1879 para “atender las necesidades culturales y de formación, en su profesión, de los empleados del comercio”. En sus 139 años de vida, se ha consolidado como una de las instituciones de referencia de la sociedad civil valenciana, en materia cultural, mercantil…",
+      "url": "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/pogramacio-cultural-ateneo",
+      "distritosMencionados": [],
+      "fetchedAt": "2026-09-28T22:57:55.939Z",
+      "source": "ajuntament-valencia-scraping"
+    },
+    {
+      "id": "palau-de-congressos-de-valencia-activitats",
+      "titulo": "Palacio de Congresos de València - Actividades",
+      "categoria": "CONGRESOS",
+      "fechaInicio": "2026-01-01T00:00:00.000Z",
+      "fechaFin": "2026-12-30T00:00:00.000Z",
+      "resumen": "El edificio del Palacio de Congresos de València fue diseñado por el célebre arquitecto británico Norman Foster e  inaugurado en 1998. Dispone de tres auditorios, una gran sala de exposiciones y diversas salas de reuniones. En su programación, que ofrece eventos nacionales e internacionales, destaca…",
+      "url": "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/palau-de-congressos-de-valencia-activitats",
+      "distritosMencionados": [],
+      "fetchedAt": "2026-09-28T22:57:55.939Z",
       "source": "ajuntament-valencia-scraping"
     },
     {
@@ -692,7 +692,7 @@
       "resumen": "En concreto Flumen teatro València es un destino de diversión que aporta muchos valores añadidos. Gracias a nuestra reciente reforma, toda la sala está equipada de butacas cómodas que harán de tu estancia un momento inolvidable que junto con los actores de la función pasará en un abrir y cerrar de o…",
       "url": "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/programacio-fins-a-final-d-any-teatre-flumen",
       "distritosMencionados": [],
-      "fetchedAt": "2026-09-28T13:00:22.244Z",
+      "fetchedAt": "2026-09-28T22:57:55.939Z",
       "source": "ajuntament-valencia-scraping"
     },
     {
@@ -704,7 +704,7 @@
       "resumen": "L’ETNO, Museu Valencià d'Etnología se creó en 1982 para recoger, estudiar y difundir todo aquello relacionado con la cultura popular y tradicional valenciana. En el año 2023 fue elegido Museo Europeo del Año por los premios EMYA del Consejo de Europa.\nComo museo de la cultura popular valenciana, inv…",
       "url": "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/museo-valencia-d-etnologia-actividades",
       "distritosMencionados": [],
-      "fetchedAt": "2026-09-28T13:00:22.244Z",
+      "fetchedAt": "2026-09-28T22:57:55.939Z",
       "source": "ajuntament-valencia-scraping"
     },
     {
@@ -716,7 +716,7 @@
       "resumen": "Teatro Círculo es un centro de creación, producción teatral y exhibición de las artes vivas contemporáneas con compañía estable, un laboratorio, un taller de entrenamiento y un espacio de acogida de residencias. Cuenta con un equipo artístico, con colaboradores en distintos ámbitos, con un espacio q…",
       "url": "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/programacion-cultural-teatro-circulo",
       "distritosMencionados": [],
-      "fetchedAt": "2026-09-28T13:00:22.244Z",
+      "fetchedAt": "2026-09-28T22:57:55.939Z",
       "source": "ajuntament-valencia-scraping"
     },
     {
@@ -728,7 +728,7 @@
       "resumen": "El Museo de la Semana Santa Marinera “Salvador Caurín” de València está ubicado en un barrio típicamente marinero. La vistosidad de sus trajes, la riqueza simbólica y la singularidad de sus celebraciones son perceptibles en las imágenes y colección de trajes y elementos expuestos en el Museo y que,…",
       "url": "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/museu-de-la-setmana-santa-marinera",
       "distritosMencionados": [],
-      "fetchedAt": "2026-09-28T13:00:22.244Z",
+      "fetchedAt": "2026-09-28T22:57:55.939Z",
       "source": "ajuntament-valencia-scraping"
     },
     {
@@ -748,7 +748,7 @@
           "bajaConfianza": false
         }
       ],
-      "fetchedAt": "2026-09-28T13:00:22.244Z",
+      "fetchedAt": "2026-09-28T22:57:55.939Z",
       "source": "ajuntament-valencia-scraping"
     },
     {
@@ -760,7 +760,7 @@
       "resumen": "La compañía de Teatro de Marionetas la Estrella cuenta con una larga trayectoria produciendo montajes infantiles, con más de veinte espectáculos producidos tanto para la programación estable de nuestras salas en Valencia, como para gira y festivales nacionales e internacionales. A lo largo de estos…",
       "url": "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/programacio-teatro-la-estrella",
       "distritosMencionados": [],
-      "fetchedAt": "2026-09-28T13:00:22.244Z",
+      "fetchedAt": "2026-09-28T22:57:55.939Z",
       "source": "ajuntament-valencia-scraping"
     },
     {
@@ -772,7 +772,7 @@
       "resumen": "El MuVIM es un museo de ideas, consagrado a preservar y dar a conocer las ideas y valores que han hecho posible el mundo moderno.\nLas actividades y exposiciones siempre ofrecen un valor añadido: son algo más que una muestra de objetos, se sirven de objetos para expresar ideas. \nIdeas que pretenden h…",
       "url": "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/programacio-muvim",
       "distritosMencionados": [],
-      "fetchedAt": "2026-09-28T13:00:22.244Z",
+      "fetchedAt": "2026-09-28T22:57:55.939Z",
       "source": "ajuntament-valencia-scraping"
     },
     {
@@ -784,7 +784,7 @@
       "resumen": "Impulsado por Acción Cultural del País Valenciano (ACPV) y la Institución Cívica y de Pensamiento Joan Fuster (IJF), en 2006 abrió en el coro de València el Octubre Centro de Cultura Contemporánea (OCCC), una apuesta firme por el revifament de la cultura y la sociedad de todo nuestro país desde una…",
       "url": "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/programacio-cultural-octubre-centre-de-cultura-contemporania",
       "distritosMencionados": [],
-      "fetchedAt": "2026-09-28T13:00:22.244Z",
+      "fetchedAt": "2026-09-28T22:57:55.939Z",
       "source": "ajuntament-valencia-scraping"
     },
     {
@@ -796,7 +796,7 @@
       "resumen": "Edificio situado en el puerto de Valencia, de planta rectangular y torre con reloj de cuatro esferas y remate cupuliforme. La decoración de sus cuatro fachadas es de tradición neoplateresca, aunque en su reconstrucción de 1939 se simplificó hacia formas más planas y sobrias. Actualmente se utiliza c…",
       "url": "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/sala-exposicions-edifici-del-rellotge",
       "distritosMencionados": [],
-      "fetchedAt": "2026-09-28T13:00:22.244Z",
+      "fetchedAt": "2026-09-28T22:57:55.939Z",
       "source": "ajuntament-valencia-scraping"
     },
     {
@@ -808,7 +808,7 @@
       "resumen": "Feria València ofrece el mejor marco para conjugar la celebración de acontecimientos nacionales e internacionales en un entorno que anima a disfrutar del clima y la gastronomía. Con un siglo de existencia, es el recinto organizador de acontecimientos más antiguo de España (1917). Dispone de la super…",
       "url": "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/fira-de-valencia-agenda",
       "distritosMencionados": [],
-      "fetchedAt": "2026-09-28T13:00:22.244Z",
+      "fetchedAt": "2026-09-28T22:57:55.939Z",
       "source": "ajuntament-valencia-scraping"
     },
     {
@@ -820,7 +820,7 @@
       "resumen": "Bombas Gens Centre d’Arts Digitals es un lugar de encuentro para todas las propuestas vinculadas al arte y tecnología de nueva generación con una agenda viva, que complementa la oferta expositiva, con eventos, actividades, visitas guiadas patrimoniales y programas formativos especializados.\n\nAgenda…",
       "url": "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/bombas-gens-centre-d-arts-digitals-cas",
       "distritosMencionados": [],
-      "fetchedAt": "2026-09-28T13:00:22.244Z",
+      "fetchedAt": "2026-09-28T22:57:55.939Z",
       "source": "ajuntament-valencia-scraping"
     },
     {
@@ -832,7 +832,7 @@
       "resumen": "El museo Iluziona ofrece un ambiente único y divertido que combina cultura, arte y entretenimiento para atraer a diversos públicos. Proporciona numerosas oportunidades para capturar fotos memorables con efectos visuales asombrosos y fomenta la interacción entre visitantes.\n\nMás información",
       "url": "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/museo-iluziona-cas",
       "distritosMencionados": [],
-      "fetchedAt": "2026-09-28T13:00:22.244Z",
+      "fetchedAt": "2026-09-28T22:57:55.939Z",
       "source": "ajuntament-valencia-scraping"
     },
     {
@@ -844,7 +844,7 @@
       "resumen": "El Consejo Superior de Investigaciones Científicas (CSIC) cuenta en el centro de la ciudad de València con la Casa de la Ciència, a su vez sede de su Delegación en la Comunidad Valenciana. Entre sus objetivos se encuentra acercar la actividad científico-técnica de los centros del CSIC a la sociedad.…",
       "url": "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/casa-de-la-ciencia-del-csic-programacion",
       "distritosMencionados": [],
-      "fetchedAt": "2026-09-28T13:00:22.244Z",
+      "fetchedAt": "2026-09-28T22:57:55.939Z",
       "source": "ajuntament-valencia-scraping"
     },
     {
@@ -856,7 +856,7 @@
       "resumen": "El Instituto Interuniversitario López Piñero es un centro dedicado a la investigación y la divulgación en torno a los estudios históricos y sociales sobre la medicina, la tecnología, la ciencia y el medioambiente. Cuenta con programas propios de Máster y Doctorado en \"Historia de la ciencia y comuni…",
       "url": "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/institut-interuniversitari-lopez-pinero-programacio",
       "distritosMencionados": [],
-      "fetchedAt": "2026-09-28T13:00:22.244Z",
+      "fetchedAt": "2026-09-28T22:57:55.939Z",
       "source": "ajuntament-valencia-scraping"
     },
     {
@@ -876,7 +876,7 @@
           "bajaConfianza": false
         }
       ],
-      "fetchedAt": "2026-09-28T13:00:22.244Z",
+      "fetchedAt": "2026-09-28T22:57:55.939Z",
       "source": "ajuntament-valencia-scraping"
     },
     {
@@ -888,7 +888,7 @@
       "resumen": "L'Hemisfèric, fou el primer edifici de la Ciutat de les Arts i les Ciències que va obrir les seues portes al públic. És un edifici dissenyat per a projeccions digitals i de cine IMAX, que te faran viure aventures a través d'imatges espectaculars. És la sala més gran d'Espanya que alberga tres sistem…",
       "url": "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/hemisferic-ciutat-arts-i-ciencies-programacio",
       "distritosMencionados": [],
-      "fetchedAt": "2026-09-28T13:00:22.244Z",
+      "fetchedAt": "2026-09-28T22:57:55.939Z",
       "source": "ajuntament-valencia-scraping"
     },
     {
@@ -900,7 +900,7 @@
       "resumen": "El Teatro Rialto fue construido en el año 1939 por iniciativa de la familia González Galindo. La estructura del edificio es compleja; cine, salón de té y restaurante en su origen, después de la rehabilitación se habilitó una sala para las proyecciones cinematográficas de la filmoteca de la Generalit…",
       "url": "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/teatre-rialto-programacio",
       "distritosMencionados": [],
-      "fetchedAt": "2026-09-28T13:00:22.244Z",
+      "fetchedAt": "2026-09-28T22:57:55.939Z",
       "source": "ajuntament-valencia-scraping"
     },
     {
@@ -912,7 +912,7 @@
       "resumen": "El Centro de Recepción del Visitante del Santo Cáliz, ubicado en el Almudín, acoge una exposición por el III Año Jubilar del Santo Cáliz. El Santo Cáliz es la copa que, según la tradición, pudo usar Jesús en la Última Cena.  Desde entonces, viajó desde Jerusalén hasta los Pirineos, fue protegida por…",
       "url": "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/almudin-exposicion-iii-ano-jubilar-santo-caliz",
       "distritosMencionados": [],
-      "fetchedAt": "2026-09-28T13:00:22.244Z",
+      "fetchedAt": "2026-09-28T22:57:55.939Z",
       "source": "ajuntament-valencia-scraping"
     },
     {
@@ -932,7 +932,7 @@
           "bajaConfianza": false
         }
       ],
-      "fetchedAt": "2026-09-28T13:00:22.244Z",
+      "fetchedAt": "2026-09-28T22:57:55.939Z",
       "source": "valencia-cf-scraping",
       "impactoViaPublica": true
     },
@@ -953,7 +953,7 @@
           "bajaConfianza": false
         }
       ],
-      "fetchedAt": "2026-09-28T13:00:22.244Z",
+      "fetchedAt": "2026-09-28T22:57:55.939Z",
       "source": "valencia-cf-scraping",
       "impactoViaPublica": true
     },
@@ -966,7 +966,7 @@
       "resumen": "Jornada 3 de LaLiga en el Ciutat de València. Levante UD - Real Betis, 15:00h.",
       "url": "https://www.levanteud.com/partidos",
       "distritosMencionados": [],
-      "fetchedAt": "2026-09-28T13:00:22.244Z",
+      "fetchedAt": "2026-09-28T22:57:55.939Z",
       "source": "levante-ud-scraping",
       "impactoViaPublica": true
     },
@@ -979,7 +979,7 @@
       "resumen": "Jornada 5 de LaLiga en el Ciutat de València. Levante UD - FC Barcelona, 14:15h.",
       "url": "https://www.levanteud.com/partidos",
       "distritosMencionados": [],
-      "fetchedAt": "2026-09-28T13:00:22.244Z",
+      "fetchedAt": "2026-09-28T22:57:55.939Z",
       "source": "levante-ud-scraping",
       "impactoViaPublica": true
     },
@@ -992,7 +992,7 @@
       "resumen": "Jornada 8 de LaLiga en el Ciutat de València. Levante UD - Sevilla FC, 19:00h.",
       "url": "https://www.levanteud.com/partidos",
       "distritosMencionados": [],
-      "fetchedAt": "2026-09-28T13:00:22.244Z",
+      "fetchedAt": "2026-09-28T22:57:55.939Z",
       "source": "levante-ud-scraping",
       "impactoViaPublica": true
     },
@@ -1005,7 +1005,7 @@
       "resumen": "Jornada 6 de LaLiga en el Ciutat de València. Levante UD - Athletic Club, 18:00h.",
       "url": "https://www.levanteud.com/partidos",
       "distritosMencionados": [],
-      "fetchedAt": "2026-09-28T13:00:22.244Z",
+      "fetchedAt": "2026-09-28T22:57:55.939Z",
       "source": "levante-ud-scraping",
       "impactoViaPublica": true
     },
@@ -1026,7 +1026,7 @@
           "bajaConfianza": false
         }
       ],
-      "fetchedAt": "2026-09-28T13:00:22.244Z",
+      "fetchedAt": "2026-09-28T22:57:55.939Z",
       "source": "roig-arena-scraping",
       "impactoViaPublica": true
     },
@@ -1047,7 +1047,7 @@
           "bajaConfianza": false
         }
       ],
-      "fetchedAt": "2026-09-28T13:00:22.244Z",
+      "fetchedAt": "2026-09-28T22:57:55.939Z",
       "source": "roig-arena-scraping",
       "impactoViaPublica": true
     },
@@ -1068,7 +1068,7 @@
           "bajaConfianza": false
         }
       ],
-      "fetchedAt": "2026-09-28T13:00:22.244Z",
+      "fetchedAt": "2026-09-28T22:57:55.939Z",
       "source": "roig-arena-scraping",
       "impactoViaPublica": true
     },
@@ -1089,7 +1089,7 @@
           "bajaConfianza": false
         }
       ],
-      "fetchedAt": "2026-09-28T13:00:22.244Z",
+      "fetchedAt": "2026-09-28T22:57:55.939Z",
       "source": "roig-arena-scraping",
       "impactoViaPublica": true
     },
@@ -1110,7 +1110,7 @@
           "bajaConfianza": false
         }
       ],
-      "fetchedAt": "2026-09-28T13:00:22.244Z",
+      "fetchedAt": "2026-09-28T22:57:55.939Z",
       "source": "roig-arena-scraping",
       "impactoViaPublica": true
     },
@@ -1131,7 +1131,7 @@
           "bajaConfianza": false
         }
       ],
-      "fetchedAt": "2026-09-28T13:00:22.244Z",
+      "fetchedAt": "2026-09-28T22:57:55.939Z",
       "source": "roig-arena-scraping",
       "impactoViaPublica": true
     },
@@ -1152,7 +1152,7 @@
           "bajaConfianza": false
         }
       ],
-      "fetchedAt": "2026-09-28T13:00:22.244Z",
+      "fetchedAt": "2026-09-28T22:57:55.939Z",
       "source": "roig-arena-scraping",
       "impactoViaPublica": true
     },
@@ -1173,7 +1173,7 @@
           "bajaConfianza": false
         }
       ],
-      "fetchedAt": "2026-09-28T13:00:22.244Z",
+      "fetchedAt": "2026-09-28T22:57:55.939Z",
       "source": "roig-arena-scraping",
       "impactoViaPublica": true
     },
@@ -1186,7 +1186,7 @@
       "resumen": "Carrera popular organizada por la Fundación Deportiva Municipal de València.",
       "url": "https://www.fdmvalencia.es/es/eventos/carrera-por-la-solidaridad-2026/",
       "distritosMencionados": [],
-      "fetchedAt": "2026-09-28T13:00:22.244Z",
+      "fetchedAt": "2026-09-28T22:57:55.939Z",
       "source": "fdm-valencia-carreras-scraping",
       "impactoViaPublica": true
     },
@@ -1207,7 +1207,7 @@
           "bajaConfianza": false
         }
       ],
-      "fetchedAt": "2026-09-28T13:00:22.244Z",
+      "fetchedAt": "2026-09-28T22:57:55.939Z",
       "source": "fdm-valencia-carreras-scraping",
       "impactoViaPublica": true
     },
@@ -1220,7 +1220,7 @@
       "resumen": "Carrera popular organizada por la Fundación Deportiva Municipal de València.",
       "url": "https://www.fdmvalencia.es/es/eventos/dogfy-run-solidaria-2026/",
       "distritosMencionados": [],
-      "fetchedAt": "2026-09-28T13:00:22.244Z",
+      "fetchedAt": "2026-09-28T22:57:55.939Z",
       "source": "fdm-valencia-carreras-scraping",
       "impactoViaPublica": true
     },
@@ -1233,7 +1233,7 @@
       "resumen": "Carrera popular organizada por la Fundación Deportiva Municipal de València.",
       "url": "https://www.fdmvalencia.es/es/eventos/iii-cross-escolar-sd-correcaminos/",
       "distritosMencionados": [],
-      "fetchedAt": "2026-09-28T13:00:22.244Z",
+      "fetchedAt": "2026-09-28T22:57:55.939Z",
       "source": "fdm-valencia-carreras-scraping",
       "impactoViaPublica": true
     },
@@ -1246,7 +1246,7 @@
       "resumen": "Carrera popular organizada por la Fundación Deportiva Municipal de València.",
       "url": "https://www.fdmvalencia.es/es/eventos/10k-valencia-ibercaja-by-kiprun-2027-5k-valencia-ibercaja-2027/",
       "distritosMencionados": [],
-      "fetchedAt": "2026-09-28T13:00:22.244Z",
+      "fetchedAt": "2026-09-28T22:57:55.939Z",
       "source": "fdm-valencia-carreras-scraping",
       "impactoViaPublica": true
     },
@@ -1259,7 +1259,7 @@
       "resumen": "Carrera popular organizada por la Fundación Deportiva Municipal de València.",
       "url": "https://www.fdmvalencia.es/es/eventos/pas-ras-al-port-de-valencia-2026/",
       "distritosMencionados": [],
-      "fetchedAt": "2026-09-28T13:00:22.244Z",
+      "fetchedAt": "2026-09-28T22:57:55.939Z",
       "source": "fdm-valencia-carreras-scraping",
       "impactoViaPublica": true
     },
@@ -1272,7 +1272,7 @@
       "resumen": "Carrera popular organizada por la Fundación Deportiva Municipal de València.",
       "url": "https://www.fdmvalencia.es/es/eventos/san-silvestre-valencia-2026/",
       "distritosMencionados": [],
-      "fetchedAt": "2026-09-28T13:00:22.244Z",
+      "fetchedAt": "2026-09-28T22:57:55.939Z",
       "source": "fdm-valencia-carreras-scraping",
       "impactoViaPublica": true
     },
@@ -1285,7 +1285,7 @@
       "resumen": "Carrera popular organizada por la Fundación Deportiva Municipal de València.",
       "url": "https://www.fdmvalencia.es/es/eventos/maraton-valencia-trinidad-alfonso-zurich-2026/",
       "distritosMencionados": [],
-      "fetchedAt": "2026-09-28T13:00:22.244Z",
+      "fetchedAt": "2026-09-28T22:57:55.939Z",
       "source": "fdm-valencia-carreras-scraping",
       "impactoViaPublica": true
     },
@@ -1298,7 +1298,7 @@
       "resumen": "Carrera popular organizada por la Fundación Deportiva Municipal de València.",
       "url": "https://www.fdmvalencia.es/es/eventos/xvi-volta-a-peu-de-les-falles-circuit-de-carreres-caixa-popular-ciutat-de-valencia-2026/",
       "distritosMencionados": [],
-      "fetchedAt": "2026-09-28T13:00:22.244Z",
+      "fetchedAt": "2026-09-28T22:57:55.939Z",
       "source": "fdm-valencia-carreras-scraping",
       "impactoViaPublica": true
     },
@@ -1311,7 +1311,7 @@
       "resumen": "Carrera popular organizada por la Fundación Deportiva Municipal de València.",
       "url": "https://www.fdmvalencia.es/es/eventos/valencia-contra-el-cancer-2026/",
       "distritosMencionados": [],
-      "fetchedAt": "2026-09-28T13:00:22.244Z",
+      "fetchedAt": "2026-09-28T22:57:55.939Z",
       "source": "fdm-valencia-carreras-scraping",
       "impactoViaPublica": true
     },
@@ -1324,11 +1324,11 @@
       "resumen": "Carrera popular organizada por la Fundación Deportiva Municipal de València.",
       "url": "https://www.fdmvalencia.es/es/eventos/medio-maraton-valencia-trinidad-alfonso-zurich-2026/",
       "distritosMencionados": [],
-      "fetchedAt": "2026-09-28T13:00:22.244Z",
+      "fetchedAt": "2026-09-28T22:57:55.939Z",
       "source": "fdm-valencia-carreras-scraping",
       "impactoViaPublica": true
     }
   ],
-  "fetchedAt": "2026-09-28T13:00:22.244Z",
+  "fetchedAt": "2026-09-28T22:57:55.939Z",
   "estructuraSospechosa": false
 }
