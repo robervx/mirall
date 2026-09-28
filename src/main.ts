@@ -40,7 +40,7 @@ import type { HistoricoTrafico } from './services/trafico-historico';
 import { sparklinePath } from './services/trafico-historico';
 import type { EstacionValenbisi } from './services/valenbisi';
 import type { Aparcamiento } from './services/aparcamiento';
-import type { PulsoDistrito, NivelPulso, EscenarioActivo } from './services/pulso-escenarios';
+import type { PulsoDistrito, EscenarioActivo } from './services/pulso-escenarios';
 import type { DatosFallas, MonumentoFalla } from './services/fallas';
 import type { ItemMediatico } from './services/mediatico';
 import type { VentanaTendencia } from './services/tendencia-terminos';
@@ -1602,7 +1602,6 @@ async function main(): Promise<void> {
   let estacionesAvamet: EstacionAvamet[] = [];
   let zonasZasVisible = false;
   let zonasZas: ZonaZas[] = [];
-  let sonometrosRuzafa: SonometroRuzafa[] = [];
   // Spec 052 — dato estático (la altimetría no cambia), un único fetch la
   // primera vez que se activa el checkbox, sin polling (a diferencia de las
   // capas de arriba, que sí refrescan periódicamente).
@@ -2973,7 +2972,6 @@ async function main(): Promise<void> {
     try {
       const { zonas, sonometrosRuzafa: sonometros, fresh } = await fetchPanelZasActual();
       zonasZas = zonas;
-      sonometrosRuzafa = sonometros;
       renderLayers();
       renderSonometrosRuzafaPanel(zasRuidoPanelRoot, sonometros, fresh);
       renderZonasZasLeyenda(zonasZasLeyendaRoot, zonas, fresh);

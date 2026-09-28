@@ -68,10 +68,3 @@ export function obtenerBasePropagacion(grafo: GrafoViarioCliente): BasePropagaci
   }
   return basePropagacionCache;
 }
-
-/** Solo para tests — evita que la caché de un test contamine el siguiente. */
-export function _resetCacheGrafoViarioParaTests(): void {
-  cache = null;
-  promesaEnCurso = null;
-  basePropagacionCache = null;
-}

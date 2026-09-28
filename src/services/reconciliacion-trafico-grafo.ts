@@ -8,7 +8,7 @@
  * §0). No se fuerzan emparejamientos de baja confianza: cobertura parcial es
  * el resultado esperado (spec 032 §7).
  */
-import { distanciaMetros, type Coordenada } from './proximidad';
+import type { Coordenada } from './proximidad';
 import { construirIndiceEspacial, type IndiceRedViaria } from './red-viaria-indice';
 import type { Tramo } from './red-viaria';
 import type { TramoTrafico } from './trafico';

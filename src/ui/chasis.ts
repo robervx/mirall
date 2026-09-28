@@ -39,7 +39,6 @@ export interface SidebarSectionDefinition {
   key: string;
   label: string;
   icono: string;
-  estado: 'disponible' | 'placeholder';
   specId?: string;
   /** Contenido desplegable bajo la fila. */
   render: () => HTMLElement;
@@ -531,7 +530,6 @@ export const SIDEBAR_REGISTRY: SidebarSectionDefinition[] = [
     key: 'cerca-de-mi',
     label: 'Cerca de mí',
     icono: '📍',
-    estado: 'disponible',
     specId: '012',
     render: buildProximidadContent,
   },
@@ -539,7 +537,6 @@ export const SIDEBAR_REGISTRY: SidebarSectionDefinition[] = [
     key: 'cordon-incidente',
     label: 'Cordón de incidente',
     icono: '🔥',
-    estado: 'disponible',
     specId: '021',
     render: buildCordonIncidenteContent,
   },
@@ -547,7 +544,6 @@ export const SIDEBAR_REGISTRY: SidebarSectionDefinition[] = [
     key: 'gemelo-digital',
     label: 'Gemelo digital',
     icono: '🗺️',
-    estado: 'disponible',
     specId: '022',
     render: buildGemeloDigitalContent,
   },
@@ -555,7 +551,6 @@ export const SIDEBAR_REGISTRY: SidebarSectionDefinition[] = [
     key: 'glosario',
     label: 'Glosario',
     icono: '📖',
-    estado: 'disponible',
     specId: '037',
     render: buildGlosarioContent,
   },
@@ -563,13 +558,12 @@ export const SIDEBAR_REGISTRY: SidebarSectionDefinition[] = [
     key: 'configuracion',
     label: 'Configuración',
     icono: '⚙️',
-    estado: 'disponible',
     specId: '019',
     render: buildConfiguracionContent,
   },
 ];
 
-const SIDEBAR_EXPANDED_KEY = 'imc:sidebar-expanded';
+const SIDEBAR_EXPANDED_KEY = 'mirall:sidebar-expanded';
 
 function buildHeader(): HTMLElement {
   const header = document.createElement('header');
@@ -704,7 +698,7 @@ function buildSidebarSection(def: SidebarSectionDefinition): HTMLElement {
   wrap.className = 'sidebar-section-wrap';
 
   const el = document.createElement('div');
-  el.className = 'sidebar-section' + (def.estado === 'placeholder' ? ' sidebar-section--placeholder' : '');
+  el.className = 'sidebar-section sidebar-section--interactive';
   el.dataset.sectionKey = def.key;
 
   const icon = document.createElement('span');
@@ -716,26 +710,15 @@ function buildSidebarSection(def: SidebarSectionDefinition): HTMLElement {
   label.textContent = def.label;
 
   el.append(icon, label);
-
-  if (def.estado === 'placeholder') {
-    const tag = document.createElement('span');
-    tag.className = 'sidebar-section__tag';
-    tag.textContent = 'Próximamente';
-    el.append(tag);
-  }
-
   wrap.appendChild(el);
 
-  if (def.estado === 'disponible' && def.render) {
-    el.classList.add('sidebar-section--interactive');
-    const content = def.render();
-    content.hidden = true;
-    el.addEventListener('click', () => {
-      content.hidden = !content.hidden;
-      el.classList.toggle('is-open', !content.hidden);
-    });
-    wrap.appendChild(content);
-  }
+  const content = def.render();
+  content.hidden = true;
+  el.addEventListener('click', () => {
+    content.hidden = !content.hidden;
+    el.classList.toggle('is-open', !content.hidden);
+  });
+  wrap.appendChild(content);
 
   return wrap;
 }
