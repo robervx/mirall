@@ -766,6 +766,58 @@ async function fetchEstacionesAvametActual(): Promise<{ estaciones: EstacionAvam
 // que medir lo mismo en pantalla se acerque o aleje el mapa.
 const RADIO_INSIGNIA_ZONA_PX = 14;
 
+/**
+ * Compone la insignia "círculo de color fijo + valor encima" (spec 050/051):
+ * deck.gl no tiene un tipo de capa único para esto, siempre son 2 capas —
+ * `ScatterplotLayer` (radio en píxeles, mide lo mismo a cualquier zoom) +
+ * `TextLayer` centrado encima. `updateTriggerFillColor`/`updateTriggerText`
+ * son opcionales: solo hace falta pasarlos cuando el accessor correspondiente
+ * es una función que depende del propio dato (p. ej. un color por gradiente),
+ * no cuando es un color fijo.
+ */
+function crearCapaInsignia<T>(opciones: {
+  id: string;
+  data: T[];
+  getPosition: (d: T) => [number, number];
+  getFillColor: Color | ((d: T) => Color);
+  getText: (d: T) => string;
+  textSize?: number;
+  updateTriggerFillColor?: unknown;
+  updateTriggerText?: unknown;
+}): [ScatterplotLayer<T>, TextLayer<T>] {
+  const { id, data, getPosition, getFillColor, getText, textSize = 12, updateTriggerFillColor, updateTriggerText } = opciones;
+  return [
+    new ScatterplotLayer<T>({
+      id,
+      data,
+      pickable: false,
+      getPosition,
+      getFillColor,
+      stroked: true,
+      getLineColor: [255, 255, 255, 230],
+      lineWidthMinPixels: 1.5,
+      getRadius: RADIO_INSIGNIA_ZONA_PX,
+      radiusUnits: 'pixels',
+      updateTriggers: updateTriggerFillColor !== undefined ? { getFillColor: [updateTriggerFillColor] } : undefined,
+    }),
+    new TextLayer<T>({
+      id: `${id}-valor`,
+      data,
+      pickable: false,
+      getPosition,
+      getText,
+      getSize: textSize,
+      getColor: [255, 255, 255, 255],
+      fontWeight: 700,
+      getTextAnchor: 'middle',
+      getAlignmentBaseline: 'center',
+      outlineWidth: 2,
+      outlineColor: [0, 0, 0, 160],
+      updateTriggers: updateTriggerText !== undefined ? { getText: [updateTriggerText] } : undefined,
+    }),
+  ];
+}
+
 // Spec 050 — gradiente azul (frío) a rojo (cálido), acotado a un rango de
 // temperatura urbana realista para Valencia (10-35°C); fuera de rango se
 // satura al extremo más cercano, no se extrapola el color.
@@ -1909,65 +1961,29 @@ async function main(): Promise<void> {
         // mida lo mismo a cualquier zoom) + el texto (TextLayer) centrado
         // encima — deck.gl no tiene un tipo de capa "insignia con texto"
         // único, es el patrón habitual para componerlo.
-        temperaturaZonaVisible &&
-          new ScatterplotLayer<EstacionAvamet>({
-            id: 'temperatura-zona',
-            data: estacionesAvamet,
-            pickable: false,
-            getPosition: (e) => [e.lon, e.lat],
-            getFillColor: colorTemperaturaZona,
-            stroked: true,
-            getLineColor: [255, 255, 255, 230],
-            lineWidthMinPixels: 1.5,
-            getRadius: RADIO_INSIGNIA_ZONA_PX,
-            radiusUnits: 'pixels',
-            updateTriggers: { getFillColor: [estacionesAvamet] },
-          }),
-        temperaturaZonaVisible &&
-          new TextLayer<EstacionAvamet>({
-            id: 'temperatura-zona-valor',
-            data: estacionesAvamet,
-            pickable: false,
-            getPosition: (e) => [e.lon, e.lat],
-            getText: (e) => `${Math.round(e.temperaturaC)}°`,
-            getSize: 12,
-            getColor: [255, 255, 255, 255],
-            fontWeight: 700,
-            getTextAnchor: 'middle',
-            getAlignmentBaseline: 'center',
-            outlineWidth: 2,
-            outlineColor: [0, 0, 0, 160],
-            updateTriggers: { getText: [estacionesAvamet] },
-          }),
-        precipitacionZonaVisible &&
-          new ScatterplotLayer<EstacionAvamet>({
-            id: 'precipitacion-zona',
-            data: estacionesAvamet,
-            pickable: false,
-            getPosition: (e) => [e.lon, e.lat],
-            getFillColor: COLOR_PRECIPITACION_ZONA,
-            stroked: true,
-            getLineColor: [255, 255, 255, 230],
-            lineWidthMinPixels: 1.5,
-            getRadius: RADIO_INSIGNIA_ZONA_PX,
-            radiusUnits: 'pixels',
-          }),
-        precipitacionZonaVisible &&
-          new TextLayer<EstacionAvamet>({
-            id: 'precipitacion-zona-valor',
-            data: estacionesAvamet,
-            pickable: false,
-            getPosition: (e) => [e.lon, e.lat],
-            getText: (e) => (e.precipitacionDiaMm >= 10 ? Math.round(e.precipitacionDiaMm).toString() : e.precipitacionDiaMm.toFixed(1)),
-            getSize: 11,
-            getColor: [255, 255, 255, 255],
-            fontWeight: 700,
-            getTextAnchor: 'middle',
-            getAlignmentBaseline: 'center',
-            outlineWidth: 2,
-            outlineColor: [0, 0, 0, 160],
-            updateTriggers: { getText: [estacionesAvamet] },
-          }),
+        ...(temperaturaZonaVisible
+          ? crearCapaInsignia<EstacionAvamet>({
+              id: 'temperatura-zona',
+              data: estacionesAvamet,
+              getPosition: (e) => [e.lon, e.lat],
+              getFillColor: colorTemperaturaZona,
+              getText: (e) => `${Math.round(e.temperaturaC)}°`,
+              textSize: 12,
+              updateTriggerFillColor: estacionesAvamet,
+              updateTriggerText: estacionesAvamet,
+            })
+          : []),
+        ...(precipitacionZonaVisible
+          ? crearCapaInsignia<EstacionAvamet>({
+              id: 'precipitacion-zona',
+              data: estacionesAvamet,
+              getPosition: (e) => [e.lon, e.lat],
+              getFillColor: COLOR_PRECIPITACION_ZONA,
+              getText: (e) => (e.precipitacionDiaMm >= 10 ? Math.round(e.precipitacionDiaMm).toString() : e.precipitacionDiaMm.toFixed(1)),
+              textSize: 11,
+              updateTriggerText: estacionesAvamet,
+            })
+          : []),
         zonasZasVisible &&
           new GeoJsonLayer<{ nombre: string }>({
             id: 'zonas-zas',
