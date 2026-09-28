@@ -17,7 +17,7 @@ export const PANEL_PREFERENCES_REGISTRY: PanelPreferenceDefinition[] = [
   { key: 'trafico-historico-panel', label: 'Histórico de tráfico' },
 ];
 
-const STORAGE_KEY = 'imc:panel-visibility-hidden';
+const STORAGE_KEY = 'mirall:panel-visibility-hidden';
 
 function readHiddenSet(): Set<string> {
   try {

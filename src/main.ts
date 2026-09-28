@@ -1387,7 +1387,7 @@ interface ControlPanel {
   presetOperativaBtn: HTMLButtonElement;
 }
 
-const SELECTOR_CONTEXTO_ABIERTO_KEY = 'imc:selector-contexto-abierto';
+const SELECTOR_CONTEXTO_ABIERTO_KEY = 'mirall:selector-contexto-abierto';
 
 /** Checkbox desconectado del DOM, marcado — ver nota en `buildControlPanel`. */
 function toggleSiempreActivo(): HTMLInputElement {

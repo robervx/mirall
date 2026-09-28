@@ -12,7 +12,7 @@
 export type Layout = 'escritorio' | 'movil';
 export type LayoutForzado = Layout | null;
 
-export const CLAVE_OVERRIDE = 'imc:layout-forzado';
+export const CLAVE_OVERRIDE = 'mirall:layout-forzado';
 export const CONSULTA_MOVIL = '(max-width: 640px) and (pointer: coarse)';
 
 /** Layout resultante dado el override manual y si el medio "es móvil". */

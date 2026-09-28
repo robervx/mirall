@@ -18,7 +18,7 @@ const TIEMPO_FALLBACK_MS = 8000;
 // que `panel-preferences.ts` (un set de ids *ocultos*, no de visibles, para
 // que una entidad nueva en el registro aparezca visible por defecto sin
 // tener que tocar la preferencia guardada de nadie).
-const ENTIDADES_OCULTAS_KEY = 'imc:entidades-redes-ocultas';
+const ENTIDADES_OCULTAS_KEY = 'mirall:entidades-redes-ocultas';
 
 function leerOcultas(): Set<string> {
   try {

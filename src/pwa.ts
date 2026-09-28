@@ -86,7 +86,7 @@ function mostrarAvisoActualizacion(aplicar: () => void): void {
 export async function limpiarCacheDatos(): Promise<void> {
   if (!('caches' in window)) return;
   try {
-    await caches.delete('icm-datos');
+    await caches.delete('mirall-datos');
   } catch {
     // sin permisos de Cache Storage (modo privado, etc.) — no bloquea el logout
   }

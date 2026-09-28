@@ -25,7 +25,7 @@ import {
   type EstadoSheet,
 } from './bottom-sheet';
 
-const CLAVE_ESTADO = 'imc:bottomsheet-estado';
+const CLAVE_ESTADO = 'mirall:bottomsheet-estado';
 const ALTURA_TIRADOR_PX = 44;
 const IDS_REPARENTABLES = [
   'controls',

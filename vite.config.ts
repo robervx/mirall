@@ -168,7 +168,7 @@ function pwaPlugin(): Plugin[] {
           urlPattern: ({ request }: { request: Request }) => request.mode === 'navigate',
           handler: 'NetworkFirst',
           options: {
-            cacheName: 'icm-shell',
+            cacheName: 'mirall-shell',
             networkTimeoutSeconds: 3,
             expiration: { maxEntries: 2 },
             cacheableResponse: { statuses: [200] },
@@ -180,7 +180,7 @@ function pwaPlugin(): Plugin[] {
           urlPattern: ({ url }: { url: URL }) => /^\/api\/.+\/v1\//.test(url.pathname),
           handler: 'StaleWhileRevalidate',
           options: {
-            cacheName: 'icm-datos',
+            cacheName: 'mirall-datos',
             expiration: { maxEntries: 60, maxAgeSeconds: 60 * 60 },
             cacheableResponse: { statuses: [200] },
           },

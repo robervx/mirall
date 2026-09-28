@@ -80,7 +80,7 @@ export function paginaLogin(): string {
       <img src="/assets/logo.png" alt="" onerror="this.style.display='none'" />
       <div>
         <div class="brand__name">${MARCA.nombre}</div>
-        <div class="brand__tag">${MARCA.tagline}</div>
+        <div class="brand__tag">${MARCA.descriptor}</div>
       </div>
     </div>
     <label for="usuario">Usuario</label>
