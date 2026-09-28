@@ -6,3 +6,6 @@ dist/
 .DS_Store
 .vercel
 
+# Bundle generado por `npm run build` (scripts/bundle-api.mjs) — ver CLAUDE.md §6.
+api/router.js
+
