@@ -1,0 +1,2650 @@
+      /* `hidden` siempre oculta, aunque una regla de `#id` ponga `display`. */
+      [hidden] {
+        display: none !important;
+      }
+
+      :root {
+        --header-h: 56px;
+        --sidebar-w-collapsed: 52px;
+        --sidebar-w-expanded: 280px;
+        --mirall-navy: #0b1f33;
+        --mirall-navy-light: #14304f;
+      }
+
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+      }
+
+      body {
+        font-family: system-ui, sans-serif;
+      }
+
+      /* El mapa empieza debajo de la cabecera (no solapado), para que el
+         control de zoom nativo de MapLibre ('top-right') no quede tapado. */
+      #map {
+        position: absolute;
+        top: var(--header-h);
+        left: 0;
+        right: 0;
+        bottom: 0;
+      }
+
+      /* maplibre-gl.css de la v6.x ya no incluye position/inset en
+         .maplibregl-canvas-container (sí lo llevaba en v4) — el div
+         colapsa a height:0 porque su único hijo (.maplibregl-canvas)
+         es position:absolute y queda fuera del flujo normal. Sin esto
+         el mapa no pinta nada, aunque el canvas interno mida bien. */
+      .maplibregl-canvas-container {
+        position: absolute;
+        inset: 0;
+      }
+
+      /* Cabecera institucional — spec 019 */
+      #app-header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: var(--header-h);
+        z-index: 200;
+        background: var(--mirall-navy);
+        color: #fff;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 0 16px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
+        box-sizing: border-box;
+      }
+
+      #app-header__logo {
+        height: 36px;
+        width: 36px;
+        object-fit: contain;
+        flex-shrink: 0;
+      }
+
+      #app-header__brand {
+        display: flex;
+        flex-direction: column;
+        line-height: 1.2;
+        min-width: 0;
+      }
+
+      #app-header__name {
+        font-family: 'Space Grotesk', system-ui, sans-serif;
+        font-size: 20px;
+        font-weight: 700;
+        letter-spacing: -0.01em;
+      }
+
+      #app-header__tagline {
+        font-size: 11px;
+        color: #b9c6d6;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+
+      /* Nav de dos vistas — spec 040. */
+      #app-header__nav {
+        display: flex;
+        gap: 4px;
+        margin-left: 20px;
+      }
+
+      .app-header__nav-link {
+        appearance: none;
+        border: none;
+        background: transparent;
+        color: #b9c6d6;
+        font-size: 13px;
+        font-weight: 600;
+        padding: 6px 12px;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      .app-header__nav-link:hover {
+        background: rgba(255, 255, 255, 0.08);
+        color: #fff;
+      }
+
+      .app-header__nav-link[aria-current='page'] {
+        background: rgba(255, 255, 255, 0.14);
+        color: #fff;
+      }
+
+      #app-header__status {
+        margin-left: auto;
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        flex-shrink: 0;
+      }
+
+      #app-header__live {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 10.5px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        color: #86efac;
+        text-transform: uppercase;
+        cursor: default;
+      }
+
+      /* spec 034b — el color de "EN VIVO" y del punto resume la frescura global. */
+      #app-header__live[data-frescura='retraso'] {
+        color: #fbbf24;
+      }
+
+      #app-header__live[data-frescura='cargando'] {
+        color: #94a3b8;
+      }
+
+      #app-header__frescura {
+        font-weight: 500;
+        letter-spacing: 0.02em;
+        text-transform: none;
+        opacity: 0.75;
+      }
+
+      #app-header__status-dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: #22c55e;
+        animation: mirall-pulse 2s infinite;
+      }
+
+      #app-header__live[data-frescura='retraso'] #app-header__status-dot {
+        background: #fbbf24;
+      }
+
+      #app-header__live[data-frescura='cargando'] #app-header__status-dot {
+        background: #94a3b8;
+        animation: none;
+      }
+
+      #app-header__divider {
+        width: 1px;
+        height: 28px;
+        background: rgba(255, 255, 255, 0.15);
+      }
+
+      #app-header__datetime {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        line-height: 1.3;
+      }
+
+      #app-header__clock {
+        font-family: ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
+        font-size: 17px;
+        font-weight: 600;
+        font-variant-numeric: tabular-nums;
+        letter-spacing: 0.02em;
+        color: #fff;
+      }
+
+      #app-header__date {
+        font-size: 11px;
+        color: #9db3c9;
+      }
+
+      @keyframes mirall-pulse {
+        0% {
+          box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.5);
+        }
+        70% {
+          box-shadow: 0 0 0 6px rgba(34, 197, 94, 0);
+        }
+        100% {
+          box-shadow: 0 0 0 0 rgba(34, 197, 94, 0);
+        }
+      }
+
+      /* Sidebar plegable — spec 019 */
+      #app-sidebar {
+        position: fixed;
+        top: var(--header-h);
+        left: 0;
+        bottom: 0;
+        width: var(--sidebar-w-collapsed);
+        z-index: 150;
+        background: var(--mirall-navy-light);
+        overflow: hidden;
+        transition: width 0.18s ease;
+        display: flex;
+        flex-direction: column;
+        box-shadow: 2px 0 6px rgba(0, 0, 0, 0.25);
+      }
+
+      #app-sidebar.is-expanded {
+        width: var(--sidebar-w-expanded);
+      }
+
+      #app-sidebar__toggle {
+        height: 44px;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        color: #fff;
+        border: none;
+        background: transparent;
+        font-size: 18px;
+        flex-shrink: 0;
+      }
+
+      #app-sidebar__toggle:hover {
+        background: rgba(255, 255, 255, 0.08);
+      }
+
+      #app-sidebar__sections {
+        flex: 1;
+        overflow-y: auto;
+      }
+
+      .sidebar-section {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 10px 15px;
+        color: #e2e8f0;
+        font-size: 13px;
+        white-space: nowrap;
+      }
+
+      .sidebar-section--interactive {
+        cursor: pointer;
+      }
+
+      .sidebar-section--interactive:hover {
+        background: rgba(255, 255, 255, 0.06);
+      }
+
+      .sidebar-section--interactive.is-open {
+        background: rgba(255, 255, 255, 0.08);
+        border-left-color: #f2c744;
+      }
+
+      .sidebar-panel-content {
+        padding: 4px 15px 12px 47px;
+      }
+
+      .sidebar-panel-content__title {
+        font-size: 10px;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: #7d90a6;
+        margin-bottom: 6px;
+      }
+
+      /* Glosario — spec 037 */
+      .glosario-entrada {
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+      }
+
+      .glosario-entrada__titulo {
+        font-size: 12px;
+        font-weight: 600;
+        color: #dbe6f0;
+        padding: 8px 0;
+        cursor: pointer;
+        list-style: none;
+      }
+
+      .glosario-entrada__titulo::-webkit-details-marker {
+        display: none;
+      }
+
+      .glosario-entrada__titulo::before {
+        content: '▸';
+        display: inline-block;
+        width: 1em;
+        color: #7d90a6;
+      }
+
+      .glosario-entrada[open] .glosario-entrada__titulo::before {
+        content: '▾';
+      }
+
+      .glosario-entrada__cuerpo {
+        font-size: 12px;
+        line-height: 1.5;
+        color: #b9c6d6;
+        padding: 0 0 10px 1em;
+      }
+
+      .glosario-entrada__cuerpo p {
+        margin: 0 0 8px;
+      }
+
+      .glosario-entrada__cuerpo code {
+        font-size: 11px;
+        background: rgba(255, 255, 255, 0.08);
+        padding: 1px 4px;
+        border-radius: 3px;
+      }
+
+      .glosario-entrada__cuerpo a {
+        color: #8bb8e8;
+      }
+
+      .glosario-lista {
+        margin: 0 0 8px;
+        padding-left: 18px;
+      }
+
+      .glosario-lista li {
+        margin-bottom: 4px;
+      }
+
+      .glosario-meta {
+        display: block;
+        font-size: 11px;
+        color: #7d90a6;
+      }
+
+      .glosario-nota {
+        font-size: 11px;
+        color: #9db3c9;
+        font-style: italic;
+      }
+
+      .glosario-punto {
+        display: inline-block;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        margin-right: 4px;
+        vertical-align: middle;
+      }
+
+      /* Actualidad institucional en redes — spec 039 */
+      .red-entidad-selector {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        margin-bottom: 4px;
+      }
+
+      .red-entidad-selector__titulo {
+        font-size: 12px;
+        font-weight: 600;
+        color: #dbe6f0;
+        padding: 8px 0;
+        cursor: pointer;
+        list-style: none;
+      }
+
+      .red-entidad-selector__titulo::-webkit-details-marker {
+        display: none;
+      }
+
+      .red-entidad-selector__titulo::before {
+        content: '▸';
+        display: inline-block;
+        width: 1em;
+        color: #7d90a6;
+      }
+
+      .red-entidad-selector[open] .red-entidad-selector__titulo::before {
+        content: '▾';
+      }
+
+      .red-entidad-selector .sidebar-panel-checkbox {
+        padding-left: 1em;
+        padding-bottom: 8px;
+      }
+
+      .red-entidad {
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+      }
+
+      .red-entidad__titulo {
+        font-size: 12px;
+        font-weight: 600;
+        color: #dbe6f0;
+        padding: 8px 0;
+        cursor: pointer;
+        list-style: none;
+      }
+
+      .red-entidad__titulo::-webkit-details-marker {
+        display: none;
+      }
+
+      .red-entidad__titulo::before {
+        content: '▸';
+        display: inline-block;
+        width: 1em;
+        color: #7d90a6;
+      }
+
+      .red-entidad[open] .red-entidad__titulo::before {
+        content: '▾';
+      }
+
+      .red-entidad__cuerpo {
+        padding: 0 0 10px 1em;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .red-entidad__widget {
+        min-height: 60px;
+        max-width: 100%;
+        overflow: hidden;
+        border-radius: 4px;
+      }
+
+      .red-entidad__fallback {
+        display: block;
+        font-size: 12px;
+        padding: 8px 10px;
+        border-radius: 4px;
+        background: rgba(255, 255, 255, 0.08);
+        color: #8bb8e8;
+        text-decoration: none;
+      }
+
+      .red-entidad__fallback:hover {
+        background: rgba(255, 255, 255, 0.14);
+      }
+
+      .proximidad-boton {
+        width: 100%;
+        padding: 7px 10px;
+        border-radius: 5px;
+        border: 1px solid rgba(255, 255, 255, 0.25);
+        background: rgba(255, 255, 255, 0.08);
+        color: #fff;
+        font-size: 12px;
+        cursor: pointer;
+      }
+
+      .proximidad-boton:hover:not(:disabled) {
+        background: rgba(255, 255, 255, 0.16);
+      }
+
+      .proximidad-boton:disabled {
+        opacity: 0.6;
+        cursor: default;
+      }
+
+      .proximidad-estado {
+        font-size: 11px;
+        color: #9db3c9;
+        margin-top: 6px;
+        min-height: 14px;
+      }
+
+      .proximidad-seccion {
+        margin-top: 10px;
+      }
+
+      .proximidad-seccion__titulo {
+        font-size: 10px;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: #7d90a6;
+        margin-bottom: 4px;
+      }
+
+      .proximidad-item {
+        display: flex;
+        justify-content: space-between;
+        gap: 8px;
+        font-size: 12px;
+        color: #dbe6f0;
+        padding: 3px 0;
+      }
+
+      .proximidad-item__nombre {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .proximidad-item__dist {
+        flex-shrink: 0;
+        color: #9db3c9;
+      }
+
+      .proximidad-vacio {
+        font-size: 11px;
+        color: #6b7f94;
+        font-style: italic;
+      }
+
+      .cordon-intro {
+        font-size: 12px;
+        color: #b9c6d6;
+        line-height: 1.4;
+        margin: 0 0 8px;
+      }
+
+      .cordon-form {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .cordon-form label {
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+        font-size: 11px;
+        color: #9db3c9;
+      }
+
+      .cordon-form select,
+      .cordon-form input[type='number'],
+      .cordon-form textarea {
+        font-size: 12px;
+        padding: 4px 6px;
+        border-radius: 4px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        background: rgba(255, 255, 255, 0.06);
+        color: #fff;
+        font-family: inherit;
+        resize: vertical;
+      }
+
+      .cordon-checkbox-label {
+        flex-direction: row !important;
+        align-items: center;
+        gap: 6px !important;
+      }
+
+      .cordon-pii-error {
+        font-size: 11px;
+        color: #fca5a5;
+        background: rgba(220, 38, 38, 0.15);
+        border-radius: 4px;
+        padding: 4px 6px;
+      }
+
+      .cordon-badge {
+        display: flex;
+        gap: 8px;
+        align-items: flex-start;
+        border: 1px solid;
+        border-radius: 5px;
+        padding: 6px 8px;
+        margin-top: 8px;
+      }
+
+      .cordon-badge__punto {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        margin-top: 3px;
+        flex-shrink: 0;
+      }
+
+      .cordon-badge__texto {
+        font-size: 11px;
+        font-weight: 700;
+        color: #fff;
+      }
+
+      .cordon-badge__fuente {
+        font-size: 10px;
+        color: #9db3c9;
+        margin-top: 2px;
+      }
+
+      .cordon-disclaimer {
+        font-size: 10px;
+        color: #fbbf24;
+        margin-top: 4px;
+        line-height: 1.4;
+      }
+
+      .cordon-resumen {
+        font-size: 11px;
+        color: #dbe6f0;
+        margin-top: 8px;
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+      }
+
+      .sim-corte-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 6px;
+        font-size: 12px;
+        color: #dbe6f0;
+        padding: 4px 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      }
+
+      .sim-corte-sentido {
+        color: #7d90a6;
+        font-size: 10px;
+      }
+
+      .sim-corte-quitar {
+        background: transparent;
+        border: none;
+        color: #f87171;
+        cursor: pointer;
+        font-size: 13px;
+        padding: 2px 4px;
+        flex-shrink: 0;
+      }
+
+      .sim-corte-quitar:hover {
+        color: #fca5a5;
+      }
+
+      .sim-aviso-aislados {
+        margin-top: 10px;
+        font-size: 11px;
+        color: #d8b4fe;
+        background: rgba(168, 85, 247, 0.15);
+        border: 1px solid rgba(168, 85, 247, 0.4);
+        border-radius: 5px;
+        padding: 6px 8px;
+      }
+
+      .sim-aviso-sin-entrada {
+        margin-top: 10px;
+        font-size: 11px;
+        color: #a5f3fc;
+        background: rgba(6, 182, 212, 0.13);
+        border: 1px solid rgba(6, 182, 212, 0.4);
+        border-radius: 5px;
+        padding: 6px 8px;
+      }
+
+      .sim-aviso-desvio {
+        margin-top: 10px;
+        font-size: 11px;
+        color: #bfdbfe;
+        background: rgba(59, 130, 246, 0.12);
+        border: 1px solid rgba(59, 130, 246, 0.35);
+        border-radius: 5px;
+        padding: 6px 8px;
+      }
+
+      .sim-aviso-aislados ul,
+      .sim-aviso-sin-entrada ul,
+      .sim-aviso-desvio ul {
+        margin: 4px 0 0;
+        padding-left: 16px;
+      }
+
+      .sim-aviso-reruta {
+        margin-top: 10px;
+        font-size: 11px;
+        color: #86efac;
+        background: rgba(22, 163, 74, 0.12);
+        border: 1px solid rgba(22, 163, 74, 0.35);
+        border-radius: 5px;
+        padding: 6px 8px;
+      }
+
+      .sim-aviso-ok {
+        margin-top: 10px;
+        font-size: 11px;
+        color: #86efac;
+        background: rgba(34, 197, 94, 0.1);
+        border: 1px solid rgba(34, 197, 94, 0.3);
+        border-radius: 5px;
+        padding: 6px 8px;
+      }
+
+      .sidebar-panel-checkbox {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 12px;
+        color: #dbe6f0;
+        padding: 4px 0;
+        cursor: pointer;
+        white-space: nowrap;
+      }
+
+      .sidebar-section__icon {
+        font-size: 18px;
+        width: 20px;
+        text-align: center;
+        flex-shrink: 0;
+      }
+
+      .sidebar-section__label {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        transition: opacity 0.12s ease;
+      }
+
+      /* Sidebar colapsado en escritorio: solo iconos, sin slivers de texto
+         asomando por el borde (spec 019 v5). */
+      :root:not([data-layout='movil']) #app-sidebar:not(.is-expanded) .sidebar-section__label,
+      :root:not([data-layout='movil']) #app-sidebar:not(.is-expanded) #app-footer-attrib,
+      :root:not([data-layout='movil']) #app-sidebar:not(.is-expanded) #app-sidebar__sesion {
+        opacity: 0;
+        visibility: hidden;
+      }
+
+      #app-footer-attrib {
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+        overflow: hidden;
+      }
+
+      #app-footer-attrib__text {
+        font-size: 10px;
+        color: #7d90a6;
+        padding: 8px 15px;
+        white-space: nowrap;
+        overflow: hidden;
+      }
+
+      #app-sidebar__sesion {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+        padding: 8px 15px;
+        font-size: 11px;
+        color: #c7d4e1;
+        white-space: nowrap;
+        overflow: hidden;
+      }
+
+      #app-sidebar__sesion-usuario {
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      #app-sidebar__logout {
+        flex-shrink: 0;
+        font-size: 11px;
+        padding: 4px 8px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 5px;
+        background: transparent;
+        color: #eef3f8;
+        cursor: pointer;
+      }
+
+      #app-sidebar__logout:hover {
+        background: rgba(255, 255, 255, 0.1);
+      }
+
+      #app-sidebar__logout:disabled {
+        opacity: 0.5;
+        cursor: default;
+      }
+
+      /* Aviso de nueva versión (PWA) — spec 028 */
+      /* spec 034 — fila de KPIs del estado de la ciudad, siempre visible. */
+      #dashboard-kpis {
+        position: fixed;
+        left: 50%;
+        transform: translateX(-50%);
+        top: calc(var(--header-h) + 10px);
+        z-index: 120;
+        display: flex;
+        gap: 6px;
+        max-width: min(70vw, 720px);
+        overflow-x: auto;
+        scrollbar-width: none;
+      }
+
+      #dashboard-kpis::-webkit-scrollbar {
+        display: none;
+      }
+
+      /* El selector de ID gana en especificidad al `[hidden]{display:none}` del
+         navegador, así que sin esto el KPI seguía visible fuera de /mapa pese a
+         que main.ts ya ponía `hidden = true` (spec 040 §2). */
+      #dashboard-kpis[hidden] {
+        display: none;
+      }
+
+      .kpi-chip {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1px;
+        padding: 5px 10px;
+        border-radius: 6px;
+        background: rgba(255, 255, 255, 0.96);
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.28);
+        border-left: 3px solid #cbd5e1;
+        font: inherit;
+        text-align: left;
+        white-space: nowrap;
+        flex-shrink: 0;
+      }
+
+      button.kpi-chip {
+        cursor: pointer;
+      }
+
+      button.kpi-chip:hover {
+        background: #fff;
+      }
+
+      .kpi-chip--ok {
+        border-left-color: #4caf50;
+      }
+
+      .kpi-chip--aviso {
+        border-left-color: #f2c744;
+      }
+
+      .kpi-chip--urgente {
+        border-left-color: #d64545;
+      }
+
+      .kpi-chip__etiqueta {
+        font-size: 9px;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        color: #94a3b8;
+      }
+
+      .kpi-chip__valor {
+        font-size: 13px;
+        font-weight: 600;
+        color: #1e293b;
+      }
+
+      :root[data-layout='movil'] #dashboard-kpis {
+        display: none;
+      }
+
+      /* spec 036 — foco de distrito: chip bajo la tira de KPIs. */
+      #foco-distrito-chip {
+        position: fixed;
+        left: 50%;
+        transform: translateX(-50%);
+        top: calc(var(--header-h) + 44px);
+        z-index: 120;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        padding: 3px 4px 3px 10px;
+        border-radius: 999px;
+        background: #0b1f33;
+        color: #eef3f8;
+        font-size: 12px;
+        font-weight: 600;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+      }
+
+      #foco-distrito-chip button {
+        border: 0;
+        background: rgba(255, 255, 255, 0.14);
+        color: #eef3f8;
+        border-radius: 999px;
+        width: 18px;
+        height: 18px;
+        line-height: 1;
+        cursor: pointer;
+        font-size: 10px;
+      }
+
+      .media-panel__foco,
+      .pulso-leyenda__foco {
+        font-size: 12px;
+        font-weight: 600;
+        color: #0b1f33;
+        background: #fef9e7;
+        border-left: 3px solid #f2c744;
+        padding: 3px 8px;
+        margin-bottom: 4px;
+        border-radius: 3px;
+      }
+
+      :root[data-layout='movil'] #foco-distrito-chip {
+        top: calc(var(--header-h) + 8px + env(safe-area-inset-top));
+      }
+
+      /* spec 013 v5 — modal bloqueante: una alerta nueva exige cierre
+         explícito antes de seguir, en vez del toast de esquina que se
+         autocerraba solo (v4). Cola: si llega más de una, se ven una a una. */
+      #alert-modal-backdrop {
+        position: fixed;
+        inset: 0;
+        z-index: 1100;
+        background: rgba(15, 23, 42, 0.55);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 16px;
+        animation: alert-modal-fade-in 0.12s ease;
+      }
+
+      #alert-modal-backdrop[hidden] {
+        display: none;
+      }
+
+      @keyframes alert-modal-fade-in {
+        from {
+          opacity: 0;
+        }
+      }
+
+      #alert-modal {
+        width: min(420px, 100%);
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+        border-top: 5px solid #94a3b8;
+        overflow: hidden;
+      }
+
+      #alert-modal.alert-modal--aviso {
+        border-top-color: #f2c744;
+      }
+
+      #alert-modal.alert-modal--urgente {
+        border-top-color: #d64545;
+      }
+
+      .alert-modal__header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px 12px;
+        border-bottom: 1px solid #eee;
+      }
+
+      .alert-modal__contador {
+        font-size: 12px;
+        color: #64748b;
+      }
+
+      .alert-modal__cerrar {
+        background: transparent;
+        border: 0;
+        color: #64748b;
+        font-size: 16px;
+        cursor: pointer;
+        padding: 2px 6px;
+        line-height: 1.4;
+      }
+
+      .alert-modal__cuerpo {
+        padding: 14px 16px;
+      }
+
+      .alert-modal__titulo {
+        font-size: 15px;
+        font-weight: 700;
+        color: #1e293b;
+      }
+
+      .alert-modal__desc {
+        font-size: 13px;
+        color: #475569;
+        margin-top: 6px;
+        line-height: 1.4;
+      }
+
+      .alert-modal__momento {
+        font-size: 11px;
+        color: #94a3b8;
+        margin-top: 8px;
+      }
+
+      .alert-modal__footer {
+        display: flex;
+        justify-content: flex-end;
+        gap: 8px;
+        padding: 10px 16px 14px;
+      }
+
+      .alert-modal__footer button {
+        font-size: 13px;
+        padding: 7px 12px;
+        border-radius: 6px;
+        cursor: pointer;
+      }
+
+      .alert-modal__ver {
+        background: #fff;
+        border: 1px solid #cbd5e1;
+        color: #334155;
+      }
+
+      .alert-modal__siguiente {
+        background: var(--mirall-navy, #0b1f33);
+        border: 1px solid var(--mirall-navy, #0b1f33);
+        color: #fff;
+      }
+
+      .info-panel--resaltado {
+        box-shadow: 0 0 0 2px #f2c744;
+        transition: box-shadow 0.2s ease;
+      }
+
+      #pwa-toast {
+        position: fixed;
+        left: 50%;
+        bottom: calc(16px + env(safe-area-inset-bottom));
+        transform: translateX(-50%);
+        z-index: 1000;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 10px 12px 10px 16px;
+        border-radius: 10px;
+        background: var(--mirall-navy, #0b1f33);
+        color: #eef3f8;
+        font-size: 13px;
+        box-shadow: 0 6px 24px rgba(0, 0, 0, 0.4);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+      }
+
+      #pwa-toast button {
+        font-size: 13px;
+        font-weight: 600;
+        padding: 6px 12px;
+        border: 0;
+        border-radius: 7px;
+        background: #2563eb;
+        color: #fff;
+        cursor: pointer;
+        min-height: 32px;
+      }
+
+      #pwa-toast .pwa-toast__cerrar {
+        background: transparent;
+        color: #9fb3c8;
+        font-weight: 400;
+        padding: 6px 8px;
+      }
+
+      #controls {
+        position: absolute;
+        top: calc(var(--header-h) + 12px);
+        left: calc(var(--sidebar-w-collapsed) + 12px);
+        z-index: 1;
+        background: rgba(255, 255, 255, 0.96);
+        border-radius: 6px;
+        padding: 8px 12px 10px;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+        font-size: 14px;
+        min-width: 210px;
+      }
+
+      .controls__head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+        padding-bottom: 6px;
+        border-bottom: 1px solid #e2e8f0;
+        margin-bottom: 6px;
+      }
+
+      .controls__title {
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        color: #64748b;
+      }
+
+      .controls__preset {
+        border: 1px solid #cbd5e1;
+        background: #f8fafc;
+        color: #1e293b;
+        font-size: 11px;
+        font-weight: 600;
+        padding: 3px 8px;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+
+      .controls__preset:hover {
+        background: #f2c744;
+        border-color: #f2c744;
+      }
+
+      .controls__group-head {
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        color: #94a3b8;
+        margin: 4px 0 3px;
+      }
+
+      .controls__group--primaria {
+        border-left: 3px solid #f2c744;
+        padding-left: 8px;
+        margin-left: -3px;
+      }
+
+      .controls__group--primaria .controls__row {
+        font-weight: 500;
+      }
+
+      .controls__group--contexto {
+        margin-top: 8px;
+      }
+
+      .controls__group--contexto > summary {
+        list-style: none;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .controls__group--contexto > summary::-webkit-details-marker {
+        display: none;
+      }
+
+      .controls__group--contexto > summary::before {
+        content: '▸';
+        font-size: 9px;
+        color: #94a3b8;
+        transition: transform 0.12s ease;
+      }
+
+      .controls__group--contexto[open] > summary::before {
+        transform: rotate(90deg);
+      }
+
+      .controls__group--contexto .controls__row {
+        opacity: 0.82;
+      }
+
+      .controls__badge {
+        font-size: 10px;
+        font-weight: 600;
+        color: #94a3b8;
+        letter-spacing: 0;
+        text-transform: none;
+      }
+
+      .controls__badge.is-active {
+        color: #1e293b;
+      }
+
+      .controls__row {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-top: 6px;
+      }
+
+      .controls__group-head + .controls__row {
+        margin-top: 2px;
+      }
+
+      .controls__row--hora {
+        margin-top: 6px;
+      }
+
+      .controls__row[hidden] {
+        display: none;
+      }
+
+      .mock-badge {
+        background: #d64545;
+        color: #fff;
+        font-weight: 700;
+        font-size: 11px;
+        letter-spacing: 0.04em;
+        padding: 2px 6px;
+        border-radius: 4px;
+      }
+
+      #mock-banner {
+        position: absolute;
+        top: calc(var(--header-h) + 12px);
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 1;
+        background: #d64545;
+        color: #fff;
+        font-weight: 600;
+        font-size: 13px;
+        padding: 6px 14px;
+        border-radius: 6px;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+      }
+
+      #info-panels {
+        position: absolute;
+        bottom: 30px;
+        left: calc(var(--sidebar-w-collapsed) + 12px);
+        right: 12px;
+        z-index: 1;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 8px;
+        justify-content: flex-start;
+        max-height: calc(100vh - var(--header-h) - 260px);
+        overflow-y: auto;
+      }
+
+      .info-panel {
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 6px;
+        padding: 10px 12px;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+        font-size: 14px;
+        width: 280px;
+        max-height: 280px;
+        overflow-y: auto;
+        box-sizing: border-box;
+      }
+
+      /* spec 035 §5.2 (v2): las leyendas de capa arrancan colapsadas a su
+         título y se expanden solo con clic/tap (`buildInfoPanel` en
+         panel-utils.ts ya tenía el toggle de clic para táctil; v2 lo
+         generaliza a todos los dispositivos). Antes se expandían también al
+         pasar el ratón por encima — en escritorio se veían "en blanco" un
+         instante y molestaban para lectura/capturas, así que se retiró. */
+      .info-panel--colapsable {
+        cursor: pointer;
+      }
+
+      .info-panel--colapsable > *:not(:first-child) {
+        overflow: hidden;
+        max-height: 0;
+        margin-top: 0;
+        opacity: 0;
+        transition:
+          max-height 0.16s ease,
+          opacity 0.12s ease;
+      }
+
+      .info-panel--colapsable > :first-child::after {
+        content: ' ▾';
+        color: #94a3b8;
+        font-size: 11px;
+      }
+
+      .info-panel--colapsable.is-expandida > * {
+        max-height: 320px;
+        opacity: 1;
+      }
+
+      .info-panel--colapsable.is-expandida > :first-child::after {
+        content: ' ▴';
+      }
+
+      .info-panel__main {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .info-panel__icon {
+        font-size: 28px;
+        line-height: 1;
+      }
+
+      .info-panel__value {
+        font-size: 22px;
+        font-weight: 700;
+      }
+
+      .info-panel__value--small {
+        font-size: 15px;
+      }
+
+      .info-panel__badge {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        color: #fff;
+        font-weight: 700;
+        font-size: 14px;
+        padding: 0 4px;
+      }
+
+      .info-panel__desc {
+        font-size: 13px;
+        color: #333;
+        margin-top: 2px;
+      }
+
+      .info-panel__viento {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 12px;
+        color: #444;
+        margin-top: 4px;
+      }
+
+      .info-panel__viento-dot {
+        width: 9px;
+        height: 9px;
+        border-radius: 50%;
+        flex-shrink: 0;
+      }
+
+      .info-panel__meta {
+        font-size: 11px;
+        color: #777;
+        margin-top: 6px;
+      }
+
+      .info-panel__stale {
+        color: #b45309;
+        font-weight: 600;
+        margin-left: 4px;
+      }
+
+      /* Spec 026 §6 — aviso de que las fechas son la vigencia del permiso,
+         no la duración real del corte; debe verse, no ir en letra pequeña
+         (CLAUDE.md §4), de ahí el color y el peso frente a .info-panel__meta normal. */
+      .info-panel__meta--aviso {
+        color: #92400e;
+        font-weight: 600;
+      }
+
+      .prediccion-panel__tramos {
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+        margin-top: 6px;
+      }
+
+      .prediccion-panel__tramo {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 2px;
+        min-width: 40px;
+      }
+
+      .prediccion-panel__hora {
+        font-size: 11px;
+        color: #666;
+      }
+
+      .prediccion-panel__icon {
+        font-size: 20px;
+        line-height: 1;
+      }
+
+      .prediccion-panel__temp {
+        font-size: 14px;
+        font-weight: 700;
+      }
+
+      .prediccion-panel__lluvia {
+        font-size: 11px;
+        color: #0369a1;
+      }
+
+      #insights-panel {
+        max-width: 260px;
+      }
+
+      .insight-panel__tarjetas {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        margin-top: 6px;
+      }
+
+      .insight-card {
+        border-radius: 4px;
+        padding: 6px 8px;
+        border-left: 4px solid #b45309;
+        background: #fffbeb;
+      }
+
+      .insight-card--urgente {
+        border-left-color: #dc2626;
+        background: #fef2f2;
+      }
+
+      .insight-card__titulo {
+        font-size: 12px;
+        font-weight: 700;
+        color: #333;
+      }
+
+      .insight-card__desc {
+        font-size: 11px;
+        color: #555;
+        margin-top: 2px;
+      }
+
+      .insight-card__momento {
+        font-size: 10px;
+        color: #94a3b8;
+        margin-top: 4px;
+      }
+
+      .insight-card__copiar {
+        margin-top: 6px;
+        font-size: 11px;
+        padding: 3px 8px;
+        border-radius: 4px;
+        border: 1px solid #999;
+        background: #fff;
+        cursor: pointer;
+      }
+
+      .insight-card__copiar:hover {
+        background: #f0f0f0;
+      }
+
+      /* spec 024 §5 — un chip por fuenteSpec, para ver de un vistazo qué señales se cruzaron sin leer la descripción completa. */
+      .insight-card__fuentes {
+        display: flex;
+        gap: 4px;
+        margin-top: 4px;
+      }
+
+      .insight-card__fuente-chip {
+        font-size: 10px;
+        font-weight: 600;
+        color: #666;
+        background: rgba(0, 0, 0, 0.06);
+        border-radius: 3px;
+        padding: 1px 5px;
+      }
+
+      .trafico-historico__spark {
+        width: 140px;
+        height: 28px;
+        margin-top: 6px;
+        display: block;
+      }
+
+      .trafico-leyenda__row {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 12px;
+        color: #333;
+        margin-top: 3px;
+      }
+
+      .trafico-leyenda__dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        flex-shrink: 0;
+      }
+
+      #media-panel {
+        position: absolute;
+        top: calc(var(--header-h) + 12px);
+        right: 60px;
+        z-index: 1;
+        width: 300px;
+        max-height: 70vh;
+        display: flex;
+        flex-direction: column;
+        background: rgba(255, 255, 255, 0.97);
+        border-radius: 6px;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+        font-size: 14px;
+        overflow: hidden;
+      }
+
+      #media-panel[hidden] {
+        display: none;
+      }
+
+      /* Spec 025 — panel "pequeño junto al de contexto mediático" (§5), a su
+         izquierda, mismo estilo visual que #media-panel. */
+      #tendencia-panel {
+        position: absolute;
+        top: calc(var(--header-h) + 12px);
+        right: 372px;
+        z-index: 1;
+        width: 240px;
+        max-height: 70vh;
+        display: flex;
+        flex-direction: column;
+        background: rgba(255, 255, 255, 0.97);
+        border-radius: 6px;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+        font-size: 14px;
+        overflow: hidden;
+      }
+
+      #tendencia-panel[hidden] {
+        display: none;
+      }
+
+      /* Cámaras en vivo — spec 038 v4. Tarjetas "clic para reproducir" (patrón
+         del panel de referencia de World Monitor): nada de vídeo se carga
+         hasta pulsar la tarjeta. Columna única a 16:9 real (las cámaras de
+         Turisme CV son 1920×1080) — con un recuadro 4:3 salía recortada. */
+      #camaras-panel {
+        position: absolute;
+        top: calc(var(--header-h) + 12px);
+        right: 664px;
+        z-index: 1;
+        width: 300px;
+        max-height: 70vh;
+        display: flex;
+        flex-direction: column;
+        background: rgba(255, 255, 255, 0.97);
+        border-radius: 6px;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+        font-size: 14px;
+        /* spec 043 — el bloque de cámaras externas (DGT) puede crecer bastante
+           más que las 4 tarjetas de spec 038; con scroll interno en vez de
+           `overflow: hidden` no se recorta contenido invisible sin aviso
+           (mismo bug real que #insights-panel en spec 013 v8). */
+        overflow: hidden auto;
+      }
+
+      #camaras-panel[hidden] {
+        display: none;
+      }
+
+      /* Vista /inteligencia — spec 040. En vez de flotar ancladas al mapa
+         (posición absoluta de arriba), cámaras/prensa/tendencia pasan a fluir
+         como tarjetas normales dentro de la página; agenda y actualidad
+         institucional ya eran bloques normales, solo ganan aquí el mismo
+         aspecto de tarjeta. El body entero se vuelve un contenedor flex que
+         envuelve — el resto de hijos de <body> (mapa, selector, sidebar,
+         cabecera) están todos en `position:fixed/absolute` u ocultos por
+         `hidden`, así que no participan del flujo y no se ven afectados. */
+      :root[data-vista='inteligencia']:not([data-layout='movil']) body {
+        display: flex;
+        flex-wrap: wrap;
+        align-content: flex-start;
+        gap: 16px;
+        padding: calc(var(--header-h) + 16px) 16px 16px calc(var(--sidebar-w-collapsed) + 16px);
+        box-sizing: border-box;
+        min-height: 100vh;
+      }
+
+      :root[data-vista='inteligencia']:not([data-layout='movil']) #camaras-panel,
+      :root[data-vista='inteligencia']:not([data-layout='movil']) #media-panel,
+      :root[data-vista='inteligencia']:not([data-layout='movil']) #tendencia-panel {
+        position: static;
+        top: auto;
+        right: auto;
+        width: 320px;
+      }
+
+      #agenda-panel,
+      #actualidad-redes-panel,
+      #apoyo-decision-panel,
+      #protocolos-panel,
+      #camaras-dgt-panel,
+      #altimetria-panel,
+      #meteo-zona-panel,
+      #senales-ia-panel,
+      #recomendaciones-ia-panel {
+        width: 320px;
+        max-height: 70vh;
+        display: flex;
+        flex-direction: column;
+        background: rgba(255, 255, 255, 0.97);
+        border-radius: 6px;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+        font-size: 14px;
+        overflow: hidden auto;
+      }
+
+      #agenda-panel[hidden],
+      #actualidad-redes-panel[hidden],
+      #apoyo-decision-panel[hidden],
+      #protocolos-panel[hidden],
+      #camaras-dgt-panel[hidden],
+      #altimetria-panel[hidden],
+      #meteo-zona-panel[hidden],
+      #senales-ia-panel[hidden],
+      #recomendaciones-ia-panel[hidden] {
+        display: none;
+      }
+
+      /* Orden de los bloques dentro de /inteligencia (pedido explícito del
+         usuario, 2026-09-17; reordenado el mismo día) — cámaras primero (DGT
+         antes que ciudad), señales+recomendaciones IA justo al lado
+         (prioridad del usuario: "esa tarjeta la vamos a poner la primera
+         arriba, al lado de las cámaras" — spec 047 la dividió en dos cajas),
+         agenda, altimetría junto a lluvia/viento, actualidad
+         institucional/apoyo a decisión después, contexto mediático relegado
+         más abajo (mismo pedido), tendencia la última (de momento aporta
+         poco, spec 025). Solo afecta al orden visual dentro del flex de
+         /inteligencia — el orden de montaje en `main.ts` no cambia. */
+      :root[data-vista='inteligencia']:not([data-layout='movil']) #camaras-dgt-panel {
+        order: 1;
+      }
+      :root[data-vista='inteligencia']:not([data-layout='movil']) #camaras-panel {
+        order: 2;
+      }
+      :root[data-vista='inteligencia']:not([data-layout='movil']) #senales-ia-panel {
+        order: 3;
+      }
+      :root[data-vista='inteligencia']:not([data-layout='movil']) #recomendaciones-ia-panel {
+        order: 4;
+      }
+      :root[data-vista='inteligencia']:not([data-layout='movil']) #agenda-panel {
+        order: 5;
+      }
+      :root[data-vista='inteligencia']:not([data-layout='movil']) #altimetria-panel {
+        order: 6;
+      }
+      :root[data-vista='inteligencia']:not([data-layout='movil']) #meteo-zona-panel {
+        order: 7;
+      }
+      :root[data-vista='inteligencia']:not([data-layout='movil']) #actualidad-redes-panel {
+        order: 8;
+      }
+      :root[data-vista='inteligencia']:not([data-layout='movil']) #apoyo-decision-panel {
+        order: 9;
+      }
+      :root[data-vista='inteligencia']:not([data-layout='movil']) #media-panel {
+        order: 10;
+      }
+      :root[data-vista='inteligencia']:not([data-layout='movil']) #protocolos-panel {
+        order: 11;
+      }
+      :root[data-vista='inteligencia']:not([data-layout='movil']) #tendencia-panel {
+        order: 12;
+      }
+      /* #movilidad-avisos-panel (spec 048) se añadió sin entrada aquí — bug
+         real: sin `order` explícito caía en el 0 por defecto de flex y se
+         colaba EL PRIMERO, por delante incluso de las cámaras. Pedido del
+         usuario (2026-09-24): que quede en un segundo plano, no como
+         principal — se manda al final. */
+      :root[data-vista='inteligencia']:not([data-layout='movil']) #movilidad-avisos-panel {
+        order: 13;
+      }
+      /* Spec 049 — lista de sonómetros de Russafa (sin geometría verificada,
+         no es una capa de mapa, ver spec 049 §7). Contenido secundario, igual
+         criterio que movilidad-avisos-panel. */
+      :root[data-vista='inteligencia']:not([data-layout='movil']) #zas-ruido-panel {
+        order: 14;
+      }
+
+      /* Spec 045/047 — advertencia de IA, compartida por síntesis v1 y por
+         la caja de recomendaciones v2 (mismo principio: nunca en letra
+         pequeña, CLAUDE.md §4). */
+      .sintesis-ia__advertencia {
+        margin: 8px;
+        padding: 6px 8px;
+        font-size: 11px;
+        font-weight: 600;
+        color: #7d3c00;
+        background: #fdebd0;
+        border-radius: 4px;
+      }
+
+      /* Spec 047 — caja "Señales" (correlación determinista, sin IA). */
+      .senales-ia__vacio {
+        margin: 8px;
+        font-size: 12px;
+        color: #666;
+      }
+
+      .senales-ia__item {
+        margin: 8px 8px 6px;
+        padding: 6px;
+        border-left: 3px solid #ccc;
+        background: #fafafa;
+        font-size: 12px;
+      }
+
+      .senales-ia__item--aviso {
+        border-left-color: #d4a017;
+      }
+
+      .senales-ia__item--urgente {
+        border-left-color: #b03a2e;
+      }
+
+      .senales-ia__tipo {
+        display: inline-block;
+        font-size: 9px;
+        font-weight: 700;
+        text-transform: uppercase;
+        color: #888;
+        margin-right: 6px;
+      }
+
+      .senales-ia__texto {
+        display: block;
+        color: #333;
+      }
+
+      .senales-ia__fuentes {
+        display: block;
+        margin-top: 4px;
+      }
+
+      /* Spec 047 — caja "Recomendaciones de actuación" (IA, condicional). */
+      .recomendaciones-ia__vacio {
+        margin: 8px;
+        font-size: 12px;
+        color: #666;
+      }
+
+      .recomendaciones-ia__item {
+        margin: 0 8px 8px;
+        padding: 6px;
+        border-left: 3px solid #2563eb;
+        background: #f0f5ff;
+        font-size: 12px;
+      }
+
+      .recomendaciones-ia__zona {
+        display: block;
+        font-size: 9px;
+        font-weight: 700;
+        text-transform: uppercase;
+        color: #2563eb;
+        margin-bottom: 2px;
+      }
+
+      .recomendaciones-ia__texto {
+        display: block;
+        color: #333;
+      }
+
+      .recomendaciones-ia__fuentes {
+        display: block;
+        margin-top: 4px;
+      }
+
+      /* Spec 044 — panel de emergencia meteorológica avanzada */
+      .emergencia-meteo__bloque {
+        padding: 8px;
+        border-top: 1px solid #eee;
+      }
+
+      .emergencia-meteo__subtitulo {
+        font-size: 12px;
+        font-weight: 600;
+        color: #444;
+        margin-bottom: 6px;
+      }
+
+      .altimetria-fila,
+      .meteo-zona-fila,
+      .pluviometro-fila,
+      .escorrentia-fila {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 11px;
+        padding: 3px 0;
+        border-bottom: 1px solid #f2f2f2;
+      }
+
+      .altimetria-fila__nombre,
+      .meteo-zona-fila__nombre,
+      .escorrentia-fila__nombre {
+        flex: 0 0 84px;
+        font-weight: 600;
+        color: #333;
+      }
+
+      .altimetria-fila__barra,
+      .escorrentia-fila__barra {
+        flex: 1;
+        height: 8px;
+        background: #eef2f5;
+        border-radius: 4px;
+        overflow: hidden;
+      }
+
+      .altimetria-fila__barra > span {
+        display: block;
+        height: 100%;
+        background: linear-gradient(90deg, #8bc34a, #d4a017, #b45f4d);
+      }
+
+      /* Azul (agua), no el verde-ámbar-marrón de altimetría — distinto concepto, mismo layout. */
+      .escorrentia-fila__barra > span {
+        display: block;
+        height: 100%;
+        background: linear-gradient(90deg, #90caf9, #1e88e5, #0d47a1);
+      }
+
+      .altimetria-fila__valor,
+      .escorrentia-fila__valor {
+        flex: 0 0 48px;
+        text-align: right;
+        color: #555;
+      }
+
+      .meteo-zona-fila__dato {
+        color: #555;
+      }
+
+      .pluviometro-fila {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 2px;
+      }
+
+      .pluviometro-fila__nombre {
+        font-weight: 600;
+        color: #333;
+      }
+
+      .pluviometro-fila__nombre small {
+        font-weight: 400;
+        color: #888;
+      }
+
+      .pluviometro-fila__acumulados {
+        color: #555;
+      }
+
+      .avamet-fila {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 6px;
+        font-size: 11px;
+        padding: 3px 0;
+        border-bottom: 1px solid #f2f2f2;
+      }
+
+      .avamet-fila__nombre {
+        flex: 1 1 100%;
+        font-weight: 600;
+        color: #333;
+      }
+
+      .avamet-fila__dato {
+        color: #555;
+      }
+
+      /* Protocolos de actuación — spec 042 */
+      .protocolos-lista {
+        padding: 8px;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+
+      .protocolo {
+        border: 1px solid #e2e8f0;
+        border-radius: 4px;
+      }
+
+      .protocolo__titulo {
+        padding: 8px 10px;
+        font-size: 13px;
+        font-weight: 600;
+        color: #1e293b;
+        cursor: pointer;
+        list-style: none;
+      }
+
+      .protocolo__titulo::-webkit-details-marker {
+        display: none;
+      }
+
+      .protocolo__cuerpo {
+        padding: 0 10px 10px;
+      }
+
+      .protocolo__bloque {
+        margin-bottom: 8px;
+      }
+
+      .protocolo__bloque-titulo {
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        color: #64748b;
+        margin-bottom: 3px;
+      }
+
+      .protocolo__cuerpo ul {
+        margin: 0;
+        padding-left: 18px;
+        font-size: 12.5px;
+        color: #334155;
+      }
+
+      .protocolo__cuerpo li {
+        margin-bottom: 3px;
+      }
+
+      .protocolo__pie {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 8px;
+        margin-top: 6px;
+        padding-top: 6px;
+        border-top: 1px solid #e2e8f0;
+        font-size: 11px;
+        color: #64748b;
+      }
+
+      .protocolo__fuente {
+        color: #2563eb;
+        text-decoration: none;
+      }
+
+      .protocolo__fuente--sin-citar {
+        color: #94a3b8;
+        font-style: italic;
+      }
+
+      #actualidad-redes-panel .actualidad-redes {
+        padding: 8px 12px 10px;
+        overflow-y: auto;
+      }
+
+      /* Apoyo a decisión operativa — spec 041 */
+      #apoyo-decision-list {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        padding: 8px;
+        overflow-y: auto;
+      }
+
+      .sugerencia-operativa {
+        border: 1px solid #e2e8f0;
+        border-left: 4px solid #94a3b8;
+        border-radius: 4px;
+        padding: 8px 10px;
+      }
+
+      .sugerencia-operativa--prioritario {
+        border-left-color: #dc2626;
+        background: #fef2f2;
+      }
+
+      .sugerencia-operativa--seguimiento {
+        border-left-color: #d97706;
+        background: #fffbeb;
+      }
+
+      .sugerencia-operativa__cabecera {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        gap: 8px;
+        font-weight: 600;
+        font-size: 12.5px;
+        color: #1e293b;
+      }
+
+      .sugerencia-operativa__severidad {
+        font-size: 10px;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        color: #64748b;
+        flex-shrink: 0;
+      }
+
+      .sugerencia-operativa__chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4px;
+        margin: 4px 0;
+      }
+
+      .sugerencia-operativa__chip {
+        font-size: 10px;
+        background: rgba(0, 0, 0, 0.06);
+        border-radius: 3px;
+        padding: 1px 5px;
+        color: #475569;
+      }
+
+      .sugerencia-operativa__resumen {
+        font-size: 12px;
+        color: #475569;
+        margin-bottom: 4px;
+      }
+
+      .sugerencia-operativa__texto {
+        font-size: 12.5px;
+        font-style: italic;
+        color: #1e293b;
+        margin-bottom: 6px;
+      }
+
+      .sugerencia-operativa__pie {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .sugerencia-operativa__ver-mapa {
+        appearance: none;
+        border: 1px solid #94a3b8;
+        background: #fff;
+        border-radius: 4px;
+        padding: 3px 8px;
+        font-size: 11px;
+        cursor: pointer;
+        color: #1e293b;
+      }
+
+      .sugerencia-operativa__ver-mapa:hover {
+        background: #f1f5f9;
+      }
+
+      .sugerencia-operativa__fuentes {
+        display: flex;
+        gap: 4px;
+      }
+
+      .camaras-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        padding: 8px;
+        overflow-y: auto;
+      }
+
+      .camara-tile__nombre {
+        font-size: 12px;
+        font-weight: 600;
+        color: #222;
+        margin-bottom: 4px;
+      }
+
+      .camara-tile__stage {
+        position: relative;
+        aspect-ratio: 16 / 9;
+        border-radius: 5px;
+        overflow: hidden;
+        background: linear-gradient(160deg, #2a3b52, #16202e);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .camara-tile__play {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        border: 1px solid rgba(255, 255, 255, 0.5);
+        background: rgba(255, 255, 255, 0.15);
+        color: #fff;
+        font-size: 15px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding-left: 2px;
+      }
+
+      .camara-tile__play:hover {
+        background: rgba(255, 255, 255, 0.3);
+      }
+
+      .camara-tile__player {
+        width: 100%;
+        height: 100%;
+        border: 0;
+        display: block;
+        object-fit: cover;
+      }
+
+      .camara-tile__error {
+        font-size: 11px;
+        color: #cbd5e1;
+        text-align: center;
+        padding: 0 8px;
+      }
+
+      .camara-tile__atribucion {
+        display: block;
+        margin-top: 4px;
+        font-size: 10px;
+        color: #888;
+        text-decoration: none;
+      }
+
+      .camara-tile__atribucion:hover {
+        text-decoration: underline;
+      }
+
+      /* Spec 043 — cámaras externas DGT, bloque separado de las internas de
+         arriba (imagen JPEG estática que se refresca, no vídeo en directo). */
+      .camaras-dgt-carretera {
+        margin: 0 8px 6px;
+        border-radius: 6px;
+        background: rgba(255, 255, 255, 0.04);
+      }
+
+      .camaras-dgt-carretera > summary {
+        cursor: pointer;
+        padding: 6px 8px;
+        font-size: 12px;
+        font-weight: 600;
+        color: #cbd5e1;
+      }
+
+      .camaras-dgt-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+        gap: 8px;
+        padding: 0 8px 8px;
+      }
+
+      .camara-dgt-tile {
+        margin: 0;
+      }
+
+      .camara-dgt-tile__img {
+        width: 100%;
+        aspect-ratio: 16 / 9;
+        object-fit: cover;
+        border-radius: 4px;
+        background: #16202e;
+        display: block;
+      }
+
+      .camara-dgt-tile figcaption {
+        font-size: 10px;
+        color: #888;
+        margin-top: 2px;
+        text-align: center;
+      }
+
+      .tendencia-panel__select {
+        float: right;
+        font-size: 11px;
+      }
+
+      .tendencia-panel__termino {
+        padding: 7px 12px;
+        border-bottom: 1px solid #f0f0f0;
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+      }
+
+      .tendencia-panel__palabra {
+        font-size: 13px;
+        font-weight: 600;
+        color: #222;
+      }
+
+      .tendencia-panel__frecuencia {
+        font-size: 11px;
+        color: #888;
+      }
+
+      .tendencia-panel__insuficiente {
+        padding: 12px;
+        font-size: 12px;
+        color: #666;
+        line-height: 1.4;
+      }
+
+      .media-panel__header {
+        padding: 10px 12px;
+        font-weight: 700;
+        border-bottom: 1px solid #eee;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+      }
+
+      .media-panel__list {
+        overflow-y: auto;
+        flex: 1;
+      }
+
+      /* spec 027 — aviso persistente de que la agenda es scraping, no una
+         API/dataset oficial (mismo principio de transparencia que el badge
+         MOCK de spec 003, adaptado: aquí no en letra pequeña tampoco). */
+      .agenda-panel__aviso {
+        padding: 6px 12px;
+        font-size: 11px;
+        font-weight: 600;
+        color: #7a4a00;
+        background: #fff3cd;
+        border-bottom: 1px solid #ffe69c;
+      }
+
+      .media-panel__item {
+        display: block;
+        padding: 8px 12px;
+        border-bottom: 1px solid #f0f0f0;
+        text-decoration: none;
+        color: inherit;
+      }
+
+      .media-panel__item:hover {
+        background: #f7f7f7;
+      }
+
+      .media-panel__item-titulo {
+        font-size: 13px;
+        color: #222;
+        line-height: 1.35;
+      }
+
+      .media-panel__item-meta {
+        font-size: 11px;
+        color: #888;
+        margin-top: 3px;
+      }
+
+      /* spec 009 v6 — titular con más de 24h desde su publicación: sigue
+         visible (es contexto igualmente válido) pero visualmente atenuado. */
+      .media-panel__item--caducado {
+        opacity: 0.6;
+      }
+
+      .media-panel__caducado {
+        color: #b45309;
+        font-weight: 600;
+      }
+
+      .media-panel__grupo-titulo {
+        position: sticky;
+        top: 0;
+        padding: 6px 12px;
+        font-size: 11px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.02em;
+        color: #555;
+        background: #f0f0f0;
+        border-bottom: 1px solid #e0e0e0;
+      }
+
+      .media-panel__chips {
+        margin-top: 5px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4px;
+      }
+
+      .media-panel__chip {
+        display: inline-block;
+        padding: 2px 7px;
+        font-size: 10px;
+        font-weight: 600;
+        color: #1a5276;
+        background: #eaf2f8;
+        border-radius: 10px;
+        line-height: 1.4;
+      }
+
+      .media-panel__chip--baja-confianza {
+        color: #7d6608;
+        background: #fef9e7;
+      }
+
+      /* Spec 027 v4 — eventos (fútbol/Roig Arena/carreras) que generan
+         afluencia/tráfico/cortes reales en vía pública, distinguidos del
+         resto de la agenda general. */
+      .media-panel__chip--impacto {
+        color: #922b21;
+        background: #fdedec;
+      }
+
+      /* Spec 026 — tooltip mínimo específico de esta capa (ver comentario en
+         buildViaPublicaTooltip, src/main.ts). Posicionado en coordenadas de
+         pantalla junto al cursor, nunca intercepta clics (pointer-events: none). */
+      #via-publica-tooltip {
+        position: fixed;
+        z-index: 20;
+        pointer-events: none;
+        background: rgba(20, 20, 20, 0.92);
+        color: #fff;
+        padding: 6px 10px;
+        border-radius: 6px;
+        font-size: 11px;
+        line-height: 1.4;
+        max-width: 220px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+      }
+
+      .via-publica-tooltip__tipo {
+        font-weight: 700;
+        text-transform: uppercase;
+        font-size: 10px;
+        letter-spacing: 0.02em;
+        opacity: 0.85;
+      }
+
+      .via-publica-tooltip__calle {
+        font-weight: 600;
+        margin-top: 2px;
+      }
+
+      .via-publica-tooltip__vigencia {
+        margin-top: 3px;
+        opacity: 0.75;
+      }
+
+      #media-panel .info-panel__meta {
+        padding: 8px 12px;
+        margin-top: 0;
+        border-top: 1px solid #eee;
+      }
+
+      /* ================================================================
+         Layout MÓVIL — spec 029. Activo cuando <html data-layout="movil">
+         (deteccion-dispositivo.ts / script inline). Escritorio: sin cambios.
+         ================================================================ */
+
+      :root[data-layout='movil'] {
+        --header-h: 52px;
+      }
+
+      /* Cabecera: safe-area arriba, reloj compacto, sin fecha. */
+      :root[data-layout='movil'] #app-header {
+        height: calc(var(--header-h) + env(safe-area-inset-top));
+        padding-top: env(safe-area-inset-top);
+        padding-left: max(12px, env(safe-area-inset-left));
+        gap: 8px;
+      }
+      :root[data-layout='movil'] #app-header__tagline,
+      :root[data-layout='movil'] #app-header__date,
+      :root[data-layout='movil'] #app-header__frescura,
+      :root[data-layout='movil'] #app-header__divider {
+        display: none;
+      }
+      :root[data-layout='movil'] #app-header__name {
+        font-size: 14px;
+      }
+      :root[data-layout='movil'] #app-header__status {
+        gap: 8px;
+      }
+      :root[data-layout='movil'] #app-header__clock {
+        font-size: 14px;
+      }
+
+      /* El mapa arranca bajo la cabecera (con safe-area). */
+      :root[data-layout='movil'] #map {
+        top: calc(var(--header-h) + env(safe-area-inset-top));
+      }
+
+      /* Sidebar: hoja a pantalla completa que entra deslizando desde la
+         izquierda (transform — el botón flotante de abrir vive fuera de este
+         subárbol, así que el bloque contenedor que crea el transform no le
+         afecta). */
+      :root[data-layout='movil'] #app-sidebar {
+        top: calc(var(--header-h) + env(safe-area-inset-top));
+        width: 100%;
+        max-width: 30rem;
+        transform: translateX(-100%);
+        transition: transform 0.2s ease;
+        z-index: 150;
+        padding-left: env(safe-area-inset-left);
+        padding-bottom: env(safe-area-inset-bottom);
+      }
+      :root[data-layout='movil'] #app-sidebar.is-expanded {
+        transform: translateX(0);
+      }
+      /* El toggle del raíl (⟨/☰) no se usa en móvil; abre el FAB de abajo. */
+      :root[data-layout='movil'] #app-sidebar__toggle {
+        display: none;
+      }
+      /* Botón flotante para abrir la hoja. */
+      #app-sidebar__fab {
+        display: none;
+      }
+      :root[data-layout='movil'] #app-sidebar__fab {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: fixed;
+        top: calc(var(--header-h) + env(safe-area-inset-top) + 10px);
+        left: 10px;
+        width: 44px;
+        height: 44px;
+        border: none;
+        border-radius: 10px;
+        background: var(--mirall-navy);
+        color: #fff;
+        font-size: 18px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+        z-index: 151;
+        cursor: pointer;
+      }
+      :root[data-layout='movil'] #app-sidebar.is-expanded ~ #app-sidebar__fab {
+        display: none;
+      }
+      :root[data-layout='movil'] #app-sidebar__cerrar {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 44px;
+        height: 44px;
+        margin: 4px 4px 0 auto;
+        border: none;
+        background: transparent;
+        color: #fff;
+        font-size: 20px;
+        cursor: pointer;
+        flex-shrink: 0;
+      }
+      :root[data-layout='movil'] #app-sidebar:not(.is-expanded) #app-sidebar__cerrar {
+        display: none;
+      }
+      :root[data-layout='movil'] #app-sidebar__backdrop {
+        position: fixed;
+        inset: 0;
+        z-index: 149;
+        background: rgba(0, 0, 0, 0.4);
+      }
+      :root[data-layout='movil'] #app-sidebar__backdrop[hidden] {
+        display: none;
+      }
+      /* Objetivos táctiles ≥ 44 px dentro de la hoja. */
+      :root[data-layout='movil'] .sidebar-section {
+        min-height: 44px;
+        font-size: 14px;
+      }
+      :root[data-layout='movil'] .sidebar-panel-checkbox {
+        min-height: 44px;
+        font-size: 13px;
+      }
+      :root[data-layout='movil'] .sidebar-panel-checkbox input {
+        width: 20px;
+        height: 20px;
+      }
+      :root[data-layout='movil'] .proximidad-boton {
+        min-height: 44px;
+        font-size: 13px;
+      }
+
+      /* Objetivos táctiles >= 44px en móvil — spec 029 §5. */
+      :root[data-layout='movil'] .controls__row {
+        min-height: 44px;
+      }
+      :root[data-layout='movil'] .controls__row input[type='checkbox'] {
+        width: 20px;
+        height: 20px;
+        flex-shrink: 0;
+      }
+      :root[data-layout='movil'] .controls__row--hora,
+      :root[data-layout='movil'] .controls__row--trafico {
+        margin-top: 2px;
+      }
+      :root[data-layout='movil'] #info-panels button,
+      :root[data-layout='movil'] .insight-card__copiar,
+      :root[data-layout='movil'] .cordon-badge + button,
+      :root[data-layout='movil'] #cordon-resultado button,
+      :root[data-layout='movil'] .sim-corte-quitar {
+        min-height: 40px;
+        min-width: 40px;
+      }
+      :root[data-layout='movil'] .cordon-form input[type='number'],
+      :root[data-layout='movil'] .cordon-form select,
+      :root[data-layout='movil'] .cordon-form textarea {
+        min-height: 40px;
+        font-size: 16px; /* evita el zoom de iOS al enfocar */
+      }
+      :root[data-layout='movil'] #app-sidebar__logout {
+        min-height: 40px;
+        padding: 8px 14px;
+      }
+
+      /* Escritorio: ocultar los controles solo-móvil. */
+      :root:not([data-layout='movil']) #app-sidebar__cerrar,
+      :root:not([data-layout='movil']) #app-sidebar__backdrop,
+      :root:not([data-layout='movil']) #sheet-tirador {
+        display: none;
+      }
+
+      /* --- Bottom sheet de paneles --- */
+      :root[data-layout='movil'] #info-panels {
+        position: fixed;
+        top: auto;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: auto;
+        height: 42vh;
+        height: 42svh;
+        max-height: 95vh;
+        max-height: 95svh;
+        margin: 0;
+        padding: 0 env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+        z-index: 140;
+        display: block;
+        background: #f1f4f8;
+        border-radius: 14px 14px 0 0;
+        box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.28);
+        overflow-y: auto;
+        overscroll-behavior: contain;
+        transition: height 0.16s ease;
+      }
+      :root[data-layout='movil'] #info-panels[data-sheet='oculto'] {
+        overflow: hidden;
+      }
+      :root[data-layout='movil'] #sheet-tirador {
+        position: sticky;
+        top: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 44px;
+        border: none;
+        background: #f1f4f8;
+        border-radius: 14px 14px 0 0;
+        cursor: grab;
+        touch-action: none;
+        z-index: 2;
+      }
+      :root[data-layout='movil'] #sheet-tirador__barra {
+        width: 40px;
+        height: 5px;
+        border-radius: 3px;
+        background: #b3bfce;
+      }
+      /* Los paneles reparentados y las tarjetas fijas: en columna, ancho completo. */
+      :root[data-layout='movil'] #info-panels > #controls,
+      :root[data-layout='movil'] #info-panels > #media-panel,
+      :root[data-layout='movil'] #info-panels > #tendencia-panel,
+      :root[data-layout='movil'] #info-panels > #camaras-panel,
+      :root[data-layout='movil'] #info-panels > #camaras-dgt-panel,
+      :root[data-layout='movil'] #info-panels > #agenda-panel,
+      :root[data-layout='movil'] #info-panels > #actualidad-redes-panel,
+      :root[data-layout='movil'] #info-panels > #apoyo-decision-panel,
+      :root[data-layout='movil'] #info-panels > #altimetria-panel,
+      :root[data-layout='movil'] #info-panels > #meteo-zona-panel,
+      :root[data-layout='movil'] #info-panels > #senales-ia-panel,
+      :root[data-layout='movil'] #info-panels > #recomendaciones-ia-panel,
+      :root[data-layout='movil'] #info-panels > #protocolos-panel,
+      :root[data-layout='movil'] #info-panels > .info-panel {
+        position: static !important;
+        inset: auto !important;
+        width: auto !important;
+        max-width: none !important;
+        max-height: none !important;
+        margin: 0 10px 10px !important;
+        box-sizing: border-box;
+      }
+      :root[data-layout='movil'] #info-panels > #media-panel,
+      :root[data-layout='movil'] #info-panels > #tendencia-panel,
+      :root[data-layout='movil'] #info-panels > #camaras-panel,
+      :root[data-layout='movil'] #info-panels > #camaras-dgt-panel,
+      :root[data-layout='movil'] #info-panels > #agenda-panel,
+      :root[data-layout='movil'] #info-panels > #actualidad-redes-panel,
+      :root[data-layout='movil'] #info-panels > #apoyo-decision-panel,
+      :root[data-layout='movil'] #info-panels > #altimetria-panel,
+      :root[data-layout='movil'] #info-panels > #meteo-zona-panel,
+      :root[data-layout='movil'] #info-panels > #senales-ia-panel,
+      :root[data-layout='movil'] #info-panels > #recomendaciones-ia-panel,
+      :root[data-layout='movil'] #info-panels > #protocolos-panel {
+        display: flex !important;
+      }
+      :root[data-layout='movil'] #info-panels > #media-panel[hidden],
+      :root[data-layout='movil'] #info-panels > #tendencia-panel[hidden],
+      :root[data-layout='movil'] #info-panels > #camaras-panel[hidden],
+      :root[data-layout='movil'] #info-panels > #camaras-dgt-panel[hidden],
+      :root[data-layout='movil'] #info-panels > #agenda-panel[hidden],
+      :root[data-layout='movil'] #info-panels > #actualidad-redes-panel[hidden],
+      :root[data-layout='movil'] #info-panels > #apoyo-decision-panel[hidden],
+      :root[data-layout='movil'] #info-panels > #altimetria-panel[hidden],
+      :root[data-layout='movil'] #info-panels > #meteo-zona-panel[hidden],
+      :root[data-layout='movil'] #info-panels > #senales-ia-panel[hidden],
+      :root[data-layout='movil'] #info-panels > #recomendaciones-ia-panel[hidden],
+      :root[data-layout='movil'] #info-panels > #protocolos-panel[hidden] {
+        display: none !important;
+      }
+
+      /* mock-banner no debe tapar el raíl del sidebar en móvil. */
+      :root[data-layout='movil'] #mock-banner {
+        left: 50%;
+        font-size: 12px;
+        padding: 5px 12px;
+      }
+
+      /* Controles nativos de MapLibre por encima del sheet colapsado. */
+      :root[data-layout='movil'] .maplibregl-ctrl-bottom-left,
+      :root[data-layout='movil'] .maplibregl-ctrl-bottom-right {
+        margin-bottom: calc(46px + env(safe-area-inset-bottom));
+      }
+
+      /* Enlace "Ver versión de escritorio/móvil". */
+      #app-sidebar__layout {
+        padding: 8px 15px;
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+      }
+      #app-sidebar__layout-link {
+        background: none;
+        border: none;
+        color: #9db3c9;
+        font-size: 11px;
+        text-decoration: underline;
+        cursor: pointer;
+        padding: 4px 0;
+        white-space: nowrap;
+      }
+      #app-sidebar__layout-link:hover {
+        color: #dbe6f0;
+      }
+      :root[data-layout='movil'] #app-sidebar__layout-link {
+        font-size: 13px;
+        min-height: 40px;
+      }
