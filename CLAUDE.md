@@ -103,7 +103,11 @@ src/
 api/
   _router-src.ts             # fuente del router: mapea /api/<dom>/v1/<rec> -> handler de src/server/
   router.js                  # BUNDLE de _router-src.ts (esbuild) — ÚNICA función desplegada.
-                             #   Generado por `npm run build`, git-ignored. Ver scripts/bundle-api.mjs.
+                             #   Generado por `npm run build`, SÍ va commiteado — Vercel detecta
+                             #   las funciones de api/ a partir del árbol del repo, no de lo que
+                             #   genere el build (verificado en vivo 2026-09-28, ver
+                             #   scripts/bundle-api.mjs). Regenerar y commitear en cada cambio de
+                             #   api/_router-src.ts o de los handlers de src/server/.
 data/                       # assets pequeños versionados (geojson de distritos, histórico de tráfico)
 public/data/                # assets grandes servidos por el CDN, NO por una función
                             #   (red-viaria-rodada.json ~9 MB — supera el límite de función)

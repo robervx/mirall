@@ -6,7 +6,14 @@
 // el tsc del proyecto (moduleResolution: bundler) no emite. esbuild resuelve
 // todo eso inlineando: un fichero, sin imports relativos, sin JSON externo.
 //
-// api/router.js está en .gitignore — lo produce `npm run build`.
+// api/router.js SÍ va commiteado (aunque sea un artefacto generado): la
+// detección de funciones de Vercel para el preset "Other" escanea el árbol
+// del repo, no lo que produzca este build command — un fichero que solo
+// exista en disco tras `npm run build` nunca se registra como función y la
+// API entera devuelve 404 en producción (verificado en vivo el 2026-09-28
+// con `vercel build` local: sin trackear, `.vercel/output/functions/` no
+// incluye el router). Hay que regenerarlo y volver a commitearlo en cada
+// cambio de `api/_router-src.ts` o de los handlers de `src/server/`.
 import { build } from 'esbuild';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
