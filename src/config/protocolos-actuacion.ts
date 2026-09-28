@@ -1,7 +1,7 @@
 /**
  * Registro de protocolos de actuación — spec 042. Contenido estático
- * versionado en el repo (mismo patrón `def()` que el resto de config
- * estática, CLAUDE.md §5), sin fuente externa ni caché.
+ * versionado en el repo (mismo patrón de registro único que el resto de
+ * config estática, CLAUDE.md §5), sin fuente externa ni caché.
  *
  * El contenido de "Lluvias intensas" es una propuesta redactada a partir de
  * recomendaciones generales de protección civil ampliamente publicadas (no

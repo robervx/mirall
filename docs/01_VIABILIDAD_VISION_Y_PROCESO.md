@@ -1,4 +1,4 @@
-# VLC Monitor — Viabilidad, Visión de Producto y Proceso
+# Mirall — Viabilidad, Visión de Producto y Proceso
 
 **Fecha:** 2026-08-17
 Documento de viabilidad económica, estrategia de producto y proceso de trabajo. Precede al Spec-Driven Development.

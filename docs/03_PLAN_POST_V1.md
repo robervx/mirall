@@ -7,7 +7,14 @@ tanda): las 4 piezas (`027` v4, `043`, `044`, `045`) quedaron `Implemented`** �
 `045`, cuyo proveedor de IA cambió dos veces tras la aprobación inicial (ver historial más
 abajo) hasta confirmarse en vivo con una cuenta 100% gratuita. `044` recibió además una v4
 con temperatura por zona real (AVAMET), a partir de una petición explícita del usuario ya
-en esta misma tanda. No es una fase nueva confirmada en `ROADMAP.md` todavía.
+en esta misma tanda.
+
+**Actualización (2026-09-25): toda esta tanda, incluida la investigación de escorrentía
+abierta más abajo, terminó `Implemented`** (`046` a `052`, ver `specs/INDEX.md` para el
+detalle real de cada versión) y ya está reflejada como fase **F11** en `ROADMAP.md`. El
+resto de este documento se conserva tal cual por su valor histórico (cómo se llegó a cada
+decisión), no como estado vigente — `specs/INDEX.md` y `ROADMAP.md` mandan sobre lo que
+diga el resto de este fichero.
 
 ## Orden de prioridad (decidido explícitamente por el usuario)
 

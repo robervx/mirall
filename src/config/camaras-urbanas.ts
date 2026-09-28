@@ -1,8 +1,9 @@
 /**
  * Registro de cámaras urbanas en directo — spec 038 v4. Sin backend: son embeds
  * de terceros que el navegador reproduce directamente desde el proveedor (nunca
- * se graba ni se rehostea nada). Mismo patrón `def()` que `map-layer-definitions.ts`,
- * sin pipeline seed→caché→endpoint porque no hay dato que normalizar.
+ * se graba ni se rehostea nada). Mismo patrón que `map-layer-definitions.ts`
+ * (registro único, un objeto por entrada), sin pipeline seed→caché→endpoint
+ * porque no hay dato que normalizar.
  *
  * Categorías (`ADR-003`, `docs/decisiones/ADR-003-capas-publicas-vs-personales.md`):
  *  - 'publica'  → activa siempre, mecanismo de embebido explícitamente autorizado
