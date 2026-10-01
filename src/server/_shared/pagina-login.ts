@@ -18,7 +18,7 @@ export function paginaLogin(): string {
 <meta name="theme-color" content="#0b1f33" />
 <title>Acceso — ${MARCA.nombre}</title>
 <style>
-  :root { --navy: #0b1f33; --navy-light: #14304f; }
+  :root { --navy: #0b1f33; --navy-light: #14304f; --acento: #33d6c0; }
   * { box-sizing: border-box; }
   html, body { height: 100%; margin: 0; }
   body {
@@ -53,7 +53,7 @@ export function paginaLogin(): string {
     background: rgba(0, 0, 0, 0.22);
     color: #fff;
   }
-  input:focus { outline: 2px solid #3b82f6; outline-offset: 1px; }
+  input:focus { outline: 2px solid var(--acento); outline-offset: 1px; }
   .remember { display: flex; align-items: center; gap: 8px; margin: 16px 0 4px; font-size: 13px; color: #c7d4e1; }
   .remember input { width: 18px; height: 18px; }
   button {
@@ -64,8 +64,8 @@ export function paginaLogin(): string {
     font-weight: 600;
     border: 0;
     border-radius: 9px;
-    background: #2563eb;
-    color: #fff;
+    background: var(--acento);
+    color: #062017;
     cursor: pointer;
     min-height: 44px;
   }

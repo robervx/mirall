@@ -1,0 +1,394 @@
+/* Landing (`/`) y página de proceso (`/proceso`) — spec 053. Hoja separada de
+   `estilos.css` (la de la herramienta en `/mapa`): son documentos estáticos,
+   sin mapa ni deck.gl, no tiene sentido cargar ni acoplarse a esos estilos. */
+
+:root {
+  --navy: #0b1f33;
+  --navy-light: #14304f;
+  --tinta: #eef2f7;
+  --tinta-tenue: rgba(238, 242, 247, 0.66);
+  --tinta-mas-tenue: rgba(238, 242, 247, 0.4);
+  --acento: #33d6c0;
+  --borde: rgba(238, 242, 247, 0.14);
+  --ancho-contenido: 880px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body.pagina-publica {
+  background: var(--navy);
+  background-image: radial-gradient(ellipse 900px 600px at 50% -10%, var(--navy-light) 0%, var(--navy) 60%);
+  color: var(--tinta);
+  font-family: system-ui, sans-serif;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.pagina-publica a {
+  color: inherit;
+}
+
+.pagina-publica h1,
+.pagina-publica h2,
+.wordmark {
+  font-family: 'Space Grotesk', system-ui, sans-serif;
+}
+
+/* ---------- navegación superior ---------- */
+
+.nav-publica {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 24px;
+  background: rgba(11, 31, 51, 0.72);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--borde);
+}
+
+.nav-publica__marca {
+  font-weight: 700;
+  font-size: 20px;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+}
+
+.nav-publica__enlaces {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.nav-publica__enlaces a {
+  text-decoration: none;
+  font-size: 14px;
+  color: var(--tinta-tenue);
+  white-space: nowrap;
+}
+
+.nav-publica__enlaces a:hover {
+  color: var(--tinta);
+}
+
+/* ---------- botones ---------- */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 22px;
+  border-radius: 100px;
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  border: 1px solid transparent;
+  white-space: nowrap;
+}
+
+.btn--primario {
+  background: var(--acento);
+  color: #062017;
+}
+
+.btn--primario:hover {
+  background: #58e2d1;
+}
+
+.btn--secundario {
+  border-color: var(--borde);
+  color: var(--tinta);
+}
+
+.btn--secundario:hover {
+  border-color: var(--tinta-tenue);
+}
+
+.btn--pequeno {
+  padding: 8px 16px;
+  font-size: 13px;
+}
+
+/* ---------- hero ---------- */
+
+.hero {
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+}
+
+.hero__fondo {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.hero__fondo canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* Difumina la ciudad 3D hacia el fondo sólido según se acerca al resto de la
+   página, para que el texto del hero y la sección siguiente no compitan con
+   ella. */
+.hero__fondo::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(11, 31, 51, 0.25) 0%, rgba(11, 31, 51, 0.35) 55%, var(--navy) 100%);
+}
+
+.hero__contenido {
+  position: relative;
+  z-index: 1;
+  max-width: var(--ancho-contenido);
+  margin: 0 auto;
+  padding: 96px 24px 64px;
+}
+
+.hero__eyebrow {
+  margin: 0 0 20px;
+  font-size: 13px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--tinta-mas-tenue);
+}
+
+.hero__titulo {
+  margin: 0;
+  font-size: clamp(64px, 14vw, 132px);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.hero__subtitulo {
+  margin: 10px 0 0;
+  font-size: clamp(16px, 3vw, 22px);
+  letter-spacing: 0.32em;
+  text-transform: lowercase;
+  color: var(--tinta-tenue);
+}
+
+.hero__tagline {
+  margin: 28px auto 0;
+  max-width: 46ch;
+  font-size: 17px;
+  color: var(--tinta-tenue);
+}
+
+.hero__cta {
+  margin-top: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+/* ---------- secciones generales ---------- */
+
+section.seccion {
+  max-width: var(--ancho-contenido);
+  margin: 0 auto;
+  padding: 64px 24px;
+  border-top: 1px solid var(--borde);
+}
+
+section.seccion h2 {
+  margin: 0 0 28px;
+  font-size: 28px;
+}
+
+/* ---------- manifiesto ---------- */
+
+.manifiesto blockquote {
+  margin: 0 0 28px;
+  padding: 0 0 0 20px;
+  border-left: 3px solid var(--acento);
+  font-size: 22px;
+  line-height: 1.5;
+  color: var(--tinta);
+}
+
+.manifiesto p {
+  color: var(--tinta-tenue);
+  max-width: 68ch;
+}
+
+/* ---------- stack tecnológico ---------- */
+
+.stack__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 16px;
+}
+
+.stack__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 20px 12px;
+  border: 1px solid var(--borde);
+  border-radius: 14px;
+  text-align: center;
+}
+
+.stack__monograma {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: var(--navy-light);
+  border: 1px solid var(--borde);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: -0.02em;
+  color: var(--acento);
+}
+
+.stack__nombre {
+  font-size: 13px;
+  color: var(--tinta-tenue);
+}
+
+/* ---------- contacto ---------- */
+
+.contacto p {
+  color: var(--tinta-tenue);
+  max-width: 60ch;
+}
+
+/* ---------- pie ---------- */
+
+.pie-publico {
+  max-width: var(--ancho-contenido);
+  margin: 0 auto;
+  padding: 40px 24px 56px;
+  border-top: 1px solid var(--borde);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 24px;
+  justify-content: space-between;
+  font-size: 13px;
+  color: var(--tinta-mas-tenue);
+}
+
+.pie-publico a {
+  text-decoration: none;
+  color: var(--tinta-tenue);
+}
+
+.pie-publico a:hover {
+  color: var(--tinta);
+}
+
+.pie-publico__enlaces {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+/* ---------- página de proceso ---------- */
+
+.proceso {
+  max-width: var(--ancho-contenido);
+  margin: 0 auto;
+  padding: 72px 24px 32px;
+}
+
+.proceso__titulo {
+  font-size: clamp(36px, 6vw, 52px);
+  margin: 0 0 12px;
+}
+
+.proceso__intro {
+  color: var(--tinta-tenue);
+  max-width: 68ch;
+  font-size: 17px;
+}
+
+.linea-tiempo {
+  max-width: var(--ancho-contenido);
+  margin: 0 auto;
+  padding: 32px 24px 64px;
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+}
+
+.linea-tiempo__hito {
+  padding-left: 24px;
+  border-left: 2px solid var(--borde);
+  position: relative;
+}
+
+.linea-tiempo__hito::before {
+  content: '';
+  position: absolute;
+  left: -5px;
+  top: 4px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--acento);
+}
+
+.linea-tiempo__fase {
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--acento);
+  margin: 0 0 6px;
+}
+
+.linea-tiempo__hito h3 {
+  margin: 0 0 8px;
+  font-size: 19px;
+}
+
+.linea-tiempo__hito p {
+  margin: 0;
+  color: var(--tinta-tenue);
+  max-width: 68ch;
+}
+
+@media (max-width: 640px) {
+  .nav-publica {
+    padding: 14px 16px;
+  }
+
+  .nav-publica__enlaces {
+    gap: 14px;
+  }
+
+  .nav-publica__enlaces .btn {
+    display: none;
+  }
+
+  section.seccion,
+  .hero,
+  .proceso,
+  .linea-tiempo,
+  .pie-publico {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+}

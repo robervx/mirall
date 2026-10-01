@@ -87,7 +87,7 @@ function authDevPlugin(): Plugin {
         }
 
         const pathname = new URL(req.url ?? '/', 'http://localhost').pathname;
-        const esRutaApp = pathname === '/' || pathname === '/index.html';
+        const esRutaApp = pathname === '/mapa' || pathname === '/mapa/' || pathname === '/mapa/index.html';
         const esApiProtegida = pathname.startsWith('/api/') && !pathname.startsWith('/api/auth/');
         if (!esRutaApp && !esApiProtegida) {
           next();
@@ -137,8 +137,8 @@ function pwaPlugin(): Plugin[] {
       short_name: MARCA.nombre,
       description: `${MARCA.descriptor} — movilidad, meteo, aire, eventos e incidencias de València.`,
       lang: 'es',
-      start_url: '/',
-      scope: '/',
+      start_url: '/mapa/',
+      scope: '/mapa/',
       display: 'standalone',
       orientation: 'any',
       background_color: '#0b1f33',
@@ -213,6 +213,18 @@ export default defineConfig(({ mode }) => {
     plugins: [authDevPlugin(), apiDevPlugin(), ...pwaPlugin()],
     server: {
       port: Number(process.env.DEV_PORT) || 3000,
+    },
+    // Multi-página (spec 053): landing en la raíz, la herramienta operativa en
+    // /mapa, la página de proceso en /proceso. Sin esto el build solo emite
+    // index.html (comportamiento por defecto de Vite de una sola página).
+    build: {
+      rollupOptions: {
+        input: {
+          landing: path.join(rootDir, 'index.html'),
+          mapa: path.join(rootDir, 'mapa/index.html'),
+          proceso: path.join(rootDir, 'proceso/index.html'),
+        },
+      },
     },
     // maplibre-gl v6 localiza su worker con `new URL(..., import.meta.url)` +
     // `new Worker(url, {type:'module'})`, relativo a su propio módulo. El dep

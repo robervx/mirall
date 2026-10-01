@@ -9,12 +9,22 @@
         --sidebar-w-expanded: 280px;
         --mirall-navy: #0b1f33;
         --mirall-navy-light: #14304f;
+        /* Acento de marca — spec 053. Mismo valor que el hero de la landing
+           (src/paginas-publicas.css): botones/enlaces de acción "neutros" de
+           la herramienta (no semánticos) usan este acento, no el azul/rojo
+           por defecto. Los colores de aviso/urgente/MOCK no se tocan aquí —
+           son información, no decoración (ver CLAUDE.md §4). */
+        --mirall-acento: #33d6c0;
       }
 
       html,
       body {
         height: 100%;
         margin: 0;
+      }
+
+      input[type='checkbox'] {
+        accent-color: var(--mirall-acento);
       }
 
       body {
@@ -1057,8 +1067,8 @@
         padding: 6px 12px;
         border: 0;
         border-radius: 7px;
-        background: #2563eb;
-        color: #fff;
+        background: var(--mirall-acento);
+        color: #062017;
         cursor: pointer;
         min-height: 32px;
       }
@@ -1489,6 +1499,27 @@
         flex-shrink: 0;
       }
 
+      /* Barra de degradado genérica para leyendas de mapa con rampa continua
+         (spec 052 v2 — tinta hipsométrica). El color del degradado se pasa
+         inline desde JS (misma rampa que pinta el mapa, nunca desincronizada). */
+      .leyenda-gradiente {
+        margin-top: 6px;
+      }
+
+      .leyenda-gradiente > span {
+        display: block;
+        height: 10px;
+        border-radius: 4px;
+      }
+
+      .leyenda-gradiente__extremos {
+        display: flex;
+        justify-content: space-between;
+        font-size: 10px;
+        color: #777;
+        margin-top: 2px;
+      }
+
       #media-panel {
         position: absolute;
         top: calc(var(--header-h) + 12px);
@@ -1744,7 +1775,7 @@
       .recomendaciones-ia__item {
         margin: 0 8px 8px;
         padding: 6px;
-        border-left: 3px solid #2563eb;
+        border-left: 3px solid var(--mirall-acento);
         background: #f0f5ff;
         font-size: 12px;
       }
@@ -1754,7 +1785,7 @@
         font-size: 9px;
         font-weight: 700;
         text-transform: uppercase;
-        color: #2563eb;
+        color: var(--mirall-acento);
         margin-bottom: 2px;
       }
 
@@ -1942,7 +1973,7 @@
       }
 
       .protocolo__fuente {
-        color: #2563eb;
+        color: var(--mirall-acento);
         text-decoration: none;
       }
 

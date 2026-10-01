@@ -21,9 +21,17 @@ export const config = {
   ],
 };
 
+// Spec 053: la landing y la página de proceso son contenido de presentación,
+// no la herramienta — quedan siempre públicas aunque el despliegue tenga el
+// gate activo (AUTH_SECRET). El gate solo protege /mapa.
+const RUTAS_PUBLICAS = new Set(['/', '/proceso', '/proceso/', '/proceso/index.html']);
+
 export default async function middleware(request: Request): Promise<Response | undefined> {
   const secret = process.env.AUTH_SECRET;
-  const esApi = new URL(request.url).pathname.startsWith('/api/');
+  const pathname = new URL(request.url).pathname;
+  const esApi = pathname.startsWith('/api/');
+
+  if (RUTAS_PUBLICAS.has(pathname)) return undefined;
 
   // Spec 030 / ADR-002: el gate es OPCIONAL. Sin AUTH_SECRET, la app se sirve
   // abierta (repo público / demo). Con AUTH_SECRET + APP_USERS, queda tras el

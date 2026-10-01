@@ -11,7 +11,7 @@ Hoy, en la práctica: un mapa vivo de la ciudad de València — movilidad, mete
 calidad del aire, eventos e incidencias, agregados en un solo panel a partir de datos
 abiertos y gratuitos.
 
-[**▶ Demo en vivo**](https://vlc-monitor.vercel.app) &nbsp;·&nbsp;
+[**▶ Demo en vivo**](https://vlc-monitor.vercel.app/mapa) &nbsp;·&nbsp;
 [Fuentes y licencias](docs/FUENTES_Y_LICENCIAS.md) &nbsp;·&nbsp;
 [Roadmap](ROADMAP.md) &nbsp;·&nbsp;
 [Índice de specs](specs/INDEX.md)
@@ -144,7 +144,7 @@ npm run build         # dist/ + bundle de la función de API
 
 Cualquier host de estáticos + funciones sirve. En **Vercel** (Vite se detecta solo):
 importa el repo y despliega. Sin variables de entorno la app queda **abierta** (modo
-demo, como la [demo en vivo](https://vlc-monitor.vercel.app)).
+demo, como la [demo en vivo](https://vlc-monitor.vercel.app/mapa)).
 
 <details>
 <summary><strong>Despliegue privado con acceso restringido (opcional)</strong></summary>
@@ -206,7 +206,7 @@ but right-sized to a single city — no 3D globe, no desktop app, no multi-tenan
 an **open project (MIT)**: deploy it as-is or fork it. Not affiliated with any
 government body.
 
-**[▶ Live demo](https://vlc-monitor.vercel.app)**
+**[▶ Live demo](https://vlc-monitor.vercel.app/mapa)**
 
 ### Highlights
 

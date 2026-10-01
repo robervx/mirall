@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>Cómo se ha construido — Mirall</title>
+    <meta
+      name="description"
+      content="El proceso de construcción de Mirall: del boceto inicial al proceso spec-driven, fase a fase, con el límite ético/legal como parte del diseño desde el principio."
+    />
+
+    <meta name="theme-color" content="#0b1f33" />
+    <link rel="icon" type="image/png" href="/icons/favicon-32.png" />
+    <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet" />
+
+    <link rel="stylesheet" href="/src/paginas-publicas.css" />
+  </head>
+  <body class="pagina-publica">
+    <header class="nav-publica">
+      <a class="nav-publica__marca" href="/">Mirall</a>
+      <nav class="nav-publica__enlaces">
+        <a href="/#manifiesto">Manifiesto</a>
+        <a href="/#stack">Tecnología</a>
+        <a href="/#contacto">Contacto</a>
+        <a class="btn btn--primario btn--pequeno" href="/mapa">Abrir el mapa</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="proceso">
+        <h1 class="proceso__titulo">Cómo se ha construido</h1>
+        <p class="proceso__intro">
+          Mirall empezó como un boceto sencillo: un mapa de València con el tráfico en directo encima, para ver si
+          agregar señales dispersas de la ciudad en un único panel aportaba algo que quince pestañas abiertas no
+          daban. La arquitectura está inspirada en
+          <a href="https://github.com/koala73/worldmonitor" target="_blank" rel="noopener">World Monitor</a>, un
+          monitor global de código abierto, pero reducida a escala de ciudad: sin globo 3D, sin app de escritorio,
+          sin multi-tenant — solo lo que hace falta para responder "¿qué está pasando en València ahora mismo?".
+        </p>
+      </section>
+
+      <section class="seccion">
+        <h2>Metodología: spec-driven</h2>
+        <p>
+          Ninguna capa, endpoint o índice del proyecto se escribe sin que exista antes su <em>spec</em>: un documento
+          que fija, antes de tocar código, de dónde sale el dato, qué forma tiene ya normalizado, cómo se cachea y
+          bajo qué condiciones se sirve, y qué criterios tiene que cumplir para darse por terminada. El flujo es
+          siempre el mismo:
+        </p>
+        <blockquote>spec (borrador) → contrato de datos + contrato de capa congelados → seed → endpoint interno → capa de mapa → verificación contra la fuente real → spec completada</blockquote>
+        <p>
+          Cada fuente se prueba con al menos una llamada real antes de escribir el contrato — nada de asumir el
+          formato de una API a partir de su documentación. Hoy hay más de 50 piezas documentadas de esta forma, la
+          inmensa mayoría ya construidas y verificadas end-to-end contra la fuente pública real que sirven.
+        </p>
+      </section>
+
+      <section class="seccion">
+        <h2>El camino, fase a fase</h2>
+      </section>
+
+      <div class="linea-tiempo">
+        <div class="linea-tiempo__hito">
+          <p class="linea-tiempo__fase">Cimientos</p>
+          <h3>El mapa base y el registro de capas</h3>
+          <p>
+            Primero, lo estructural: MapLibre GL + deck.gl sobre tiles gratuitos (OpenFreeMap), la geometría de los
+            19 distritos de València, y un registro único de capas — añadir una capa nueva es una entrada en un
+            objeto, no tocar diez ficheros. Cada capa cachea su dato en un endpoint propio; el navegador nunca llama
+            directamente a una fuente externa.
+          </p>
+        </div>
+        <div class="linea-tiempo__hito">
+          <p class="linea-tiempo__fase">MVP</p>
+          <h3>Meteorología, calidad del aire, tráfico en tiempo real</h3>
+          <p>
+            Las tres primeras capas de verdad, todas sobre fuentes 100% gratuitas y sin clave: Open-Meteo para tiempo
+            y aire, el Geoportal del Ajuntament para ~412 tramos de tráfico en vivo.
+          </p>
+        </div>
+        <div class="linea-tiempo__hito">
+          <p class="linea-tiempo__fase">Movilidad completa</p>
+          <h3>Valenbisi y aparcamiento</h3>
+          <p>273 estaciones de bici compartida y la ocupación de los aparcamientos públicos, mismo patrón de siempre.</p>
+        </div>
+        <div class="linea-tiempo__hito">
+          <p class="linea-tiempo__fase">Síntesis</p>
+          <h3>El Índice de Pulso de Distrito y el motor de insights</h3>
+          <p>
+            Una lectura compuesta por zona que cruza tráfico, aire e incidencias para detectar cuándo varias señales
+            coinciden en el mismo sitio — y un motor de alertas con una regla que no se negocia: avisa a una persona,
+            nunca actúa por su cuenta.
+          </p>
+        </div>
+        <div class="linea-tiempo__hito">
+          <p class="linea-tiempo__fase">Agenda y contexto</p>
+          <h3>Fallas, obras, cortes de calle y prensa local</h3>
+          <p>
+            El mejor predictor legal de una aglomeración es saber qué evento hay programado, no vigilar a la gente:
+            calendario de Fallas y eventos culturales, incidencias oficiales de vía pública, y prensa local agregada
+            y geolocalizada por distrito, filtrada para que "Valencia" signifique la ciudad y no la provincia, la
+            Comunitat o Venezuela.
+          </p>
+        </div>
+        <div class="linea-tiempo__hito">
+          <p class="linea-tiempo__fase">Pulido y publicación</p>
+          <h3>Repo público, PWA, móvil</h3>
+          <p>
+            Re-marca genérica (el proyecto pasa a llamarse <strong>Mirall</strong>), licencia MIT, acceso protegido
+            opcional, instalable como PWA con shell offline, chasis táctil para móvil.
+          </p>
+        </div>
+        <div class="linea-tiempo__hito">
+          <p class="linea-tiempo__fase">Apoyo a la gestión municipal</p>
+          <h3>Grafo viario y simulador de cortes de calle</h3>
+          <p>
+            Un grafo propio de la red viaria (OpenStreetMap vía Overpass) con un motor de propagación dirigida de
+            cortes, compartido por una propuesta de perímetro de seguridad por incidente y un simulador de "¿qué pasa
+            si cierro estas calles?" — herramientas de apoyo, siempre editables por una persona, nunca automáticas.
+          </p>
+        </div>
+        <div class="linea-tiempo__hito">
+          <p class="linea-tiempo__fase">Post-V1</p>
+          <h3>Emergencia meteorológica avanzada e histórico verificado</h3>
+          <p>
+            Temperatura y precipitación por zona (AVAMET), riesgo de acumulación de agua por densidad de imbornales,
+            Zonas Acústicamente Saturadas, y un histórico de señales correlacionadas escrito en una base de datos
+            real (Postgres/Neon) — verificado de punta a punta, no solo por tests.
+          </p>
+        </div>
+        <div class="linea-tiempo__hito">
+          <p class="linea-tiempo__fase">Hoy</p>
+          <h3>Una landing propia</h3>
+          <p>
+            Esta misma página: separar la herramienta operativa (que se usa a diario, en modo kiosco, sin fricción)
+            de una presentación pensada para quien no conoce el proyecto todavía.
+          </p>
+        </div>
+      </div>
+
+      <section class="seccion">
+        <h2>Un límite que no se negocia</h2>
+        <p>
+          Desde el diseño inicial, cuatro reglas quedaron cerradas y no se han vuelto a abrir: ningún dato de
+          localización individual — todo lo que toca movimiento humano llega agregado y anonimizado por quien lo
+          proporciona; ninguna fuente sin un cauce legal explícito; cualquier capa de anomalías avisa a una persona,
+          nunca actúa por su cuenta; y ningún dato simulado se sirve sin decirlo, de forma visible y permanente.
+        </p>
+      </section>
+    </main>
+
+    <footer class="pie-publico">
+      <span>Proyecto de datos abiertos · sin relación con ningún organismo oficial</span>
+      <span class="pie-publico__enlaces">
+        <a href="https://github.com/robervx/vlc-monitor" target="_blank" rel="noopener">Código en GitHub</a>
+        <a href="/">Inicio</a>
+        <a href="/mapa">Mapa en vivo</a>
+      </span>
+    </footer>
+  </body>
+</html>

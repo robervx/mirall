@@ -54159,7 +54159,7 @@ var agenda_eventos_default = {
           bajaConfianza: false
         }
       ],
-      fetchedAt: "2026-09-28T03:50:59.130Z",
+      fetchedAt: "2026-09-28T13:00:22.244Z",
       source: "ajuntament-valencia-scraping"
     },
     {
@@ -54171,7 +54171,34 @@ var agenda_eventos_default = {
       resumen: "El Ayuntamiento de Val\xE8ncia ha organizado las jornadas XATS, dedicadas a la salud mental, una iniciativa impulsada desde la Concejal\xEDa de Servicios Sociales, bajo el lema \u201CSentir, crecer y sanar\u201D. El car\xE1cter diferencial de XATS es que une a los destacados profesionales del \xE1mbito cient\xEDfico, cl\xEDnic\u2026",
       url: "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/jornadas-xats-salud-mental-y-cultura",
       distritosMencionados: [],
-      fetchedAt: "2026-09-28T03:50:59.130Z",
+      fetchedAt: "2026-09-28T13:00:22.244Z",
+      source: "ajuntament-valencia-scraping"
+    },
+    {
+      id: "cc-aben-al-abbar-programacion",
+      titulo: "CC Aben Al-Abbar: programaci\xF3n semanal",
+      categoria: "CINE",
+      fechaInicio: "2026-09-27T00:00:00.000Z",
+      fechaFin: "2026-10-03T00:00:00.000Z",
+      resumen: "El Centro Cultural Aben Al-Abbar nace con el prop\xF3sito de convertirse en el punto de encuentro de los vecinos y vecinas de Albors/Algir\xF3s. Es un espacio \xFAnico y completamente reformado, ubicado en un chalet de dos plantas construido en 1916.\n\nOfrecemos una programaci\xF3n multidisciplinar, adaptada a t\u2026",
+      url: "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/cc-aben-al-abbar-programacion",
+      distritosMencionados: [
+        {
+          distritoCodigo: "13",
+          distritoNombre: "Algiros",
+          coincidencia: "distrito",
+          textoCoincidente: "Algiros",
+          bajaConfianza: false
+        },
+        {
+          distritoCodigo: "12",
+          distritoNombre: "Camins al Grau",
+          coincidencia: "barrio",
+          textoCoincidente: "Albors",
+          bajaConfianza: false
+        }
+      ],
+      fetchedAt: "2026-09-28T13:00:22.244Z",
       source: "ajuntament-valencia-scraping"
     },
     {
@@ -54183,7 +54210,7 @@ var agenda_eventos_default = {
       resumen: "Si te gusta el ambiente de los mercados, los productos de temporada y compartir plan con los m\xE1s peques de la casa, aqu\xED tienes una selecci\xF3n de fechas donde estas plazas de abastos de Val\xE8ncia se convierten en un aut\xE9ntico parque de experiencias. Cada cita gira alrededor de un producto t\xEDpico y de\u2026",
       url: "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/mercafestes-en-los-mercados-municipales",
       distritosMencionados: [],
-      fetchedAt: "2026-09-28T03:50:59.130Z",
+      fetchedAt: "2026-09-28T13:00:22.244Z",
       source: "ajuntament-valencia-scraping"
     },
     {
@@ -54195,7 +54222,7 @@ var agenda_eventos_default = {
       resumen: "Cultura als Barris\xA0es un proyecto del Ayuntamiento de Val\xE8ncia cuyo objetivo es ampliar los lugares, los p\xFAblicos y la oferta de actividades culturales gratuitas para la ciudadan\xEDa, llegando a los barrios perif\xE9ricos de Val\xE8ncia.\n\nLa cultura no puede quedarse en determinados espacios ni tampoco en z\u2026",
       url: "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/cultura-als-barris-2026",
       distritosMencionados: [],
-      fetchedAt: "2026-09-28T03:50:59.130Z",
+      fetchedAt: "2026-09-28T13:00:22.244Z",
       source: "ajuntament-valencia-scraping"
     },
     {
@@ -54207,7 +54234,7 @@ var agenda_eventos_default = {
       resumen: "La ciudad de Val\xE8ncia se suma un a\xF1o m\xE1s a la Semana Europea del Deporte, bajo el lema europeo \u2018#BeActive your way\u2019, con una programaci\xF3n de actividades deportivas y de promoci\xF3n de la actividad f\xEDsica dirigida a toda la ciudadan\xEDa. El Ayuntamiento de Val\xE8ncia, a trav\xE9s de la Fundaci\xF3n Deportiva Mun\u2026",
       url: "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/semana-europea-del-deporte-2026",
       distritosMencionados: [],
-      fetchedAt: "2026-09-28T03:50:59.130Z",
+      fetchedAt: "2026-09-28T13:00:22.244Z",
       source: "ajuntament-valencia-scraping"
     },
     {
@@ -54219,7 +54246,7 @@ var agenda_eventos_default = {
       resumen: "El Palau de la M\xFAsica es un auditorio de prestigio internacional y un punto de referencia esencial en la vida cultural de la ciudad. Inaugurado en 1987, contiene varias salas para audiciones musicales, congresos, exposiciones, espect\xE1culos y proyecciones de cine, entre otras actividades. Es la sede\u2026",
       url: "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/palau-de-la-musica-programacion-2026",
       distritosMencionados: [],
-      fetchedAt: "2026-09-28T03:50:59.130Z",
+      fetchedAt: "2026-09-28T13:00:22.244Z",
       source: "ajuntament-valencia-scraping"
     },
     {
@@ -54231,7 +54258,7 @@ var agenda_eventos_default = {
       resumen: "Durante los meses de septiembre y octubre Val\xE8ncia celebra el festival del dise\xF1o\xA0Val\xE8ncia Design Fest, que re\xFAne a empresas y profesionales nacionales e internacionales con los que descubrir de primera mano el talento local y la efervescencia creativa de nuestra ciudad, designada por UNESCO como\xA0Ci\u2026",
       url: "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/valencia-design-fest-2026",
       distritosMencionados: [],
-      fetchedAt: "2026-09-28T03:50:59.130Z",
+      fetchedAt: "2026-09-28T13:00:22.244Z",
       source: "ajuntament-valencia-scraping"
     },
     {
@@ -54243,39 +54270,7 @@ var agenda_eventos_default = {
       resumen: "La Oficina de l'Energia es un servicio p\xFAblico y gratuito de la fundaci\xF3n Val\xE8ncia Clima i Energia, del Ajuntament de Val\xE8ncia. Se trata de un espacio de informaci\xF3n y formaci\xF3n dirigido a la ciudadan\xEDa, donde se proporciona asesoramiento personalizado, talleres y actividades relacionados con la ene\u2026",
       url: "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/oficina-de-l-energia-actividades-gratuitas",
       distritosMencionados: [],
-      fetchedAt: "2026-09-28T03:50:59.130Z",
-      source: "ajuntament-valencia-scraping"
-    },
-    {
-      id: "centros-culturales-municipales",
-      titulo: "CENTROS CULTURALES MUNICIPALES",
-      categoria: "AGENDA INFANTIL",
-      fechaInicio: "2026-08-31T00:00:00.000Z",
-      fechaFin: "2026-12-30T00:00:00.000Z",
-      resumen: "Val\xE8ncia cuenta con cinco centros culturales a disposici\xF3n de la ciudadan\xEDa, dise\xF1ados para fomentar la participaci\xF3n ciudadana, promover la cultura local y revitalizar los barrios mediante una programaci\xF3n accesible y gratuita. Su programaci\xF3n cuenta con talleres, teatro, m\xFAsica, cuentacuentos, cha\u2026",
-      url: "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/centros-culturales-municipales",
-      distritosMencionados: [],
-      fetchedAt: "2026-09-28T03:50:59.130Z",
-      source: "ajuntament-valencia-scraping"
-    },
-    {
-      id: "cc-escorxador-programacion-2025-26",
-      titulo: "CC Escorxador - Programaci\xF3n de septiembre",
-      categoria: "ENCUENTROS",
-      fechaInicio: "2026-08-31T00:00:00.000Z",
-      fechaFin: "2026-09-29T00:00:00.000Z",
-      resumen: "El Centro Cultural Escorxador nace con el objetivo de poner en valor las m\xFAltiples memorias que vertebran el barrio del Cabanyal- Canyamelar. Se ubica en uno de los antiguos mataderos del distrito mar\xEDtimo, un edificio de 1910 que ha sido rehabilitado y recuperado para el barrio.\n\nLa programaci\xF3n\xA0co\u2026",
-      url: "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/cc-escorxador-programacion-2025-26",
-      distritosMencionados: [
-        {
-          distritoCodigo: "11",
-          distritoNombre: "Poblats Maritims",
-          coincidencia: "barrio",
-          textoCoincidente: "El Cabanyal",
-          bajaConfianza: false
-        }
-      ],
-      fetchedAt: "2026-09-28T03:50:59.130Z",
+      fetchedAt: "2026-09-28T13:00:22.244Z",
       source: "ajuntament-valencia-scraping"
     },
     {
@@ -54295,7 +54290,39 @@ var agenda_eventos_default = {
           bajaConfianza: false
         }
       ],
-      fetchedAt: "2026-09-28T03:50:59.130Z",
+      fetchedAt: "2026-09-28T13:00:22.244Z",
+      source: "ajuntament-valencia-scraping"
+    },
+    {
+      id: "cc-escorxador-programacion-2025-26",
+      titulo: "CC Escorxador - Programaci\xF3n de oto\xF1o",
+      categoria: "ENCUENTROS",
+      fechaInicio: "2026-08-31T00:00:00.000Z",
+      fechaFin: "2026-12-19T00:00:00.000Z",
+      resumen: "El Centro Cultural Escorxador nace con el objetivo de poner en valor las m\xFAltiples memorias que vertebran el barrio del Cabanyal- Canyamelar. Se ubica en uno de los antiguos mataderos del distrito mar\xEDtimo, un edificio de 1910 que ha sido rehabilitado y recuperado para el barrio.\n\nLa programaci\xF3n\xA0co\u2026",
+      url: "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/cc-escorxador-programacion-2025-26",
+      distritosMencionados: [
+        {
+          distritoCodigo: "11",
+          distritoNombre: "Poblats Maritims",
+          coincidencia: "barrio",
+          textoCoincidente: "El Cabanyal",
+          bajaConfianza: false
+        }
+      ],
+      fetchedAt: "2026-09-28T13:00:22.244Z",
+      source: "ajuntament-valencia-scraping"
+    },
+    {
+      id: "centros-culturales-municipales",
+      titulo: "CENTROS CULTURALES MUNICIPALES",
+      categoria: "AGENDA INFANTIL",
+      fechaInicio: "2026-08-31T00:00:00.000Z",
+      fechaFin: "2026-12-30T00:00:00.000Z",
+      resumen: "Val\xE8ncia cuenta con cinco centros culturales a disposici\xF3n de la ciudadan\xEDa, dise\xF1ados para fomentar la participaci\xF3n ciudadana, promover la cultura local y revitalizar los barrios mediante una programaci\xF3n accesible y gratuita. Su programaci\xF3n cuenta con talleres, teatro, m\xFAsica, cuentacuentos, cha\u2026",
+      url: "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/centros-culturales-municipales",
+      distritosMencionados: [],
+      fetchedAt: "2026-09-28T13:00:22.244Z",
       source: "ajuntament-valencia-scraping"
     },
     {
@@ -54307,7 +54334,7 @@ var agenda_eventos_default = {
       resumen: "La Alqueria dels moros es un edificio catalogado como Bien de Inter\xE9s Cultural (BIC) desde 2004, que puede visitarse gratuitamente con cita previa. Se trata de un edificio residencial compendio de la arquitectura se\xF1orial y rural de la huerta valenciana de los siglos XIV, XVI y XVIII, que ofrece ele\u2026",
       url: "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/alqueria-dels-moros-visitas-gratuitas",
       distritosMencionados: [],
-      fetchedAt: "2026-09-28T03:50:59.130Z",
+      fetchedAt: "2026-09-28T13:00:22.244Z",
       source: "ajuntament-valencia-scraping"
     },
     {
@@ -54319,7 +54346,7 @@ var agenda_eventos_default = {
       resumen: "El Centro Cultural Nave 3 Ribes es un espacio de encuentro y creaci\xF3n colectiva, ubicado en el Parque Central, que funciona como un laboratorio abierto para el desarrollo de f\xF3rmulas innovadoras de participaci\xF3n, aprendizaje y dinamizaci\xF3n cultural. La programaci\xF3n cuenta con\xA0talleres, cine, teatro,\u2026",
       url: "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/cc-nave-3-ribes-cas",
       distritosMencionados: [],
-      fetchedAt: "2026-09-28T03:50:59.130Z",
+      fetchedAt: "2026-09-28T13:00:22.244Z",
       source: "ajuntament-valencia-scraping"
     },
     {
@@ -54339,7 +54366,7 @@ var agenda_eventos_default = {
           bajaConfianza: false
         }
       ],
-      fetchedAt: "2026-09-28T03:50:59.130Z",
+      fetchedAt: "2026-09-28T13:00:22.244Z",
       source: "ajuntament-valencia-scraping"
     },
     {
@@ -54351,7 +54378,7 @@ var agenda_eventos_default = {
       resumen: "El Paleontol\xF2gic acoge la exposici\xF3n \u201CMacroArte\u201D, del fot\xF3grafo Tony Tirado,\xA0una invitaci\xF3n a detener el ritmo cotidiano para descubrir la belleza de aquello que normalmente pasa desapercibido. Un recorrido que demuestra que la ciencia comienza con la observaci\xF3n, pero que el conocimiento tambi\xE9n pu\u2026",
       url: "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/exposicion-macroarte-de-tony-tirado-el-paleontologic",
       distritosMencionados: [],
-      fetchedAt: "2026-09-28T03:50:59.130Z",
+      fetchedAt: "2026-09-28T13:00:22.244Z",
       source: "ajuntament-valencia-scraping"
     },
     {
@@ -54363,7 +54390,7 @@ var agenda_eventos_default = {
       resumen: "La Sala Municipal de Exposiciones del Ajuntament de Val\xE8ncia inaugura ALTRES, una recuperaci\xF3n hist\xF3rica que se aproxima a un episodio singular de la historia reciente del arte valenciano: Els altres 75 anys de pintura valenciana, una contraexposici\xF3n organizada en 1976 por el Col\xB7lectiu de Pintors\u2026",
       url: "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/exposicion-altres",
       distritosMencionados: [],
-      fetchedAt: "2026-09-28T03:50:59.130Z",
+      fetchedAt: "2026-09-28T13:00:22.244Z",
       source: "ajuntament-valencia-scraping"
     },
     {
@@ -54375,7 +54402,7 @@ var agenda_eventos_default = {
       resumen: "La Fundaci\xF3n Deportiva Municipal (FDM) ha programado \u2018Un estiu amb molt d\u2019esport\u2019, con propuestas deportivas para todas las edades que se desarrollar\xE1n durante los meses estivales en piscinas y otras instalaciones municipales. El programa incluye propuestas para todos los p\xFAblicos y edades: desde cu\u2026",
       url: "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/un-estiu-amb-molt-d-esport-2026",
       distritosMencionados: [],
-      fetchedAt: "2026-09-28T03:50:59.130Z",
+      fetchedAt: "2026-09-28T13:00:22.244Z",
       source: "ajuntament-valencia-scraping"
     },
     {
@@ -54387,7 +54414,7 @@ var agenda_eventos_default = {
       resumen: "Anualmente, la Federaci\xF3 Cultural Valenciana de Vela Llatina\xA0patrocina las exhibiciones de Vela Latina que organizan las distintas associaciomes de los municipios que bordean el lago de l'Albufera. Estos acontecimientos reunen a asociaciones n\xE1uticas y vecinos con el objetivo de poner en valor el pa\u2026",
       url: "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/exhibiciones-de-vela-latina-lago-de-la-albufera-2026",
       distritosMencionados: [],
-      fetchedAt: "2026-09-28T03:50:59.130Z",
+      fetchedAt: "2026-09-28T13:00:22.244Z",
       source: "ajuntament-valencia-scraping"
     },
     {
@@ -54399,7 +54426,7 @@ var agenda_eventos_default = {
       resumen: "Con motivo de la celebraci\xF3n del III A\xF1o Jubilar Santo C\xE1liz, se han organizado visitas guiadas gratuitas para descubrir la historia del Santo C\xE1liz. Las rutas recorrer\xE1n distintos puntos hist\xF3ricos de la ciudad relacionados con la reliquia, pasando por enclaves emblem\xE1ticos como las Torres de Serra\u2026",
       url: "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/ruta-santo-caliz-visitas-guiadas",
       distritosMencionados: [],
-      fetchedAt: "2026-09-28T03:50:59.130Z",
+      fetchedAt: "2026-09-28T13:00:22.244Z",
       source: "ajuntament-valencia-scraping"
     },
     {
@@ -54411,7 +54438,7 @@ var agenda_eventos_default = {
       resumen: "La Casa Museo Blasco Ib\xE1\xF1ez acoge una exposici\xF3n temporal que, con el t\xEDtulo de \u2018La Val\xE8ncia de Blasco Ib\xE1\xF1ez\u2019, rememora escenarios emblem\xE1ticos de la ciudad y de su entorno, as\xED como algunos tipos caracter\xEDsticos de la sociedad valenciana de finales del XIX y principios del XX. La muestra, comisari\u2026",
       url: "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/exposicion-la-valencia-de-blasco-ibanez",
       distritosMencionados: [],
-      fetchedAt: "2026-09-28T03:50:59.130Z",
+      fetchedAt: "2026-09-28T13:00:22.244Z",
       source: "ajuntament-valencia-scraping"
     },
     {
@@ -54423,7 +54450,7 @@ var agenda_eventos_default = {
       resumen: "En BIOPARC Val\xE8ncia se recrea la naturaleza salvaje del continente africano: el bosque ecuatorial, Madagascar, los grandes humedales y la sabana. Los animales, la vegetaci\xF3n y el paisaje forman un conjunto que permite al visitante aprender sobre las relaciones entre los organismos y elementos que co\u2026",
       url: "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/bioparc-valencia",
       distritosMencionados: [],
-      fetchedAt: "2026-09-28T03:50:59.130Z",
+      fetchedAt: "2026-09-28T13:00:22.244Z",
       source: "ajuntament-valencia-scraping"
     },
     {
@@ -54435,7 +54462,7 @@ var agenda_eventos_default = {
       resumen: "Ciencia, g\xE9nero, arte y nuevas tecnolog\xEDas se conjugan en esta iniciativa de la Universitat Polit\xE8cnica de Val\xE8ncia y el centro de innovaci\xF3n Las Naves del Ayuntamiento de Val\xE8ncia, que cuenta con la colaboraci\xF3n de la Fundaci\xF3n Espa\xF1ola para la Ciencia y la Tecnolog\xEDa (FECYT) del Ministerio de Cien\u2026",
       url: "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/ruta-dones-de-ciencia",
       distritosMencionados: [],
-      fetchedAt: "2026-09-28T03:50:59.130Z",
+      fetchedAt: "2026-09-28T13:00:22.244Z",
       source: "ajuntament-valencia-scraping"
     },
     {
@@ -54447,7 +54474,7 @@ var agenda_eventos_default = {
       resumen: "Las cinco rutas de los \xE1rboles monumentales de Val\xE8ncia es una forma muy original y ecol\xF3gica de visitar la ciudad. Se trata de recorrer varias zonas de la ciudad a trav\xE9s de sus \xE1rboles m\xE1s curiosos. \xC1rboles que por su tama\xF1o, forma, edad, rareza, origen biol\xF3gico, belleza o por ser protagonistas d\u2026",
       url: "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/ruta-dels-arbres-monumentals-de-valencia",
       distritosMencionados: [],
-      fetchedAt: "2026-09-28T03:50:59.130Z",
+      fetchedAt: "2026-09-28T13:00:22.244Z",
       source: "ajuntament-valencia-scraping"
     },
     {
@@ -54459,7 +54486,7 @@ var agenda_eventos_default = {
       resumen: "El anillo ciclista de la ciudad permite disfrutar a su paso de edificios y lugares emblem\xE1ticos de Val\xE8ncia. Todo un gusto ir en bicicleta y poder empaparse de la cultura y la historia de la ciudad.\n\nLa ruta te llevar\xE1 a lugares tan ic\xF3nicos como la Estaci\xF3n del Norte, dise\xF1ada por el arquitecto Dem\u2026",
       url: "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/ruta-cultural-anell-ciclista",
       distritosMencionados: [],
-      fetchedAt: "2026-09-28T03:50:59.130Z",
+      fetchedAt: "2026-09-28T13:00:22.244Z",
       source: "ajuntament-valencia-scraping"
     },
     {
@@ -54471,7 +54498,7 @@ var agenda_eventos_default = {
       resumen: "El Museo de Prehistoria se crea en el a\xF1o 1927 como una instituci\xF3n cient\xEDfica dedicada a conservar, investigar y difundir el rico patrimonio arqueol\xF3gico valenciano. En el a\xF1o 1982 se ubic\xF3 definitivamente en la antigua Beneficencia y en 1995 se abrieron al p\xFAblico las actuales Salas de Prehistoria\u2026",
       url: "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/museu-de-prehistoria-de-valencia",
       distritosMencionados: [],
-      fetchedAt: "2026-09-28T03:50:59.130Z",
+      fetchedAt: "2026-09-28T13:00:22.244Z",
       source: "ajuntament-valencia-scraping"
     },
     {
@@ -54483,7 +54510,7 @@ var agenda_eventos_default = {
       resumen: "La Alquer\xEDa de F\xE9lix cuenta con una exposici\xF3n permanente que tiene por objetivo dar a conocer su historia y explicar c\xF3mo era antes la vida en la huerta.\xA0\n\nLa exposici\xF3n est\xE1 formada por ocho paneles expositivos que tienen por objetivo divulgar la historia y la arquitectura del edificio, su evoluci\u2026",
       url: "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/exposicio-permanent-a-l-alqueria-de-felix",
       distritosMencionados: [],
-      fetchedAt: "2026-09-28T03:50:59.130Z",
+      fetchedAt: "2026-09-28T13:00:22.244Z",
       source: "ajuntament-valencia-scraping"
     },
     {
@@ -54495,7 +54522,7 @@ var agenda_eventos_default = {
       resumen: "En el espectacular edificio dise\xF1ado por Santiago Calatrava los visitantes cuentan con m\xE1s de 26.000 metros cuadrados de exposiciones relacionadas con la actualidad cient\xEDfica y tecnol\xF3gica. La interactividad llena es una de sus se\xF1ales de identidad, debajo el lema \u201CProhibido no tocar, no sentir, no\u2026",
       url: "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/programacio-cultural-museu-de-les-ciencies",
       distritosMencionados: [],
-      fetchedAt: "2026-09-28T03:50:59.130Z",
+      fetchedAt: "2026-09-28T13:00:22.244Z",
       source: "ajuntament-valencia-scraping"
     },
     {
@@ -54507,7 +54534,7 @@ var agenda_eventos_default = {
       resumen: "LocoClub est\xE1 ubicado en pleno centro de la ciudad de Val\xE8ncia. Es un espacio amplio y abierto donde se realizan diferentes actividades, principalmente conciertos y m\xFAsica en directo, pero tambi\xE9n ofrece la posibilidad de celebrar otro tipo de eventos. Con una programaci\xF3n variada que abarca desde r\u2026",
       url: "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/loco-club-programaci%C3%B3",
       distritosMencionados: [],
-      fetchedAt: "2026-09-28T03:50:59.130Z",
+      fetchedAt: "2026-09-28T13:00:22.244Z",
       source: "ajuntament-valencia-scraping"
     },
     {
@@ -54519,7 +54546,7 @@ var agenda_eventos_default = {
       resumen: "El Ajuntament de Val\xE8ncia, a trav\xE9s de la Concejal\xEDa de Acci\xF3 Cultural, gestiona este espacio esc\xE9nico ubicado en la calle Joan Verdeguer. Artistas valencianos y propuestas internacionales, con el denominador com\xFAn de los nuevos lenguajes esc\xE9nicos, se han convertido en el motor de una nueva etapa c\u2026",
       url: "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/la-mutant-espai-d-arts-vives",
       distritosMencionados: [],
-      fetchedAt: "2026-09-28T03:50:59.130Z",
+      fetchedAt: "2026-09-28T13:00:22.244Z",
       source: "ajuntament-valencia-scraping"
     },
     {
@@ -54539,7 +54566,7 @@ var agenda_eventos_default = {
           bajaConfianza: false
         }
       ],
-      fetchedAt: "2026-09-28T03:50:59.130Z",
+      fetchedAt: "2026-09-28T13:00:22.244Z",
       source: "ajuntament-valencia-scraping"
     },
     {
@@ -54551,7 +54578,7 @@ var agenda_eventos_default = {
       resumen: "En el siglo VIII se construy\xF3 sobre su solar la mezquita mayor de Balansiya, que sirvi\xF3 de catedral tras la fundaci\xF3n del Reino cristiano de Val\xE8ncia por Jaime I el Conquistador en 1238, y el 22 de junio de 1262 el Obispo Fray Andr\xE9s de Albalat O. P. puso la primera piedra de la actual Catedral. En\u2026",
       url: "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/catedral-de-valencia",
       distritosMencionados: [],
-      fetchedAt: "2026-09-28T03:50:59.130Z",
+      fetchedAt: "2026-09-28T13:00:22.244Z",
       source: "ajuntament-valencia-scraping"
     },
     {
@@ -54563,7 +54590,7 @@ var agenda_eventos_default = {
       resumen: null,
       url: "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/ivac-filmoteca-programacio",
       distritosMencionados: [],
-      fetchedAt: "2026-09-28T03:50:59.130Z",
+      fetchedAt: "2026-09-28T13:00:22.244Z",
       source: "ajuntament-valencia-scraping"
     },
     {
@@ -54575,215 +54602,7 @@ var agenda_eventos_default = {
       resumen: "Caixaforum Val\xE8ncia se ubica en el complejo arquitect\xF3nico de la\xA0Ciutat de les Arts i les Ci\xE8ncies, un conjunto \xFAnico dedicado a la divulgaci\xF3n cient\xEDfica y cultural. Caixaforum, el estandarte cultural de la Fundaci\xF3n \u201Dla Caixa\u201D, apuesta por la divulgaci\xF3n del conocimiento, la cultura y la ciencia c\u2026",
       url: "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/programacio-cultural-caixaforum-valencia",
       distritosMencionados: [],
-      fetchedAt: "2026-09-28T03:50:59.130Z",
-      source: "ajuntament-valencia-scraping"
-    },
-    {
-      id: "fundacion-canada-blanch-programacion-cultural",
-      titulo: "Fundaci\xF3n Ca\xF1ada Blanch \u2013 Programaci\xF3n cultural",
-      categoria: "CONFERENCIAS",
-      fechaInicio: "2026-01-01T00:00:00.000Z",
-      fechaFin: "2026-12-30T00:00:00.000Z",
-      resumen: "La Fundaci\xF3n Ca\xF1ada Blanch es un espacio dedicado a la cultura contempor\xE1nea, donde personas referentes en diferentes \xE1reas comparten sus conocimientos y vivencias, permiti\xE9ndonos reflexionar sobre la realidad que nos rodea.\nLiteratura, arte, m\xFAsica, filosof\xEDa, g\xE9nero, ciencia, sociedad, humanidades\u2026",
-      url: "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/fundacion-canada-blanch-programacion-cultural",
-      distritosMencionados: [],
-      fetchedAt: "2026-09-28T03:50:59.130Z",
-      source: "ajuntament-valencia-scraping"
-    },
-    {
-      id: "sala-russafa-programacio-cultural",
-      titulo: "Sala Russafa - Programaci\xF3n cultural",
-      categoria: "DANZA",
-      fechaInicio: "2026-01-01T00:00:00.000Z",
-      fechaFin: "2026-12-30T00:00:00.000Z",
-      resumen: "La Sala Russafa nace en 2011, en pleno barrio de Ruzafa, un barrio de arraigados h\xE1bitos culturales. En el teatro del Centro Cultural se programan piezas dirigidas al p\xFAblico familiar, adulto o escolar dentro de distintos ciclos, dando cabida al teatro cl\xE1sico y contempor\xE1neo y a cualquier disciplin\u2026",
-      url: "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/sala-russafa-programacio-cultural",
-      distritosMencionados: [
-        {
-          distritoCodigo: "02",
-          distritoNombre: "l'Eixample",
-          coincidencia: "barrio",
-          textoCoincidente: "Ruzafa",
-          bajaConfianza: false
-        }
-      ],
-      fetchedAt: "2026-09-28T03:50:59.130Z",
-      source: "ajuntament-valencia-scraping"
-    },
-    {
-      id: "el-centre-museistic-la-beneficencia",
-      titulo: "El Centro Muse\xEDstico 'La Beneficencia' - Actividades",
-      categoria: "AGENDA INFANTIL",
-      fechaInicio: "2026-01-01T00:00:00.000Z",
-      fechaFin: "2026-12-30T00:00:00.000Z",
-      resumen: null,
-      url: "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/el-centre-museistic-la-beneficencia",
-      distritosMencionados: [],
-      fetchedAt: "2026-09-28T03:50:59.130Z",
-      source: "ajuntament-valencia-scraping"
-    },
-    {
-      id: "teatre-escalante-programacio",
-      titulo: "Escalante - Programaci\xF3n",
-      categoria: "TEATRO",
-      fechaInicio: "2026-01-01T00:00:00.000Z",
-      fechaFin: "2026-12-30T00:00:00.000Z",
-      resumen: "El Escalante es el proyecto esc\xE9nico para la Infancia y la Juventud de la Diputaci\xF3n de Val\xE8ncia. Nacido en 1985, fue el primer teatro en Espa\xF1a que apost\xF3 por ofrecer producciones y exhibiciones de calidad para los ni\xF1os y a los j\xF3venes que, hasta entonces, solo se encontraban en el teatro para adu\u2026",
-      url: "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/teatre-escalante-programacio",
-      distritosMencionados: [],
-      fetchedAt: "2026-09-28T03:50:59.130Z",
-      source: "ajuntament-valencia-scraping"
-    },
-    {
-      id: "teatre-principal-programacio",
-      titulo: "Teatro Principal - Programaci\xF3n",
-      categoria: "TEATRO",
-      fechaInicio: "2026-01-01T00:00:00.000Z",
-      fechaFin: "2026-12-30T00:00:00.000Z",
-      resumen: "El Teatro Principal de Val\xE8ncia, inaugurado en 1832 y ubicado en pleno coraz\xF3n de la ciudad, es uno de los espacios culturales m\xE1s ic\xF3nicos y emblem\xE1ticos de la Comunidad Valenciana.\xA0Su historia y tradici\xF3n lo han consolidado como el escenario perfecto para acoger los espect\xE1culos m\xE1s destacados de\u2026",
-      url: "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/teatre-principal-programacio",
-      distritosMencionados: [],
-      fetchedAt: "2026-09-28T03:50:59.130Z",
-      source: "ajuntament-valencia-scraping"
-    },
-    {
-      id: "collegi-major-rector-peset-programacio",
-      titulo: "Colegio Mayor Rector Peset - Programaci\xF3n cultural",
-      categoria: "EXPOSICIONES",
-      fechaInicio: "2026-01-01T00:00:00.000Z",
-      fechaFin: "2026-12-30T00:00:00.000Z",
-      resumen: "El Colegio Mayor Rector Peset se ha consolidado en la ciudad de Valencia como un punto de encuentro de la universidad, la sociedad civil y las entidades sociales y culturales de la ciudad de Valencia, en la programaci\xF3n de sus actividades culturales, formativas y en la transmisi\xF3n de sus experiencia\u2026",
-      url: "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/collegi-major-rector-peset-programacio",
-      distritosMencionados: [],
-      fetchedAt: "2026-09-28T03:50:59.130Z",
-      source: "ajuntament-valencia-scraping"
-    },
-    {
-      id: "museu-faller-de-valencia",
-      titulo: "Museo Fallero de Val\xE8ncia",
-      categoria: "EXPOSICIONES",
-      fechaInicio: "2026-01-01T00:00:00.000Z",
-      fechaFin: "2026-12-30T00:00:00.000Z",
-      resumen: "El actual Museo Fallero de Val\xE8ncia est\xE1 instalado desde 1971 en el antiguo Convento de la Casa Misi\xF3n de San Vicente de Pa\xFAl est\xE1 integrado por la colecci\xF3n de ninots indultados grandes, e infantiles, as\xED como por los carteles anunciadores ganadores y finalistas de las Fallas, los cuadros que retra\u2026",
-      url: "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/museu-faller-de-valencia",
-      distritosMencionados: [],
-      fetchedAt: "2026-09-28T03:50:59.130Z",
-      source: "ajuntament-valencia-scraping"
-    },
-    {
-      id: "teatre-el-musical-programacio",
-      titulo: "Teatro El Musical \u2013 Programaci\xF3n",
-      categoria: "TEATRO",
-      fechaInicio: "2026-01-01T00:00:00.000Z",
-      fechaFin: "2026-12-30T00:00:00.000Z",
-      resumen: "El TEM\xA0es algo m\xE1s que un teatro, se ha convertido en un centro cultural al servicio del ciudadano y de sus asociaciones, un laboratorio de escena que tambi\xE9n ofrece talleres y actividades participativas. Ubicado en el barrio Cabanyal, es un edificio emblem\xE1tico.\xA0\nCon una programaci\xF3n de primer\xEDsimo\u2026",
-      url: "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/teatre-el-musical-programacio",
-      distritosMencionados: [],
-      fetchedAt: "2026-09-28T03:50:59.130Z",
-      source: "ajuntament-valencia-scraping"
-    },
-    {
-      id: "programacio-fins-a-final-d-any-teatre-flumen",
-      titulo: "Teatro Flumen - Programaci\xF3n",
-      categoria: "CINE",
-      fechaInicio: "2026-01-01T00:00:00.000Z",
-      fechaFin: "2026-12-30T00:00:00.000Z",
-      resumen: "En concreto Flumen teatro Val\xE8ncia es un destino de diversi\xF3n que aporta muchos valores a\xF1adidos. Gracias a nuestra reciente reforma, toda la sala est\xE1 equipada de butacas c\xF3modas que har\xE1n de tu estancia un momento inolvidable que junto con los actores de la funci\xF3n pasar\xE1 en un abrir y cerrar de o\u2026",
-      url: "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/programacio-fins-a-final-d-any-teatre-flumen",
-      distritosMencionados: [],
-      fetchedAt: "2026-09-28T03:50:59.130Z",
-      source: "ajuntament-valencia-scraping"
-    },
-    {
-      id: "museo-valencia-d-etnologia-actividades",
-      titulo: "L\u2019ETNO,\xA0Museu Valenci\xE0 d'Etnologia- Programaci\xF3n",
-      categoria: "EXPOSICIONES",
-      fechaInicio: "2026-01-01T00:00:00.000Z",
-      fechaFin: "2026-12-30T00:00:00.000Z",
-      resumen: "L\u2019ETNO,\xA0Museu Valenci\xE0 d'Etnolog\xEDa se cre\xF3 en 1982 para recoger, estudiar y difundir todo aquello relacionado con la cultura popular y tradicional valenciana. En el a\xF1o 2023 fue elegido Museo Europeo del A\xF1o por los premios EMYA del Consejo de Europa.\nComo museo de la cultura popular valenciana, inv\u2026",
-      url: "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/museo-valencia-d-etnologia-actividades",
-      distritosMencionados: [],
-      fetchedAt: "2026-09-28T03:50:59.130Z",
-      source: "ajuntament-valencia-scraping"
-    },
-    {
-      id: "programacion-cultural-teatro-circulo",
-      titulo: "Teatro C\xEDrculo - Programaci\xF3n",
-      categoria: "TEATRO",
-      fechaInicio: "2026-01-01T00:00:00.000Z",
-      fechaFin: "2026-12-30T00:00:00.000Z",
-      resumen: "Teatro C\xEDrculo es un centro de creaci\xF3n, producci\xF3n teatral y exhibici\xF3n de las artes vivas contempor\xE1neas con compa\xF1\xEDa estable, un laboratorio, un taller de entrenamiento y un espacio de acogida de residencias. Cuenta con un equipo art\xEDstico, con colaboradores en distintos \xE1mbitos, con un espacio q\u2026",
-      url: "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/programacion-cultural-teatro-circulo",
-      distritosMencionados: [],
-      fetchedAt: "2026-09-28T03:50:59.130Z",
-      source: "ajuntament-valencia-scraping"
-    },
-    {
-      id: "museu-de-la-setmana-santa-marinera",
-      titulo: "Museo de la Semana Santa Marinera",
-      categoria: "EXPOSICIONES",
-      fechaInicio: "2026-01-01T00:00:00.000Z",
-      fechaFin: "2026-12-30T00:00:00.000Z",
-      resumen: "El Museo de la Semana Santa Marinera \u201CSalvador Caur\xEDn\u201D de Val\xE8ncia est\xE1 ubicado en un barrio t\xEDpicamente marinero.\xA0La vistosidad de sus trajes, la riqueza simb\xF3lica y la singularidad de sus celebraciones son perceptibles en las im\xE1genes y colecci\xF3n de trajes y elementos expuestos en el Museo y que,\u2026",
-      url: "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/museu-de-la-setmana-santa-marinera",
-      distritosMencionados: [],
-      fetchedAt: "2026-09-28T03:50:59.130Z",
-      source: "ajuntament-valencia-scraping"
-    },
-    {
-      id: "cafe-mercedes-jazz-programacio",
-      titulo: "Caf\xE9 Mercedes Jazz - Programaci\xF3n",
-      categoria: "M\xDASICA",
-      fechaInicio: "2026-01-01T00:00:00.000Z",
-      fechaFin: "2026-12-30T00:00:00.000Z",
-      resumen: "Ubicado en el carism\xE1tico barrio de Russafa, Caf\xE9 Mercedes Jazz abri\xF3 sus puertas en el a\xF1o 2007. Es un espacio cultural al servicio de la m\xFAsica, los m\xFAsicos y el p\xFAblico, y tiene como objetivo ser una plataforma para la creaci\xF3n musical y el intercambio cultural y art\xEDstico. Su actividad principal\u2026",
-      url: "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/cafe-mercedes-jazz-programacio",
-      distritosMencionados: [
-        {
-          distritoCodigo: "02",
-          distritoNombre: "l'Eixample",
-          coincidencia: "barrio",
-          textoCoincidente: "Russafa",
-          bajaConfianza: false
-        }
-      ],
-      fetchedAt: "2026-09-28T03:50:59.130Z",
-      source: "ajuntament-valencia-scraping"
-    },
-    {
-      id: "programacio-teatro-la-estrella",
-      titulo: "Teatro La Estrella - Programaci\xF3n",
-      categoria: "AGENDA INFANTIL",
-      fechaInicio: "2026-01-01T00:00:00.000Z",
-      fechaFin: "2026-12-30T00:00:00.000Z",
-      resumen: "La compa\xF1\xEDa de Teatro de Marionetas la Estrella cuenta con una larga trayectoria produciendo montajes infantiles, con m\xE1s de veinte espect\xE1culos producidos tanto para la programaci\xF3n estable de nuestras salas en Valencia, como para gira y festivales nacionales e internacionales. A lo largo de estos\u2026",
-      url: "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/programacio-teatro-la-estrella",
-      distritosMencionados: [],
-      fetchedAt: "2026-09-28T03:50:59.130Z",
-      source: "ajuntament-valencia-scraping"
-    },
-    {
-      id: "programacio-muvim",
-      titulo: "MUVIM - Programaci\xF3n cultural",
-      categoria: "EXPOSICIONES",
-      fechaInicio: "2026-01-01T00:00:00.000Z",
-      fechaFin: "2026-12-30T00:00:00.000Z",
-      resumen: "El MuVIM es un museo de ideas, consagrado a preservar y dar a conocer las ideas y valores que han hecho posible el mundo moderno.\nLas actividades y exposiciones siempre ofrecen un valor a\xF1adido: son algo m\xE1s que una muestra de objetos, se sirven de objetos para expresar ideas. \nIdeas que pretenden h\u2026",
-      url: "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/programacio-muvim",
-      distritosMencionados: [],
-      fetchedAt: "2026-09-28T03:50:59.130Z",
-      source: "ajuntament-valencia-scraping"
-    },
-    {
-      id: "programacio-cultural-octubre-centre-de-cultura-contemporania",
-      titulo: "Octubre CCC - Programaci\xF3n cultural",
-      categoria: "CINE",
-      fechaInicio: "2026-01-01T00:00:00.000Z",
-      fechaFin: "2026-12-30T00:00:00.000Z",
-      resumen: "Impulsado por Acci\xF3n Cultural del Pa\xEDs Valenciano (ACPV) y la Instituci\xF3n C\xEDvica y de Pensamiento Joan Fuster (IJF), en 2006 abri\xF3 en el coro de Val\xE8ncia el Octubre Centro de Cultura Contempor\xE1nea (OCCC), una apuesta firme por el revifament de la cultura y la sociedad de todo nuestro pa\xEDs desde una\u2026",
-      url: "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/programacio-cultural-octubre-centre-de-cultura-contemporania",
-      distritosMencionados: [],
-      fetchedAt: "2026-09-28T03:50:59.130Z",
+      fetchedAt: "2026-09-28T13:00:22.244Z",
       source: "ajuntament-valencia-scraping"
     },
     {
@@ -54795,7 +54614,7 @@ var agenda_eventos_default = {
       resumen: "Una escena que abre nuevos \xE1mbitos de conexi\xF3n con el p\xFAblico. Teatro de proximidad, independiente, alternativo, pr\xF3ximo, a tu lado y en Val\xE8ncia. Desde la comedia al drama, pasando por la tragedia y la tragicomedia: todas las experiencias son posibles en Sala Carme Teatre Val\xE8ncia. Amor y pasi\xF3n po\u2026",
       url: "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/programacio-fins-a-final-d-any-carme-teatre",
       distritosMencionados: [],
-      fetchedAt: "2026-09-28T03:50:59.130Z",
+      fetchedAt: "2026-09-28T13:00:22.244Z",
       source: "ajuntament-valencia-scraping"
     },
     {
@@ -54807,7 +54626,7 @@ var agenda_eventos_default = {
       resumen: null,
       url: "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/teatre-olympia-programaci%C3%B3",
       distritosMencionados: [],
-      fetchedAt: "2026-09-28T03:50:59.130Z",
+      fetchedAt: "2026-09-28T13:00:22.244Z",
       source: "ajuntament-valencia-scraping"
     },
     {
@@ -54819,7 +54638,7 @@ var agenda_eventos_default = {
       resumen: "Teatro Talia est\xE1 ubicado en el casco antiguo de Val\xE8ncia. Se inaugur\xF3 en 1928. En sus inicios, se representaban obras locales, tanto en valenciano como en castellano. Es de los teatros m\xE1s peque\xF1os de la Generalitat, con un aforo de unos 350 espectadores. Durante todo el a\xF1o nos ofrece una amplia p\u2026",
       url: "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/teatre-talia-programacio",
       distritosMencionados: [],
-      fetchedAt: "2026-09-28T03:50:59.130Z",
+      fetchedAt: "2026-09-28T13:00:22.244Z",
       source: "ajuntament-valencia-scraping"
     },
     {
@@ -54839,7 +54658,7 @@ var agenda_eventos_default = {
           bajaConfianza: false
         }
       ],
-      fetchedAt: "2026-09-28T03:50:59.130Z",
+      fetchedAt: "2026-09-28T13:00:22.244Z",
       source: "ajuntament-valencia-scraping"
     },
     {
@@ -54851,7 +54670,7 @@ var agenda_eventos_default = {
       resumen: "Entidad privada sin \xE1nimo de lucro que trabaja en favor del progreso de las personas y la sociedad valenciana, \xA0que fomenta la participaci\xF3n y el acceso a la cultura. Sus actividades culturales se centran en exposiciones, talleres did\xE1cticos, ciclos de conferencias, premios y el apoyo de la lengua y\u2026",
       url: "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/centre-cultural-bancaixa",
       distritosMencionados: [],
-      fetchedAt: "2026-09-28T03:50:59.130Z",
+      fetchedAt: "2026-09-28T13:00:22.244Z",
       source: "ajuntament-valencia-scraping"
     },
     {
@@ -54863,7 +54682,7 @@ var agenda_eventos_default = {
       resumen: "El Jard\xEDn Bot\xE1nico de la Universitat de Val\xE8ncia es un museo vivo situado al casco hist\xF3rico de la ciudad, un espacio universitario abierto al p\xFAblico que tiene como misi\xF3n popularizar el mundo vegetal fomentando su estudio, ense\xF1anza, divulgaci\xF3n y conservaci\xF3n, as\xED como tambi\xE9n su uso sostenible.\u2026",
       url: "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/pogramacio-cultural-jardi-botanic",
       distritosMencionados: [],
-      fetchedAt: "2026-09-28T03:50:59.130Z",
+      fetchedAt: "2026-09-28T13:00:22.244Z",
       source: "ajuntament-valencia-scraping"
     },
     {
@@ -54875,7 +54694,7 @@ var agenda_eventos_default = {
       resumen: "Desde hace m\xE1s de tres d\xE9cadas, Black Note Club ha sido el epicentro de la m\xFAsica en directo en Val\xE8ncia y un referente a nivel nacional, ofreciendo una plataforma para artistas emergentes y consagrados. Black Note Club se ha convertido en el lugar de encuentro para los amantes de la m\xFAsica en vivo.\u2026",
       url: "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/black-note-club-programacio",
       distritosMencionados: [],
-      fetchedAt: "2026-09-28T03:50:59.130Z",
+      fetchedAt: "2026-09-28T13:00:22.244Z",
       source: "ajuntament-valencia-scraping"
     },
     {
@@ -54887,7 +54706,7 @@ var agenda_eventos_default = {
       resumen: "La instituci\xF3n\xA0nace el 23 de marzo de 1879\xA0para \u201Catender las necesidades culturales y de formaci\xF3n, en su profesi\xF3n, de los empleados del comercio\u201D. En sus 139 a\xF1os de vida, se ha consolidado como una de las instituciones de referencia de la sociedad civil valenciana, en materia cultural, mercantil\u2026",
       url: "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/pogramacio-cultural-ateneo",
       distritosMencionados: [],
-      fetchedAt: "2026-09-28T03:50:59.130Z",
+      fetchedAt: "2026-09-28T13:00:22.244Z",
       source: "ajuntament-valencia-scraping"
     },
     {
@@ -54899,7 +54718,215 @@ var agenda_eventos_default = {
       resumen: "El edificio del Palacio de Congresos de Val\xE8ncia\xA0fue dise\xF1ado por el c\xE9lebre arquitecto brit\xE1nico Norman Foster e \xA0inaugurado en 1998.\xA0Dispone de tres auditorios, una gran sala de exposiciones y diversas salas de reuniones. En su programaci\xF3n, que ofrece eventos nacionales e internacionales, destaca\u2026",
       url: "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/palau-de-congressos-de-valencia-activitats",
       distritosMencionados: [],
-      fetchedAt: "2026-09-28T03:50:59.130Z",
+      fetchedAt: "2026-09-28T13:00:22.244Z",
+      source: "ajuntament-valencia-scraping"
+    },
+    {
+      id: "fundacion-canada-blanch-programacion-cultural",
+      titulo: "Fundaci\xF3n Ca\xF1ada Blanch \u2013 Programaci\xF3n cultural",
+      categoria: "CONFERENCIAS",
+      fechaInicio: "2026-01-01T00:00:00.000Z",
+      fechaFin: "2026-12-30T00:00:00.000Z",
+      resumen: "La Fundaci\xF3n Ca\xF1ada Blanch es un espacio dedicado a la cultura contempor\xE1nea, donde personas referentes en diferentes \xE1reas comparten sus conocimientos y vivencias, permiti\xE9ndonos reflexionar sobre la realidad que nos rodea.\nLiteratura, arte, m\xFAsica, filosof\xEDa, g\xE9nero, ciencia, sociedad, humanidades\u2026",
+      url: "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/fundacion-canada-blanch-programacion-cultural",
+      distritosMencionados: [],
+      fetchedAt: "2026-09-28T13:00:22.244Z",
+      source: "ajuntament-valencia-scraping"
+    },
+    {
+      id: "sala-russafa-programacio-cultural",
+      titulo: "Sala Russafa - Programaci\xF3n cultural",
+      categoria: "DANZA",
+      fechaInicio: "2026-01-01T00:00:00.000Z",
+      fechaFin: "2026-12-30T00:00:00.000Z",
+      resumen: "La Sala Russafa nace en 2011, en pleno barrio de Ruzafa, un barrio de arraigados h\xE1bitos culturales. En el teatro del Centro Cultural se programan piezas dirigidas al p\xFAblico familiar, adulto o escolar dentro de distintos ciclos, dando cabida al teatro cl\xE1sico y contempor\xE1neo y a cualquier disciplin\u2026",
+      url: "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/sala-russafa-programacio-cultural",
+      distritosMencionados: [
+        {
+          distritoCodigo: "02",
+          distritoNombre: "l'Eixample",
+          coincidencia: "barrio",
+          textoCoincidente: "Ruzafa",
+          bajaConfianza: false
+        }
+      ],
+      fetchedAt: "2026-09-28T13:00:22.244Z",
+      source: "ajuntament-valencia-scraping"
+    },
+    {
+      id: "el-centre-museistic-la-beneficencia",
+      titulo: "El Centro Muse\xEDstico 'La Beneficencia' - Actividades",
+      categoria: "AGENDA INFANTIL",
+      fechaInicio: "2026-01-01T00:00:00.000Z",
+      fechaFin: "2026-12-30T00:00:00.000Z",
+      resumen: null,
+      url: "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/el-centre-museistic-la-beneficencia",
+      distritosMencionados: [],
+      fetchedAt: "2026-09-28T13:00:22.244Z",
+      source: "ajuntament-valencia-scraping"
+    },
+    {
+      id: "teatre-escalante-programacio",
+      titulo: "Escalante - Programaci\xF3n",
+      categoria: "TEATRO",
+      fechaInicio: "2026-01-01T00:00:00.000Z",
+      fechaFin: "2026-12-30T00:00:00.000Z",
+      resumen: "El Escalante es el proyecto esc\xE9nico para la Infancia y la Juventud de la Diputaci\xF3n de Val\xE8ncia. Nacido en 1985, fue el primer teatro en Espa\xF1a que apost\xF3 por ofrecer producciones y exhibiciones de calidad para los ni\xF1os y a los j\xF3venes que, hasta entonces, solo se encontraban en el teatro para adu\u2026",
+      url: "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/teatre-escalante-programacio",
+      distritosMencionados: [],
+      fetchedAt: "2026-09-28T13:00:22.244Z",
+      source: "ajuntament-valencia-scraping"
+    },
+    {
+      id: "teatre-principal-programacio",
+      titulo: "Teatro Principal - Programaci\xF3n",
+      categoria: "TEATRO",
+      fechaInicio: "2026-01-01T00:00:00.000Z",
+      fechaFin: "2026-12-30T00:00:00.000Z",
+      resumen: "El Teatro Principal de Val\xE8ncia, inaugurado en 1832 y ubicado en pleno coraz\xF3n de la ciudad, es uno de los espacios culturales m\xE1s ic\xF3nicos y emblem\xE1ticos de la Comunidad Valenciana.\xA0Su historia y tradici\xF3n lo han consolidado como el escenario perfecto para acoger los espect\xE1culos m\xE1s destacados de\u2026",
+      url: "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/teatre-principal-programacio",
+      distritosMencionados: [],
+      fetchedAt: "2026-09-28T13:00:22.244Z",
+      source: "ajuntament-valencia-scraping"
+    },
+    {
+      id: "collegi-major-rector-peset-programacio",
+      titulo: "Colegio Mayor Rector Peset - Programaci\xF3n cultural",
+      categoria: "EXPOSICIONES",
+      fechaInicio: "2026-01-01T00:00:00.000Z",
+      fechaFin: "2026-12-30T00:00:00.000Z",
+      resumen: "El Colegio Mayor Rector Peset se ha consolidado en la ciudad de Valencia como un punto de encuentro de la universidad, la sociedad civil y las entidades sociales y culturales de la ciudad de Valencia, en la programaci\xF3n de sus actividades culturales, formativas y en la transmisi\xF3n de sus experiencia\u2026",
+      url: "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/collegi-major-rector-peset-programacio",
+      distritosMencionados: [],
+      fetchedAt: "2026-09-28T13:00:22.244Z",
+      source: "ajuntament-valencia-scraping"
+    },
+    {
+      id: "museu-faller-de-valencia",
+      titulo: "Museo Fallero de Val\xE8ncia",
+      categoria: "EXPOSICIONES",
+      fechaInicio: "2026-01-01T00:00:00.000Z",
+      fechaFin: "2026-12-30T00:00:00.000Z",
+      resumen: "El actual Museo Fallero de Val\xE8ncia est\xE1 instalado desde 1971 en el antiguo Convento de la Casa Misi\xF3n de San Vicente de Pa\xFAl est\xE1 integrado por la colecci\xF3n de ninots indultados grandes, e infantiles, as\xED como por los carteles anunciadores ganadores y finalistas de las Fallas, los cuadros que retra\u2026",
+      url: "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/museu-faller-de-valencia",
+      distritosMencionados: [],
+      fetchedAt: "2026-09-28T13:00:22.244Z",
+      source: "ajuntament-valencia-scraping"
+    },
+    {
+      id: "teatre-el-musical-programacio",
+      titulo: "Teatro El Musical \u2013 Programaci\xF3n",
+      categoria: "TEATRO",
+      fechaInicio: "2026-01-01T00:00:00.000Z",
+      fechaFin: "2026-12-30T00:00:00.000Z",
+      resumen: "El TEM\xA0es algo m\xE1s que un teatro, se ha convertido en un centro cultural al servicio del ciudadano y de sus asociaciones, un laboratorio de escena que tambi\xE9n ofrece talleres y actividades participativas. Ubicado en el barrio Cabanyal, es un edificio emblem\xE1tico.\xA0\nCon una programaci\xF3n de primer\xEDsimo\u2026",
+      url: "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/teatre-el-musical-programacio",
+      distritosMencionados: [],
+      fetchedAt: "2026-09-28T13:00:22.244Z",
+      source: "ajuntament-valencia-scraping"
+    },
+    {
+      id: "programacio-fins-a-final-d-any-teatre-flumen",
+      titulo: "Teatro Flumen - Programaci\xF3n",
+      categoria: "CINE",
+      fechaInicio: "2026-01-01T00:00:00.000Z",
+      fechaFin: "2026-12-30T00:00:00.000Z",
+      resumen: "En concreto Flumen teatro Val\xE8ncia es un destino de diversi\xF3n que aporta muchos valores a\xF1adidos. Gracias a nuestra reciente reforma, toda la sala est\xE1 equipada de butacas c\xF3modas que har\xE1n de tu estancia un momento inolvidable que junto con los actores de la funci\xF3n pasar\xE1 en un abrir y cerrar de o\u2026",
+      url: "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/programacio-fins-a-final-d-any-teatre-flumen",
+      distritosMencionados: [],
+      fetchedAt: "2026-09-28T13:00:22.244Z",
+      source: "ajuntament-valencia-scraping"
+    },
+    {
+      id: "museo-valencia-d-etnologia-actividades",
+      titulo: "L\u2019ETNO,\xA0Museu Valenci\xE0 d'Etnologia- Programaci\xF3n",
+      categoria: "EXPOSICIONES",
+      fechaInicio: "2026-01-01T00:00:00.000Z",
+      fechaFin: "2026-12-30T00:00:00.000Z",
+      resumen: "L\u2019ETNO,\xA0Museu Valenci\xE0 d'Etnolog\xEDa se cre\xF3 en 1982 para recoger, estudiar y difundir todo aquello relacionado con la cultura popular y tradicional valenciana. En el a\xF1o 2023 fue elegido Museo Europeo del A\xF1o por los premios EMYA del Consejo de Europa.\nComo museo de la cultura popular valenciana, inv\u2026",
+      url: "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/museo-valencia-d-etnologia-actividades",
+      distritosMencionados: [],
+      fetchedAt: "2026-09-28T13:00:22.244Z",
+      source: "ajuntament-valencia-scraping"
+    },
+    {
+      id: "programacion-cultural-teatro-circulo",
+      titulo: "Teatro C\xEDrculo - Programaci\xF3n",
+      categoria: "TEATRO",
+      fechaInicio: "2026-01-01T00:00:00.000Z",
+      fechaFin: "2026-12-30T00:00:00.000Z",
+      resumen: "Teatro C\xEDrculo es un centro de creaci\xF3n, producci\xF3n teatral y exhibici\xF3n de las artes vivas contempor\xE1neas con compa\xF1\xEDa estable, un laboratorio, un taller de entrenamiento y un espacio de acogida de residencias. Cuenta con un equipo art\xEDstico, con colaboradores en distintos \xE1mbitos, con un espacio q\u2026",
+      url: "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/programacion-cultural-teatro-circulo",
+      distritosMencionados: [],
+      fetchedAt: "2026-09-28T13:00:22.244Z",
+      source: "ajuntament-valencia-scraping"
+    },
+    {
+      id: "museu-de-la-setmana-santa-marinera",
+      titulo: "Museo de la Semana Santa Marinera",
+      categoria: "EXPOSICIONES",
+      fechaInicio: "2026-01-01T00:00:00.000Z",
+      fechaFin: "2026-12-30T00:00:00.000Z",
+      resumen: "El Museo de la Semana Santa Marinera \u201CSalvador Caur\xEDn\u201D de Val\xE8ncia est\xE1 ubicado en un barrio t\xEDpicamente marinero.\xA0La vistosidad de sus trajes, la riqueza simb\xF3lica y la singularidad de sus celebraciones son perceptibles en las im\xE1genes y colecci\xF3n de trajes y elementos expuestos en el Museo y que,\u2026",
+      url: "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/museu-de-la-setmana-santa-marinera",
+      distritosMencionados: [],
+      fetchedAt: "2026-09-28T13:00:22.244Z",
+      source: "ajuntament-valencia-scraping"
+    },
+    {
+      id: "cafe-mercedes-jazz-programacio",
+      titulo: "Caf\xE9 Mercedes Jazz - Programaci\xF3n",
+      categoria: "M\xDASICA",
+      fechaInicio: "2026-01-01T00:00:00.000Z",
+      fechaFin: "2026-12-30T00:00:00.000Z",
+      resumen: "Ubicado en el carism\xE1tico barrio de Russafa, Caf\xE9 Mercedes Jazz abri\xF3 sus puertas en el a\xF1o 2007. Es un espacio cultural al servicio de la m\xFAsica, los m\xFAsicos y el p\xFAblico, y tiene como objetivo ser una plataforma para la creaci\xF3n musical y el intercambio cultural y art\xEDstico. Su actividad principal\u2026",
+      url: "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/cafe-mercedes-jazz-programacio",
+      distritosMencionados: [
+        {
+          distritoCodigo: "02",
+          distritoNombre: "l'Eixample",
+          coincidencia: "barrio",
+          textoCoincidente: "Russafa",
+          bajaConfianza: false
+        }
+      ],
+      fetchedAt: "2026-09-28T13:00:22.244Z",
+      source: "ajuntament-valencia-scraping"
+    },
+    {
+      id: "programacio-teatro-la-estrella",
+      titulo: "Teatro La Estrella - Programaci\xF3n",
+      categoria: "AGENDA INFANTIL",
+      fechaInicio: "2026-01-01T00:00:00.000Z",
+      fechaFin: "2026-12-30T00:00:00.000Z",
+      resumen: "La compa\xF1\xEDa de Teatro de Marionetas la Estrella cuenta con una larga trayectoria produciendo montajes infantiles, con m\xE1s de veinte espect\xE1culos producidos tanto para la programaci\xF3n estable de nuestras salas en Valencia, como para gira y festivales nacionales e internacionales. A lo largo de estos\u2026",
+      url: "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/programacio-teatro-la-estrella",
+      distritosMencionados: [],
+      fetchedAt: "2026-09-28T13:00:22.244Z",
+      source: "ajuntament-valencia-scraping"
+    },
+    {
+      id: "programacio-muvim",
+      titulo: "MUVIM - Programaci\xF3n cultural",
+      categoria: "EXPOSICIONES",
+      fechaInicio: "2026-01-01T00:00:00.000Z",
+      fechaFin: "2026-12-30T00:00:00.000Z",
+      resumen: "El MuVIM es un museo de ideas, consagrado a preservar y dar a conocer las ideas y valores que han hecho posible el mundo moderno.\nLas actividades y exposiciones siempre ofrecen un valor a\xF1adido: son algo m\xE1s que una muestra de objetos, se sirven de objetos para expresar ideas. \nIdeas que pretenden h\u2026",
+      url: "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/programacio-muvim",
+      distritosMencionados: [],
+      fetchedAt: "2026-09-28T13:00:22.244Z",
+      source: "ajuntament-valencia-scraping"
+    },
+    {
+      id: "programacio-cultural-octubre-centre-de-cultura-contemporania",
+      titulo: "Octubre CCC - Programaci\xF3n cultural",
+      categoria: "CINE",
+      fechaInicio: "2026-01-01T00:00:00.000Z",
+      fechaFin: "2026-12-30T00:00:00.000Z",
+      resumen: "Impulsado por Acci\xF3n Cultural del Pa\xEDs Valenciano (ACPV) y la Instituci\xF3n C\xEDvica y de Pensamiento Joan Fuster (IJF), en 2006 abri\xF3 en el coro de Val\xE8ncia el Octubre Centro de Cultura Contempor\xE1nea (OCCC), una apuesta firme por el revifament de la cultura y la sociedad de todo nuestro pa\xEDs desde una\u2026",
+      url: "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/programacio-cultural-octubre-centre-de-cultura-contemporania",
+      distritosMencionados: [],
+      fetchedAt: "2026-09-28T13:00:22.244Z",
       source: "ajuntament-valencia-scraping"
     },
     {
@@ -54911,7 +54938,7 @@ var agenda_eventos_default = {
       resumen: "Edificio situado en el puerto de Valencia, de planta rectangular y torre con reloj de cuatro esferas y remate cupuliforme. La decoraci\xF3n de sus cuatro fachadas es de tradici\xF3n neoplateresca, aunque en su reconstrucci\xF3n de 1939 se simplific\xF3 hacia formas m\xE1s planas y sobrias. Actualmente se utiliza c\u2026",
       url: "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/sala-exposicions-edifici-del-rellotge",
       distritosMencionados: [],
-      fetchedAt: "2026-09-28T03:50:59.130Z",
+      fetchedAt: "2026-09-28T13:00:22.244Z",
       source: "ajuntament-valencia-scraping"
     },
     {
@@ -54923,7 +54950,7 @@ var agenda_eventos_default = {
       resumen: "Feria Val\xE8ncia ofrece el mejor marco para conjugar la celebraci\xF3n de acontecimientos nacionales e internacionales\xA0en un entorno que anima a disfrutar del clima y la gastronom\xEDa. Con un siglo de existencia, es el recinto organizador de acontecimientos m\xE1s antiguo de Espa\xF1a (1917). Dispone de la super\u2026",
       url: "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/fira-de-valencia-agenda",
       distritosMencionados: [],
-      fetchedAt: "2026-09-28T03:50:59.130Z",
+      fetchedAt: "2026-09-28T13:00:22.244Z",
       source: "ajuntament-valencia-scraping"
     },
     {
@@ -54935,7 +54962,7 @@ var agenda_eventos_default = {
       resumen: "Bombas Gens Centre d\u2019Arts Digitals\xA0es un lugar de encuentro para todas las propuestas vinculadas al arte y tecnolog\xEDa de nueva generaci\xF3n con una agenda viva, que complementa la oferta expositiva, con eventos, actividades, visitas guiadas patrimoniales y programas formativos especializados.\n\nAgenda\u2026",
       url: "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/bombas-gens-centre-d-arts-digitals-cas",
       distritosMencionados: [],
-      fetchedAt: "2026-09-28T03:50:59.130Z",
+      fetchedAt: "2026-09-28T13:00:22.244Z",
       source: "ajuntament-valencia-scraping"
     },
     {
@@ -54947,7 +54974,7 @@ var agenda_eventos_default = {
       resumen: "El museo Iluziona ofrece un ambiente \xFAnico y divertido que combina cultura, arte y entretenimiento para atraer a diversos p\xFAblicos. Proporciona numerosas oportunidades para capturar fotos memorables con efectos visuales asombrosos y fomenta la interacci\xF3n entre visitantes.\n\nM\xE1s informaci\xF3n",
       url: "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/museo-iluziona-cas",
       distritosMencionados: [],
-      fetchedAt: "2026-09-28T03:50:59.130Z",
+      fetchedAt: "2026-09-28T13:00:22.244Z",
       source: "ajuntament-valencia-scraping"
     },
     {
@@ -54959,7 +54986,7 @@ var agenda_eventos_default = {
       resumen: "El\xA0Consejo Superior de Investigaciones Cient\xEDficas\xA0(CSIC) cuenta en el centro de la ciudad de Val\xE8ncia con la Casa de la Ci\xE8ncia, a su vez sede de su Delegaci\xF3n en la Comunidad Valenciana. Entre sus objetivos se encuentra acercar la actividad cient\xEDfico-t\xE9cnica de los centros del CSIC a la sociedad.\u2026",
       url: "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/casa-de-la-ciencia-del-csic-programacion",
       distritosMencionados: [],
-      fetchedAt: "2026-09-28T03:50:59.130Z",
+      fetchedAt: "2026-09-28T13:00:22.244Z",
       source: "ajuntament-valencia-scraping"
     },
     {
@@ -54971,7 +54998,7 @@ var agenda_eventos_default = {
       resumen: 'El Instituto Interuniversitario L\xF3pez Pi\xF1ero es un centro dedicado a la investigaci\xF3n y la divulgaci\xF3n en torno a los estudios hist\xF3ricos y sociales sobre la medicina, la tecnolog\xEDa, la ciencia y el medioambiente. Cuenta con programas propios de M\xE1ster y Doctorado en "Historia de la ciencia y comuni\u2026',
       url: "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/institut-interuniversitari-lopez-pinero-programacio",
       distritosMencionados: [],
-      fetchedAt: "2026-09-28T03:50:59.130Z",
+      fetchedAt: "2026-09-28T13:00:22.244Z",
       source: "ajuntament-valencia-scraping"
     },
     {
@@ -54991,7 +55018,7 @@ var agenda_eventos_default = {
           bajaConfianza: false
         }
       ],
-      fetchedAt: "2026-09-28T03:50:59.130Z",
+      fetchedAt: "2026-09-28T13:00:22.244Z",
       source: "ajuntament-valencia-scraping"
     },
     {
@@ -55003,7 +55030,7 @@ var agenda_eventos_default = {
       resumen: "L'Hemisf\xE8ric, fou el primer edifici de la Ciutat de les Arts i les Ci\xE8ncies que va obrir les seues portes al p\xFAblic. \xC9s un edifici\xA0dissenyat per a projeccions digitals i de cine IMAX, que te faran viure aventures a trav\xE9s d'imatges espectaculars. \xC9s la sala m\xE9s gran d'Espanya que alberga tres sistem\u2026",
       url: "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/hemisferic-ciutat-arts-i-ciencies-programacio",
       distritosMencionados: [],
-      fetchedAt: "2026-09-28T03:50:59.130Z",
+      fetchedAt: "2026-09-28T13:00:22.244Z",
       source: "ajuntament-valencia-scraping"
     },
     {
@@ -55015,7 +55042,7 @@ var agenda_eventos_default = {
       resumen: "El Teatro Rialto fue construido en el a\xF1o 1939 por iniciativa de la familia Gonz\xE1lez Galindo. La estructura del edificio es compleja; cine, sal\xF3n de t\xE9 y restaurante en su origen, despu\xE9s de la rehabilitaci\xF3n se habilit\xF3 una sala para las proyecciones cinematogr\xE1ficas de la filmoteca de la Generalit\u2026",
       url: "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/teatre-rialto-programacio",
       distritosMencionados: [],
-      fetchedAt: "2026-09-28T03:50:59.130Z",
+      fetchedAt: "2026-09-28T13:00:22.244Z",
       source: "ajuntament-valencia-scraping"
     },
     {
@@ -55027,7 +55054,7 @@ var agenda_eventos_default = {
       resumen: "El Centro de Recepci\xF3n del Visitante del Santo C\xE1liz, ubicado en el\xA0Almud\xEDn, acoge una exposici\xF3n por el\xA0III A\xF1o Jubilar del Santo C\xE1liz. El Santo C\xE1liz es la copa que, seg\xFAn la tradici\xF3n, pudo usar Jes\xFAs en la \xDAltima Cena.\xA0 Desde entonces, viaj\xF3 desde Jerusal\xE9n hasta los Pirineos, fue protegida por\u2026",
       url: "https://www.valencia.es/cas/agenda-de-la-ciudad/-/content/almudin-exposicion-iii-ano-jubilar-santo-caliz",
       distritosMencionados: [],
-      fetchedAt: "2026-09-28T03:50:59.130Z",
+      fetchedAt: "2026-09-28T13:00:22.244Z",
       source: "ajuntament-valencia-scraping"
     },
     {
@@ -55047,7 +55074,7 @@ var agenda_eventos_default = {
           bajaConfianza: false
         }
       ],
-      fetchedAt: "2026-09-28T03:50:59.130Z",
+      fetchedAt: "2026-09-28T13:00:22.244Z",
       source: "valencia-cf-scraping",
       impactoViaPublica: true
     },
@@ -55068,7 +55095,7 @@ var agenda_eventos_default = {
           bajaConfianza: false
         }
       ],
-      fetchedAt: "2026-09-28T03:50:59.130Z",
+      fetchedAt: "2026-09-28T13:00:22.244Z",
       source: "valencia-cf-scraping",
       impactoViaPublica: true
     },
@@ -55081,7 +55108,7 @@ var agenda_eventos_default = {
       resumen: "Jornada 3 de LaLiga en el Ciutat de Val\xE8ncia. Levante UD - Real Betis, 15:00h.",
       url: "https://www.levanteud.com/partidos",
       distritosMencionados: [],
-      fetchedAt: "2026-09-28T03:50:59.130Z",
+      fetchedAt: "2026-09-28T13:00:22.244Z",
       source: "levante-ud-scraping",
       impactoViaPublica: true
     },
@@ -55094,7 +55121,7 @@ var agenda_eventos_default = {
       resumen: "Jornada 5 de LaLiga en el Ciutat de Val\xE8ncia. Levante UD - FC Barcelona, 14:15h.",
       url: "https://www.levanteud.com/partidos",
       distritosMencionados: [],
-      fetchedAt: "2026-09-28T03:50:59.130Z",
+      fetchedAt: "2026-09-28T13:00:22.244Z",
       source: "levante-ud-scraping",
       impactoViaPublica: true
     },
@@ -55107,7 +55134,7 @@ var agenda_eventos_default = {
       resumen: "Jornada 8 de LaLiga en el Ciutat de Val\xE8ncia. Levante UD - Sevilla FC, 19:00h.",
       url: "https://www.levanteud.com/partidos",
       distritosMencionados: [],
-      fetchedAt: "2026-09-28T03:50:59.130Z",
+      fetchedAt: "2026-09-28T13:00:22.244Z",
       source: "levante-ud-scraping",
       impactoViaPublica: true
     },
@@ -55120,7 +55147,7 @@ var agenda_eventos_default = {
       resumen: "Jornada 6 de LaLiga en el Ciutat de Val\xE8ncia. Levante UD - Athletic Club, 18:00h.",
       url: "https://www.levanteud.com/partidos",
       distritosMencionados: [],
-      fetchedAt: "2026-09-28T03:50:59.130Z",
+      fetchedAt: "2026-09-28T13:00:22.244Z",
       source: "levante-ud-scraping",
       impactoViaPublica: true
     },
@@ -55141,7 +55168,7 @@ var agenda_eventos_default = {
           bajaConfianza: false
         }
       ],
-      fetchedAt: "2026-09-28T03:50:59.130Z",
+      fetchedAt: "2026-09-28T13:00:22.244Z",
       source: "roig-arena-scraping",
       impactoViaPublica: true
     },
@@ -55162,7 +55189,7 @@ var agenda_eventos_default = {
           bajaConfianza: false
         }
       ],
-      fetchedAt: "2026-09-28T03:50:59.130Z",
+      fetchedAt: "2026-09-28T13:00:22.244Z",
       source: "roig-arena-scraping",
       impactoViaPublica: true
     },
@@ -55183,7 +55210,7 @@ var agenda_eventos_default = {
           bajaConfianza: false
         }
       ],
-      fetchedAt: "2026-09-28T03:50:59.130Z",
+      fetchedAt: "2026-09-28T13:00:22.244Z",
       source: "roig-arena-scraping",
       impactoViaPublica: true
     },
@@ -55204,7 +55231,7 @@ var agenda_eventos_default = {
           bajaConfianza: false
         }
       ],
-      fetchedAt: "2026-09-28T03:50:59.130Z",
+      fetchedAt: "2026-09-28T13:00:22.244Z",
       source: "roig-arena-scraping",
       impactoViaPublica: true
     },
@@ -55225,7 +55252,7 @@ var agenda_eventos_default = {
           bajaConfianza: false
         }
       ],
-      fetchedAt: "2026-09-28T03:50:59.130Z",
+      fetchedAt: "2026-09-28T13:00:22.244Z",
       source: "roig-arena-scraping",
       impactoViaPublica: true
     },
@@ -55246,7 +55273,7 @@ var agenda_eventos_default = {
           bajaConfianza: false
         }
       ],
-      fetchedAt: "2026-09-28T03:50:59.130Z",
+      fetchedAt: "2026-09-28T13:00:22.244Z",
       source: "roig-arena-scraping",
       impactoViaPublica: true
     },
@@ -55267,7 +55294,7 @@ var agenda_eventos_default = {
           bajaConfianza: false
         }
       ],
-      fetchedAt: "2026-09-28T03:50:59.130Z",
+      fetchedAt: "2026-09-28T13:00:22.244Z",
       source: "roig-arena-scraping",
       impactoViaPublica: true
     },
@@ -55288,7 +55315,7 @@ var agenda_eventos_default = {
           bajaConfianza: false
         }
       ],
-      fetchedAt: "2026-09-28T03:50:59.130Z",
+      fetchedAt: "2026-09-28T13:00:22.244Z",
       source: "roig-arena-scraping",
       impactoViaPublica: true
     },
@@ -55301,7 +55328,7 @@ var agenda_eventos_default = {
       resumen: "Carrera popular organizada por la Fundaci\xF3n Deportiva Municipal de Val\xE8ncia.",
       url: "https://www.fdmvalencia.es/es/eventos/carrera-por-la-solidaridad-2026/",
       distritosMencionados: [],
-      fetchedAt: "2026-09-28T03:50:59.130Z",
+      fetchedAt: "2026-09-28T13:00:22.244Z",
       source: "fdm-valencia-carreras-scraping",
       impactoViaPublica: true
     },
@@ -55322,7 +55349,7 @@ var agenda_eventos_default = {
           bajaConfianza: false
         }
       ],
-      fetchedAt: "2026-09-28T03:50:59.130Z",
+      fetchedAt: "2026-09-28T13:00:22.244Z",
       source: "fdm-valencia-carreras-scraping",
       impactoViaPublica: true
     },
@@ -55335,7 +55362,7 @@ var agenda_eventos_default = {
       resumen: "Carrera popular organizada por la Fundaci\xF3n Deportiva Municipal de Val\xE8ncia.",
       url: "https://www.fdmvalencia.es/es/eventos/dogfy-run-solidaria-2026/",
       distritosMencionados: [],
-      fetchedAt: "2026-09-28T03:50:59.130Z",
+      fetchedAt: "2026-09-28T13:00:22.244Z",
       source: "fdm-valencia-carreras-scraping",
       impactoViaPublica: true
     },
@@ -55348,7 +55375,7 @@ var agenda_eventos_default = {
       resumen: "Carrera popular organizada por la Fundaci\xF3n Deportiva Municipal de Val\xE8ncia.",
       url: "https://www.fdmvalencia.es/es/eventos/iii-cross-escolar-sd-correcaminos/",
       distritosMencionados: [],
-      fetchedAt: "2026-09-28T03:50:59.130Z",
+      fetchedAt: "2026-09-28T13:00:22.244Z",
       source: "fdm-valencia-carreras-scraping",
       impactoViaPublica: true
     },
@@ -55361,7 +55388,7 @@ var agenda_eventos_default = {
       resumen: "Carrera popular organizada por la Fundaci\xF3n Deportiva Municipal de Val\xE8ncia.",
       url: "https://www.fdmvalencia.es/es/eventos/10k-valencia-ibercaja-by-kiprun-2027-5k-valencia-ibercaja-2027/",
       distritosMencionados: [],
-      fetchedAt: "2026-09-28T03:50:59.130Z",
+      fetchedAt: "2026-09-28T13:00:22.244Z",
       source: "fdm-valencia-carreras-scraping",
       impactoViaPublica: true
     },
@@ -55374,7 +55401,7 @@ var agenda_eventos_default = {
       resumen: "Carrera popular organizada por la Fundaci\xF3n Deportiva Municipal de Val\xE8ncia.",
       url: "https://www.fdmvalencia.es/es/eventos/pas-ras-al-port-de-valencia-2026/",
       distritosMencionados: [],
-      fetchedAt: "2026-09-28T03:50:59.130Z",
+      fetchedAt: "2026-09-28T13:00:22.244Z",
       source: "fdm-valencia-carreras-scraping",
       impactoViaPublica: true
     },
@@ -55387,7 +55414,7 @@ var agenda_eventos_default = {
       resumen: "Carrera popular organizada por la Fundaci\xF3n Deportiva Municipal de Val\xE8ncia.",
       url: "https://www.fdmvalencia.es/es/eventos/san-silvestre-valencia-2026/",
       distritosMencionados: [],
-      fetchedAt: "2026-09-28T03:50:59.130Z",
+      fetchedAt: "2026-09-28T13:00:22.244Z",
       source: "fdm-valencia-carreras-scraping",
       impactoViaPublica: true
     },
@@ -55400,7 +55427,7 @@ var agenda_eventos_default = {
       resumen: "Carrera popular organizada por la Fundaci\xF3n Deportiva Municipal de Val\xE8ncia.",
       url: "https://www.fdmvalencia.es/es/eventos/maraton-valencia-trinidad-alfonso-zurich-2026/",
       distritosMencionados: [],
-      fetchedAt: "2026-09-28T03:50:59.130Z",
+      fetchedAt: "2026-09-28T13:00:22.244Z",
       source: "fdm-valencia-carreras-scraping",
       impactoViaPublica: true
     },
@@ -55413,7 +55440,7 @@ var agenda_eventos_default = {
       resumen: "Carrera popular organizada por la Fundaci\xF3n Deportiva Municipal de Val\xE8ncia.",
       url: "https://www.fdmvalencia.es/es/eventos/xvi-volta-a-peu-de-les-falles-circuit-de-carreres-caixa-popular-ciutat-de-valencia-2026/",
       distritosMencionados: [],
-      fetchedAt: "2026-09-28T03:50:59.130Z",
+      fetchedAt: "2026-09-28T13:00:22.244Z",
       source: "fdm-valencia-carreras-scraping",
       impactoViaPublica: true
     },
@@ -55426,7 +55453,7 @@ var agenda_eventos_default = {
       resumen: "Carrera popular organizada por la Fundaci\xF3n Deportiva Municipal de Val\xE8ncia.",
       url: "https://www.fdmvalencia.es/es/eventos/valencia-contra-el-cancer-2026/",
       distritosMencionados: [],
-      fetchedAt: "2026-09-28T03:50:59.130Z",
+      fetchedAt: "2026-09-28T13:00:22.244Z",
       source: "fdm-valencia-carreras-scraping",
       impactoViaPublica: true
     },
@@ -55439,12 +55466,12 @@ var agenda_eventos_default = {
       resumen: "Carrera popular organizada por la Fundaci\xF3n Deportiva Municipal de Val\xE8ncia.",
       url: "https://www.fdmvalencia.es/es/eventos/medio-maraton-valencia-trinidad-alfonso-zurich-2026/",
       distritosMencionados: [],
-      fetchedAt: "2026-09-28T03:50:59.130Z",
+      fetchedAt: "2026-09-28T13:00:22.244Z",
       source: "fdm-valencia-carreras-scraping",
       impactoViaPublica: true
     }
   ],
-  fetchedAt: "2026-09-28T03:50:59.130Z",
+  fetchedAt: "2026-09-28T13:00:22.244Z",
   estructuraSospechosa: false
 };
 
@@ -55941,15 +55968,1213 @@ var altimetria_valencia_default = [
   }
 ];
 
+// data/altimetria-puntos.json
+var altimetria_puntos_default = [
+  {
+    lat: 39.4,
+    lon: -0.3459999999999999,
+    elevacionM: 0.4799783527851105,
+    distritoCodigo: "19"
+  },
+  {
+    lat: 39.4,
+    lon: -0.3389999999999999,
+    elevacionM: 0.4436502754688263,
+    distritoCodigo: "19"
+  },
+  {
+    lat: 39.4,
+    lon: -0.3319999999999999,
+    elevacionM: 1.3864222764968872,
+    distritoCodigo: "19"
+  },
+  {
+    lat: 39.4054,
+    lon: -0.3459999999999999,
+    elevacionM: 0.47293707728385925,
+    distritoCodigo: "19"
+  },
+  {
+    lat: 39.4054,
+    lon: -0.3389999999999999,
+    elevacionM: 0.5380992889404297,
+    distritoCodigo: "19"
+  },
+  {
+    lat: 39.4054,
+    lon: -0.3319999999999999,
+    elevacionM: 3.095593214035034,
+    distritoCodigo: "19"
+  },
+  {
+    lat: 39.4108,
+    lon: -0.3459999999999999,
+    elevacionM: 0.5496336817741394,
+    distritoCodigo: "19"
+  },
+  {
+    lat: 39.4108,
+    lon: -0.3389999999999999,
+    elevacionM: 0.6046684980392456,
+    distritoCodigo: "19"
+  },
+  {
+    lat: 39.4108,
+    lon: -0.3319999999999999,
+    elevacionM: 0.2591051757335663,
+    distritoCodigo: "19"
+  },
+  {
+    lat: 39.4162,
+    lon: -0.3459999999999999,
+    elevacionM: 0.6674822568893433,
+    distritoCodigo: "19"
+  },
+  {
+    lat: 39.4162,
+    lon: -0.3389999999999999,
+    elevacionM: 0.7592845559120178,
+    distritoCodigo: "19"
+  },
+  {
+    lat: 39.421600000000005,
+    lon: -0.35999999999999993,
+    elevacionM: 1.8033475875854492,
+    distritoCodigo: "19"
+  },
+  {
+    lat: 39.421600000000005,
+    lon: -0.3459999999999999,
+    elevacionM: 1.5305557250976562,
+    distritoCodigo: "19"
+  },
+  {
+    lat: 39.421600000000005,
+    lon: -0.3389999999999999,
+    elevacionM: 1.67963445186615,
+    distritoCodigo: "19"
+  },
+  {
+    lat: 39.42700000000001,
+    lon: -0.37399999999999994,
+    elevacionM: 5.6147074699401855,
+    distritoCodigo: "19"
+  },
+  {
+    lat: 39.42700000000001,
+    lon: -0.36699999999999994,
+    elevacionM: 3.8399829864501953,
+    distritoCodigo: "19"
+  },
+  {
+    lat: 39.42700000000001,
+    lon: -0.35999999999999993,
+    elevacionM: 2.535386323928833,
+    distritoCodigo: "19"
+  },
+  {
+    lat: 39.42700000000001,
+    lon: -0.3529999999999999,
+    elevacionM: 1.920156478881836,
+    distritoCodigo: "19"
+  },
+  {
+    lat: 39.42700000000001,
+    lon: -0.3459999999999999,
+    elevacionM: 0.9299131631851196,
+    distritoCodigo: "19"
+  },
+  {
+    lat: 39.42700000000001,
+    lon: -0.3389999999999999,
+    elevacionM: 2.797856569290161,
+    distritoCodigo: "19"
+  },
+  {
+    lat: 39.42700000000001,
+    lon: -0.3109999999999999,
+    elevacionM: 2.803213119506836,
+    distritoCodigo: "11"
+  },
+  {
+    lat: 39.43240000000001,
+    lon: -0.40199999999999997,
+    elevacionM: 16.1257381439209,
+    distritoCodigo: "19"
+  },
+  {
+    lat: 39.43240000000001,
+    lon: -0.39499999999999996,
+    elevacionM: 13.507719039916992,
+    distritoCodigo: "19"
+  },
+  {
+    lat: 39.43240000000001,
+    lon: -0.38099999999999995,
+    elevacionM: 8.49301815032959,
+    distritoCodigo: "19"
+  },
+  {
+    lat: 39.43240000000001,
+    lon: -0.37399999999999994,
+    elevacionM: 6.908078670501709,
+    distritoCodigo: "19"
+  },
+  {
+    lat: 39.43240000000001,
+    lon: -0.36699999999999994,
+    elevacionM: 4.398972034454346,
+    distritoCodigo: "19"
+  },
+  {
+    lat: 39.43240000000001,
+    lon: -0.35999999999999993,
+    elevacionM: 2.6728477478027344,
+    distritoCodigo: "19"
+  },
+  {
+    lat: 39.43240000000001,
+    lon: -0.3529999999999999,
+    elevacionM: 2.009368896484375,
+    distritoCodigo: "10"
+  },
+  {
+    lat: 39.43240000000001,
+    lon: -0.3459999999999999,
+    elevacionM: 3.628242254257202,
+    distritoCodigo: "10"
+  },
+  {
+    lat: 39.43240000000001,
+    lon: -0.3389999999999999,
+    elevacionM: 3.01682710647583,
+    distritoCodigo: "10"
+  },
+  {
+    lat: 39.43240000000001,
+    lon: -0.3319999999999999,
+    elevacionM: 3.1070749759674072,
+    distritoCodigo: "11"
+  },
+  {
+    lat: 39.43780000000001,
+    lon: -0.423,
+    elevacionM: 26.97804832458496,
+    distritoCodigo: "19"
+  },
+  {
+    lat: 39.43780000000001,
+    lon: -0.416,
+    elevacionM: 23.122753143310547,
+    distritoCodigo: "19"
+  },
+  {
+    lat: 39.43780000000001,
+    lon: -0.409,
+    elevacionM: 20.50381088256836,
+    distritoCodigo: "19"
+  },
+  {
+    lat: 39.43780000000001,
+    lon: -0.40199999999999997,
+    elevacionM: 19.40723991394043,
+    distritoCodigo: "19"
+  },
+  {
+    lat: 39.43780000000001,
+    lon: -0.39499999999999996,
+    elevacionM: 15.406719207763672,
+    distritoCodigo: "19"
+  },
+  {
+    lat: 39.43780000000001,
+    lon: -0.38799999999999996,
+    elevacionM: 7.409144878387451,
+    distritoCodigo: "09"
+  },
+  {
+    lat: 39.43780000000001,
+    lon: -0.38099999999999995,
+    elevacionM: 7.536284923553467,
+    distritoCodigo: "10"
+  },
+  {
+    lat: 39.43780000000001,
+    lon: -0.37399999999999994,
+    elevacionM: 6.558753490447998,
+    distritoCodigo: "10"
+  },
+  {
+    lat: 39.43780000000001,
+    lon: -0.36699999999999994,
+    elevacionM: 5.540640354156494,
+    distritoCodigo: "10"
+  },
+  {
+    lat: 39.43780000000001,
+    lon: -0.35999999999999993,
+    elevacionM: 3.978959560394287,
+    distritoCodigo: "10"
+  },
+  {
+    lat: 39.43780000000001,
+    lon: -0.3529999999999999,
+    elevacionM: 3.5328426361083984,
+    distritoCodigo: "10"
+  },
+  {
+    lat: 39.43780000000001,
+    lon: -0.3459999999999999,
+    elevacionM: 1.6873551607131958,
+    distritoCodigo: "10"
+  },
+  {
+    lat: 39.43780000000001,
+    lon: -0.3389999999999999,
+    elevacionM: 4.28934907913208,
+    distritoCodigo: "10"
+  },
+  {
+    lat: 39.43780000000001,
+    lon: -0.3319999999999999,
+    elevacionM: 2.9340169429779053,
+    distritoCodigo: "11"
+  },
+  {
+    lat: 39.44320000000001,
+    lon: -0.423,
+    elevacionM: 25.795551300048828,
+    distritoCodigo: "19"
+  },
+  {
+    lat: 39.44320000000001,
+    lon: -0.416,
+    elevacionM: 21.32895278930664,
+    distritoCodigo: "19"
+  },
+  {
+    lat: 39.44320000000001,
+    lon: -0.409,
+    elevacionM: 19.161327362060547,
+    distritoCodigo: "19"
+  },
+  {
+    lat: 39.44320000000001,
+    lon: -0.40199999999999997,
+    elevacionM: 12.41065788269043,
+    distritoCodigo: "19"
+  },
+  {
+    lat: 39.44320000000001,
+    lon: -0.39499999999999996,
+    elevacionM: 15.41629695892334,
+    distritoCodigo: "09"
+  },
+  {
+    lat: 39.44320000000001,
+    lon: -0.38799999999999996,
+    elevacionM: 12.518745422363281,
+    distritoCodigo: "09"
+  },
+  {
+    lat: 39.44320000000001,
+    lon: -0.38099999999999995,
+    elevacionM: 10.287894248962402,
+    distritoCodigo: "10"
+  },
+  {
+    lat: 39.44320000000001,
+    lon: -0.37399999999999994,
+    elevacionM: 12.23971176147461,
+    distritoCodigo: "10"
+  },
+  {
+    lat: 39.44320000000001,
+    lon: -0.36699999999999994,
+    elevacionM: 6.000975131988525,
+    distritoCodigo: "10"
+  },
+  {
+    lat: 39.44320000000001,
+    lon: -0.35999999999999993,
+    elevacionM: 3.1180145740509033,
+    distritoCodigo: "10"
+  },
+  {
+    lat: 39.44320000000001,
+    lon: -0.3529999999999999,
+    elevacionM: 2.7887063026428223,
+    distritoCodigo: "10"
+  },
+  {
+    lat: 39.44320000000001,
+    lon: -0.3459999999999999,
+    elevacionM: 2.021568536758423,
+    distritoCodigo: "10"
+  },
+  {
+    lat: 39.44320000000001,
+    lon: -0.3389999999999999,
+    elevacionM: 4.04799747467041,
+    distritoCodigo: "10"
+  },
+  {
+    lat: 39.44320000000001,
+    lon: -0.3319999999999999,
+    elevacionM: 1.3914040327072144,
+    distritoCodigo: "11"
+  },
+  {
+    lat: 39.44320000000001,
+    lon: -0.3109999999999999,
+    elevacionM: 1.7399518489837646,
+    distritoCodigo: "11"
+  },
+  {
+    lat: 39.44860000000001,
+    lon: -0.423,
+    elevacionM: 23.615970611572266,
+    distritoCodigo: "19"
+  },
+  {
+    lat: 39.44860000000001,
+    lon: -0.416,
+    elevacionM: 21.199586868286133,
+    distritoCodigo: "19"
+  },
+  {
+    lat: 39.44860000000001,
+    lon: -0.409,
+    elevacionM: 17.64972686767578,
+    distritoCodigo: "19"
+  },
+  {
+    lat: 39.44860000000001,
+    lon: -0.40199999999999997,
+    elevacionM: 16.91123390197754,
+    distritoCodigo: "09"
+  },
+  {
+    lat: 39.44860000000001,
+    lon: -0.39499999999999996,
+    elevacionM: 14.946502685546875,
+    distritoCodigo: "09"
+  },
+  {
+    lat: 39.44860000000001,
+    lon: -0.38799999999999996,
+    elevacionM: 13.028973579406738,
+    distritoCodigo: "09"
+  },
+  {
+    lat: 39.44860000000001,
+    lon: -0.38099999999999995,
+    elevacionM: 12.397661209106445,
+    distritoCodigo: "10"
+  },
+  {
+    lat: 39.44860000000001,
+    lon: -0.37399999999999994,
+    elevacionM: 8.870155334472656,
+    distritoCodigo: "10"
+  },
+  {
+    lat: 39.44860000000001,
+    lon: -0.36699999999999994,
+    elevacionM: 7.402920722961426,
+    distritoCodigo: "10"
+  },
+  {
+    lat: 39.44860000000001,
+    lon: -0.35999999999999993,
+    elevacionM: 3.839123249053955,
+    distritoCodigo: "10"
+  },
+  {
+    lat: 39.44860000000001,
+    lon: -0.3529999999999999,
+    elevacionM: 3.2535529136657715,
+    distritoCodigo: "10"
+  },
+  {
+    lat: 39.44860000000001,
+    lon: -0.3459999999999999,
+    elevacionM: 3.2238383293151855,
+    distritoCodigo: "10"
+  },
+  {
+    lat: 39.44860000000001,
+    lon: -0.3389999999999999,
+    elevacionM: 4.01887321472168,
+    distritoCodigo: "10"
+  },
+  {
+    lat: 39.44860000000001,
+    lon: -0.3319999999999999,
+    elevacionM: 1.8609793186187744,
+    distritoCodigo: "11"
+  },
+  {
+    lat: 39.44860000000001,
+    lon: -0.3039999999999999,
+    elevacionM: 2.064680576324463,
+    distritoCodigo: "11"
+  },
+  {
+    lat: 39.454000000000015,
+    lon: -0.409,
+    elevacionM: 19.769052505493164,
+    distritoCodigo: "08"
+  },
+  {
+    lat: 39.454000000000015,
+    lon: -0.40199999999999997,
+    elevacionM: 19.33660888671875,
+    distritoCodigo: "08"
+  },
+  {
+    lat: 39.454000000000015,
+    lon: -0.39499999999999996,
+    elevacionM: 16.28651237487793,
+    distritoCodigo: "08"
+  },
+  {
+    lat: 39.454000000000015,
+    lon: -0.38799999999999996,
+    elevacionM: 13.832690238952637,
+    distritoCodigo: "09"
+  },
+  {
+    lat: 39.454000000000015,
+    lon: -0.38099999999999995,
+    elevacionM: 11.758440017700195,
+    distritoCodigo: "10"
+  },
+  {
+    lat: 39.454000000000015,
+    lon: -0.37399999999999994,
+    elevacionM: 10.061963081359863,
+    distritoCodigo: "10"
+  },
+  {
+    lat: 39.454000000000015,
+    lon: -0.36699999999999994,
+    elevacionM: 8.527770042419434,
+    distritoCodigo: "10"
+  },
+  {
+    lat: 39.454000000000015,
+    lon: -0.35999999999999993,
+    elevacionM: 8.252134323120117,
+    distritoCodigo: "10"
+  },
+  {
+    lat: 39.454000000000015,
+    lon: -0.3529999999999999,
+    elevacionM: 8.156318664550781,
+    distritoCodigo: "10"
+  },
+  {
+    lat: 39.454000000000015,
+    lon: -0.3459999999999999,
+    elevacionM: 1.0361292362213135,
+    distritoCodigo: "10"
+  },
+  {
+    lat: 39.454000000000015,
+    lon: -0.3389999999999999,
+    elevacionM: 2.03841233253479,
+    distritoCodigo: "10"
+  },
+  {
+    lat: 39.454000000000015,
+    lon: -0.3319999999999999,
+    elevacionM: 1.5497808456420898,
+    distritoCodigo: "11"
+  },
+  {
+    lat: 39.454000000000015,
+    lon: -0.3249999999999999,
+    elevacionM: 2.469712018966675,
+    distritoCodigo: "11"
+  },
+  {
+    lat: 39.454000000000015,
+    lon: -0.3179999999999999,
+    elevacionM: 2.8745663166046143,
+    distritoCodigo: "11"
+  },
+  {
+    lat: 39.45940000000002,
+    lon: -0.409,
+    elevacionM: 21.99294662475586,
+    distritoCodigo: "08"
+  },
+  {
+    lat: 39.45940000000002,
+    lon: -0.40199999999999997,
+    elevacionM: 21.09716033935547,
+    distritoCodigo: "08"
+  },
+  {
+    lat: 39.45940000000002,
+    lon: -0.39499999999999996,
+    elevacionM: 18.518648147583008,
+    distritoCodigo: "08"
+  },
+  {
+    lat: 39.45940000000002,
+    lon: -0.38799999999999996,
+    elevacionM: 17.626117706298828,
+    distritoCodigo: "09"
+  },
+  {
+    lat: 39.45940000000002,
+    lon: -0.38099999999999995,
+    elevacionM: 13.414849281311035,
+    distritoCodigo: "03"
+  },
+  {
+    lat: 39.45940000000002,
+    lon: -0.37399999999999994,
+    elevacionM: 12.399469375610352,
+    distritoCodigo: "02"
+  },
+  {
+    lat: 39.45940000000002,
+    lon: -0.36699999999999994,
+    elevacionM: 10.051087379455566,
+    distritoCodigo: "10"
+  },
+  {
+    lat: 39.45940000000002,
+    lon: -0.35999999999999993,
+    elevacionM: 8.073688507080078,
+    distritoCodigo: "10"
+  },
+  {
+    lat: 39.45940000000002,
+    lon: -0.3529999999999999,
+    elevacionM: 9.461307525634766,
+    distritoCodigo: "12"
+  },
+  {
+    lat: 39.45940000000002,
+    lon: -0.3459999999999999,
+    elevacionM: 5.775010585784912,
+    distritoCodigo: "12"
+  },
+  {
+    lat: 39.45940000000002,
+    lon: -0.3389999999999999,
+    elevacionM: 3.642266273498535,
+    distritoCodigo: "11"
+  },
+  {
+    lat: 39.45940000000002,
+    lon: -0.3319999999999999,
+    elevacionM: 2.810614824295044,
+    distritoCodigo: "11"
+  },
+  {
+    lat: 39.45940000000002,
+    lon: -0.3179999999999999,
+    elevacionM: 2.3513641357421875,
+    distritoCodigo: "11"
+  },
+  {
+    lat: 39.46480000000002,
+    lon: -0.409,
+    elevacionM: 25.766101837158203,
+    distritoCodigo: "07"
+  },
+  {
+    lat: 39.46480000000002,
+    lon: -0.40199999999999997,
+    elevacionM: 22.263715744018555,
+    distritoCodigo: "07"
+  },
+  {
+    lat: 39.46480000000002,
+    lon: -0.39499999999999996,
+    elevacionM: 20.57561683654785,
+    distritoCodigo: "08"
+  },
+  {
+    lat: 39.46480000000002,
+    lon: -0.38799999999999996,
+    elevacionM: 18.63268280029297,
+    distritoCodigo: "03"
+  },
+  {
+    lat: 39.46480000000002,
+    lon: -0.38099999999999995,
+    elevacionM: 13.674519538879395,
+    distritoCodigo: "03"
+  },
+  {
+    lat: 39.46480000000002,
+    lon: -0.37399999999999994,
+    elevacionM: 12.615260124206543,
+    distritoCodigo: "02"
+  },
+  {
+    lat: 39.46480000000002,
+    lon: -0.36699999999999994,
+    elevacionM: 10.983589172363281,
+    distritoCodigo: "02"
+  },
+  {
+    lat: 39.46480000000002,
+    lon: -0.35999999999999993,
+    elevacionM: 5.450434684753418,
+    distritoCodigo: "06"
+  },
+  {
+    lat: 39.46480000000002,
+    lon: -0.3529999999999999,
+    elevacionM: 8.58195972442627,
+    distritoCodigo: "12"
+  },
+  {
+    lat: 39.46480000000002,
+    lon: -0.3459999999999999,
+    elevacionM: 6.300593376159668,
+    distritoCodigo: "12"
+  },
+  {
+    lat: 39.46480000000002,
+    lon: -0.3389999999999999,
+    elevacionM: 4.5090718269348145,
+    distritoCodigo: "12"
+  },
+  {
+    lat: 39.46480000000002,
+    lon: -0.3319999999999999,
+    elevacionM: 2.2813198566436768,
+    distritoCodigo: "11"
+  },
+  {
+    lat: 39.46480000000002,
+    lon: -0.3249999999999999,
+    elevacionM: 1.7356077432632446,
+    distritoCodigo: "11"
+  },
+  {
+    lat: 39.47020000000002,
+    lon: -0.409,
+    elevacionM: 26.693389892578125,
+    distritoCodigo: "07"
+  },
+  {
+    lat: 39.47020000000002,
+    lon: -0.40199999999999997,
+    elevacionM: 24.29241943359375,
+    distritoCodigo: "07"
+  },
+  {
+    lat: 39.47020000000002,
+    lon: -0.39499999999999996,
+    elevacionM: 20.92852783203125,
+    distritoCodigo: "07"
+  },
+  {
+    lat: 39.47020000000002,
+    lon: -0.38799999999999996,
+    elevacionM: 17.27732276916504,
+    distritoCodigo: "03"
+  },
+  {
+    lat: 39.47020000000002,
+    lon: -0.38099999999999995,
+    elevacionM: 14.184959411621094,
+    distritoCodigo: "01"
+  },
+  {
+    lat: 39.47020000000002,
+    lon: -0.37399999999999994,
+    elevacionM: 11.531900405883789,
+    distritoCodigo: "01"
+  },
+  {
+    lat: 39.47020000000002,
+    lon: -0.36699999999999994,
+    elevacionM: 10.72704029083252,
+    distritoCodigo: "02"
+  },
+  {
+    lat: 39.47020000000002,
+    lon: -0.35999999999999993,
+    elevacionM: 9.609221458435059,
+    distritoCodigo: "06"
+  },
+  {
+    lat: 39.47020000000002,
+    lon: -0.3529999999999999,
+    elevacionM: 8.221555709838867,
+    distritoCodigo: "12"
+  },
+  {
+    lat: 39.47020000000002,
+    lon: -0.3459999999999999,
+    elevacionM: 6.27008056640625,
+    distritoCodigo: "13"
+  },
+  {
+    lat: 39.47020000000002,
+    lon: -0.3389999999999999,
+    elevacionM: 5.065891742706299,
+    distritoCodigo: "11"
+  },
+  {
+    lat: 39.47020000000002,
+    lon: -0.3319999999999999,
+    elevacionM: 2.391139268875122,
+    distritoCodigo: "11"
+  },
+  {
+    lat: 39.47020000000002,
+    lon: -0.3249999999999999,
+    elevacionM: 2.02778959274292,
+    distritoCodigo: "11"
+  },
+  {
+    lat: 39.47560000000002,
+    lon: -0.409,
+    elevacionM: 18.91069221496582,
+    distritoCodigo: "04"
+  },
+  {
+    lat: 39.47560000000002,
+    lon: -0.40199999999999997,
+    elevacionM: 21.643918991088867,
+    distritoCodigo: "04"
+  },
+  {
+    lat: 39.47560000000002,
+    lon: -0.39499999999999996,
+    elevacionM: 13.713201522827148,
+    distritoCodigo: "03"
+  },
+  {
+    lat: 39.47560000000002,
+    lon: -0.38799999999999996,
+    elevacionM: 17.837844848632812,
+    distritoCodigo: "03"
+  },
+  {
+    lat: 39.47560000000002,
+    lon: -0.38099999999999995,
+    elevacionM: 16.195173263549805,
+    distritoCodigo: "01"
+  },
+  {
+    lat: 39.47560000000002,
+    lon: -0.37399999999999994,
+    elevacionM: 16.174095153808594,
+    distritoCodigo: "01"
+  },
+  {
+    lat: 39.47560000000002,
+    lon: -0.36699999999999994,
+    elevacionM: 10.658482551574707,
+    distritoCodigo: "06"
+  },
+  {
+    lat: 39.47560000000002,
+    lon: -0.35999999999999993,
+    elevacionM: 13.547780990600586,
+    distritoCodigo: "06"
+  },
+  {
+    lat: 39.47560000000002,
+    lon: -0.3529999999999999,
+    elevacionM: 8.669344902038574,
+    distritoCodigo: "13"
+  },
+  {
+    lat: 39.47560000000002,
+    lon: -0.3459999999999999,
+    elevacionM: 7.313787937164307,
+    distritoCodigo: "13"
+  },
+  {
+    lat: 39.47560000000002,
+    lon: -0.3389999999999999,
+    elevacionM: 5.893232345581055,
+    distritoCodigo: "13"
+  },
+  {
+    lat: 39.47560000000002,
+    lon: -0.3319999999999999,
+    elevacionM: 2.5113847255706787,
+    distritoCodigo: "11"
+  },
+  {
+    lat: 39.47560000000002,
+    lon: -0.3249999999999999,
+    elevacionM: 1.9762089252471924,
+    distritoCodigo: "11"
+  },
+  {
+    lat: 39.48100000000002,
+    lon: -0.409,
+    elevacionM: 26.67854118347168,
+    distritoCodigo: "04"
+  },
+  {
+    lat: 39.48100000000002,
+    lon: -0.40199999999999997,
+    elevacionM: 23.283092498779297,
+    distritoCodigo: "04"
+  },
+  {
+    lat: 39.48100000000002,
+    lon: -0.39499999999999996,
+    elevacionM: 20.749908447265625,
+    distritoCodigo: "04"
+  },
+  {
+    lat: 39.48100000000002,
+    lon: -0.38799999999999996,
+    elevacionM: 14.256916999816895,
+    distritoCodigo: "04"
+  },
+  {
+    lat: 39.48100000000002,
+    lon: -0.38099999999999995,
+    elevacionM: 16.151742935180664,
+    distritoCodigo: "01"
+  },
+  {
+    lat: 39.48100000000002,
+    lon: -0.37399999999999994,
+    elevacionM: 14.2454833984375,
+    distritoCodigo: "05"
+  },
+  {
+    lat: 39.48100000000002,
+    lon: -0.36699999999999994,
+    elevacionM: 14.137200355529785,
+    distritoCodigo: "05"
+  },
+  {
+    lat: 39.48100000000002,
+    lon: -0.35999999999999993,
+    elevacionM: 11.032310485839844,
+    distritoCodigo: "06"
+  },
+  {
+    lat: 39.48100000000002,
+    lon: -0.3529999999999999,
+    elevacionM: 8.408815383911133,
+    distritoCodigo: "14"
+  },
+  {
+    lat: 39.48100000000002,
+    lon: -0.3459999999999999,
+    elevacionM: 5.986671447753906,
+    distritoCodigo: "13"
+  },
+  {
+    lat: 39.48100000000002,
+    lon: -0.3389999999999999,
+    elevacionM: 5.487948417663574,
+    distritoCodigo: "13"
+  },
+  {
+    lat: 39.48100000000002,
+    lon: -0.3319999999999999,
+    elevacionM: 3.2064952850341797,
+    distritoCodigo: "11"
+  },
+  {
+    lat: 39.48100000000002,
+    lon: -0.3249999999999999,
+    elevacionM: 1.9415764808654785,
+    distritoCodigo: "11"
+  },
+  {
+    lat: 39.486400000000025,
+    lon: -0.416,
+    elevacionM: 27.786624908447266,
+    distritoCodigo: "04"
+  },
+  {
+    lat: 39.486400000000025,
+    lon: -0.409,
+    elevacionM: 25.038652420043945,
+    distritoCodigo: "04"
+  },
+  {
+    lat: 39.486400000000025,
+    lon: -0.40199999999999997,
+    elevacionM: 23.23337173461914,
+    distritoCodigo: "04"
+  },
+  {
+    lat: 39.486400000000025,
+    lon: -0.39499999999999996,
+    elevacionM: 22.969932556152344,
+    distritoCodigo: "16"
+  },
+  {
+    lat: 39.486400000000025,
+    lon: -0.38799999999999996,
+    elevacionM: 21.68448257446289,
+    distritoCodigo: "04"
+  },
+  {
+    lat: 39.486400000000025,
+    lon: -0.38099999999999995,
+    elevacionM: 17.905288696289062,
+    distritoCodigo: "05"
+  },
+  {
+    lat: 39.486400000000025,
+    lon: -0.37399999999999994,
+    elevacionM: 15.403170585632324,
+    distritoCodigo: "05"
+  },
+  {
+    lat: 39.486400000000025,
+    lon: -0.36699999999999994,
+    elevacionM: 13.592037200927734,
+    distritoCodigo: "14"
+  },
+  {
+    lat: 39.486400000000025,
+    lon: -0.35999999999999993,
+    elevacionM: 11.332428932189941,
+    distritoCodigo: "14"
+  },
+  {
+    lat: 39.486400000000025,
+    lon: -0.3529999999999999,
+    elevacionM: 6.91945219039917,
+    distritoCodigo: "14"
+  },
+  {
+    lat: 39.486400000000025,
+    lon: -0.3459999999999999,
+    elevacionM: 5.661479473114014,
+    distritoCodigo: "14"
+  },
+  {
+    lat: 39.491800000000026,
+    lon: -0.423,
+    elevacionM: 31.235973358154297,
+    distritoCodigo: "04"
+  },
+  {
+    lat: 39.491800000000026,
+    lon: -0.416,
+    elevacionM: 26.99890899658203,
+    distritoCodigo: "04"
+  },
+  {
+    lat: 39.491800000000026,
+    lon: -0.409,
+    elevacionM: 24.609588623046875,
+    distritoCodigo: "04"
+  },
+  {
+    lat: 39.491800000000026,
+    lon: -0.40199999999999997,
+    elevacionM: 25.710086822509766,
+    distritoCodigo: "04"
+  },
+  {
+    lat: 39.491800000000026,
+    lon: -0.39499999999999996,
+    elevacionM: 27.076574325561523,
+    distritoCodigo: "16"
+  },
+  {
+    lat: 39.491800000000026,
+    lon: -0.38799999999999996,
+    elevacionM: 28.004680633544922,
+    distritoCodigo: "16"
+  },
+  {
+    lat: 39.491800000000026,
+    lon: -0.38099999999999995,
+    elevacionM: 20.872812271118164,
+    distritoCodigo: "15"
+  },
+  {
+    lat: 39.491800000000026,
+    lon: -0.37399999999999994,
+    elevacionM: 15.474973678588867,
+    distritoCodigo: "05"
+  },
+  {
+    lat: 39.491800000000026,
+    lon: -0.36699999999999994,
+    elevacionM: 12.806877136230469,
+    distritoCodigo: "15"
+  },
+  {
+    lat: 39.491800000000026,
+    lon: -0.35999999999999993,
+    elevacionM: 9.754105567932129,
+    distritoCodigo: "15"
+  },
+  {
+    lat: 39.49720000000003,
+    lon: -0.423,
+    elevacionM: 40.138275146484375,
+    distritoCodigo: "18"
+  },
+  {
+    lat: 39.49720000000003,
+    lon: -0.416,
+    elevacionM: 36.067176818847656,
+    distritoCodigo: "18"
+  },
+  {
+    lat: 39.49720000000003,
+    lon: -0.409,
+    elevacionM: 36.35773849487305,
+    distritoCodigo: "18"
+  },
+  {
+    lat: 39.49720000000003,
+    lon: -0.40199999999999997,
+    elevacionM: 29.81505584716797,
+    distritoCodigo: "18"
+  },
+  {
+    lat: 39.49720000000003,
+    lon: -0.39499999999999996,
+    elevacionM: 26.808631896972656,
+    distritoCodigo: "16"
+  },
+  {
+    lat: 39.49720000000003,
+    lon: -0.38799999999999996,
+    elevacionM: 22.43648910522461,
+    distritoCodigo: "16"
+  },
+  {
+    lat: 39.49720000000003,
+    lon: -0.38099999999999995,
+    elevacionM: 18.825244903564453,
+    distritoCodigo: "15"
+  },
+  {
+    lat: 39.49720000000003,
+    lon: -0.37399999999999994,
+    elevacionM: 14.450206756591797,
+    distritoCodigo: "15"
+  },
+  {
+    lat: 39.49720000000003,
+    lon: -0.36699999999999994,
+    elevacionM: 11.830851554870605,
+    distritoCodigo: "15"
+  },
+  {
+    lat: 39.49720000000003,
+    lon: -0.35999999999999993,
+    elevacionM: 8.952692985534668,
+    distritoCodigo: "15"
+  },
+  {
+    lat: 39.50260000000003,
+    lon: -0.43,
+    elevacionM: 50.70057678222656,
+    distritoCodigo: "18"
+  },
+  {
+    lat: 39.50260000000003,
+    lon: -0.423,
+    elevacionM: 50.433441162109375,
+    distritoCodigo: "18"
+  },
+  {
+    lat: 39.50260000000003,
+    lon: -0.416,
+    elevacionM: 43.10715866088867,
+    distritoCodigo: "18"
+  },
+  {
+    lat: 39.50260000000003,
+    lon: -0.39499999999999996,
+    elevacionM: 33.53450012207031,
+    distritoCodigo: "16"
+  },
+  {
+    lat: 39.50260000000003,
+    lon: -0.38799999999999996,
+    elevacionM: 20.264698028564453,
+    distritoCodigo: "17"
+  },
+  {
+    lat: 39.50260000000003,
+    lon: -0.38099999999999995,
+    elevacionM: 16.490680694580078,
+    distritoCodigo: "17"
+  },
+  {
+    lat: 39.50260000000003,
+    lon: -0.37399999999999994,
+    elevacionM: 12.723814010620117,
+    distritoCodigo: "17"
+  },
+  {
+    lat: 39.50260000000003,
+    lon: -0.36699999999999994,
+    elevacionM: 11.326598167419434,
+    distritoCodigo: "15"
+  },
+  {
+    lat: 39.50260000000003,
+    lon: -0.35999999999999993,
+    elevacionM: 10.215474128723145,
+    distritoCodigo: "15"
+  },
+  {
+    lat: 39.50800000000003,
+    lon: -0.39499999999999996,
+    elevacionM: 23.032262802124023,
+    distritoCodigo: "17"
+  },
+  {
+    lat: 39.50800000000003,
+    lon: -0.38799999999999996,
+    elevacionM: 18.169004440307617,
+    distritoCodigo: "17"
+  },
+  {
+    lat: 39.50800000000003,
+    lon: -0.38099999999999995,
+    elevacionM: 15.274999618530273,
+    distritoCodigo: "17"
+  },
+  {
+    lat: 39.50800000000003,
+    lon: -0.37399999999999994,
+    elevacionM: 13.69969367980957,
+    distritoCodigo: "17"
+  }
+];
+
 // src/server/altimetria-valencia.ts
 async function handler21() {
-  return new Response(JSON.stringify({ distritos: altimetria_valencia_default }), {
-    status: 200,
-    headers: {
-      "content-type": "application/json; charset=utf-8",
-      "cache-control": "public, max-age=86400, stale-while-revalidate=604800"
+  return new Response(
+    JSON.stringify({
+      distritos: altimetria_valencia_default,
+      puntos: altimetria_puntos_default
+    }),
+    {
+      status: 200,
+      headers: {
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "public, max-age=86400, stale-while-revalidate=604800"
+      }
     }
-  });
+  );
 }
 
 // src/services/riesgo-escorrentia.ts

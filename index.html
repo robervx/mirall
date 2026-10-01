@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>Mirall — Urban Intelligence Platform</title>
+    <meta
+      name="description"
+      content="Mirall transforma información pública dispersa en una representación coherente de la ciudad que permite comprender qué está ocurriendo y tomar decisiones. Un mapa en tiempo real de València construido con datos abiertos."
+    />
+
+    <meta name="theme-color" content="#0b1f33" />
+    <link rel="icon" type="image/png" href="/icons/favicon-32.png" />
+    <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet" />
+
+    <link rel="stylesheet" href="/src/paginas-publicas.css" />
+  </head>
+  <body class="pagina-publica">
+    <header class="nav-publica">
+      <a class="nav-publica__marca" href="/">Mirall</a>
+      <nav class="nav-publica__enlaces">
+        <a href="#manifiesto">Manifiesto</a>
+        <a href="#stack">Tecnología</a>
+        <a href="#contacto">Contacto</a>
+        <a href="/proceso">Cómo se ha construido</a>
+        <a class="btn btn--primario btn--pequeno" href="/mapa">Abrir el mapa</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="hero__fondo"><canvas id="hero-ciudad-3d" aria-hidden="true"></canvas></div>
+        <div class="hero__contenido">
+          <p class="hero__eyebrow">València · datos abiertos en tiempo real</p>
+          <h1 class="hero__titulo">Mirall</h1>
+          <p class="hero__subtitulo">urban intelligence</p>
+          <p class="hero__tagline">
+            La ciudad reflejada en tiempo real: movilidad, meteorología, calidad del aire, eventos e incidencias, en
+            un único panel.
+          </p>
+          <div class="hero__cta">
+            <a class="btn btn--primario" href="/mapa">Ver el mapa en directo →</a>
+            <a class="btn btn--secundario" href="/proceso">Cómo se ha construido</a>
+          </div>
+        </div>
+      </section>
+
+      <section id="manifiesto" class="seccion manifiesto">
+        <h2>Manifiesto</h2>
+        <blockquote>
+          Mirall transforma información pública dispersa en una representación coherente de la ciudad que permite
+          comprender qué está ocurriendo y tomar decisiones.
+        </blockquote>
+        <p>
+          Cada día, una ciudad genera decenas de fuentes de datos abiertos — tráfico, bici compartida, meteorología,
+          calidad del aire, obras, incidencias, prensa local — que viven dispersas, en formatos distintos, sin relación
+          entre sí. Mirall las agrega en un único mapa vivo, cada capa con su fuente y su frescura visibles, para que
+          comprender qué está pasando ahora mismo en la ciudad no dependa de abrir quince pestañas.
+        </p>
+      </section>
+
+      <section id="stack" class="seccion stack">
+        <h2>Construido con</h2>
+        <div class="stack__grid">
+          <div class="stack__item"><div class="stack__monograma">TS</div><div class="stack__nombre">TypeScript</div></div>
+          <div class="stack__item"><div class="stack__monograma">⚡</div><div class="stack__nombre">Vite</div></div>
+          <div class="stack__item"><div class="stack__monograma">GL</div><div class="stack__nombre">MapLibre GL</div></div>
+          <div class="stack__item"><div class="stack__monograma">DG</div><div class="stack__nombre">deck.gl</div></div>
+          <div class="stack__item"><div class="stack__monograma">3D</div><div class="stack__nombre">Three.js</div></div>
+          <div class="stack__item"><div class="stack__monograma">Rd</div><div class="stack__nombre">Redis (Upstash)</div></div>
+          <div class="stack__item"><div class="stack__monograma">Pg</div><div class="stack__nombre">Postgres (Neon)</div></div>
+          <div class="stack__item"><div class="stack__monograma">▲</div><div class="stack__nombre">Vercel</div></div>
+          <div class="stack__item"><div class="stack__monograma">OSM</div><div class="stack__nombre">OpenStreetMap</div></div>
+        </div>
+      </section>
+
+      <section id="contacto" class="seccion contacto">
+        <h2>Colabora</h2>
+        <p>
+          Mirall es un proyecto abierto (MIT), sin empresa ni organismo detrás. Si estás construyendo algo parecido
+          para otra ciudad, tienes una fuente de datos que debería estar aquí, o simplemente quieres hablar del
+          proyecto, escribe.
+        </p>
+        <a class="btn btn--primario" href="mailto:mirall.urbanintelligence@gmail.com"
+          >mirall.urbanintelligence@gmail.com</a
+        >
+      </section>
+    </main>
+
+    <footer class="pie-publico">
+      <span>Proyecto de datos abiertos · sin relación con ningún organismo oficial</span>
+      <span class="pie-publico__enlaces">
+        <a href="https://github.com/robervx/vlc-monitor" target="_blank" rel="noopener">Código en GitHub</a>
+        <a href="/proceso">Proceso</a>
+        <a href="/mapa">Mapa en vivo</a>
+        <a href="/LICENSE">Licencia MIT</a>
+      </span>
+    </footer>
+
+    <script type="module" src="/src/paginas/landing-entrada.ts"></script>
+  </body>
+</html>
