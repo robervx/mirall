@@ -52,6 +52,7 @@ import type { EstacionAvamet } from './services/avamet-estaciones';
 import type { ZonaZas, SonometroRuzafa, PanelZas } from './services/zas';
 import type { ResumenAltimetriaDistrito, MuestraElevacion } from './services/altimetria';
 import { featureCollectionAltimetriaPuntos } from './services/altimetria';
+import type { EquipamientoCritico, CategoriaEquipamientoCritico } from './services/equipamientos-criticos';
 import { rejillaInterpolada, featureCollectionInterpolada, PASO_LAT_INTERPOLACION, PASO_LON_INTERPOLACION, DISTANCIA_MAXIMA_INTERPOLACION_M } from './services/interpolacion-meteo';
 import { mountChasis } from './ui/chasis';
 import { applyPanelVisibility, PANEL_PREFERENCES_REGISTRY } from './ui/panel-preferences';
@@ -1125,6 +1126,47 @@ async function fetchAltimetriaActual(): Promise<{ distritos: ResumenAltimetriaDi
   return (await res.json()) as { distritos: ResumenAltimetriaDistrito[]; puntos: MuestraElevacion[] };
 }
 
+async function fetchEquipamientosCriticosActual(): Promise<EquipamientoCritico[]> {
+  const res = await fetch('/api/emergencia/v1/equipamientos-criticos');
+  if (!res.ok) throw new Error(`GET /api/emergencia/v1/equipamientos-criticos -> HTTP ${res.status}`);
+  const body = (await res.json()) as { equipamientos: EquipamientoCritico[] };
+  return body.equipamientos;
+}
+
+// Spec 054 §5 — un color por categoría, claramente distinto entre sí y del
+// resto de la paleta ya en uso (trafico/pulso/fallas/escorrentia/precipitación/ZAS).
+const COLOR_EQUIPAMIENTO_CRITICO: Record<CategoriaEquipamientoCritico, Color> = {
+  sanidad: [220, 38, 38, 220], // rojo sanitario
+  policia: [30, 64, 175, 220], // azul oscuro, distinto del azul de precipitación
+  bomberos: [234, 88, 12, 220], // naranja-rojo
+};
+const NOMBRE_CATEGORIA_EQUIPAMIENTO_CRITICO: Record<CategoriaEquipamientoCritico, string> = {
+  sanidad: 'Sanidad',
+  policia: 'Policía',
+  bomberos: 'Bomberos',
+};
+
+function renderEquipamientosCriticosLeyenda(root: HTMLDivElement, equipamientos: EquipamientoCritico[]): void {
+  if (equipamientos.length === 0) {
+    root.innerHTML = `<div class="info-panel__desc">Equipamientos críticos — sin datos disponibles ahora mismo</div>`;
+    return;
+  }
+  const categorias: CategoriaEquipamientoCritico[] = ['sanidad', 'policia', 'bomberos'];
+  const filas = categorias
+    .map((cat) => {
+      const n = equipamientos.filter((e) => e.categoria === cat).length;
+      const [r, g, b] = COLOR_EQUIPAMIENTO_CRITICO[cat];
+      return `<div class="trafico-leyenda__row"><span class="trafico-leyenda__dot" style="background:rgb(${r},${g},${b})"></span>${NOMBRE_CATEGORIA_EQUIPAMIENTO_CRITICO[cat]} (${n})</div>`;
+    })
+    .join('');
+  root.innerHTML = `
+    <div class="info-panel__desc">Equipamientos críticos — ${equipamientos.length} ubicaciones reales</div>
+    ${filas}
+    <div class="info-panel__meta">Hospitales, centros de salud, comisarías de policía y parques de bomberos — equipamientos públicos abiertos, no infraestructura sensible (CLAUDE.md §4). Dato fijo (equipamientos municipales), no cambia con el tiempo.</div>
+    <div class="info-panel__meta">Fuente: Geoportal del Ajuntament de València (Equipamientos municipales)</div>
+  `;
+}
+
 // Spec 026 — mostaza/morado/verde azulado: distintos de rojo (reservado para
 // spec 021), naranja (spec 022) y dorado (Fallas, spec 008).
 const COLOR_TIPO_VIA_PUBLICA: Record<TipoIncidenciaViaPublica, Color> = {
@@ -1592,6 +1634,7 @@ interface ControlPanel {
   zasRuidoToggle: HTMLInputElement;
   viaPublicaToggle: HTMLInputElement;
   camarasToggle: HTMLInputElement;
+  equipamientosCriticosToggle: HTMLInputElement;
   /** spec 033: grupo plegable "Contexto e informativas" y sus adornos. */
   contextoDetails: HTMLDetailsElement;
   contextoContador: HTMLSpanElement;
@@ -1685,6 +1728,10 @@ function buildControlPanel(): ControlPanel {
         <input type="checkbox" id="toggle-fallas" />
         Fallas
       </label>
+      <label class="controls__row">
+        <input type="checkbox" id="toggle-equipamientos-criticos" />
+        Equipamientos críticos
+      </label>
     </details>
   `;
   document.body.appendChild(panel);
@@ -1735,6 +1782,7 @@ function buildControlPanel(): ControlPanel {
     zasRuidoToggle: toggleSiempreActivo(),
     camarasToggle: toggleSiempreActivo(),
     viaPublicaToggle: panel.querySelector('#toggle-via-publica')!,
+    equipamientosCriticosToggle: panel.querySelector('#toggle-equipamientos-criticos')!,
     contextoDetails,
     contextoContador: panel.querySelector('#contexto-contador')!,
     presetOperativaBtn: panel.querySelector('#preset-operativa')!,
@@ -1822,6 +1870,11 @@ async function main(): Promise<void> {
   // media por distrito, ver spec 052 v2 §5); es lo que pinta el mapa ahora.
   let altimetriaPuntos: MuestraElevacion[] = [];
   let altimetriaCargada = false;
+  // Spec 054 — dato estático (equipamientos municipales no cambian de un día
+  // para otro), mismo patrón de un único fetch perezoso que altimetría.
+  let equipamientosCriticosVisible = false;
+  let equipamientosCriticos: EquipamientoCritico[] = [];
+  let equipamientosCriticosCargados = false;
   // v3 (DoD de V1, 2026-09-16) — los puntos calientes del mock de densidad
   // (más abajo) necesitan los monumentos falleros aunque la capa "Fallas" en
   // sí no esté activada; se cargan una vez, la primera vez que hagan falta.
@@ -2141,6 +2194,27 @@ async function main(): Promise<void> {
             pickable: false,
             getFillColor: (f) => colorHipsometrico(f.properties.elevacionM),
             updateTriggers: { getFillColor: [altimetriaPuntos] },
+          }),
+        // Spec 054 — referencia geográfica fija (sanidad/policía/bomberos),
+        // pickable para ver el nombre al clic, mismo patrón que `pulso-marcadores`.
+        equipamientosCriticosVisible &&
+          new ScatterplotLayer<EquipamientoCritico>({
+            id: 'equipamientos-criticos',
+            data: equipamientosCriticos,
+            pickable: true,
+            getPosition: (e) => [e.lon, e.lat],
+            getFillColor: (e) => COLOR_EQUIPAMIENTO_CRITICO[e.categoria],
+            stroked: true,
+            getLineColor: [255, 255, 255, 230],
+            lineWidthMinPixels: 1.5,
+            getRadius: 7,
+            radiusUnits: 'pixels',
+            onClick: (info: PickingInfo<EquipamientoCritico>) => {
+              if (info.object) {
+                equipamientosCriticosLeyendaRoot.classList.add('is-expandida');
+                equipamientosCriticosLeyendaRoot.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+              }
+            },
           }),
         riesgoEscorrentiaVisible &&
           new GeoJsonLayer<DistritoProperties>({
@@ -2740,6 +2814,7 @@ async function main(): Promise<void> {
     panel.valenbisiToggle,
     panel.aparcamientoToggle,
     panel.fallasToggle,
+    panel.equipamientosCriticosToggle,
   ];
   function actualizarContextoSelector(): void {
     const activas = togglesContexto.filter((t) => t.checked).length;
@@ -3052,6 +3127,34 @@ async function main(): Promise<void> {
     altimetriaLeyendaRoot.hidden = !altimetriaVisible;
     if (altimetriaVisible) {
       void cargarAltimetriaSiHaceFalta();
+    } else {
+      renderLayers();
+    }
+  });
+
+  const equipamientosCriticosLeyendaRoot = buildInfoPanel('equipamientos-criticos-leyenda', { colapsable: true });
+  equipamientosCriticosLeyendaRoot.hidden = true;
+  async function cargarEquipamientosCriticosSiHaceFalta(): Promise<void> {
+    if (equipamientosCriticosCargados) {
+      renderLayers();
+      return;
+    }
+    equipamientosCriticosCargados = true;
+    try {
+      const equipamientos = await fetchEquipamientosCriticosActual();
+      equipamientosCriticos = equipamientos;
+      renderLayers();
+      renderEquipamientosCriticosLeyenda(equipamientosCriticosLeyendaRoot, equipamientos);
+    } catch (err) {
+      equipamientosCriticosLeyendaRoot.textContent = 'Equipamientos críticos no disponibles';
+      console.error('Fallo al cargar equipamientos críticos:', err);
+    }
+  }
+  panel.equipamientosCriticosToggle.addEventListener('change', () => {
+    equipamientosCriticosVisible = panel.equipamientosCriticosToggle.checked;
+    equipamientosCriticosLeyendaRoot.hidden = !equipamientosCriticosVisible;
+    if (equipamientosCriticosVisible) {
+      void cargarEquipamientosCriticosSiHaceFalta();
     } else {
       renderLayers();
     }
@@ -3390,6 +3493,7 @@ async function main(): Promise<void> {
     ['precipitacion-zona-leyenda', panel.precipitacionZonaToggle],
     ['zonas-zas-leyenda', panel.zonasZasToggle],
     ['altimetria-leyenda', panel.altimetriaToggle],
+    ['equipamientos-criticos-leyenda', panel.equipamientosCriticosToggle],
   ];
   const idsPaneleFijos = PANEL_PREFERENCES_REGISTRY.map((d) => d.key);
   const idsInteligencia = [

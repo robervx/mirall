@@ -210,6 +210,17 @@ export const LAYER_REGISTRY: Record<string, LayerDefinition> = {
     zoomMinimo: 0,
     agregacion: 'rejilla',
   },
+  equipamientosCriticos: {
+    key: 'equipamientosCriticos',
+    specId: '054',
+    // 'contexto': referencia geográfica fija (sanidad/policía/bomberos no
+    // cambian de un día para otro), no una señal "ahora mismo" — no compite
+    // con las prioritarias.
+    grupo: 'contexto',
+    renderers: ['deck'],
+    zoomMinimo: 0,
+    agregacion: 'punto',
+  },
   //
   // No añadas entradas aquí sin que exista antes la spec correspondiente
   // en specs/, con su contrato de capa ya congelado (sección 5 de la spec).

@@ -101572,9 +101572,9 @@ async function handler23() {
 var CACHE_KEY14 = "sintesis-ia:actual:v1";
 var TTL_MS16 = 90 * 60 * 1e3;
 var MODELO = "gemini-3-flash-preview";
-async function leerJson(handler31) {
+async function leerJson(handler32) {
   try {
-    const res = await handler31();
+    const res = await handler32();
     if (!res.ok) return null;
     return await res.json();
   } catch (err) {
@@ -108026,9 +108026,9 @@ var camaras_dgt_valencia_default = [
 var CACHE_KEY15 = "sintesis-ia:v2:actual";
 var TTL_MS17 = 90 * 60 * 1e3;
 var MODELO2 = "gemini-3-flash-preview";
-async function leerJson2(handler31) {
+async function leerJson2(handler32) {
   try {
-    const res = await handler31();
+    const res = await handler32();
     if (!res.ok) return null;
     return await res.json();
   } catch (err) {
@@ -109050,6 +109050,1082 @@ async function handler27() {
   }
 }
 
+// data/equipamientos-criticos.json
+var equipamientos_criticos_default = [
+  {
+    id: "003330",
+    nombre: "CENTRO DE SALUD MALVARROSA",
+    categoria: "sanidad",
+    lat: 39.47507097695723,
+    lon: -0.3255548805154534,
+    telefono: "963717251",
+    fetchedAt: "2026-10-01T14:29:32.591Z",
+    source: "geoportal-valencia-equipamientos"
+  },
+  {
+    id: "004898",
+    nombre: "HOSPITAL VALENCIA AL MAR",
+    categoria: "sanidad",
+    lat: 39.47679575817843,
+    lon: -0.3304666538848022,
+    telefono: "963352500",
+    fetchedAt: "2026-10-01T14:29:32.591Z",
+    source: "geoportal-valencia-equipamientos"
+  },
+  {
+    id: "22840",
+    nombre: "CONSULTORIO AUXILIAR DE SAFRANAR",
+    categoria: "sanidad",
+    lat: 39.45996000031412,
+    lon: -0.39717449973868896,
+    telefono: "963184340",
+    fetchedAt: "2026-10-01T14:29:32.591Z",
+    source: "geoportal-valencia-equipamientos"
+  },
+  {
+    id: "003298",
+    nombre: "CONSULTORIO AUXILIAR BORBOT\xD3",
+    categoria: "sanidad",
+    lat: 39.51774314847492,
+    lon: -0.3894251948397757,
+    telefono: "961206415",
+    fetchedAt: "2026-10-01T14:29:32.591Z",
+    source: "geoportal-valencia-equipamientos"
+  },
+  {
+    id: "002831",
+    nombre: "HOSPITAL QUIR\xD3NSALUD VALENCIA",
+    categoria: "sanidad",
+    lat: 39.480146046077536,
+    lon: -0.3629351663565962,
+    telefono: "963690600",
+    fetchedAt: "2026-10-01T14:29:32.591Z",
+    source: "geoportal-valencia-equipamientos"
+  },
+  {
+    id: "003295",
+    nombre: "CONSULTORIO AUXILIAR ARQUITECTO TOLS\xC1",
+    categoria: "sanidad",
+    lat: 39.49576426616212,
+    lon: -0.36687604119211015,
+    telefono: "963469540",
+    fetchedAt: "2026-10-01T14:29:32.591Z",
+    source: "geoportal-valencia-equipamientos"
+  },
+  {
+    id: "003275",
+    nombre: "COORDINACI\xD3N DE TRASPLANTES HOSPITAL LA FE",
+    categoria: "sanidad",
+    lat: 39.44504369624809,
+    lon: -0.3752113959329485,
+    telefono: "961244620",
+    fetchedAt: "2026-10-01T14:29:32.591Z",
+    source: "geoportal-valencia-equipamientos"
+  },
+  {
+    id: "003292",
+    nombre: "CENTRO DE SALUD N\xC1POLES Y SICILIA",
+    categoria: "sanidad",
+    lat: 39.47747066688818,
+    lon: -0.37167367555732517,
+    telefono: "961926960",
+    fetchedAt: "2026-10-01T14:29:32.591Z",
+    source: "geoportal-valencia-equipamientos"
+  },
+  {
+    id: "003343",
+    nombre: "CENTRO DE SALUD SERRER\xCDA II",
+    categoria: "sanidad",
+    lat: 39.47025930473733,
+    lon: -0.3341681710866759,
+    telefono: "963469400",
+    fetchedAt: "2026-10-01T14:29:32.591Z",
+    source: "geoportal-valencia-equipamientos"
+  },
+  {
+    id: "002829",
+    nombre: "HOSPITAL LA SALUD",
+    categoria: "sanidad",
+    lat: 39.47144023271136,
+    lon: -0.3487211065037281,
+    telefono: "963897700",
+    fetchedAt: "2026-10-01T14:29:32.591Z",
+    source: "geoportal-valencia-equipamientos"
+  },
+  {
+    id: "003329",
+    nombre: "CENTRO DE SALUD DE MALILLA",
+    categoria: "sanidad",
+    lat: 39.45078000038477,
+    lon: -0.3795209996462796,
+    telefono: "961983333",
+    fetchedAt: "2026-10-01T14:29:32.591Z",
+    source: "geoportal-valencia-equipamientos"
+  },
+  {
+    id: "002830",
+    nombre: "CL\xCDNICA VIRGEN DEL CONSUELO",
+    categoria: "sanidad",
+    lat: 39.462328667956335,
+    lon: -0.38573560789647804,
+    telefono: "963177800",
+    fetchedAt: "2026-10-01T14:29:32.591Z",
+    source: "geoportal-valencia-equipamientos"
+  },
+  {
+    id: "003481",
+    nombre: "CENTRO DE SALUD P\xDABLICA DE VALENCIA",
+    categoria: "sanidad",
+    lat: 39.47231699996537,
+    lon: -0.40422599986564856,
+    telefono: "961248000",
+    fetchedAt: "2026-10-01T14:29:32.591Z",
+    source: "geoportal-valencia-equipamientos"
+  },
+  {
+    id: "003323",
+    nombre: "CENTRO DE SALUD JUST RAM\xCDREZ",
+    categoria: "sanidad",
+    lat: 39.49096385119291,
+    lon: -0.3793920925270312,
+    telefono: "963469525",
+    fetchedAt: "2026-10-01T14:29:32.591Z",
+    source: "geoportal-valencia-equipamientos"
+  },
+  {
+    id: "006747",
+    nombre: "UNIDAD HOSPITALIZACI\xD3N PSIQUI\xC1TRICA HOSPITAL LA FE",
+    categoria: "sanidad",
+    lat: 39.44430900041117,
+    lon: -0.37502099951400736,
+    telefono: "961245553",
+    fetchedAt: "2026-10-01T14:29:32.591Z",
+    source: "geoportal-valencia-equipamientos"
+  },
+  {
+    id: "004896",
+    nombre: "INSTITUTO VALENCIANO DE ONCOLOG\xCDA - IVO",
+    categoria: "sanidad",
+    lat: 39.48374621344631,
+    lon: -0.3891418525192891,
+    telefono: "961114000",
+    fetchedAt: "2026-10-01T14:29:32.591Z",
+    source: "geoportal-valencia-equipamientos"
+  },
+  {
+    id: "003336",
+    nombre: "CENTRO DE SALUD REP\xDABLICA ARGENTINA",
+    categoria: "sanidad",
+    lat: 39.473678421492174,
+    lon: -0.35043768919542345,
+    telefono: "963108700",
+    fetchedAt: "2026-10-01T14:29:32.591Z",
+    source: "geoportal-valencia-equipamientos"
+  },
+  {
+    id: "003342",
+    nombre: "CENTRO DE SALUD SERRER\xCDA I",
+    categoria: "sanidad",
+    lat: 39.47007367575648,
+    lon: -0.33392256886970756,
+    telefono: "963469420",
+    fetchedAt: "2026-10-01T14:29:32.591Z",
+    source: "geoportal-valencia-equipamientos"
+  },
+  {
+    id: "003277",
+    nombre: "CENTRO DE ESPECIALIDADES RICARDO TR\xC9NOR PALAVICINO",
+    categoria: "sanidad",
+    lat: 39.48186953236005,
+    lon: -0.370927038727253,
+    telefono: "961244000",
+    fetchedAt: "2026-10-01T14:29:32.591Z",
+    source: "geoportal-valencia-equipamientos"
+  },
+  {
+    id: "004891",
+    nombre: "HOSPITAL CL\xCDNICO UNIVERSITARIO",
+    categoria: "sanidad",
+    lat: 39.48053876008551,
+    lon: -0.3606029746783577,
+    telefono: "961973500",
+    fetchedAt: "2026-10-01T14:29:32.591Z",
+    source: "geoportal-valencia-equipamientos"
+  },
+  {
+    id: "002855",
+    nombre: "CL\xCDNICA VETERINARIA BOLTA",
+    categoria: "sanidad",
+    lat: 39.45550500021645,
+    lon: -0.3586950005150097,
+    telefono: "963342266",
+    fetchedAt: "2026-10-01T14:29:32.591Z",
+    source: "geoportal-valencia-equipamientos"
+  },
+  {
+    id: "003310",
+    nombre: "PUNTO DE ATENCI\xD3N SANITARIA (PAS) L'ALGUER",
+    categoria: "sanidad",
+    lat: 39.4717841262469,
+    lon: -0.33860560310457616,
+    telefono: "112",
+    fetchedAt: "2026-10-01T14:29:32.591Z",
+    source: "geoportal-valencia-equipamientos"
+  },
+  {
+    id: "002954",
+    nombre: "CENTROS DE INFORMACI\xD3N Y PREVENCI\xD3N DEL SIDA- CIPS",
+    categoria: "sanidad",
+    lat: 39.45322592036746,
+    lon: -0.39327245834254365,
+    telefono: "900702020",
+    fetchedAt: "2026-10-01T14:29:32.591Z",
+    source: "geoportal-valencia-equipamientos"
+  },
+  {
+    id: "003286",
+    nombre: "CONSULTORIO AUXILIAR EL PERELLONET",
+    categoria: "sanidad",
+    lat: 39.299806789107954,
+    lon: -0.2874679271116552,
+    telefono: "963184370",
+    fetchedAt: "2026-10-01T14:29:32.591Z",
+    source: "geoportal-valencia-equipamientos"
+  },
+  {
+    id: "003302",
+    nombre: "CONSULTORIO AUXILIAR EL SALER",
+    categoria: "sanidad",
+    lat: 39.38430683552033,
+    lon: -0.3305847634053931,
+    telefono: "963184370",
+    fetchedAt: "2026-10-01T14:29:32.591Z",
+    source: "geoportal-valencia-equipamientos"
+  },
+  {
+    id: "003293",
+    nombre: "CENTRO DE SALUD GUILLEM DE CASTRO",
+    categoria: "sanidad",
+    lat: 39.478486985178044,
+    lon: -0.3828302404656762,
+    telefono: "963157000",
+    fetchedAt: "2026-10-01T14:29:32.591Z",
+    source: "geoportal-valencia-equipamientos"
+  },
+  {
+    id: "003308",
+    nombre: "CONSULTORIO AUXILIAR BARRIO LA PUNTA",
+    categoria: "sanidad",
+    lat: 39.44474507526437,
+    lon: -0.3427097992748799,
+    telefono: "963870350",
+    fetchedAt: "2026-10-01T14:29:32.591Z",
+    source: "geoportal-valencia-equipamientos"
+  },
+  {
+    id: "003328",
+    nombre: "CENTRO DE SALUD FUENTE SAN LUIS",
+    categoria: "sanidad",
+    lat: 39.45877122803111,
+    lon: -0.3587239596497326,
+    telefono: "961972999",
+    fetchedAt: "2026-10-01T14:29:32.591Z",
+    source: "geoportal-valencia-equipamientos"
+  },
+  {
+    id: "003331",
+    nombre: "CENTRO DE SALUD JUAN XXIII",
+    categoria: "sanidad",
+    lat: 39.49546071325106,
+    lon: -0.38231704091878976,
+    telefono: "961923750",
+    fetchedAt: "2026-10-01T14:29:32.591Z",
+    source: "geoportal-valencia-equipamientos"
+  },
+  {
+    id: "003301",
+    nombre: "CONSULTORIO AUXILIAR EL PALMAR",
+    categoria: "sanidad",
+    lat: 39.311367047491245,
+    lon: -0.31652681988232406,
+    telefono: "963184370",
+    fetchedAt: "2026-10-01T14:29:32.591Z",
+    source: "geoportal-valencia-equipamientos"
+  },
+  {
+    id: "003324",
+    nombre: "CENTRO DE SALUD FUENSANTA",
+    categoria: "sanidad",
+    lat: 39.46803221694546,
+    lon: -0.40622719523703826,
+    telefono: "961925030",
+    fetchedAt: "2026-10-01T14:29:32.591Z",
+    source: "geoportal-valencia-equipamientos"
+  },
+  {
+    id: "003332",
+    nombre: "CENTRO DE SALUD NAZARET",
+    categoria: "sanidad",
+    lat: 39.45171418504864,
+    lon: -0.3296768110282035,
+    telefono: "963870350",
+    fetchedAt: "2026-10-01T14:29:32.591Z",
+    source: "geoportal-valencia-equipamientos"
+  },
+  {
+    id: "004899",
+    nombre: "HOSPITAL 9 DE OCTUBRE",
+    categoria: "sanidad",
+    lat: 39.480111205054186,
+    lon: -0.4005843169497326,
+    telefono: "963179100",
+    fetchedAt: "2026-10-01T14:29:32.591Z",
+    source: "geoportal-valencia-equipamientos"
+  },
+  {
+    id: "007674",
+    nombre: "CENTRO DE SALUD SAN ISIDRO",
+    categoria: "sanidad",
+    lat: 39.45304891271673,
+    lon: -0.4015185714455462,
+    telefono: "961613150",
+    fetchedAt: "2026-10-01T14:29:32.591Z",
+    source: "geoportal-valencia-equipamientos"
+  },
+  {
+    id: "003288",
+    nombre: "CONSULTORIO MIGUEL SERVET",
+    categoria: "sanidad",
+    lat: 39.490696441556345,
+    lon: -0.39396303598623994,
+    telefono: "963425250",
+    fetchedAt: "2026-10-01T14:29:32.591Z",
+    source: "geoportal-valencia-equipamientos"
+  },
+  {
+    id: "007771",
+    nombre: "CONSULTORIO AUXILIAR BARRIO LA TORRE",
+    categoria: "sanidad",
+    lat: 39.43636816964347,
+    lon: -0.39187668175573354,
+    telefono: "963178230",
+    fetchedAt: "2026-10-01T14:29:32.591Z",
+    source: "geoportal-valencia-equipamientos"
+  },
+  {
+    id: "003279",
+    nombre: "CENTRO DE ESPECIALIDADES JUAN LLORENS",
+    categoria: "sanidad",
+    lat: 39.475472970885924,
+    lon: -0.3902564547866149,
+    telefono: "963131250",
+    fetchedAt: "2026-10-01T14:29:32.591Z",
+    source: "geoportal-valencia-equipamientos"
+  },
+  {
+    id: "003341",
+    nombre: "CENTRO DE SALUD SAN MARCELINO",
+    categoria: "sanidad",
+    lat: 39.44477785357602,
+    lon: -0.3888661144294532,
+    telefono: "961926430",
+    fetchedAt: "2026-10-01T14:29:32.591Z",
+    source: "geoportal-valencia-equipamientos"
+  },
+  {
+    id: "003335",
+    nombre: "CENTRO DE SALUD PLAZA SEGOVIA",
+    categoria: "sanidad",
+    lat: 39.450502127325066,
+    lon: -0.3899073793626129,
+    telefono: "961926400",
+    fetchedAt: "2026-10-01T14:29:32.591Z",
+    source: "geoportal-valencia-equipamientos"
+  },
+  {
+    id: "003297",
+    nombre: "CONSULTORIO AUXILIAR BENIFARAIG",
+    categoria: "sanidad",
+    lat: 39.53115177540514,
+    lon: -0.3844794068143939,
+    telefono: "961206420",
+    fetchedAt: "2026-10-01T14:29:32.591Z",
+    source: "geoportal-valencia-equipamientos"
+  },
+  {
+    id: "003309",
+    nombre: "CONSULTORIO AUXILIAR CHILE",
+    categoria: "sanidad",
+    lat: 39.47085899974832,
+    lon: -0.35563499966470347,
+    telefono: "963469510",
+    fetchedAt: "2026-10-01T14:29:32.591Z",
+    source: "geoportal-valencia-equipamientos"
+  },
+  {
+    id: "003344",
+    nombre: "CENTRO DE SALUD TRAFALGAR",
+    categoria: "sanidad",
+    lat: 39.46303607961858,
+    lon: -0.3439368267828239,
+    telefono: "963108130",
+    fetchedAt: "2026-10-01T14:29:32.591Z",
+    source: "geoportal-valencia-equipamientos"
+  },
+  {
+    id: "003311",
+    nombre: "CONSULTORIO AUXILIAR VICENTE BRULL",
+    categoria: "sanidad",
+    lat: 39.467265872586914,
+    lon: -0.33142023299853707,
+    telefono: "961206675",
+    fetchedAt: "2026-10-01T14:29:32.591Z",
+    source: "geoportal-valencia-equipamientos"
+  },
+  {
+    id: "010346",
+    nombre: "PUNTO DE ATENCI\xD3N SANITARIA (PAS) FUENTE SAN LUIS",
+    categoria: "sanidad",
+    lat: 39.456863999702534,
+    lon: -0.36026100052737303,
+    telefono: "963952159",
+    fetchedAt: "2026-10-01T14:29:32.591Z",
+    source: "geoportal-valencia-equipamientos"
+  },
+  {
+    id: "003287",
+    nombre: "CONSULTORIO AUXILIAR BILBAO",
+    categoria: "sanidad",
+    lat: 39.48907855264176,
+    lon: -0.3715413841198214,
+    telefono: "963666516",
+    fetchedAt: "2026-10-01T14:29:32.591Z",
+    source: "geoportal-valencia-equipamientos"
+  },
+  {
+    id: "003294",
+    nombre: "CONSULTORIO TENDETES",
+    categoria: "sanidad",
+    lat: 39.4840193899913,
+    lon: -0.3868627499723421,
+    telefono: "963469340",
+    fetchedAt: "2026-10-01T14:29:32.591Z",
+    source: "geoportal-valencia-equipamientos"
+  },
+  {
+    id: "003305",
+    nombre: "CONSULTORIO AUXILIAR PINEDO",
+    categoria: "sanidad",
+    lat: 39.42400542183238,
+    lon: -0.3368567437561274,
+    telefono: "961206400",
+    fetchedAt: "2026-10-01T14:29:32.591Z",
+    source: "geoportal-valencia-equipamientos"
+  },
+  {
+    id: "003303",
+    nombre: "CONSULTORIO AUXILIAR HORNO DE ALCEDO",
+    categoria: "sanidad",
+    lat: 39.43434670258869,
+    lon: -0.3741659088072406,
+    telefono: "963184370",
+    fetchedAt: "2026-10-01T14:29:32.591Z",
+    source: "geoportal-valencia-equipamientos"
+  },
+  {
+    id: "004893",
+    nombre: "HOSPITAL GENERAL UNIVERSITARIO",
+    categoria: "sanidad",
+    lat: 39.47117895816753,
+    lon: -0.40547446647968804,
+    telefono: "963131800",
+    fetchedAt: "2026-10-01T14:29:32.591Z",
+    source: "geoportal-valencia-equipamientos"
+  },
+  {
+    id: "010347",
+    nombre: "PUNTO DE ATENCI\xD3N SANITARIA (PAS) AVENIDA DEL CID",
+    categoria: "sanidad",
+    lat: 39.46925700010579,
+    lon: -0.4008689995859562,
+    telefono: "112",
+    fetchedAt: "2026-10-01T14:29:32.591Z",
+    source: "geoportal-valencia-equipamientos"
+  },
+  {
+    id: "003320",
+    nombre: "CENTRO DE SALUD BENIMACLET",
+    categoria: "sanidad",
+    lat: 39.484574664562146,
+    lon: -0.3572489163046922,
+    telefono: "963108160",
+    fetchedAt: "2026-10-01T14:29:32.591Z",
+    source: "geoportal-valencia-equipamientos"
+  },
+  {
+    id: "003290",
+    nombre: "CENTRO DE SALUD GIL Y MORTE",
+    categoria: "sanidad",
+    lat: 39.463678450679495,
+    lon: -0.38069397317898135,
+    telefono: "961926220",
+    fetchedAt: "2026-10-01T14:29:32.591Z",
+    source: "geoportal-valencia-equipamientos"
+  },
+  {
+    id: "003316",
+    nombre: "CENTRO DE SALUD TRINITAT",
+    categoria: "sanidad",
+    lat: 39.48204576316427,
+    lon: -0.36892996202984346,
+    telefono: "962825700",
+    fetchedAt: "2026-10-01T14:29:32.591Z",
+    source: "geoportal-valencia-equipamientos"
+  },
+  {
+    id: "003318",
+    nombre: "CENTRO DE SALUD AZUCENA DE BENICALAP",
+    categoria: "sanidad",
+    lat: 39.495434658281916,
+    lon: -0.389165406537512,
+    telefono: "963469325",
+    fetchedAt: "2026-10-01T14:29:32.591Z",
+    source: "geoportal-valencia-equipamientos"
+  },
+  {
+    id: "010345",
+    nombre: "PUNTO DE ATENCI\xD3N SANITARIA (PAS) CAMPANAR - ERNEST LLUCH",
+    categoria: "sanidad",
+    lat: 39.4836635329823,
+    lon: -0.3884187731193648,
+    telefono: "962931440",
+    fetchedAt: "2026-10-01T14:29:32.591Z",
+    source: "geoportal-valencia-equipamientos"
+  },
+  {
+    id: "003300",
+    nombre: "CONSULTORIO AUXILIAR CARRETERA DE ARTES",
+    categoria: "sanidad",
+    lat: 39.44434815644495,
+    lon: -0.3660408545875348,
+    telefono: "963184320",
+    fetchedAt: "2026-10-01T14:29:32.591Z",
+    source: "geoportal-valencia-equipamientos"
+  },
+  {
+    id: "003321",
+    nombre: "CENTRO DE SALUD BENIM\xC0MET",
+    categoria: "sanidad",
+    lat: 39.501696852650994,
+    lon: -0.41990849423791315,
+    telefono: "963178255",
+    fetchedAt: "2026-10-01T14:29:32.591Z",
+    source: "geoportal-valencia-equipamientos"
+  },
+  {
+    id: "003299",
+    nombre: "CONSULTORIO AUXILIAR CARPESA",
+    categoria: "sanidad",
+    lat: 39.51913120421093,
+    lon: -0.3781156646298149,
+    telefono: "961206430",
+    fetchedAt: "2026-10-01T14:29:32.591Z",
+    source: "geoportal-valencia-equipamientos"
+  },
+  {
+    id: "003339",
+    nombre: "CENTRO DE SALUD SALVADOR ALLENDE",
+    categoria: "sanidad",
+    lat: 39.4962895635534,
+    lon: -0.37144743111538453,
+    telefono: "961925050",
+    fetchedAt: "2026-10-01T14:29:32.591Z",
+    source: "geoportal-valencia-equipamientos"
+  },
+  {
+    id: "003334",
+    nombre: "CENTRO DE SALUD NOU MOLES",
+    categoria: "sanidad",
+    lat: 39.47237146724677,
+    lon: -0.3970351040786895,
+    telefono: "963425200",
+    fetchedAt: "2026-10-01T14:29:32.591Z",
+    source: "geoportal-valencia-equipamientos"
+  },
+  {
+    id: "003322",
+    nombre: "CENTRO DE SALUD CASTELLAR-OLIVERAL",
+    categoria: "sanidad",
+    lat: 39.43052815467892,
+    lon: -0.36231349286899384,
+    telefono: "963184370",
+    fetchedAt: "2026-10-01T14:29:32.591Z",
+    source: "geoportal-valencia-equipamientos"
+  },
+  {
+    id: "003280",
+    nombre: "CENTRO DE ESPECIALIDADES MONTEOLIVETE",
+    categoria: "sanidad",
+    lat: 39.463299060826735,
+    lon: -0.36089783075328874,
+    telefono: "963131450",
+    fetchedAt: "2026-10-01T14:29:32.591Z",
+    source: "geoportal-valencia-equipamientos"
+  },
+  {
+    id: "003333",
+    nombre: "CENTRO DE SALUD PADRE JOFRE",
+    categoria: "sanidad",
+    lat: 39.46137558204633,
+    lon: -0.3885667206727067,
+    telefono: "961926460",
+    fetchedAt: "2026-10-01T14:29:32.591Z",
+    source: "geoportal-valencia-equipamientos"
+  },
+  {
+    id: "007930",
+    nombre: "HOSPITAL UNIVERSITARI I POLIT\xC8CNIC LA FE (NUEVO HOSPITAL LA FE)",
+    categoria: "sanidad",
+    lat: 39.446176911844155,
+    lon: -0.37368646538259637,
+    telefono: "961244000",
+    fetchedAt: "2026-10-01T14:29:32.591Z",
+    source: "geoportal-valencia-equipamientos"
+  },
+  {
+    id: "007366",
+    nombre: "CENTRO DE SALUD CAMPANAR",
+    categoria: "sanidad",
+    lat: 39.47945070793587,
+    lon: -0.3989558386909364,
+    telefono: "963175300",
+    fetchedAt: "2026-10-01T14:29:32.591Z",
+    source: "geoportal-valencia-equipamientos"
+  },
+  {
+    id: "003304",
+    nombre: "CONSULTORIO AUXILIAR MASSARROJOS",
+    categoria: "sanidad",
+    lat: 39.541501938368754,
+    lon: -0.40229339186804003,
+    telefono: "961205880",
+    fetchedAt: "2026-10-01T14:29:32.591Z",
+    source: "geoportal-valencia-equipamientos"
+  },
+  {
+    id: "004890",
+    nombre: "HOSPITAL ARNAU DE VILANOVA",
+    categoria: "sanidad",
+    lat: 39.49228217190712,
+    lon: -0.4018559471347845,
+    telefono: "961976000",
+    fetchedAt: "2026-10-01T14:29:32.591Z",
+    source: "geoportal-valencia-equipamientos"
+  },
+  {
+    id: "003306",
+    nombre: "CONSULTORIO AUXILIAR POBLE NOU",
+    categoria: "sanidad",
+    lat: 39.50569551557887,
+    lon: -0.38272068726606817,
+    telefono: "961206425",
+    fetchedAt: "2026-10-01T14:29:32.591Z",
+    source: "geoportal-valencia-equipamientos"
+  },
+  {
+    id: "004894",
+    nombre: "HOSPITAL LA MALVARROSA",
+    categoria: "sanidad",
+    lat: 39.47871023599953,
+    lon: -0.32418997110948766,
+    telefono: "961925400",
+    fetchedAt: "2026-10-01T14:29:32.591Z",
+    source: "geoportal-valencia-equipamientos"
+  },
+  {
+    id: "003337",
+    nombre: "CENTRO DE SALUD RUZAFA",
+    categoria: "sanidad",
+    lat: 39.46590001658832,
+    lon: -0.3707717831931825,
+    telefono: "963469300",
+    fetchedAt: "2026-10-01T14:29:32.591Z",
+    source: "geoportal-valencia-equipamientos"
+  },
+  {
+    id: "003278",
+    nombre: "CENTRO DE ESPECIALIDADES EL GRAO",
+    categoria: "sanidad",
+    lat: 39.46177227634208,
+    lon: -0.33441248098811654,
+    telefono: "963469560",
+    fetchedAt: "2026-10-01T14:29:32.591Z",
+    source: "geoportal-valencia-equipamientos"
+  },
+  {
+    id: "003340",
+    nombre: "CENTRO DE SALUD SALVADOR PAU",
+    categoria: "sanidad",
+    lat: 39.4718597316986,
+    lon: -0.3501886995941132,
+    telefono: "963108720",
+    fetchedAt: "2026-10-01T14:29:32.591Z",
+    source: "geoportal-valencia-equipamientos"
+  },
+  {
+    id: "003307",
+    nombre: "CONSULTORIO AUXILIAR DE SAFRANAR",
+    categoria: "sanidad",
+    lat: 39.45996000031412,
+    lon: -0.39717449973868896,
+    telefono: "963184340",
+    fetchedAt: "2026-10-01T14:29:32.591Z",
+    source: "geoportal-valencia-equipamientos"
+  },
+  {
+    id: "005962",
+    nombre: "MICOF",
+    categoria: "sanidad",
+    lat: 39.47401398798645,
+    lon: -0.37168270032750705,
+    telefono: "963922000",
+    fetchedAt: "2026-10-01T14:29:32.591Z",
+    source: "geoportal-valencia-equipamientos"
+  },
+  {
+    id: "004892",
+    nombre: "HOSPITAL UNIVERSITARIO DOCTOR PESET",
+    categoria: "sanidad",
+    lat: 39.45420043961424,
+    lon: -0.3923918825909075,
+    telefono: "963188700",
+    fetchedAt: "2026-10-01T14:29:32.591Z",
+    source: "geoportal-valencia-equipamientos"
+  },
+  {
+    id: "007806",
+    nombre: "UNIDAD POLICIAL - MOL\xCD DEL SOL",
+    categoria: "policia",
+    lat: 39.48155663193705,
+    lon: -0.4097659684234057,
+    telefono: null,
+    fetchedAt: "2026-10-01T14:29:32.591Z",
+    source: "geoportal-valencia-equipamientos"
+  },
+  {
+    id: "003856",
+    nombre: "CENTRAL DE LA POLIC\xCDA LOCAL DE VALENCIA",
+    categoria: "policia",
+    lat: 39.46998796618334,
+    lon: -0.39680266573281364,
+    telefono: "962085092",
+    fetchedAt: "2026-10-01T14:29:32.591Z",
+    source: "geoportal-valencia-equipamientos"
+  },
+  {
+    id: "002862",
+    nombre: "COMISAR\xCDA DE POLIC\xCDA DE ABASTOS",
+    categoria: "policia",
+    lat: 39.46883660967499,
+    lon: -0.3879036627627721,
+    telefono: "963540030",
+    fetchedAt: "2026-10-01T14:29:32.591Z",
+    source: "geoportal-valencia-equipamientos"
+  },
+  {
+    id: "000572",
+    nombre: "BRIGADA PROVINCIAL DE EXTRANJER\xCDA Y FRONTERAS",
+    categoria: "policia",
+    lat: 39.45776228956536,
+    lon: -0.3660735553980925,
+    telefono: "963351106",
+    fetchedAt: "2026-10-01T14:29:32.591Z",
+    source: "geoportal-valencia-equipamientos"
+  },
+  {
+    id: "002866",
+    nombre: "COMISAR\xCDA DE POLIC\xCDA DE PATRAIX",
+    categoria: "policia",
+    lat: 39.46040999986525,
+    lon: -0.41088599994414016,
+    telefono: "963707456",
+    fetchedAt: "2026-10-01T14:29:32.591Z",
+    source: "geoportal-valencia-equipamientos"
+  },
+  {
+    id: "009442",
+    nombre: "MUSEO DE LA POLIC\xCDA LOCAL DE VAL\xC8NCIA",
+    categoria: "policia",
+    lat: 39.46771259800734,
+    lon: -0.3950236024150605,
+    telefono: "962085412",
+    fetchedAt: "2026-10-01T14:29:32.591Z",
+    source: "geoportal-valencia-equipamientos"
+  },
+  {
+    id: "006467",
+    nombre: "UNIDADES DE ATENCI\xD3N A LA FAMILIA Y MUJER (UFAM)",
+    categoria: "policia",
+    lat: 39.470339324613875,
+    lon: -0.38198673305587666,
+    telefono: "91",
+    fetchedAt: "2026-10-01T14:29:32.591Z",
+    source: "geoportal-valencia-equipamientos"
+  },
+  {
+    id: "004966",
+    nombre: "POLIC\xCDA LOCAL. UNIDAD DE DISTRITO 6. BENIMACLET.",
+    categoria: "policia",
+    lat: 39.4951687599116,
+    lon: -0.3569415976057739,
+    telefono: "963933149",
+    fetchedAt: "2026-10-01T14:29:32.591Z",
+    source: "geoportal-valencia-equipamientos"
+  },
+  {
+    id: "002861",
+    nombre: "COMISAR\xCDA DE POLIC\xCDA DE EXPOSICI\xD3N",
+    categoria: "policia",
+    lat: 39.47342400013817,
+    lon: -0.36370800029719313,
+    telefono: "963600350",
+    fetchedAt: "2026-10-01T14:29:32.591Z",
+    source: "geoportal-valencia-equipamientos"
+  },
+  {
+    id: "007680",
+    nombre: "OFICINA DE EXPEDICI\xD3N DE DNI Y PASAPORTE",
+    categoria: "policia",
+    lat: 39.47082299963484,
+    lon: -0.3832739994332438,
+    telefono: "963154900",
+    fetchedAt: "2026-10-01T14:29:32.591Z",
+    source: "geoportal-valencia-equipamientos"
+  },
+  {
+    id: "004964",
+    nombre: "POLIC\xCDA LOCAL. UNIDAD DE DISTRITO 2. RUSSAFA.",
+    categoria: "policia",
+    lat: 39.452212938610586,
+    lon: -0.36706570437390096,
+    telefono: "963730515",
+    fetchedAt: "2026-10-01T14:29:32.591Z",
+    source: "geoportal-valencia-equipamientos"
+  },
+  {
+    id: "002865",
+    nombre: "COMISAR\xCDA DE POLIC\xCDA DE TR\xC1NSITOS",
+    categoria: "policia",
+    lat: 39.48733779574896,
+    lon: -0.378681182183241,
+    telefono: "963467040",
+    fetchedAt: "2026-10-01T14:29:32.591Z",
+    source: "geoportal-valencia-equipamientos"
+  },
+  {
+    id: "004963",
+    nombre: "POLIC\xCDA LOCAL. UNIDAD DE DISTRITO 5. TR\xC0NSITS",
+    categoria: "policia",
+    lat: 39.49299769472066,
+    lon: -0.384824971557703,
+    telefono: "963474849",
+    fetchedAt: "2026-10-01T14:29:32.591Z",
+    source: "geoportal-valencia-equipamientos"
+  },
+  {
+    id: "004961",
+    nombre: "POLIC\xCDA LOCAL. UNIDAD DE DISTRITO 1. CIUTAT VELLA.",
+    categoria: "policia",
+    lat: 39.48061514599821,
+    lon: -0.37864312618705454,
+    telefono: "963917636",
+    fetchedAt: "2026-10-01T14:29:32.591Z",
+    source: "geoportal-valencia-equipamientos"
+  },
+  {
+    id: "004958",
+    nombre: "JEFATURA SUPERIOR DE POLIC\xCDA DE LA COMUNIDAD VALENCIANA",
+    categoria: "policia",
+    lat: 39.468546000215696,
+    lon: -0.38340899998230565,
+    telefono: "963539539",
+    fetchedAt: "2026-10-01T14:29:32.591Z",
+    source: "geoportal-valencia-equipamientos"
+  },
+  {
+    id: "002863",
+    nombre: "COMISAR\xCDA DE VAL\xC8NCIA MAR\xCDTIMO",
+    categoria: "policia",
+    lat: 39.46516200019191,
+    lon: -0.3339045004532364,
+    telefono: "963712556",
+    fetchedAt: "2026-10-01T14:29:32.591Z",
+    source: "geoportal-valencia-equipamientos"
+  },
+  {
+    id: "002864",
+    nombre: "COMISAR\xCDA DE POLIC\xCDA DE RUZAFA",
+    categoria: "policia",
+    lat: 39.45763517534772,
+    lon: -0.3659622524864467,
+    telefono: "963351174",
+    fetchedAt: "2026-10-01T14:29:32.591Z",
+    source: "geoportal-valencia-equipamientos"
+  },
+  {
+    id: "004962",
+    nombre: "POLIC\xCDA LOCAL. UNIDAD DE DISTRITO 7. MAR\xCDTIM.",
+    categoria: "policia",
+    lat: 39.465129244718426,
+    lon: -0.327444022236,
+    telefono: "963679112",
+    fetchedAt: "2026-10-01T14:29:32.591Z",
+    source: "geoportal-valencia-equipamientos"
+  },
+  {
+    id: "005126",
+    nombre: "POLIC\xCDA DE LA GENERALITAT",
+    categoria: "policia",
+    lat: 39.48102900008284,
+    lon: -0.37357200010420294,
+    telefono: "963175400",
+    fetchedAt: "2026-10-01T14:29:32.591Z",
+    source: "geoportal-valencia-equipamientos"
+  },
+  {
+    id: "004965",
+    nombre: "POLIC\xCDA LOCAL. UNIDAD DE DISTRITO 3. PATRAIX.",
+    categoria: "policia",
+    lat: 39.45550267381061,
+    lon: -0.40088595756768997,
+    telefono: "963577208",
+    fetchedAt: "2026-10-01T14:29:32.591Z",
+    source: "geoportal-valencia-equipamientos"
+  },
+  {
+    id: "010204",
+    nombre: "POLIC\xCDA LOCAL. UNIDAD DE MEDIO AMBIENTE - UMA",
+    categoria: "policia",
+    lat: 39.48322500043651,
+    lon: -0.40886999972924715,
+    telefono: "962085829",
+    fetchedAt: "2026-10-01T14:29:32.591Z",
+    source: "geoportal-valencia-equipamientos"
+  },
+  {
+    id: "000571",
+    nombre: "BRIGADA M\xD3VIL",
+    categoria: "policia",
+    lat: 39.46410899968682,
+    lon: -0.37894049959462134,
+    telefono: "963417866",
+    fetchedAt: "2026-10-01T14:29:32.591Z",
+    source: "geoportal-valencia-equipamientos"
+  },
+  {
+    id: "010310",
+    nombre: "POLIC\xCDA PORTUARIA DE LA AUTORIDAD PORTUARIA DE VAL\xC8NCIA",
+    categoria: "policia",
+    lat: 39.45345002731915,
+    lon: -0.3289512145150854,
+    telefono: "963939505",
+    fetchedAt: "2026-10-01T14:29:32.591Z",
+    source: "geoportal-valencia-equipamientos"
+  },
+  {
+    id: "002868",
+    nombre: "COMISAR\xCDA DE POLIC\xCDA CENTRO",
+    categoria: "policia",
+    lat: 39.473658000133966,
+    lon: -0.3687525001526142,
+    telefono: "963155690",
+    fetchedAt: "2026-10-01T14:29:32.591Z",
+    source: "geoportal-valencia-equipamientos"
+  },
+  {
+    id: "010423",
+    nombre: "OFICINA ANTIOCUPACI\xD3N",
+    categoria: "policia",
+    lat: 39.467690999632076,
+    lon: -0.39613499988742756,
+    telefono: "962081111",
+    fetchedAt: "2026-10-01T14:29:32.591Z",
+    source: "geoportal-valencia-equipamientos"
+  },
+  {
+    id: "010238",
+    nombre: "PARQUE DE BOMBEROS OESTE",
+    categoria: "bomberos",
+    lat: 39.466943999963924,
+    lon: -0.40384349984529133,
+    telefono: "112",
+    fetchedAt: "2026-10-01T14:29:32.591Z",
+    source: "geoportal-valencia-equipamientos"
+  },
+  {
+    id: "004987",
+    nombre: "PARQUE DE BOMBEROS NORTE",
+    categoria: "bomberos",
+    lat: 39.48342740393438,
+    lon: -0.352688219784863,
+    telefono: "963539939",
+    fetchedAt: "2026-10-01T14:29:32.591Z",
+    source: "geoportal-valencia-equipamientos"
+  },
+  {
+    id: "004990",
+    nombre: "PARQUE CENTRAL DE BOMBEROS",
+    categoria: "bomberos",
+    lat: 39.45442500023466,
+    lon: -0.3679470001931667,
+    telefono: "962087787",
+    fetchedAt: "2026-10-01T14:29:32.591Z",
+    source: "geoportal-valencia-equipamientos"
+  },
+  {
+    id: "005866",
+    nombre: "PARQUE DE BOMBEROS CAMPANAR",
+    categoria: "bomberos",
+    lat: 39.48490236251875,
+    lon: -0.4045922486828422,
+    telefono: "962084972",
+    fetchedAt: "2026-10-01T14:29:32.591Z",
+    source: "geoportal-valencia-equipamientos"
+  },
+  {
+    id: "009883",
+    nombre: "PARQUE DE BOMBEROS CENTRO HIST\xD3RICO",
+    categoria: "bomberos",
+    lat: 39.47707799954648,
+    lon: -0.37997549971257316,
+    telefono: "962087784",
+    fetchedAt: "2026-10-01T14:29:32.591Z",
+    source: "geoportal-valencia-equipamientos"
+  },
+  {
+    id: "005844",
+    nombre: "PARQUE DE BOMBEROS SALER/DEVESA",
+    categoria: "bomberos",
+    lat: 39.360599997946835,
+    lon: -0.32756999969564476,
+    telefono: "963539988",
+    fetchedAt: "2026-10-01T14:29:32.591Z",
+    source: "geoportal-valencia-equipamientos"
+  }
+];
+
+// src/server/equipamientos-criticos.ts
+async function handler28() {
+  return new Response(JSON.stringify({ equipamientos: equipamientos_criticos_default }), {
+    status: 200,
+    headers: {
+      "content-type": "application/json; charset=utf-8",
+      // Baja frecuencia de cambio (ver spec 054 §4) — cacheable de forma agresiva, igual que distritos.
+      "cache-control": "public, max-age=3600, s-maxage=86400, stale-while-revalidate=86400"
+    }
+  });
+}
+
 // src/server/_shared/auth.ts
 var enc = new TextEncoder();
 var dec = new TextDecoder();
@@ -109199,7 +110275,7 @@ function json3(obj, status, extraHeaders) {
     headers: { "content-type": "application/json; charset=utf-8", "cache-control": "no-store", ...extraHeaders }
   });
 }
-async function handler28(req) {
+async function handler29(req) {
   if (req.method !== "POST") return json3({ ok: false }, 405);
   const secret = process.env.AUTH_SECRET;
   let users;
@@ -109242,7 +110318,7 @@ async function handler28(req) {
 }
 
 // src/server/auth-logout.ts
-async function handler29(req) {
+async function handler30(req) {
   const status = req.method === "POST" ? 200 : 405;
   return new Response(JSON.stringify({ ok: status === 200 }), {
     status,
@@ -109255,7 +110331,7 @@ async function handler29(req) {
 }
 
 // src/server/auth-estado.ts
-async function handler30(req) {
+async function handler31(req) {
   const secret = process.env.AUTH_SECRET;
   const sesion = secret ? await verificarSesion(leerCookie(req.headers.get("cookie"), COOKIE_NOMBRE), secret) : null;
   return new Response(
@@ -109292,10 +110368,11 @@ var RUTAS = {
   "sintesis/v2/actual": handler25,
   "emergencia/v1/avamet": handler26,
   "emergencia/v1/zas": handler27,
+  "emergencia/v1/equipamientos-criticos": handler28,
   "decision/v1/sugerencias": handler23,
-  "auth/v1/login": handler28,
-  "auth/v1/logout": handler29,
-  "auth/v1/estado": handler30
+  "auth/v1/login": handler29,
+  "auth/v1/logout": handler30,
+  "auth/v1/estado": handler31
 };
 var BASE = "http://d.invalid";
 async function dispatch(req) {
