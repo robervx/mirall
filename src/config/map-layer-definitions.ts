@@ -65,6 +65,11 @@ export const LAYER_REGISTRY: Record<string, LayerDefinition> = {
   trafico: {
     key: 'trafico',
     specId: '004',
+    // v5 (2026-10-01, pedido explícito del usuario): vuelve a ser la primera
+    // fila del selector — por delante de riesgo de agua (v4, 2026-09-24).
+    // Nota: `grupo` solo decide primaria/contexto, no el orden dentro del
+    // grupo — el orden real lo marca el HTML de `buildControlPanel` en
+    // `src/main.ts`, que es donde se aplicó este cambio.
     grupo: 'primaria',
     renderers: ['deck'],
     zoomMinimo: 0,

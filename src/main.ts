@@ -1670,6 +1670,10 @@ function buildControlPanel(): ControlPanel {
     <div class="controls__group controls__group--primaria">
       <div class="controls__group-head">Prioritarias</div>
       <label class="controls__row">
+        <input type="checkbox" id="toggle-trafico" />
+        Tráfico en tiempo real
+      </label>
+      <label class="controls__row">
         <input type="checkbox" id="toggle-riesgo-escorrentia" />
         Riesgo de acumulación de agua
       </label>
@@ -1688,10 +1692,6 @@ function buildControlPanel(): ControlPanel {
       <label class="controls__row">
         <input type="checkbox" id="toggle-altimetria" />
         Altimetría
-      </label>
-      <label class="controls__row">
-        <input type="checkbox" id="toggle-trafico" />
-        Tráfico en tiempo real
       </label>
       <label class="controls__row">
         <input type="checkbox" id="toggle-pulso" />
