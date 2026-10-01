@@ -955,9 +955,8 @@ function parsearFechaPublicacion(fechaTexto) {
   const fecha = /* @__PURE__ */ new Date(`${m2[3]}-${m2[2]}-${m2[1]}T00:00:00.000Z`);
   return Number.isNaN(fecha.getTime()) ? null : fecha.toISOString();
 }
-function esActivacionDeAviso(titulo) {
-  const t = titulo.toLowerCase();
-  return /\bactiva\b/.test(t) && /\b(alerta|aviso)\b/.test(t);
+function mencionaAlertaOAviso(texto) {
+  return /\b(alerta|aviso)s?\b/i.test(texto);
 }
 function detectarNivel(texto) {
   const t = texto.toLowerCase();
@@ -970,8 +969,8 @@ function mencionaValencia(texto) {
   return /valencia/i.test(texto);
 }
 function construirAviso(tarjeta, fetchedAt) {
-  if (!esActivacionDeAviso(tarjeta.titulo)) return null;
   const textoCompleto = `${tarjeta.titulo} ${tarjeta.resumen ?? ""}`;
+  if (!mencionaAlertaOAviso(textoCompleto)) return null;
   if (!mencionaValencia(textoCompleto)) return null;
   const nivel = detectarNivel(textoCompleto);
   if (!nivel) return null;
@@ -26230,206 +26229,6 @@ function construirHistoricoDistrito(snapshots, rollups, distritoCodigo, dias, ah
 // data/trafico-historico.json
 var trafico_historico_default = [
   {
-    timestamp: "2026-09-01T09:13:24.436Z",
-    distritos: [
-      {
-        codigo: "01",
-        congestion: 0,
-        muestras: 29
-      },
-      {
-        codigo: "02",
-        congestion: 0,
-        muestras: 21
-      },
-      {
-        codigo: "03",
-        congestion: 0.15384615384615385,
-        muestras: 26
-      },
-      {
-        codigo: "04",
-        congestion: 0,
-        muestras: 45
-      },
-      {
-        codigo: "05",
-        congestion: 0,
-        muestras: 18
-      },
-      {
-        codigo: "06",
-        congestion: 0.008571428571428572,
-        muestras: 35
-      },
-      {
-        codigo: "07",
-        congestion: 0,
-        muestras: 19
-      },
-      {
-        codigo: "08",
-        congestion: 0.07692307692307693,
-        muestras: 13
-      },
-      {
-        codigo: "09",
-        congestion: 0,
-        muestras: 24
-      },
-      {
-        codigo: "10",
-        congestion: 0,
-        muestras: 48
-      },
-      {
-        codigo: "11",
-        congestion: 0,
-        muestras: 29
-      },
-      {
-        codigo: "12",
-        congestion: 0,
-        muestras: 29
-      },
-      {
-        codigo: "13",
-        congestion: 0,
-        muestras: 15
-      },
-      {
-        codigo: "14",
-        congestion: 0,
-        muestras: 7
-      },
-      {
-        codigo: "15",
-        congestion: 0,
-        muestras: 13
-      },
-      {
-        codigo: "16",
-        congestion: 0,
-        muestras: 19
-      },
-      {
-        codigo: "17",
-        congestion: 0,
-        muestras: 10
-      },
-      {
-        codigo: "18",
-        congestion: 0,
-        muestras: 3
-      },
-      {
-        codigo: "19",
-        congestion: 0,
-        muestras: 2
-      }
-    ]
-  },
-  {
-    timestamp: "2026-09-01T14:33:36.818Z",
-    distritos: [
-      {
-        codigo: "01",
-        congestion: 0,
-        muestras: 29
-      },
-      {
-        codigo: "02",
-        congestion: 0,
-        muestras: 21
-      },
-      {
-        codigo: "03",
-        congestion: 0.15384615384615385,
-        muestras: 26
-      },
-      {
-        codigo: "04",
-        congestion: 0,
-        muestras: 45
-      },
-      {
-        codigo: "05",
-        congestion: 0,
-        muestras: 18
-      },
-      {
-        codigo: "06",
-        congestion: 0,
-        muestras: 35
-      },
-      {
-        codigo: "07",
-        congestion: 0,
-        muestras: 19
-      },
-      {
-        codigo: "08",
-        congestion: 0.07692307692307693,
-        muestras: 13
-      },
-      {
-        codigo: "09",
-        congestion: 0,
-        muestras: 24
-      },
-      {
-        codigo: "10",
-        congestion: 0,
-        muestras: 48
-      },
-      {
-        codigo: "11",
-        congestion: 0,
-        muestras: 29
-      },
-      {
-        codigo: "12",
-        congestion: 0,
-        muestras: 29
-      },
-      {
-        codigo: "13",
-        congestion: 0,
-        muestras: 15
-      },
-      {
-        codigo: "14",
-        congestion: 0,
-        muestras: 7
-      },
-      {
-        codigo: "15",
-        congestion: 0,
-        muestras: 13
-      },
-      {
-        codigo: "16",
-        congestion: 0,
-        muestras: 19
-      },
-      {
-        codigo: "17",
-        congestion: 0,
-        muestras: 10
-      },
-      {
-        codigo: "18",
-        congestion: 0,
-        muestras: 3
-      },
-      {
-        codigo: "19",
-        congestion: 0,
-        muestras: 2
-      }
-    ]
-  },
-  {
     timestamp: "2026-09-01T18:11:01.605Z",
     distritos: [
       {
@@ -51650,6 +51449,220 @@ var trafico_historico_default = [
         }
       }
     ]
+  },
+  {
+    timestamp: "2026-10-01T16:01:58.279Z",
+    distritos: [
+      {
+        codigo: "01",
+        congestion: 0,
+        muestras: 29,
+        porEstado: {
+          fluido: 29,
+          denso: 0,
+          congestionado: 0,
+          cortado: 0
+        }
+      },
+      {
+        codigo: "02",
+        congestion: 0,
+        muestras: 23,
+        porEstado: {
+          fluido: 23,
+          denso: 0,
+          congestionado: 0,
+          cortado: 0
+        }
+      },
+      {
+        codigo: "03",
+        congestion: 0.11538461538461539,
+        muestras: 26,
+        porEstado: {
+          fluido: 23,
+          denso: 0,
+          congestionado: 0,
+          cortado: 3
+        }
+      },
+      {
+        codigo: "04",
+        congestion: 0,
+        muestras: 45,
+        porEstado: {
+          fluido: 45,
+          denso: 0,
+          congestionado: 0,
+          cortado: 0
+        }
+      },
+      {
+        codigo: "05",
+        congestion: 0,
+        muestras: 18,
+        porEstado: {
+          fluido: 18,
+          denso: 0,
+          congestionado: 0,
+          cortado: 0
+        }
+      },
+      {
+        codigo: "06",
+        congestion: 0,
+        muestras: 35,
+        porEstado: {
+          fluido: 35,
+          denso: 0,
+          congestionado: 0,
+          cortado: 0
+        }
+      },
+      {
+        codigo: "07",
+        congestion: 0,
+        muestras: 19,
+        porEstado: {
+          fluido: 19,
+          denso: 0,
+          congestionado: 0,
+          cortado: 0
+        }
+      },
+      {
+        codigo: "08",
+        congestion: 0.07692307692307693,
+        muestras: 13,
+        porEstado: {
+          fluido: 12,
+          denso: 0,
+          congestionado: 0,
+          cortado: 1
+        }
+      },
+      {
+        codigo: "09",
+        congestion: 0,
+        muestras: 24,
+        porEstado: {
+          fluido: 24,
+          denso: 0,
+          congestionado: 0,
+          cortado: 0
+        }
+      },
+      {
+        codigo: "10",
+        congestion: 0,
+        muestras: 48,
+        porEstado: {
+          fluido: 48,
+          denso: 0,
+          congestionado: 0,
+          cortado: 0
+        }
+      },
+      {
+        codigo: "11",
+        congestion: 0,
+        muestras: 29,
+        porEstado: {
+          fluido: 29,
+          denso: 0,
+          congestionado: 0,
+          cortado: 0
+        }
+      },
+      {
+        codigo: "12",
+        congestion: 0,
+        muestras: 29,
+        porEstado: {
+          fluido: 29,
+          denso: 0,
+          congestionado: 0,
+          cortado: 0
+        }
+      },
+      {
+        codigo: "13",
+        congestion: 0,
+        muestras: 15,
+        porEstado: {
+          fluido: 15,
+          denso: 0,
+          congestionado: 0,
+          cortado: 0
+        }
+      },
+      {
+        codigo: "14",
+        congestion: 0,
+        muestras: 7,
+        porEstado: {
+          fluido: 7,
+          denso: 0,
+          congestionado: 0,
+          cortado: 0
+        }
+      },
+      {
+        codigo: "15",
+        congestion: 0,
+        muestras: 13,
+        porEstado: {
+          fluido: 13,
+          denso: 0,
+          congestionado: 0,
+          cortado: 0
+        }
+      },
+      {
+        codigo: "16",
+        congestion: 0,
+        muestras: 19,
+        porEstado: {
+          fluido: 19,
+          denso: 0,
+          congestionado: 0,
+          cortado: 0
+        }
+      },
+      {
+        codigo: "17",
+        congestion: 0,
+        muestras: 10,
+        porEstado: {
+          fluido: 10,
+          denso: 0,
+          congestionado: 0,
+          cortado: 0
+        }
+      },
+      {
+        codigo: "18",
+        congestion: 0,
+        muestras: 3,
+        porEstado: {
+          fluido: 3,
+          denso: 0,
+          congestionado: 0,
+          cortado: 0
+        }
+      },
+      {
+        codigo: "19",
+        congestion: 0,
+        muestras: 2,
+        porEstado: {
+          fluido: 2,
+          denso: 0,
+          congestionado: 0,
+          cortado: 0
+        }
+      }
+    ]
   }
 ];
 
@@ -53516,23 +53529,31 @@ function insightsLluviaIntensa(prediccion, fetchedAt) {
 function esCodigoLluvia(weatherCode) {
   return weatherCode >= 51 && weatherCode <= 67 || weatherCode >= 80 && weatherCode <= 82 || weatherCode >= 95 && weatherCode <= 99;
 }
+function formatoHoraPrediccion(iso) {
+  const fecha = new Date(iso);
+  if (Number.isNaN(fecha.getTime())) return iso;
+  return fecha.toLocaleTimeString("es-ES", { hour: "2-digit", minute: "2-digit" });
+}
 function insightsLluviaPrevista(prediccion, fetchedAt) {
   return prediccion.predicciones.filter((tramo) => tramo.precipitacion < UMBRAL_LLUVIA_MM).filter(
     (tramo) => tramo.probabilidadPrecipitacion >= UMBRAL_LLUVIA_PROB_PCT || tramo.precipitacion > 0 && esCodigoLluvia(tramo.weatherCode)
-  ).map((tramo) => ({
-    id: `lluvia-prevista:${tramo.horaObjetivo}`,
-    tipo: "lluvia-prevista",
-    severidad: "aviso",
-    titulo: `Lluvia prevista hacia las ${tramo.horaObjetivo}`,
-    descripcion: `Predicci\xF3n: ${tramo.probabilidadPrecipitacion}% de probabilidad de precipitaci\xF3n (${tramo.precipitacion} mm) para ${tramo.horaObjetivo}.`,
-    protocoloSugerido: {
-      asunto: "Aviso de lluvia prevista \u2014 Valencia",
-      cuerpo: `Open-Meteo prev\xE9 lluvia hacia las ${tramo.horaObjetivo} en Valencia (${tramo.probabilidadPrecipitacion}% de probabilidad, ${tramo.precipitacion} mm estimados). Se sugiere aviso preventivo a unidades y atenci\xF3n a puntos de acumulaci\xF3n de agua habituales. Dato de origen: Open-Meteo (Mirall, spec 016). Revisar y decidir antes de actuar.`
-    },
-    fuenteSpec: ["016"],
-    detectedAt: tramo.horaObjetivo,
-    fetchedAt
-  }));
+  ).map((tramo) => {
+    const hora = formatoHoraPrediccion(tramo.horaObjetivo);
+    return {
+      id: `lluvia-prevista:${tramo.horaObjetivo}`,
+      tipo: "lluvia-prevista",
+      severidad: "aviso",
+      titulo: `Lluvia prevista hacia las ${hora}`,
+      descripcion: `Predicci\xF3n: ${tramo.probabilidadPrecipitacion}% de probabilidad de precipitaci\xF3n (${tramo.precipitacion} mm) para las ${hora}.`,
+      protocoloSugerido: {
+        asunto: "Aviso de lluvia prevista \u2014 Valencia",
+        cuerpo: `Open-Meteo prev\xE9 lluvia hacia las ${hora} en Valencia (${tramo.probabilidadPrecipitacion}% de probabilidad, ${tramo.precipitacion} mm estimados). Se sugiere aviso preventivo a unidades y atenci\xF3n a puntos de acumulaci\xF3n de agua habituales. Dato de origen: Open-Meteo (Mirall, spec 016). Revisar y decidir antes de actuar.`
+      },
+      fuenteSpec: ["016"],
+      detectedAt: tramo.horaObjetivo,
+      fetchedAt
+    };
+  });
 }
 var NIVEL_TRAFICO = { fluido: 0, denso: 1, congestionado: 2, cortado: 3 };
 function insightsTraficoEmpeora(actual, previo, fetchedAt) {
@@ -53721,7 +53742,8 @@ function insightsAvisoOficial(avisos, fetchedAt) {
     },
     fuenteSpec: ["001"],
     detectedAt: aviso.publicadoEn,
-    fetchedAt
+    fetchedAt,
+    nivelAvisoOficial: aviso.nivel
   }));
 }
 function calcularInsights(meteo, aire, distritos2, prediccion, tramosTrafico = null, datosFallas = null, tramosTraficoPrevios = null, avisosOficiales = null) {
@@ -55507,6 +55529,15 @@ async function handler16(req) {
   }
 }
 
+// src/services/agenda-eventos.ts
+function eventoVigente(evento, ahoraMs) {
+  const finDelDiaMs = new Date(evento.fechaFin).getTime() + 24 * 60 * 60 * 1e3;
+  return ahoraMs < finDelDiaMs;
+}
+function eventosVigentes(eventos, ahoraMs) {
+  return eventos.filter((e) => eventoVigente(e, ahoraMs));
+}
+
 // data/agenda-eventos.json
 var agenda_eventos_default = {
   eventos: [
@@ -56813,7 +56844,8 @@ var agenda_eventos_default = {
 
 // src/server/agenda-eventos.ts
 async function handler17() {
-  const datos = agenda_eventos_default;
+  const bruto = agenda_eventos_default;
+  const datos = { ...bruto, eventos: eventosVigentes(bruto.eventos, Date.now()) };
   return new Response(JSON.stringify(datos), {
     status: 200,
     headers: {

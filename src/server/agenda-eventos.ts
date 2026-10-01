@@ -3,13 +3,19 @@
 // propia: lee el snapshot ya escrito por scripts/scrape-agenda-eventos.ts
 // (bundleado en build time, mismo patrón que data/trafico-historico.json de
 // spec 017).
-import type { SnapshotAgenda } from '../services/agenda-eventos';
+//
+// Filtro de vigencia en cada petición (bug real corregido 2026-10-01, ver
+// memoria de proyecto): el snapshot scrapeado nunca "caduca" sus propios
+// eventos — sin este filtro, un evento ya pasado se quedaba visible en
+// /inteligencia hasta el siguiente scrape (hasta 6h, spec 027 §4 cron).
+import { eventosVigentes, type SnapshotAgenda } from '../services/agenda-eventos';
 import snapshot from '../../data/agenda-eventos.json' with { type: 'json' };
 
 export const config = { runtime: 'edge' };
 
 export default async function handler(): Promise<Response> {
-  const datos = snapshot as SnapshotAgenda;
+  const bruto = snapshot as SnapshotAgenda;
+  const datos: SnapshotAgenda = { ...bruto, eventos: eventosVigentes(bruto.eventos, Date.now()) };
 
   return new Response(JSON.stringify(datos), {
     status: 200,

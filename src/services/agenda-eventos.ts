@@ -136,3 +136,21 @@ export function construirEventoAgenda(
     source: 'ajuntament-valencia-scraping',
   };
 }
+
+/**
+ * Bug real reportado por el usuario (2026-10-01): el panel de agenda en
+ * /inteligencia mostraba TODOS los eventos scrapeados, incluidos los ya
+ * pasados — no había ningún filtro por fecha. `fechaFin` es siempre
+ * medianoche UTC del último día del evento (`parsearRangoFecha*`); el
+ * evento sigue vigente hasta que termina ESE día — se descarta en cuanto
+ * pasan las 00:00 del día siguiente, no antes (un evento de un solo día
+ * sigue siendo relevante todo ese día, aunque ya haya "pasado" la hora).
+ */
+export function eventoVigente(evento: Pick<EventoAgenda, 'fechaFin'>, ahoraMs: number): boolean {
+  const finDelDiaMs = new Date(evento.fechaFin).getTime() + 24 * 60 * 60 * 1000;
+  return ahoraMs < finDelDiaMs;
+}
+
+export function eventosVigentes<T extends Pick<EventoAgenda, 'fechaFin'>>(eventos: T[], ahoraMs: number): T[] {
+  return eventos.filter((e) => eventoVigente(e, ahoraMs));
+}

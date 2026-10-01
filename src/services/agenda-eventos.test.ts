@@ -8,6 +8,8 @@ import {
   construirResumen,
   detectarEstructuraSospechosa,
   construirEventoAgenda,
+  eventoVigente,
+  eventosVigentes,
   type EventoAgenda,
 } from './agenda-eventos';
 
@@ -149,5 +151,36 @@ describe('construirEventoAgenda', () => {
       '2026-09-16T10:00:00.000Z',
     );
     expect(r!.resumen).toBeNull();
+  });
+});
+
+describe('eventoVigente / eventosVigentes', () => {
+  // fechaFin siempre es medianoche UTC del último día (ver parsearRangoFecha*).
+  const FECHA_FIN = '2026-10-01T00:00:00.000Z'; // evento que termina el 1 de octubre
+
+  it('vigente mientras dure el día de fechaFin (antes de las 00:00 del día siguiente)', () => {
+    const justoAntesDeMedianoche = new Date('2026-10-01T23:59:00.000Z').getTime();
+    expect(eventoVigente({ fechaFin: FECHA_FIN }, justoAntesDeMedianoche)).toBe(true);
+  });
+
+  it('vigente el mismo día de fechaFin aunque ya sea tarde', () => {
+    const mediodiaDelMismoDia = new Date('2026-10-01T18:00:00.000Z').getTime();
+    expect(eventoVigente({ fechaFin: FECHA_FIN }, mediodiaDelMismoDia)).toBe(true);
+  });
+
+  it('deja de ser vigente en cuanto pasan las 00:00 del día siguiente a fechaFin', () => {
+    const justoDespuesDeMedianoche = new Date('2026-10-02T00:00:01.000Z').getTime();
+    expect(eventoVigente({ fechaFin: FECHA_FIN }, justoDespuesDeMedianoche)).toBe(false);
+  });
+
+  it('eventosVigentes filtra solo los pasados, conserva el resto', () => {
+    const eventos = [
+      { id: 'pasado', fechaFin: '2026-09-28T00:00:00.000Z' },
+      { id: 'hoy', fechaFin: '2026-10-01T00:00:00.000Z' },
+      { id: 'futuro', fechaFin: '2026-10-05T00:00:00.000Z' },
+    ];
+    const ahoraMs = new Date('2026-10-01T12:00:00.000Z').getTime();
+    const resultado = eventosVigentes(eventos, ahoraMs);
+    expect(resultado.map((e) => e.id)).toEqual(['hoy', 'futuro']);
   });
 });
