@@ -20,11 +20,21 @@ import {
   getDistrictAtCoordinates,
   getLoadedDistricts,
 } from '../src/services/district-geometry';
-import { resumenAltimetriaPorDistrito, NODATA_IGN, type MuestraElevacion } from '../src/services/altimetria';
+import {
+  resumenAltimetriaPorDistrito,
+  NODATA_IGN,
+  PASO_LAT_REJILLA,
+  PASO_LON_REJILLA,
+  type MuestraElevacion,
+} from '../src/services/altimetria';
 import distritosGeoJSON from '../data/distritos-valencia.json' with { type: 'json' };
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), '..');
 const OUTPUT_PATH = path.join(ROOT, 'data', 'altimetria-valencia.json');
+// Spec 052 v2 — antes se descartaban tras agregar a media por distrito; ahora
+// se persisten también los puntos individuales (celda real de la capa de
+// mapa, ver src/services/altimetria.ts `featureCollectionAltimetriaPuntos`).
+const OUTPUT_PUNTOS_PATH = path.join(ROOT, 'data', 'altimetria-puntos.json');
 
 // Mismo bbox que scripts/seed-red-viaria.ts (spec 020) — margen holgado
 // alrededor del término municipal.
@@ -32,8 +42,10 @@ const LAT_MIN = 39.4;
 const LAT_MAX = 39.51;
 const LON_MIN = -0.43;
 const LON_MAX = -0.3;
-const PASO_LAT = 0.0054; // ~600 m
-const PASO_LON = 0.007; // ~600 m a esta latitud
+// Mismo paso que usa la capa de mapa para dibujar cada celda — ver
+// src/services/altimetria.ts.
+const PASO_LAT = PASO_LAT_REJILLA;
+const PASO_LON = PASO_LON_REJILLA;
 const CONCURRENCIA = 6;
 const PAUSA_ENTRE_LOTES_MS = 200;
 
@@ -102,8 +114,9 @@ async function main(): Promise<void> {
 
   const resumen = resumenAltimetriaPorDistrito(muestras, nombrePorCodigo);
   await writeFile(OUTPUT_PATH, `${JSON.stringify(resumen, null, 2)}\n`);
+  await writeFile(OUTPUT_PUNTOS_PATH, `${JSON.stringify(conDatoReal, null, 2)}\n`);
   console.log(
-    `${resumen.length} distritos, ${conDatoReal.length} muestras válidas (de ${muestras.length} consultadas) escritos en ${path.relative(ROOT, OUTPUT_PATH)}.`,
+    `${resumen.length} distritos, ${conDatoReal.length} muestras válidas (de ${muestras.length} consultadas) escritos en ${path.relative(ROOT, OUTPUT_PATH)} y ${path.relative(ROOT, OUTPUT_PUNTOS_PATH)}.`,
   );
 }
 

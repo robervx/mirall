@@ -21,7 +21,7 @@ export interface LayerDefinition {
   specId: string; // id de la spec en specs/ que define esta capa — trazabilidad obligatoria
   renderers: RendererKind[];
   zoomMinimo: number;
-  agregacion: 'punto' | 'choropleth-distrito' | 'cluster' | 'linea' | 'lista' | 'mixta'; // 'linea' (spec 004), 'lista' (spec 009, panel no geoespacial), 'mixta' (spec 010 v4: marcador + tramos resaltados como primario, choropleth como contexto)
+  agregacion: 'punto' | 'choropleth-distrito' | 'rejilla' | 'cluster' | 'linea' | 'lista' | 'mixta'; // 'linea' (spec 004), 'lista' (spec 009, panel no geoespacial), 'mixta' (spec 010 v4: marcador + tramos resaltados como primario, choropleth como contexto), 'rejilla' (spec 052 v2: celdas cuadradas sobre puntos reales de una rejilla, no un choropleth por distrito)
   /** Grupo del selector — spec 033. `distritos` (capa base, no está en el selector) es el único sin grupo. */
   grupo?: GrupoCapa;
   /** Debe ser `true` mientras la fuente sea sintética — ver spec 003. */
@@ -204,7 +204,7 @@ export const LAYER_REGISTRY: Record<string, LayerDefinition> = {
     grupo: 'primaria',
     renderers: ['deck'],
     zoomMinimo: 0,
-    agregacion: 'choropleth-distrito',
+    agregacion: 'rejilla',
   },
   //
   // No añadas entradas aquí sin que exista antes la spec correspondiente

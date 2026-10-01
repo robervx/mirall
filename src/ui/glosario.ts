@@ -158,7 +158,7 @@ const META_CAPAS: Record<string, MetaCapa> = {
   },
   altimetria: {
     nombre: 'Altimetría',
-    mide: 'Elevación media por distrito (choropleth de los 19 distritos) — no es una rejilla continua: el dato de detalle de la rejilla original del IGN se agrega y se descarta tras calcular el resumen por distrito, ver spec 052',
+    mide: 'Tinta hipsométrica sobre la rejilla real de ~198 puntos del IGN (~600 m de paso) — no un promedio por distrito: cada celda de la "alfombra" es una muestra real, re-escalada al rango real de Valencia (0-45 m) en vez de a una escala pensada para sierra, ver spec 052 v2',
     frecuencia: 'Dato fijo (seed único) — la altimetría no cambia',
     fuente: 'IGN (Instituto Geográfico Nacional), Modelo Digital del Terreno',
   },

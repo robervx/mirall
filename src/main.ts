@@ -50,7 +50,8 @@ import type { IncidenciaViaPublica, TipoIncidenciaViaPublica } from './services/
 import type { RiesgoEscorrentiaDistrito } from './services/riesgo-escorrentia';
 import type { EstacionAvamet } from './services/avamet-estaciones';
 import type { ZonaZas, SonometroRuzafa, PanelZas } from './services/zas';
-import type { ResumenAltimetriaDistrito } from './services/altimetria';
+import type { ResumenAltimetriaDistrito, MuestraElevacion } from './services/altimetria';
+import { featureCollectionAltimetriaPuntos } from './services/altimetria';
 import { mountChasis } from './ui/chasis';
 import { applyPanelVisibility, PANEL_PREFERENCES_REGISTRY } from './ui/panel-preferences';
 import { registrarFrescura } from './ui/estado-frescura';
@@ -930,40 +931,77 @@ function renderSonometrosRuzafaPanel(root: HTMLDivElement, sonometros: Sonometro
   `;
 }
 
-// Spec 052 — choropleth por distrito sobre elevacionMediaM (2.5-40.9 m reales
-// en los 19 distritos, ver spec §5). Verde (cota baja, litoral) -> marrón
-// (cota alta, interior), convención habitual de mapa topográfico — acotado
-// 0-45 m con margen sobre el máximo real, mismo patrón de saturar en los
-// extremos que `colorTemperaturaZona` (spec 050).
-const ALTIMETRIA_MIN_M = 0;
-const ALTIMETRIA_MAX_M = 45;
-function colorChoroplethAltimetria(d: ResumenAltimetriaDistrito | undefined): Color {
-  if (!d) return [158, 158, 158, 60];
-  const t = Math.min(1, Math.max(0, (d.elevacionMediaM - ALTIMETRIA_MIN_M) / (ALTIMETRIA_MAX_M - ALTIMETRIA_MIN_M)));
-  // verde [67,160,71] -> marrón [121,85,72]
-  return [Math.round(67 + t * 54), Math.round(160 - t * 75), Math.round(71 + t * 1), 170];
+// Spec 052 v2 — tinta hipsométrica de verdad, no un lerp de 2 colores: la
+// convención cartográfica centenaria (IGN, Natural Earth "cross-blended
+// hypsometric tints") es verde -> amarillo/ocre -> siena/marrón con varias
+// paradas de color, normalmente pensada para 0-4000 m de sierra. Valencia
+// es una ciudad casi plana (rango real de la rejilla del IGN: 0.26-50.7 m,
+// ver data/altimetria-puntos.json) — aplicar esa escala tal cual la dejaría
+// plana/inútil, así que se re-escala al rango real de la ciudad (0-45 m)
+// con MÁS paradas de color en la franja baja (0-20 m, donde cae el 90% de
+// los puntos reales — ver histograma en spec 052 v2 §5) y menos en la alta
+// (20-45 m, apenas unos pocos puntos, probable ruido de borde del WMS más
+// que relieve real).
+const RAMPA_HIPSOMETRICA: ReadonlyArray<{ m: number; rgb: [number, number, number] }> = [
+  { m: 0, rgb: [27, 94, 32] }, // verde oscuro — litoral/huerta, cota ~0
+  { m: 5, rgb: [76, 140, 64] },
+  { m: 10, rgb: [142, 172, 79] },
+  { m: 15, rgb: [190, 183, 93] },
+  { m: 20, rgb: [223, 179, 95] }, // amarillo-ocre
+  { m: 30, rgb: [200, 138, 82] },
+  { m: 45, rgb: [141, 94, 72] }, // siena — cota alta, interior
+];
+
+function colorHipsometrico(elevacionM: number, alpha = 190): Color {
+  const min = RAMPA_HIPSOMETRICA[0]!;
+  const max = RAMPA_HIPSOMETRICA[RAMPA_HIPSOMETRICA.length - 1]!;
+  const m = Math.min(max.m, Math.max(min.m, elevacionM));
+  for (let i = 0; i < RAMPA_HIPSOMETRICA.length - 1; i++) {
+    const a = RAMPA_HIPSOMETRICA[i]!;
+    const b = RAMPA_HIPSOMETRICA[i + 1]!;
+    if (m <= b.m) {
+      const t = (m - a.m) / (b.m - a.m);
+      return [
+        Math.round(a.rgb[0] + t * (b.rgb[0] - a.rgb[0])),
+        Math.round(a.rgb[1] + t * (b.rgb[1] - a.rgb[1])),
+        Math.round(a.rgb[2] + t * (b.rgb[2] - a.rgb[2])),
+        alpha,
+      ];
+    }
+  }
+  return [max.rgb[0], max.rgb[1], max.rgb[2], alpha];
 }
 
-function renderAltimetriaLeyenda(root: HTMLDivElement, distritos: ResumenAltimetriaDistrito[]): void {
-  if (distritos.length === 0) {
+/** CSS del degradado de la leyenda — construido de la misma rampa que pinta el mapa, nunca puede desincronizarse. */
+function cssGradienteHipsometrico(): string {
+  const total = RAMPA_HIPSOMETRICA[RAMPA_HIPSOMETRICA.length - 1]!.m;
+  const paradas = RAMPA_HIPSOMETRICA.map((s) => `rgb(${s.rgb.join(',')}) ${((s.m / total) * 100).toFixed(1)}%`).join(', ');
+  return `linear-gradient(90deg, ${paradas})`;
+}
+
+function renderAltimetriaLeyenda(root: HTMLDivElement, distritos: ResumenAltimetriaDistrito[], puntos: MuestraElevacion[]): void {
+  if (distritos.length === 0 || puntos.length === 0) {
     root.innerHTML = `<div class="info-panel__desc">Altimetría — sin datos disponibles ahora mismo</div>`;
     return;
   }
   const masAlto = distritos.reduce((a, b) => (b.elevacionMediaM > a.elevacionMediaM ? b : a));
   const masBajo = distritos.reduce((a, b) => (b.elevacionMediaM < a.elevacionMediaM ? b : a));
+  const rgbTexto = (m: number) => colorHipsometrico(m, 255).slice(0, 3).join(',');
   root.innerHTML = `
-    <div class="info-panel__desc">Altimetría — elevación media por distrito</div>
-    <div class="trafico-leyenda__row"><span class="trafico-leyenda__dot" style="background:rgb(121,86,72)"></span>Más alto: ${escapeHtml(masAlto.distritoNombre)} (${masAlto.elevacionMediaM.toFixed(1)} m)</div>
-    <div class="trafico-leyenda__row"><span class="trafico-leyenda__dot" style="background:rgb(67,160,71)"></span>Más bajo: ${escapeHtml(masBajo.distritoNombre)} (${masBajo.elevacionMediaM.toFixed(1)} m)</div>
-    <div class="info-panel__meta">Media por distrito, no una rejilla continua — ver ranking completo en /inteligencia</div>
+    <div class="info-panel__desc">Altimetría — tinta hipsométrica, ${puntos.length} puntos reales del IGN (rejilla ~600 m)</div>
+    <div class="leyenda-gradiente"><span style="background:${cssGradienteHipsometrico()}"></span></div>
+    <div class="leyenda-gradiente__extremos"><span>0 m</span><span>45 m</span></div>
+    <div class="trafico-leyenda__row"><span class="trafico-leyenda__dot" style="background:rgb(${rgbTexto(masAlto.elevacionMediaM)})"></span>Distrito más alto (media): ${escapeHtml(masAlto.distritoNombre)} (${masAlto.elevacionMediaM.toFixed(1)} m)</div>
+    <div class="trafico-leyenda__row"><span class="trafico-leyenda__dot" style="background:rgb(${rgbTexto(masBajo.elevacionMediaM)})"></span>Distrito más bajo (media): ${escapeHtml(masBajo.distritoNombre)} (${masBajo.elevacionMediaM.toFixed(1)} m)</div>
+    <div class="info-panel__meta">Rejilla real del IGN (~600 m de paso), cada celda es una muestra real — no un promedio por distrito</div>
     <div class="info-panel__meta">Fuente: IGN (Instituto Geográfico Nacional) · dato fijo, no cambia con el tiempo</div>
   `;
 }
 
-async function fetchAltimetriaActual(): Promise<{ distritos: ResumenAltimetriaDistrito[] }> {
+async function fetchAltimetriaActual(): Promise<{ distritos: ResumenAltimetriaDistrito[]; puntos: MuestraElevacion[] }> {
   const res = await fetch('/api/emergencia/v1/altimetria');
   if (!res.ok) throw new Error(`GET /api/emergencia/v1/altimetria -> HTTP ${res.status}`);
-  return (await res.json()) as { distritos: ResumenAltimetriaDistrito[] };
+  return (await res.json()) as { distritos: ResumenAltimetriaDistrito[]; puntos: MuestraElevacion[] };
 }
 
 // Spec 026 — mostaza/morado/verde azulado: distintos de rojo (reservado para
@@ -1659,6 +1697,9 @@ async function main(): Promise<void> {
   // capas de arriba, que sí refrescan periódicamente).
   let altimetriaVisible = false;
   let altimetriaDistritos: ResumenAltimetriaDistrito[] = [];
+  // v2 — rejilla real de puntos IGN (antes se descartaba tras agregar a
+  // media por distrito, ver spec 052 v2 §5); es lo que pinta el mapa ahora.
+  let altimetriaPuntos: MuestraElevacion[] = [];
   let altimetriaCargada = false;
   // v3 (DoD de V1, 2026-09-16) — los puntos calientes del mock de densidad
   // (más abajo) necesitan los monumentos falleros aunque la capa "Fallas" en
@@ -1816,7 +1857,10 @@ async function main(): Promise<void> {
     const intensidadPorDistrito = new Map(densidadMock.map((d) => [d.distritoCodigo, d.intensidad]));
     const pulsoPorDistrito = new Map(pulsoDistritos.map((p) => [p.distritoCodigo, p]));
     const riesgoEscorrentiaPorDistrito = new Map(riesgoEscorrentia.map((d) => [d.distritoCodigo, d]));
-    const altimetriaPorDistrito = new Map(altimetriaDistritos.map((d) => [d.distritoCodigo, d]));
+    // v2 — la capa ya no usa este Map (pintaba por distrito); se mantiene
+    // solo para la leyenda (más alto/más bajo). La rejilla se construye más
+    // abajo, junto al resto de featureCollections derivadas.
+    const altimetriaFeatureCollection = featureCollectionAltimetriaPuntos(altimetriaPuntos);
     // v4 (spec 010 §5) — escenarios vivo+confirmado, base de los marcadores y
     // de los puntos de tramo resaltados (primario); el choropleth de abajo es
     // el contexto.
@@ -1930,19 +1974,19 @@ async function main(): Promise<void> {
             getFillColor: (f) => colorChoroplethPulso(pulsoPorDistrito.get(f.properties.codigo)),
             updateTriggers: { getFillColor: [pulsoDistritos] },
           }),
-        // Spec 052 — choropleth de altimetría, antes que riesgo-escorrentia en
-        // el array (se pinta primero) para que, si ambas capas están activas
-        // a la vez, la de riesgo de agua (más urgente/accionable) quede
-        // encima, nunca tapada.
+        // Spec 052 v2 — rejilla real de ~198 celdas (antes: choropleth de 19
+        // distritos), antes que riesgo-escorrentia en el array (se pinta
+        // primero) para que, si ambas capas están activas a la vez, la de
+        // riesgo de agua (más urgente/accionable) quede encima, nunca tapada.
         altimetriaVisible &&
-          new GeoJsonLayer<DistritoProperties>({
+          new GeoJsonLayer<{ elevacionM: number; distritoCodigo: string }>({
             id: 'altimetria',
-            data: featureCollection,
+            data: altimetriaFeatureCollection,
             stroked: false,
             filled: true,
             pickable: false,
-            getFillColor: (f) => colorChoroplethAltimetria(altimetriaPorDistrito.get(f.properties.codigo)),
-            updateTriggers: { getFillColor: [altimetriaDistritos] },
+            getFillColor: (f) => colorHipsometrico(f.properties.elevacionM),
+            updateTriggers: { getFillColor: [altimetriaPuntos] },
           }),
         riesgoEscorrentiaVisible &&
           new GeoJsonLayer<DistritoProperties>({
@@ -2813,10 +2857,11 @@ async function main(): Promise<void> {
     }
     altimetriaCargada = true;
     try {
-      const { distritos } = await fetchAltimetriaActual();
+      const { distritos, puntos } = await fetchAltimetriaActual();
       altimetriaDistritos = distritos;
+      altimetriaPuntos = puntos;
       renderLayers();
-      renderAltimetriaLeyenda(altimetriaLeyendaRoot, distritos);
+      renderAltimetriaLeyenda(altimetriaLeyendaRoot, distritos, puntos);
     } catch (err) {
       altimetriaLeyendaRoot.textContent = 'Altimetría no disponible';
       console.error('Fallo al cargar altimetría:', err);

@@ -592,3 +592,784 @@ usar el histórico ya real para dar contexto a las recomendaciones de `047` (la 
 propia spec ya anota como pendiente futura — la razón de fondo de todo este trabajo),
 perfiles de "normalidad" por distrito/hora, y reutilizar este mismo modelo para la spec
 `046` en vez de un almacén paralelo (§13.4).
+
+---
+
+## 15. Revisión v2 (2026-09-23) — geolocalización de precisión, zonas reguladas,
+## infraestructura de referencia, correcciones de identidad
+
+Cierre de la ronda de trabajo acordada con el usuario: "primero cerramos lo pendiente y
+luego vamos a ser más ambiciosos". Esta sección añade lo que quedaba abierto desde §13 y
+desde la sesión de geolocalización — **no** incluye todavía `catalogo_variable`,
+`Observación` ni el histórico de dos tuberías (línea base + captura por umbral) que salió
+de comparar dos agentes ciegos (ingeniería de datos / ciencia de datos) — eso es la "ronda
+ambiciosa" explícitamente pospuesta, ver §15.8.
+
+**Nada de esta sección está migrado todavía** — es propuesta, igual que §10 lo fue hasta
+que se ejecutó en §14. La migración real (`003`) es trabajo posterior a cerrar el diseño.
+
+### 15.1 Nuevas entidades de geolocalización de precisión
+
+Motivación del usuario: poder bajar hasta calle+número, y que el barrio se resuelva **por
+el punto concreto**, no por la calle entera — una calle puede cruzar varios barrios, así
+que la contención barrio↔calle no puede vivir a nivel de calle.
+
+- **`Barrio`** — deja de ser un array de nombres dentro de `Distrito` (spec `023`, solo
+  para *matching* de texto) y pasa a entidad real: `codigo`, `distrito_codigo` FK,
+  `nombre`. **Pendiente de verificar**: si Valencia tiene código oficial de barrio
+  publicado (candidato razonable por convención INE/padrón: anidado bajo el distrito, tipo
+  `01-03`) — no lo doy por confirmado, hay que comprobarlo contra el Geoportal antes de
+  fijarlo en una migración real.
+- **`Calle`** — catálogo simple: `id` surrogate, `nombre_oficial`, `codigo_cdncv`
+  (procedencia, no identidad — mismo criterio que ya aplica `Señal`). Deliberadamente
+  **sin** `barrio_codigo` propio, por la razón de arriba. Reconciliación con el `Tramo` ya
+  existente en `red-viaria` (spec `020`, `Implemented`) queda fuera de esta revisión — spec
+  `020` §7 ya documenta que ese join espacial entre segmentaciones distintas es su propio
+  trabajo pendiente, no lo fuerzo aquí encima de un esquema ya implementado.
+- **`Portal`** — la pieza central de esta revisión: `id` surrogate, `calle_id` FK,
+  `numero_texto` (string, no entero — existen "12 bis", "S/N", "14A"), `lat`/`lon`,
+  `barrio_codigo`/`distrito_codigo`/`demarcacion_codigo` **ya resueltos en origen**, mismo
+  patrón que `Señal.distrito_codigo` (§4). `UNIQUE(calle_id, numero_texto)`. Fuente
+  candidata verificada como real (no su esquema exacto): "Portales de las calles", Open
+  Data Valencia.
+- **`DemarcacionPolicial`** — `codigo` (1-7), `nombre`, geometría propia como asset
+  estático (igual que `Distrito.geom` hoy). Resuelta de forma **independiente** por
+  point-in-polygon, nunca derivada de `distrito_codigo` aunque hoy coincidan — dos
+  particiones ortogonales del mismo territorio, no una anidada en la otra (decisión ya
+  tomada en la sesión de geolocalización, se mantiene). Fuente candidata verificada: "Districtes
+  Policials/Distritos Policiales", Open Data Valencia.
+
+### 15.2 Zonas reguladas — `TipoZonaRegulada` / `ZonaRegulada`
+
+Catálogo cerrado y gobernado (`zas`, `vut`, futuros tipos) + zona concreta con vigencia
+temporal real, no un `UPDATE` en sitio si cambia una ordenanza (SCD tipo 2:
+`vigente_desde`/`vigente_hasta`, `null` = vigente). El ámbito de la zona se define
+preferentemente como **lista de calles** cuando la fuente oficial ya delimita así (Russafa
+ZAS: 18 calles concretas, confirmado real) en vez de aproximar con un polígono. Sobre VUT:
+si el registro municipal se publica por dirección individual, la agregación a barrio/calle
+es obligatoria antes de que el dato entre en este modelo (`CLAUDE.md` §4) — no se modela
+`ZonaRegulada` a nivel de portal individual bajo ningún concepto.
+
+`ZonaRegulada` fuera explícitamente de esta revisión: cualquier "zona de menudeo de
+drogas" u "ocupación" — sigue sin existir fuente legal identificable, ver conversación
+previa y `CLAUDE.md` §4. No se reabre.
+
+### 15.3 Infraestructura de referencia — `Camara` / `InfraestructuraCritica`
+
+Dos catálogos nuevos, ambos dimensión/referencia (cambian poquísimo), no `Señal`:
+
+- **`Camara`** — ubicación de cada cámara visible en el mapa: `id` (nativo si la fuente lo
+  da, p. ej. id de DGT; slug propio para las cámaras propias), `nombre`, `lat`/`lon`,
+  `tipo` (`propia` | `dgt-externa`), `fuente_id`, `url_imagen` opcional si la fuente ofrece
+  snapshot público, `activa`. Responde directamente a "marcar con un icono solo dónde están
+  las cámaras reales" — hoy esa información vive repartida entre un JSON estático
+  (`data/camaras-dgt-valencia.json`) y las propias, sin catálogo único; `tipo` permite que
+  la capa de mapa las distinga visualmente sin duplicar lógica.
+- **`InfraestructuraCritica`** — `TipoInfraestructuraCritica` (catálogo: `hospital`,
+  `ayuntamiento`, `bomberos`, `comisaria`, `colegio`...) + `InfraestructuraCritica` (`id`,
+  `tipo_id` FK, `nombre`, `lat`/`lon`, `barrio_codigo`/`distrito_codigo` resueltos,
+  `fuente_id`, `verificado_en`). **Candidato, pendiente de verificar fuente exacta** —
+  probable capa de equipamientos del Geoportal municipal, no confirmada en esta sesión.
+  Naturaleza: catálogo de referencia público (edificios, no personas), sin conflicto con
+  `CLAUDE.md` §4.
+
+Nota deliberada: ambas son, sobre todo, datos maestros para que la capa de mapa
+(`map-layer-definitions.ts`) los pinte distinto — la parte de presentación (icono, color,
+filtro) no es de este documento.
+
+### 15.4 `EventoProgramado` — corrección de identidad + ventana de impacto + calle
+
+Tres cambios sobre la entidad ya `Implemented`:
+
+1. **Corrección de identidad** (ya en cola desde §13-post-revisión): `id uuid` surrogate +
+   `slug_origen text unique`, no el slug de la ficha ajena como PK — un identificador que
+   no controláis no debe ser clave primaria (mismo error que `Señal` ya evita bien con
+   `id`+`id_origen`).
+2. **Ventana de impacto real**: `impacto_previo_min`/`impacto_posterior_min` (minutos),
+   con valor por defecto por categoría y posibilidad de override por evento concreto (un
+   partido normal y una final no tienen el mismo buffer de aglomeración). Antes solo
+   existía `fecha_inicio`/`fecha_fin` del evento en sí — esto añade el intervalo en que el
+   evento **afecta**, que empieza antes y termina después del evento propiamente dicho.
+3. **Granularidad de calle**: `evento_tramo_afectado(evento_id, tramo_id, motivo)`, N:M,
+   junto al `evento_distrito` ya existente — se usa el fino cuando se conoce (Mestalla, el
+   recorrido de una carrera popular) y el distrito cuando no. `tramo_id` es referencia
+   informativa al grafo viario de `red-viaria` (spec `020`); reconciliar ambos esquemas con
+   garantías formales es trabajo de la ronda ambiciosa (`resolucion_tramo` genérico), aquí
+   se deja como referencia simple.
+
+### 15.5 Correcciones sobre entidades ya existentes
+
+| Qué corrige | Cómo |
+|---|---|
+| Campos "enum" sin restricción real (`senal.severidad`, `senal.dominio`, `fuente.tipo`, `asociacion.criterio`, `recomendacion.tipo_actuacion`, `evento_distrito.coincidencia`) | `CHECK` constraint con la lista de valores válidos — no tabla catálogo ni `ENUM` nativo todavía (son listas curadas por el equipo, no crecen por input externo; promocionar a catálogo es aditivo si algún día hace falta). |
+| `asociacion` guardaba cada relación dos veces (verificado contra `correlacion-senales.ts`: `relacionadas` es simétrico por construcción) | Orden canónico forzado en escritura (`senal_id < asociada_id`) antes del `insert`, más `CHECK(senal_id <> asociada_id)` para evitar auto-relación. Una arista no dirigida, una sola fila. |
+| `recomendacion.zona` (texto libre, redundante con `distrito_codigo`) | Se elimina la columna. Con `Barrio` ya real, `recomendacion` gana `barrio_codigo` nullable junto a `distrito_codigo` (precisión fina cuando aplica); la etiqueta legible se calcula en lectura a partir de los códigos, no se almacena duplicada. |
+
+`severidad` reportada-por-fuente vs. derivada-por-regla queda **fuera** de esta revisión a
+propósito — depende de `regla_captura`/`ReglaUmbral`, pieza central de la ronda ambiciosa;
+cerrarla a medias aquí sería peor que dejarla explícitamente pendiente.
+
+### 15.6 Diagrama ER (delta sobre §2)
+
+```mermaid
+erDiagram
+    DISTRITO ||--o{ BARRIO : "contiene"
+    BARRIO ||--o{ PORTAL : "ubica"
+    CALLE ||--o{ PORTAL : "numera"
+    PORTAL }o--|| DEMARCACION_POLICIAL : "resuelve_a"
+    TIPO_ZONA_REGULADA ||--o{ ZONA_REGULADA : "clasifica"
+    ZONA_REGULADA ||--o{ ZONA_REGULADA_CALLE : "delimita"
+    CALLE ||--o{ ZONA_REGULADA_CALLE : "pertenece_a"
+    TIPO_INFRAESTRUCTURA_CRITICA ||--o{ INFRAESTRUCTURA_CRITICA : "clasifica"
+    DISTRITO ||--o{ INFRAESTRUCTURA_CRITICA : "ubica"
+    DISTRITO ||--o{ CAMARA : "ubica"
+    EVENTO_PROGRAMADO ||--o{ EVENTO_TRAMO_AFECTADO : "afecta"
+    RECOMENDACION }o--|| BARRIO : "para_barrio (opcional, más fino que distrito)"
+
+    BARRIO {
+        string codigo PK
+        string distrito_codigo FK
+        string nombre
+    }
+    CALLE {
+        uuid id PK
+        string nombre_oficial
+        string codigo_cdncv
+    }
+    PORTAL {
+        uuid id PK
+        uuid calle_id FK
+        string numero_texto
+        double lat
+        double lon
+        string barrio_codigo FK
+        string distrito_codigo FK
+        string demarcacion_codigo FK
+    }
+    DEMARCACION_POLICIAL {
+        string codigo PK
+        string nombre
+    }
+    ZONA_REGULADA {
+        uuid id PK
+        string tipo_id FK
+        string nombre
+        date vigente_desde
+        date vigente_hasta
+    }
+    CAMARA {
+        string id PK
+        string nombre
+        double lat
+        double lon
+        string tipo
+    }
+    INFRAESTRUCTURA_CRITICA {
+        uuid id PK
+        string tipo_id FK
+        string nombre
+        double lat
+        double lon
+    }
+```
+
+### 15.7 Esquema físico — migración `003` (propuesta, sin ejecutar)
+
+```sql
+create table barrio (
+  codigo text primary key,             -- pendiente de verificar formato real
+  distrito_codigo text not null references distrito(codigo),
+  nombre text not null
+);
+
+create table calle (
+  id uuid primary key default gen_random_uuid(),
+  nombre_oficial text not null,
+  codigo_cdncv text unique
+);
+create index on calle (nombre_oficial);
+
+create table demarcacion_policial (
+  codigo text primary key,
+  nombre text not null
+);
+
+create table portal (
+  id uuid primary key default gen_random_uuid(),
+  calle_id uuid not null references calle(id),
+  numero_texto text not null,
+  lat double precision not null,
+  lon double precision not null,
+  barrio_codigo text references barrio(codigo),
+  distrito_codigo text references distrito(codigo),
+  demarcacion_codigo text references demarcacion_policial(codigo),
+  fuente_id text not null references fuente(id),
+  actualizado_en timestamptz not null default now(),
+  unique (calle_id, numero_texto)
+);
+create index on portal (barrio_codigo);
+create index on portal (distrito_codigo);
+
+create table tipo_zona_regulada (
+  id text primary key,                 -- 'zas' | 'vut'
+  nombre text not null
+);
+
+create table zona_regulada (
+  id uuid primary key default gen_random_uuid(),
+  tipo_id text not null references tipo_zona_regulada(id),
+  nombre text not null,
+  fuente_id text not null references fuente(id),
+  vigente_desde date not null,
+  vigente_hasta date                   -- null = vigente
+);
+
+create table zona_regulada_calle (
+  zona_regulada_id uuid not null references zona_regulada(id) on delete cascade,
+  calle_id uuid not null references calle(id),
+  primary key (zona_regulada_id, calle_id)
+);
+
+create table camara (
+  id text primary key,
+  nombre text not null,
+  lat double precision not null,
+  lon double precision not null,
+  tipo text not null check (tipo in ('propia','dgt-externa')),
+  fuente_id text not null references fuente(id),
+  url_imagen text,
+  activa boolean not null default true
+);
+
+create table tipo_infraestructura_critica (
+  id text primary key,
+  nombre text not null
+);
+
+create table infraestructura_critica (
+  id uuid primary key default gen_random_uuid(),
+  tipo_id text not null references tipo_infraestructura_critica(id),
+  nombre text not null,
+  lat double precision not null,
+  lon double precision not null,
+  barrio_codigo text references barrio(codigo),
+  distrito_codigo text references distrito(codigo),
+  fuente_id text not null references fuente(id),
+  verificado_en date
+);
+
+-- Correcciones sobre tablas ya existentes (§15.5):
+alter table senal add constraint senal_severidad_valida
+  check (severidad in ('informativo','aviso','urgente'));
+alter table fuente add constraint fuente_tipo_valido
+  check (tipo in ('oficial-api','scraping','modelo','comunitario'));
+alter table asociacion add constraint asociacion_sin_autorrelacion
+  check (senal_id <> asociada_id);
+-- orden canónico (senal_id < asociada_id) se fuerza en la capa de escritura
+-- (historico-senales.ts), no en el esquema, porque UUID no tiene orden semántico útil
+-- a nivel de CHECK declarativo — la garantía real vive en el código que inserta.
+
+alter table recomendacion drop column zona;
+alter table recomendacion add column barrio_codigo text references barrio(codigo);
+
+-- evento_programado: recreación con id surrogate (migración de datos, no solo de esquema,
+-- si ya hay filas reales — evaluar en su momento) + ventana de impacto:
+alter table evento_programado add column impacto_previo_min integer not null default 0;
+alter table evento_programado add column impacto_posterior_min integer not null default 0;
+
+create table evento_tramo_afectado (
+  evento_id text not null references evento_programado(id) on delete cascade,
+  tramo_id text not null,
+  motivo text,
+  primary key (evento_id, tramo_id)
+);
+```
+
+### 15.8 Qué queda explícitamente fuera de esta revisión
+
+- **Histórico de dos tuberías** (`catalogo_variable`, `Observación`, `agregado_periodico`/
+  `perfil_temporal_zona`, `captura`/`disparo_captura`/`regla_captura`, `purga_log`,
+  `ejecucion_pipeline`) — la "ronda ambiciosa" acordada, siguiente paso tras esta revisión.
+- **Reconducción de tráfico al cortar una calle** (propagación dirigida sobre el grafo) —
+  pertenece a specs `020`-`022`/`031`, es algoritmo de rutas, no modelo de datos.
+- **Imagen a nivel de calle tipo Street View** — no es dato de dominio, es integración de
+  un proveedor de imágenes (Mapillary como candidato abierto); su propia spec si se
+  retoma.
+- **Filtros/capas de mapa** (temperatura, lluvia, altimetría, ZAS-sonido, cámaras,
+  infraestructura crítica pintadas en el mapa) — la referencia de datos que necesitan
+  queda cubierta arriba; la presentación es `src/config/map-layer-definitions.ts`, fuera de
+  este documento.
+- **Sonido en tiempo real en zonas ZAS** — sigue sin fuente confirmada, no se modela hasta
+  verificarlo con una llamada real.
+
+### 15.9 Pendiente de verificar antes de escribir la migración `003`
+
+- Formato real del código de `Barrio` en el Geoportal de Valencia.
+- Esquema y licencia exactos de "Portales de las calles" y "Districtes Policials" (Open
+  Data Valencia) — confirmados como reales en la investigación previa, no confirmados en su
+  forma exacta de campos.
+- Fuente exacta de `InfraestructuraCritica` (capa de equipamientos del Geoportal, a
+  confirmar).
+- Si el registro de VUT se publica agregado o por dirección individual — condiciona si
+  `ZonaRegulada` de tipo `vut` puede construirse tal cual o necesita un paso de agregación
+  obligatorio antes de ingesta.
+- Volumen real del dataset de portales — condiciona si `Portal` se resuelve en función
+  serverless con índice en memoria o como asset estático de CDN (mismo patrón que el grafo
+  viario), igual que ya señaló el ingeniero de datos en la comparación ciega.
+
+---
+
+## 16. Revisión v3 (2026-09-23) — histórico de dos tuberías, catálogo de variables
+## gobernado (la ronda "ambiciosa")
+
+Esta sección cierra lo que quedó explícitamente pospuesto en §15.8: el mecanismo real que
+hace posible comparar "esto es normal para esta zona/hora" y acumular histórico útil para
+predicción futura — la razón de fondo por la que el usuario quería este histórico desde el
+principio. Nace de comparar dos propuestas ciegas independientes (ingeniería de datos /
+ciencia de datos, mismo encargo, sin verse entre sí ni ver este documento) — donde
+coincidían sin haberse visto, la adopción es directa; donde discrepaban, la decisión y su
+razón están explícitas abajo.
+
+### 16.1 Dos decisiones de fondo, resueltas
+
+**`Observación` (nueva) convive con `Señal`, no la sustituye.** Responden preguntas
+distintas: `Señal` es "qué pasó en esta calle, en términos que un humano lee" (severidad,
+descripción, investigación a posteriori — §11.2) y sigue escribiéndose exactamente igual
+que hoy (`historico-senales.ts`, solo `aviso`/`urgente`, solo si cambia el estado).
+`Observación` es "dame la serie temporal gobernada de esta variable, para análisis
+estadístico y modelos futuros" — se alimenta de las mismas fuentes normalizadas
+(`src/services/*.ts`), no de `Señal`, así que no hay una tubería derivando de la otra ni
+duplicación de escritura: son dos destinos independientes de la misma materia prima cruda,
+cada uno con su propia cadencia y condición de escritura (§16.4).
+
+**`Asociación` se queda como está — arista rígida `Señal`↔`Señal` con FK real, no se
+generaliza a relación polimórfica.** La propuesta de ingeniería de datos (relacionar
+también `Captura`/`EventoProgramado`/`Recomendación` con un `tipo`+`id` genérico) es más
+flexible pero renuncia a integridad referencial real de Postgres — no se puede tener una
+FK que apunte "a una de varias tablas" sin trucos adicionales. Si aparece un caso de uso
+concreto que necesite relacionar, por ejemplo, una `Captura` con un `EventoProgramado`, se
+añade una tabla de relación estrecha y con FK real para ese par concreto cuando haga falta
+— no una genérica de antemano sin necesidad probada.
+
+### 16.2 `catalogo_variable` — el contrato anti-EAV
+
+La pieza que convierte el histórico multi-fuente en "EAV gobernado" en vez de JSON libre
+sin contrato. Una fila por cada magnitud medible que el sistema puede llegar a persistir en
+`Observación`:
+
+```sql
+create table catalogo_variable (
+  id text primary key,              -- namespaced: 'meteo.temperatura', 'aire.pm25', 'trafico.ocupacion_pct'
+  nombre text not null,
+  dominio text not null,            -- mismo vocabulario que senal.dominio
+  tipo_dato text not null check (tipo_dato in ('numerico','categorico','booleano')),
+  unidad text,                      -- '°C', 'µg/m³', null si categórico
+  rango_valido_min numeric,
+  rango_valido_max numeric,
+  valores_permitidos text[],        -- solo si tipo_dato = 'categorico'
+  fuente_id_defecto text references fuente(id),
+  sensible boolean not null default false,   -- true si pudiera aproximarse a actividad humana agregada
+  n_minimo_agregacion integer,      -- k-anonimato: umbral de supresión si sensible = true (ver §16.9)
+  activo boolean not null default true
+);
+```
+
+Añadir una fuente nueva que aporte una variable ya conocida (p. ej. otra estación de
+temperatura) es una fila de `fuente`, no una columna nueva. Añadir una magnitud realmente
+nueva es una fila revisada en `catalogo_variable` (unidad, rango, si es sensible), no un
+campo JSON libre insertado de pasada.
+
+### 16.3 `Observación` — la tabla de hechos gobernada
+
+```sql
+create table observacion (
+  id uuid primary key default gen_random_uuid(),
+  variable_id text not null references catalogo_variable(id),
+  fuente_id text not null references fuente(id),
+  valor_numerico numeric,
+  valor_categorico text,
+  check (
+    (valor_numerico is not null and valor_categorico is null) or
+    (valor_numerico is null and valor_categorico is not null)
+  ),
+  barrio_codigo text references barrio(codigo),     -- grano base — más fino que distrito
+  distrito_codigo text references distrito(codigo), -- redundante deliberado, evita join en consultas de rollup por distrito
+  tramo_id text,                                     -- referencia informativa al grafo viario, si aplica
+  tipo_temporal text not null check (tipo_temporal in ('medido','previsto')) default 'medido',
+  observed_at timestamptz not null,   -- si previsto: el instante PARA el que se predice, no cuándo se emitió
+  emitido_en timestamptz,             -- solo si tipo_temporal = 'previsto' — cuándo se emitió esa predicción
+  ingested_at timestamptz not null default now(),
+  precision_temporal text not null check (precision_temporal in ('instante','hora','dia')) default 'instante',
+  interpolado boolean not null default false,
+  distancia_fuente_km numeric,        -- si interpolado = true, distancia a la estación/sensor real más cercano
+  captura_id uuid references captura(id),   -- null si es observación de línea base, no disparada por umbral
+  check (tipo_temporal = 'previsto' or emitido_en is null)
+);
+create index on observacion (barrio_codigo, variable_id, observed_at);
+create index on observacion (variable_id, observed_at) where captura_id is null;  -- consultas de línea base
+create index on observacion (captura_id) where captura_id is not null;
+```
+
+Resuelve, con campos concretos, los hallazgos de la comparación ciega:
+- **`tipo_temporal`/`emitido_en`** — nunca se sobrescribe un pronóstico con el dato real en
+  la misma fila (Open-Meteo da ambos); son filas distintas, distinguibles.
+- **`precision_temporal`** — evita mezclar sin marcar una lectura con precisión de segundo
+  (Open-Meteo) con un aviso GVA que solo da fecha sin hora (`avisos-meteo.ts`).
+- **`interpolado`/`distancia_fuente_km`** — la calidad del aire tiene 4-5 estaciones para
+  88 barrios (hallazgo verificado contra código real por el agente de ciencia de datos); un
+  barrio sin estación cercana queda marcado como tal en el propio dato, no solo mencionado
+  en un pie de página de la UI.
+- **Resolución espacial congelada en escritura** (`barrio_codigo`/`distrito_codigo`), nunca
+  recalculada a posteriori contra geometría "actual" — mismo principio que ya aplica
+  `Señal`.
+
+### 16.4 La tubería doble: línea base vs. captura por umbral
+
+**a) `agregado_periodico`** — línea base, densa, barata, **incondicional** (se escribe
+siempre, se dispare o no cualquier umbral). Generaliza el rollup horario→diario que
+`trafico-historico.ts` (spec `017`) ya hace para tráfico, a cualquier variable del
+catálogo:
+
+```sql
+create table agregado_periodico (
+  id uuid primary key default gen_random_uuid(),
+  variable_id text not null references catalogo_variable(id),
+  barrio_codigo text references barrio(codigo),
+  franja_hora smallint not null check (franja_hora between 0 and 23),
+  fecha date not null,
+  promedio numeric,
+  minimo numeric,
+  maximo numeric,
+  p90 numeric,
+  n_muestras integer not null,
+  actualizado_en timestamptz not null default now(),
+  unique (variable_id, barrio_codigo, franja_hora, fecha)
+);
+```
+
+**b) `perfil_temporal_zona`** — recalculado periódicamente (semanal) a partir de
+`agregado_periodico` **exclusivamente**, nunca de `captura` — si se calculara sobre las
+capturas, el perfil quedaría sesgado hacia lo anómalo, justo el error que se quiere evitar:
+
+```sql
+create table perfil_temporal_zona (
+  variable_id text not null references catalogo_variable(id),
+  barrio_codigo text not null references barrio(codigo),
+  franja_hora smallint not null check (franja_hora between 0 and 23),
+  tipo_dia text not null check (tipo_dia in ('laborable','finde','festivo')),
+  media numeric,
+  mediana numeric,
+  p10 numeric,
+  p90 numeric,
+  desviacion numeric,
+  n_muestras integer not null,
+  actualizado_en timestamptz not null default now(),
+  primary key (variable_id, barrio_codigo, franja_hora, tipo_dia)
+);
+```
+
+`n_muestras` se expone siempre junto al perfil — un sensor con 3 semanas de histórico no
+puede afirmar "lo normal" con la misma confianza que uno con 2 años; esto es la forma de
+comunicar incertidumbre sobre el propio dato histórico, no solo en la UI en vivo.
+
+**c) `regla_captura` / `disparo_captura` / `captura`** — la pieza rara y rica, activada por
+umbral:
+
+```sql
+create table regla_captura (
+  id uuid primary key default gen_random_uuid(),
+  variable_id text not null references catalogo_variable(id),
+  tipo text not null check (tipo in ('absoluto','adaptativo')),
+  operador text not null check (operador in ('>','<','>=','<=')),
+  valor_umbral numeric,              -- si tipo = 'absoluto'
+  percentil_referencia numeric,      -- si tipo = 'adaptativo': p. ej. 90 -> compara contra p90 de perfil_temporal_zona
+  grano_espacial text not null check (grano_espacial in ('ciudad','distrito','barrio')),
+  modo text not null check (modo in ('sombra','vivo')) default 'sombra',
+  vigente_desde timestamptz not null default now(),
+  vigente_hasta timestamptz,          -- null = vigente; nunca se hace UPDATE en sitio, se cierra e inserta nueva versión
+  calibrado_por text,
+  fecha_calibracion date
+);
+
+create table disparo_captura (
+  id uuid primary key default gen_random_uuid(),
+  regla_captura_id uuid not null references regla_captura(id),
+  variable_id text not null references catalogo_variable(id),
+  valor_que_disparo numeric,
+  barrio_codigo text references barrio(codigo),
+  disparado_en timestamptz not null default now()
+);
+
+create table captura (
+  id uuid primary key default gen_random_uuid(),
+  disparo_id uuid not null references disparo_captura(id),
+  barrio_codigo text references barrio(codigo),
+  momento timestamptz not null
+);
+```
+
+Guardar `regla_captura_id` en `disparo_captura` (no solo el valor) es lo que permite
+auditar, dentro de dos años, bajo qué regla exacta se disparó una captura concreta, incluso
+si el umbral se recalibró después.
+
+**Criterio de calibración de umbrales** (distinción de la ciencia de datos, adoptada tal
+cual): variables con sentido físico/salud pública fijo (calor/frío extremo, viento, AQI
+sobre banda OMS/UE) usan `tipo = 'absoluto'`, documentado contra la fuente de referencia.
+Variables relativas por naturaleza (densidad de tráfico, nº de incidencias activas) usan
+`tipo = 'adaptativo'` contra `perfil_temporal_zona`, porque un umbral fijo aquí falla en
+los dos sentidos (nunca dispara fuera de hora punta, o dispara siempre en ella). Toda regla
+nueva nace en `modo = 'sombra'` (registra disparos sin generar alerta visible) — mismo
+patrón ya validado en spec `010` v4 (`scripts/snapshot-pulso-sombra.ts`) — y solo pasa a
+`vivo` tras revisión humana de la tasa de falsos positivos.
+
+**De dónde sale "el resto de variables del momento" sin llamadas nuevas a fuentes
+externas**: el job que evalúa `regla_captura` lee de la caché de proceso ya existente
+(`getOrFetch`), no vuelve a golpear ninguna API — todas las demás capas ya se refrescan por
+su propio ciclo de seed. Respeta `CLAUDE.md` §2 sin presión de cuota añadida.
+
+### 16.5 Cierre del punto pendiente de §15.5: severidad reportada vs. derivada
+
+Se resuelve con una pieza distinta y más ligera que `regla_captura` — a propósito, porque
+son dos problemas distintos aunque se parezcan: `regla_captura` decide qué entra en el
+histórico analítico; **`regla_alerta`** decide cuándo `Señal.severidad` se deriva de una
+regla nuestra en vez de venir ya así de la fuente. Formaliza lo que hoy vive como
+constantes sueltas en `insights.ts` (38°C/42°C calor, 35°C aviso, 0°C frío, 50/70 km/h
+viento, 3/6 tramos):
+
+```sql
+create table regla_alerta (
+  id uuid primary key default gen_random_uuid(),
+  variable_id text not null references catalogo_variable(id),
+  operador text not null check (operador in ('>','<','>=','<=')),
+  valor_umbral numeric not null,
+  severidad_resultante text not null check (severidad_resultante in ('aviso','urgente')),
+  vigente_desde timestamptz not null default now(),
+  vigente_hasta timestamptz
+);
+
+alter table senal add column regla_alerta_id uuid references regla_alerta(id);
+-- null = severidad reportada tal cual por la fuente; relleno = la subió esta regla concreta
+```
+
+Con esto, "¿por qué se marcó esto como aviso?" tiene respuesta en una query, no en rastrear
+código.
+
+### 16.6 Retención, auditoría y salud del propio pipeline
+
+```sql
+create table purga_log (
+  id uuid primary key default gen_random_uuid(),
+  tabla_afectada text not null,
+  rango_desde timestamptz not null,
+  rango_hasta timestamptz not null,
+  filas_afectadas integer not null,
+  rollup_resultante_ref text,        -- referencia al agregado_periodico que sustituye al detalle purgado
+  ejecutado_en timestamptz not null default now()
+);
+
+create table ejecucion_pipeline (
+  id uuid primary key default gen_random_uuid(),
+  job text not null,
+  ejecutado_en timestamptz not null default now(),
+  ok boolean not null,
+  filas_insertadas integer,
+  detalle_error text
+);
+```
+
+`observacion` se particiona por rango mensual de `observed_at` (partición nativa de
+Postgres, no una decisión arquitectónica nueva) para que tanto la consulta como la purga
+por partición completa sean baratas. Ninguna purga ocurre sin dejar fila en `purga_log` —
+es la respuesta directa al hallazgo 🔴 de la revisión senior (`on delete cascade` rompiendo
+trazabilidad): aquí ni siquiera se depende de un `cascade`, la purga es una operación
+explícita y registrada, nunca un efecto secundario de borrar otra cosa. `captura` (bajo
+volumen, alto valor) **no se purga nunca** — solo `observacion` de línea base, y solo tras
+compactar su rango a `agregado_periodico`, que ya lo conserva agregado.
+
+`ejecucion_pipeline` resuelve el caso de uso que casi nunca se diseña a propósito:
+distinguir "no hay histórico nuevo porque no pasó nada" de "no hay histórico nuevo porque
+el cron lleva 3 días caído".
+
+### 16.7 Diagrama ER (delta sobre §2 y §15.6)
+
+```mermaid
+erDiagram
+    CATALOGO_VARIABLE ||--o{ OBSERVACION : "tipa"
+    BARRIO ||--o{ OBSERVACION : "ubica"
+    CAPTURA ||--o{ OBSERVACION : "agrupa"
+    DISPARO_CAPTURA ||--o{ CAPTURA : "origina"
+    REGLA_CAPTURA ||--o{ DISPARO_CAPTURA : "dispara"
+    CATALOGO_VARIABLE ||--o{ AGREGADO_PERIODICO : "resume"
+    CATALOGO_VARIABLE ||--o{ PERFIL_TEMPORAL_ZONA : "perfila"
+    CATALOGO_VARIABLE ||--o{ REGLA_CAPTURA : "gobierna"
+    CATALOGO_VARIABLE ||--o{ REGLA_ALERTA : "gobierna"
+    REGLA_ALERTA ||--o{ SENAL : "puede_derivar"
+
+    CATALOGO_VARIABLE {
+        string id PK
+        string tipo_dato
+        string unidad
+        boolean sensible
+    }
+    OBSERVACION {
+        uuid id PK
+        string variable_id FK
+        string barrio_codigo FK
+        string tipo_temporal
+        timestamptz observed_at
+        uuid captura_id FK
+    }
+    AGREGADO_PERIODICO {
+        uuid id PK
+        string variable_id FK
+        string barrio_codigo FK
+        smallint franja_hora
+        date fecha
+    }
+    PERFIL_TEMPORAL_ZONA {
+        string variable_id FK
+        string barrio_codigo FK
+        smallint franja_hora
+        string tipo_dia
+    }
+    REGLA_CAPTURA {
+        uuid id PK
+        string variable_id FK
+        string tipo
+        string modo
+    }
+    REGLA_ALERTA {
+        uuid id PK
+        string variable_id FK
+        string severidad_resultante
+    }
+```
+
+### 16.8 Errores clásicos evitados — resumen
+
+| Error clásico | Cómo lo evita esta revisión |
+|---|---|
+| Histórico sesgado hacia el drama, sin ejemplos de "normal" | `agregado_periodico` incondicional, desacoplado de cualquier umbral (§16.4a). |
+| Umbral fijo que no se adapta a estacionalidad | `regla_captura.tipo = 'adaptativo'` contra `perfil_temporal_zona` para variables relativas por naturaleza (§16.4c). |
+| Recalibrar un umbral reescribe silenciosamente la historia | `regla_captura`/`regla_alerta` con `vigente_desde`/`vigente_hasta`, nunca `UPDATE` en sitio; `disparo_captura` guarda la regla exacta que disparó. |
+| Fuga de datos: pronóstico y medición mezclados en la misma fila | `tipo_temporal`/`emitido_en` en `Observación` — filas distintas, nunca sobrescritura. |
+| EAV sin contrato | `catalogo_variable` fija tipo, unidad, rango y vocabulario antes de que exista una fila de `Observación` con esa variable. |
+| Pérdida de trazabilidad al purgar | `purga_log` obligatorio en cada compactación; `captura` nunca se purga. |
+| Silencio ambiguo del pipeline | `ejecucion_pipeline` distingue "no pasó nada" de "está caído". |
+| Agregar variable sensible sin umbral de supresión | `catalogo_variable.sensible`/`n_minimo_agregacion` — k-anonimato explícito en el catálogo, no solo en la UI (§16.9). |
+
+### 16.9 Nota operacional sobre `catalogo_variable.sensible`
+
+Ninguna variable de este catálogo identifica personas hoy — toda la ronda ambiciosa opera
+sobre infraestructura pública (tráfico, meteo, aire, eventos). El campo `sensible`/
+`n_minimo_agregacion` existe **preparado, no activado**: si en el futuro (F6, hoy
+`Blocked`) se activara alguna variable de movilidad agregada real, entraría con `sensible =
+true` y un `n_minimo_agregacion` explícito (candidato 15-30, mismo orden que aplican
+productos comerciales de agregación tipo Telefónica LUCA) antes de que una sola fila toque
+`Observación` — nunca después, y nunca solo como advertencia en la UI. Esto no reabre
+`CLAUDE.md` §4, lo operacionaliza con un número concreto en vez de dejarlo en principio
+general.
+
+### 16.10bis Verificación real de §15.9 (2026-09-24) — fuente de Barrio/Calle/Portal confirmada
+
+Investigación con llamadas reales (no solo búsqueda) contra el mismo servidor ArcGIS ya
+dado de alta como `fuente` (`ajuntament-valencia-geoportal`) — cierra dos de los puntos
+pendientes de §15.9:
+
+- **`Portals dels carrers`** (capa 217 del MapServer `OPENDATA/UrbanismoEInfraestructuras`):
+  56.651 registros reales, licencia CC BY 4.0. Campos: `codvia`, `numportal`,
+  `dupli_trip`, `accesorio`, `angulo`, `catfis`, `descripcion` + geometría punto (UTM
+  25830 — pedir `outSR=4326` en la query evita reproyectar a mano). **No** lleva nombre de
+  calle ni barrio/distrito propios.
+- **`Vias`** (tabla 273, mismo MapServer): `codvia` (clave de cruce), `codviacatastro`,
+  `codtipovia`, `nomoficial` (nombre real de la calle).
+- **`Barris/Barrios`** (capa 224, mismo MapServer): `codbarrio`, `coddistbar` (código
+  distrito-barrio combinado — confirma la convención anidada que se supuso en §15.1),
+  `coddistrit` (cruzable directo con `distrito.codigo`), geometría de polígono.
+
+Resolución real: `Portal` (punto) → point-in-polygon contra `Barris` (da `codbarrio` +
+`coddistrit` en un solo cruce) → `Calle.nombre_oficial` vía `Vias.codvia = Portal.codvia`.
+Mismo patrón que ya usa `district-geometry.ts` para `Señal.distrito_codigo`, un nivel más
+fino. No hace falta dar de alta ninguna `Fuente` nueva — es el mismo proveedor ya
+catalogado. Pendiente real que queda: paginar 56.651 filas por el límite de transferencia
+por petición del servicio (`resultOffset`/`resultRecordCount`, patrón ArcGIS estándar) —
+trabajo de implementación, no de este documento.
+
+Hallazgo adicional, no solicitado pero relevante para cuando se retome
+`DemarcacionPolicial`: el mismo MapServer expone también **`Barris Policials/Barrios
+Policiales`** (capa 267) — una subdivisión más fina que los 7 distritos policiales,
+no contemplada hasta ahora. Se anota para la spec correspondiente, no se modela aquí.
+
+### 16.10ter Verificación real de `DemarcacionPolicial` (2026-09-24) — revisa §15.1
+
+Investigación con llamadas reales contra el mismo MapServer que §16.10bis:
+
+- **`Districtes Policials`** (capa 266): **7 registros exactos**, confirmando la cifra que
+  ya manejaba el usuario. Campos: `nombre`, `direccion`, `telefono`, `fax`, `distritopl`
+  (código nativo — `10`/`20`/`30`/`40`/`50`/`60`/`70`, no `1`-`7` como se había supuesto en
+  §15.1/§15.7; se recomienda usar el código nativo tal cual, mismo criterio que el resto
+  del modelo aplica cuando la fuente ya da un identificador estable — no inventar una
+  renumeración propia sin necesidad). Nombres reales (actualizan la prensa citada en
+  sesiones previas, que mencionaba "Abastos" — no aparece en la fuente oficial): Ciutat
+  Vella (10), Russafa (20), Patraix-Jesús (30), Campanar-Benimàmet (40), Trànsits (50),
+  Exposició-Benimaclet (60), Marítim (70). `direccion`/`telefono`/`fax` son un campo con
+  valor práctico real no contemplado en el diseño original — dirección y contacto de la
+  comisaría de cada distrito.
+- **`Barris Policials`** (capa 267): **88 registros** — mismo número que los barrios
+  administrativos de la ciudad. Muestra verificada (15 filas) confirma que `barriopol` son
+  nombres de barrio reales (L'Illa Perduda, Malilla, Benicalap, Mestalla, Safranar...), cada
+  uno con su `distritopo` (mismo código de la capa anterior).
+
+**Esto revisa la decisión de §15.1** ("resuelta de forma independiente por point-in-polygon,
+nunca derivada de barrio/distrito"), tomada entonces por precaución sin datos reales. El
+dato real dice que un barrio nunca queda partido entre dos demarcaciones policiales —
+`DemarcacionPolicial` no necesita su propia geometría ni su propio point-in-polygon: basta
+una tabla de correspondencia `barrio_demarcacion_policial(barrio_codigo, demarcacion_codigo)`
+(≈88 filas, prácticamente estática, construida una vez por cruce de nombre normalizado
+entre `Barris` y `Barris Policials` — no comparten `codbarrio`, solo nombre, así que el
+cruce inicial necesita revisión humana puntual de las 88 filas, no es un *join* automático
+fiable a ciegas). El punto se resuelve contra `Barris` (que ya hace falta para el barrio) y
+la demarcación sale de la misma consulta, sin segundo sistema de polígonos.
+
+```sql
+-- Sustituye a la geometría independiente prevista en §15.7 para demarcacion_policial:
+create table demarcacion_policial (
+  codigo text primary key,        -- código nativo: '10'..'70'
+  nombre text not null,
+  direccion text,
+  telefono text
+);
+
+create table barrio_demarcacion_policial (
+  barrio_codigo text primary key references barrio(codigo),
+  demarcacion_codigo text not null references demarcacion_policial(codigo)
+);
+```
+
+**Licencia verificada (2026-09-24)**: el `copyrightText` vacío en los metadatos del propio
+servicio ArcGIS no reflejaba ausencia de licencia — confirmado contra el catálogo CKAN real
+(`opendata.vlci.valencia.es/api/3/action/package_search`, el mismo portal ya usado para
+"Portals dels carrers", no `valencia.opendatasoft.com`, que resultó ser un dominio retirado
+que ya no resuelve). Ambos datasets, **`Distritos Policiales`** y **`Barrios Policiales`**,
+están licenciados **CC BY 4.0** (Atribución 4.0 Internacional) por el Ajuntament de
+València — misma licencia que "Portals dels carrers", mismo editor. Sin cauce legal
+pendiente en esta pieza del modelo.
+
+### 16.10 Pendiente de verificar / fuera de esta revisión
+
+- Cadencia real de refresco de cada fuente antes de fijar la granularidad temporal de
+  `agregado_periodico` — no asumir más precisión de la que la fuente entrega de verdad.
+  Falta auditar fuente por fuente (Open-Meteo hourly confirmado; el resto, no).
+- Límite real de almacenamiento vigente del free tier de Neon — fija el intervalo real de
+  compactación/purga de §16.6, no asumido aquí.
+- Lista inicial de filas de `catalogo_variable` (qué variables concretas de las ~30
+  interfaces existentes entran primero) — trabajo de la spec que implemente esto, no de
+  este documento.
+- Descomposición en specs — esta sección, igual que §15, no es una spec: como mínimo separa
+  en (1) `catalogo_variable`+`Observación` como tabla de hechos, (2) `agregado_periodico`+
+  `perfil_temporal_zona`, (3) `regla_captura`/`regla_alerta`+captura por umbral, (4)
+  retención/`purga_log`/`ejecucion_pipeline`. Cada una necesita su contrato de datos
+  congelado antes de tocar Postgres, siguiendo `CLAUDE.md` §2.
+- Migración `004` (esta sección) depende de que `003` (§15.7) esté aplicada primero —
+  `Observación`/`agregado_periodico`/`perfil_temporal_zona` usan `barrio_codigo` como
+  grano base.

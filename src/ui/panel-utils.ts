@@ -61,11 +61,13 @@ export function buildInfoPanel(id: string, opciones?: { colapsable?: boolean }):
   const root = document.createElement('div');
   root.id = id;
   root.className = 'info-panel';
-  // spec 035 §5.2 (v2) — las leyendas de capa arrancan colapsadas a su
-  // título y se expanden solo con clic/tap, igual en escritorio que en
-  // móvil (antes también se expandían al hover, ver historial de la spec).
+  // spec 035 §5.2 (v2) arrancaba las leyendas colapsadas a su título, con
+  // clic/tap para expandir. Petición explícita del usuario (2026-09-30):
+  // que se vean siempre abiertas al activar la capa, sin tener que pulsar
+  // — arrancan ya expandidas (`is-expandida` desde el principio); el clic
+  // sigue ahí solo para quien quiera plegarla a mano y reducir el ruido.
   if (opciones?.colapsable) {
-    root.classList.add('info-panel--colapsable');
+    root.classList.add('info-panel--colapsable', 'is-expandida');
     root.tabIndex = 0;
     root.addEventListener('click', (ev) => {
       if ((ev.target as HTMLElement).closest('button, a')) return;
