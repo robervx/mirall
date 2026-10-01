@@ -12,7 +12,7 @@ export const config = { runtime: 'edge' };
 const CACHE_KEY = 'emergencia:avamet-estaciones:v1';
 const TTL_MS = 15 * 60 * 1000;
 const AVAMET_URL = 'https://www.avamet.org/mxo-mxo.php?territori=c15';
-const USER_AGENT = 'vlc-monitor-emergencia-bot/1.0 (+https://github.com/robervx/vlc-monitor)';
+const USER_AGENT = 'vlc-monitor-emergencia-bot/1.0 (+https://github.com/robervx/mirall)';
 
 async function fetchEstacionesAvamet(): Promise<EstacionAvamet[]> {
   const res = await fetch(AVAMET_URL, { headers: { 'user-agent': USER_AGENT } });

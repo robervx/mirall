@@ -19,7 +19,7 @@ import {
   UMBRAL_TRAFICO_CONCENTRADO_URGENTE,
 } from '../services/insights';
 
-const REPO_URL = 'https://github.com/robervx/vlc-monitor';
+const REPO_URL = 'https://github.com/robervx/mirall';
 const RUTA_FUENTES = 'docs/FUENTES_Y_LICENCIAS.md';
 
 export interface EntradaGlosario {

@@ -16,7 +16,7 @@ import path from 'node:path';
 import { normalizarCamarasDgt, type CamaraCrudaDgt } from '../src/services/camaras-dgt';
 
 const URL = 'https://www.dgt.es/.content/.assets/json/camaras.json';
-const USER_AGENT = 'vlc-monitor-camaras-bot/1.0 (+https://github.com/robervx/vlc-monitor)';
+const USER_AGENT = 'vlc-monitor-camaras-bot/1.0 (+https://github.com/robervx/mirall)';
 const OUTPUT_PATH = path.join(path.dirname(fileURLToPath(import.meta.url)), '..', 'data', 'camaras-dgt-valencia.json');
 
 async function main(): Promise<void> {

@@ -3,7 +3,7 @@
 Material listo para publicar. El repo público es la pieza de portfolio; el post de
 LinkedIn es el anzuelo que lleva a él.
 
-- **Repo:** https://github.com/robervx/vlc-monitor
+- **Repo:** https://github.com/robervx/mirall
 - **Demo en vivo:** https://vlc-monitor.vercel.app
 - **Capturas:** `docs/capturas/` (hero para el post, las otras 3 para el carrusel o el primer comentario)
 
@@ -34,7 +34,7 @@ LinkedIn es el anzuelo que lleva a él.
 > Es un proyecto abierto (MIT): se puede desplegar tal cual o partir de él para otra ciudad.
 >
 > 🔗 Demo: https://vlc-monitor.vercel.app
-> 🔗 Código y documentación: https://github.com/robervx/vlc-monitor
+> 🔗 Código y documentación: https://github.com/robervx/mirall
 >
 > Feedback bienvenido, sobre todo de quien trabaje con datos abiertos municipales o movilidad urbana.
 >
@@ -52,7 +52,7 @@ LinkedIn es el anzuelo que lleva a él.
 >
 > Proyecto abierto (MIT).
 > Demo: https://vlc-monitor.vercel.app
-> Código: https://github.com/robervx/vlc-monitor
+> Código: https://github.com/robervx/mirall
 >
 > #OpenData #SmartCity #Valencia #TypeScript #CivicTech
 
@@ -76,7 +76,7 @@ LinkedIn es el anzuelo que lleva a él.
 > Open project (MIT) — deploy as-is or fork it for another city.
 >
 > 🔗 Demo: https://vlc-monitor.vercel.app
-> 🔗 Code: https://github.com/robervx/vlc-monitor
+> 🔗 Code: https://github.com/robervx/mirall
 >
 > #OpenData #SmartCity #TypeScript #DataVisualization #CivicTech #MapLibre
 

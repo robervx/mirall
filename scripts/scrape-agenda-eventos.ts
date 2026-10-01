@@ -38,7 +38,7 @@ const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), '..');
 const SNAPSHOT_PATH = path.join(ROOT, 'data', 'agenda-eventos.json');
 const BASE_URL = 'https://www.valencia.es';
 const LISTADO_URL = `${BASE_URL}/cas/agenda-de-la-ciudad`;
-const USER_AGENT = 'vlc-monitor-agenda-bot/1.0 (+https://github.com/robervx/vlc-monitor)';
+const USER_AGENT = 'vlc-monitor-agenda-bot/1.0 (+https://github.com/robervx/mirall)';
 
 interface DistritoFeature {
   type: 'Feature';

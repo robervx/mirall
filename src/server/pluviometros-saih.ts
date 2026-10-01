@@ -12,7 +12,7 @@ export const config = { runtime: 'edge' };
 const CACHE_KEY = 'emergencia:pluviometros-saih:v1';
 const TTL_MS = 15 * 60 * 1000;
 const SAIH_URL = 'https://saih.chj.es/mapa-lluvias';
-const USER_AGENT = 'vlc-monitor-emergencia-bot/1.0 (+https://github.com/robervx/vlc-monitor)';
+const USER_AGENT = 'vlc-monitor-emergencia-bot/1.0 (+https://github.com/robervx/mirall)';
 
 async function fetchPluviometros(): Promise<PluviometroSaih[]> {
   const res = await fetch(SAIH_URL, { headers: { 'user-agent': USER_AGENT } });
