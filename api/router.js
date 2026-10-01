@@ -26230,106 +26230,6 @@ function construirHistoricoDistrito(snapshots, rollups, distritoCodigo, dias, ah
 // data/trafico-historico.json
 var trafico_historico_default = [
   {
-    timestamp: "2026-09-01T03:52:32.337Z",
-    distritos: [
-      {
-        codigo: "01",
-        congestion: 0,
-        muestras: 29
-      },
-      {
-        codigo: "02",
-        congestion: 0,
-        muestras: 21
-      },
-      {
-        codigo: "03",
-        congestion: 0.15384615384615385,
-        muestras: 26
-      },
-      {
-        codigo: "04",
-        congestion: 0,
-        muestras: 45
-      },
-      {
-        codigo: "05",
-        congestion: 0,
-        muestras: 18
-      },
-      {
-        codigo: "06",
-        congestion: 0,
-        muestras: 35
-      },
-      {
-        codigo: "07",
-        congestion: 0,
-        muestras: 19
-      },
-      {
-        codigo: "08",
-        congestion: 0.07692307692307693,
-        muestras: 13
-      },
-      {
-        codigo: "09",
-        congestion: 0,
-        muestras: 24
-      },
-      {
-        codigo: "10",
-        congestion: 0,
-        muestras: 48
-      },
-      {
-        codigo: "11",
-        congestion: 0,
-        muestras: 29
-      },
-      {
-        codigo: "12",
-        congestion: 0,
-        muestras: 29
-      },
-      {
-        codigo: "13",
-        congestion: 0,
-        muestras: 15
-      },
-      {
-        codigo: "14",
-        congestion: 0,
-        muestras: 7
-      },
-      {
-        codigo: "15",
-        congestion: 0,
-        muestras: 13
-      },
-      {
-        codigo: "16",
-        congestion: 0,
-        muestras: 19
-      },
-      {
-        codigo: "17",
-        congestion: 0,
-        muestras: 10
-      },
-      {
-        codigo: "18",
-        congestion: 0,
-        muestras: 3
-      },
-      {
-        codigo: "19",
-        congestion: 0,
-        muestras: 2
-      }
-    ]
-  },
-  {
     timestamp: "2026-09-01T09:13:24.436Z",
     distritos: [
       {
@@ -51536,6 +51436,220 @@ var trafico_historico_default = [
         }
       }
     ]
+  },
+  {
+    timestamp: "2026-10-01T08:23:12.603Z",
+    distritos: [
+      {
+        codigo: "01",
+        congestion: 0,
+        muestras: 29,
+        porEstado: {
+          fluido: 29,
+          denso: 0,
+          congestionado: 0,
+          cortado: 0
+        }
+      },
+      {
+        codigo: "02",
+        congestion: 0,
+        muestras: 23,
+        porEstado: {
+          fluido: 23,
+          denso: 0,
+          congestionado: 0,
+          cortado: 0
+        }
+      },
+      {
+        codigo: "03",
+        congestion: 0.12692307692307692,
+        muestras: 26,
+        porEstado: {
+          fluido: 22,
+          denso: 1,
+          congestionado: 0,
+          cortado: 3
+        }
+      },
+      {
+        codigo: "04",
+        congestion: 0,
+        muestras: 45,
+        porEstado: {
+          fluido: 45,
+          denso: 0,
+          congestionado: 0,
+          cortado: 0
+        }
+      },
+      {
+        codigo: "05",
+        congestion: 0,
+        muestras: 18,
+        porEstado: {
+          fluido: 18,
+          denso: 0,
+          congestionado: 0,
+          cortado: 0
+        }
+      },
+      {
+        codigo: "06",
+        congestion: 0,
+        muestras: 35,
+        porEstado: {
+          fluido: 35,
+          denso: 0,
+          congestionado: 0,
+          cortado: 0
+        }
+      },
+      {
+        codigo: "07",
+        congestion: 0,
+        muestras: 19,
+        porEstado: {
+          fluido: 19,
+          denso: 0,
+          congestionado: 0,
+          cortado: 0
+        }
+      },
+      {
+        codigo: "08",
+        congestion: 0.07692307692307693,
+        muestras: 13,
+        porEstado: {
+          fluido: 12,
+          denso: 0,
+          congestionado: 0,
+          cortado: 1
+        }
+      },
+      {
+        codigo: "09",
+        congestion: 0,
+        muestras: 24,
+        porEstado: {
+          fluido: 24,
+          denso: 0,
+          congestionado: 0,
+          cortado: 0
+        }
+      },
+      {
+        codigo: "10",
+        congestion: 0,
+        muestras: 48,
+        porEstado: {
+          fluido: 48,
+          denso: 0,
+          congestionado: 0,
+          cortado: 0
+        }
+      },
+      {
+        codigo: "11",
+        congestion: 0,
+        muestras: 29,
+        porEstado: {
+          fluido: 29,
+          denso: 0,
+          congestionado: 0,
+          cortado: 0
+        }
+      },
+      {
+        codigo: "12",
+        congestion: 0,
+        muestras: 29,
+        porEstado: {
+          fluido: 29,
+          denso: 0,
+          congestionado: 0,
+          cortado: 0
+        }
+      },
+      {
+        codigo: "13",
+        congestion: 0,
+        muestras: 15,
+        porEstado: {
+          fluido: 15,
+          denso: 0,
+          congestionado: 0,
+          cortado: 0
+        }
+      },
+      {
+        codigo: "14",
+        congestion: 0,
+        muestras: 7,
+        porEstado: {
+          fluido: 7,
+          denso: 0,
+          congestionado: 0,
+          cortado: 0
+        }
+      },
+      {
+        codigo: "15",
+        congestion: 0,
+        muestras: 13,
+        porEstado: {
+          fluido: 13,
+          denso: 0,
+          congestionado: 0,
+          cortado: 0
+        }
+      },
+      {
+        codigo: "16",
+        congestion: 0,
+        muestras: 19,
+        porEstado: {
+          fluido: 19,
+          denso: 0,
+          congestionado: 0,
+          cortado: 0
+        }
+      },
+      {
+        codigo: "17",
+        congestion: 0,
+        muestras: 10,
+        porEstado: {
+          fluido: 10,
+          denso: 0,
+          congestionado: 0,
+          cortado: 0
+        }
+      },
+      {
+        codigo: "18",
+        congestion: 0,
+        muestras: 3,
+        porEstado: {
+          fluido: 3,
+          denso: 0,
+          congestionado: 0,
+          cortado: 0
+        }
+      },
+      {
+        codigo: "19",
+        congestion: 0,
+        muestras: 2,
+        porEstado: {
+          fluido: 2,
+          denso: 0,
+          congestionado: 0,
+          cortado: 0
+        }
+      }
+    ]
   }
 ];
 
@@ -52843,6 +52957,106 @@ var trafico_historico_diario_default = [
   },
   {
     fecha: "2026-08-31",
+    distritos: [
+      {
+        codigo: "01",
+        congestionMedia: 0,
+        muestras: 1
+      },
+      {
+        codigo: "02",
+        congestionMedia: 0,
+        muestras: 1
+      },
+      {
+        codigo: "03",
+        congestionMedia: 0.15384615384615385,
+        muestras: 1
+      },
+      {
+        codigo: "04",
+        congestionMedia: 0,
+        muestras: 1
+      },
+      {
+        codigo: "05",
+        congestionMedia: 0,
+        muestras: 1
+      },
+      {
+        codigo: "06",
+        congestionMedia: 0,
+        muestras: 1
+      },
+      {
+        codigo: "07",
+        congestionMedia: 0,
+        muestras: 1
+      },
+      {
+        codigo: "08",
+        congestionMedia: 0.07692307692307693,
+        muestras: 1
+      },
+      {
+        codigo: "09",
+        congestionMedia: 0,
+        muestras: 1
+      },
+      {
+        codigo: "10",
+        congestionMedia: 0,
+        muestras: 1
+      },
+      {
+        codigo: "11",
+        congestionMedia: 0,
+        muestras: 1
+      },
+      {
+        codigo: "12",
+        congestionMedia: 0,
+        muestras: 1
+      },
+      {
+        codigo: "13",
+        congestionMedia: 0,
+        muestras: 1
+      },
+      {
+        codigo: "14",
+        congestionMedia: 0,
+        muestras: 1
+      },
+      {
+        codigo: "15",
+        congestionMedia: 0,
+        muestras: 1
+      },
+      {
+        codigo: "16",
+        congestionMedia: 0,
+        muestras: 1
+      },
+      {
+        codigo: "17",
+        congestionMedia: 0,
+        muestras: 1
+      },
+      {
+        codigo: "18",
+        congestionMedia: 0,
+        muestras: 1
+      },
+      {
+        codigo: "19",
+        congestionMedia: 0,
+        muestras: 1
+      }
+    ]
+  },
+  {
+    fecha: "2026-09-01",
     distritos: [
       {
         codigo: "01",

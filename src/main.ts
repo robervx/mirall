@@ -812,6 +812,17 @@ function crearCapaInsignia<T>(opciones: {
   updateTriggerText?: unknown;
 }): [ScatterplotLayer<T>, TextLayer<T>] {
   const { id, data, getPosition, getFillColor, getText, textSize = 12, updateTriggerFillColor, updateTriggerText } = opciones;
+  // deck.gl pone `updateTriggers: {}` por defecto y su diffing interno asume
+  // que siempre es un objeto (`"all" in props.updateTriggers`, ver
+  // @deck.gl/core). Pasar `updateTriggers: undefined` explícitamente (como
+  // hacía antes este helper cuando no había trigger) PISA ese valor por
+  // defecto y deja `props.updateTriggers` en `undefined` de verdad — deck.gl
+  // revienta con `TypeError: Cannot use 'in' operator to search for 'all' in
+  // undefined` en cuanto la capa necesita volver a diferenciar props
+  // (confirmado 2026-10-01 con la capa de precipitación, que no pasa
+  // `updateTriggerFillColor` por tener un color fijo). Por eso aquí solo se
+  // añade la clave `updateTriggers` cuando hay un trigger real — nunca con
+  // valor `undefined` — para dejar que deck.gl use su propio `{}`.
   return [
     new ScatterplotLayer<T>({
       id,
@@ -824,7 +835,7 @@ function crearCapaInsignia<T>(opciones: {
       lineWidthMinPixels: 1.5,
       getRadius: RADIO_INSIGNIA_ZONA_PX,
       radiusUnits: 'pixels',
-      updateTriggers: updateTriggerFillColor !== undefined ? { getFillColor: [updateTriggerFillColor] } : undefined,
+      ...(updateTriggerFillColor !== undefined ? { updateTriggers: { getFillColor: [updateTriggerFillColor] } } : {}),
     }),
     new TextLayer<T>({
       id: `${id}-valor`,
@@ -839,7 +850,7 @@ function crearCapaInsignia<T>(opciones: {
       getAlignmentBaseline: 'center',
       outlineWidth: 2,
       outlineColor: [0, 0, 0, 160],
-      updateTriggers: updateTriggerText !== undefined ? { getText: [updateTriggerText] } : undefined,
+      ...(updateTriggerText !== undefined ? { updateTriggers: { getText: [updateTriggerText] } } : {}),
     }),
   ];
 }
