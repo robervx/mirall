@@ -19,6 +19,8 @@ import {
   getDistrictAtCoordinates,
 } from '../services/district-geometry';
 import distritosGeoJSON from '../../data/distritos-valencia.json' with { type: 'json' };
+import equipamientosCriticos from '../../data/equipamientos-criticos.json' with { type: 'json' };
+import type { EquipamientoCritico } from '../services/equipamientos-criticos';
 
 export const config = { runtime: 'edge' };
 
@@ -69,6 +71,8 @@ export default async function handler(): Promise<Response> {
         prediccion,
         aire: aireResult.value,
         tramosPrevios: tramosTraficoPrevios,
+        // v5 (spec 010) — asset estático (spec 054), sin fetch/caché propia.
+        equipamientosCriticos: equipamientosCriticos as EquipamientoCritico[],
       },
       estadoHisteresisPrevio,
     );

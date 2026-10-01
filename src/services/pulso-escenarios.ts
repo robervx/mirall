@@ -19,6 +19,8 @@ import type { ZonaMovilidadReducida } from './fallas';
 import { centroidePoligono } from './fallas';
 import type { PrediccionCortoPlazo } from './prediccion-corto-plazo';
 import type { CalidadAire } from './calidad-aire';
+import type { EquipamientoCritico } from './equipamientos-criticos';
+import { distanciaPuntoALinea } from './proximidad';
 import {
   UMBRAL_TRAFICO_CONCENTRADO_AVISO,
   UMBRAL_TRAFICO_CONCENTRADO_URGENTE,
@@ -30,7 +32,8 @@ export type ModoEscenario = 'vivo' | 'sombra';
 export type IdEscenario =
   | 'incidencia-sobre-trafico-denso'
   | 'fallas-y-trafico'
-  | 'lluvia-inminente-sobre-trafico-denso';
+  | 'lluvia-inminente-sobre-trafico-denso'
+  | 'corte-cerca-equipamiento-critico';
 
 export interface TramoAfectado {
   id: string;
@@ -54,6 +57,8 @@ export interface EscenarioActivo {
   tramosAfectados: TramoAfectado[];
   incidencia?: { id: string; descripcion: string; tipo: string; lat: number; lon: number };
   zonaFallas?: { nombre: string; centroide: [number, number] };
+  /** v5 (spec 010) — solo en 'corte-cerca-equipamiento-critico'. */
+  equipamientoCritico?: { id: string; nombre: string; categoria: 'sanidad' | 'bomberos'; distanciaM: number };
 }
 
 export interface PulsoDistrito {
@@ -106,6 +111,8 @@ export interface EntradaPulso {
   aire: CalidadAire | null;
   /** Estado de tráfico de la evaluación anterior — para el gate "trafico-empeora" del escenario 3. Mismo dato que usa spec 013 v4b. */
   tramosPrevios: TramoTrafico[] | null;
+  /** v5 (spec 010) — para 'corte-cerca-equipamiento-critico'. Asset estático (spec 054), sin TTL propio. */
+  equipamientosCriticos: EquipamientoCritico[];
   /** Inyectable para tests deterministas; por defecto la hora real. */
   ahora?: string;
 }
@@ -122,17 +129,24 @@ const DIAS_INCIDENCIA_RECIENTE = 7;
 const HORIZONTE_LLUVIA_MIN = 120; // 2h — spec 010 §3
 const MAX_TRAMOS_AFECTADOS_MOSTRADOS = 5;
 const CENTRO_CIUDAD_FALLBACK: [number, number] = [-0.3763, 39.4699]; // Ciutat Vella — solo si un escenario de ciudad no tiene ningún tramo que anclar
+/** v5 (spec 010 §3) — heurística de partida sin calibrar, ver spec para el porqué de 250 m. */
+const RADIO_EQUIPAMIENTO_CRITICO_M = 250;
 
 const IDS_ESCENARIO: IdEscenario[] = [
   'incidencia-sobre-trafico-denso',
   'fallas-y-trafico',
   'lluvia-inminente-sobre-trafico-denso',
+  'corte-cerca-equipamiento-critico',
 ];
 
 const MODO_POR_ESCENARIO: Record<IdEscenario, ModoEscenario> = {
   'incidencia-sobre-trafico-denso': 'vivo',
   'fallas-y-trafico': 'vivo',
   'lluvia-inminente-sobre-trafico-denso': 'sombra',
+  // v5 — determinista (estado oficial de tráfico + geometría real), mismo
+  // criterio de bajo riesgo de ruido que justificó ir a 'vivo' desde el
+  // principio a los dos primeros escenarios (§10.3 de la spec).
+  'corte-cerca-equipamiento-critico': 'vivo',
 };
 
 // Mismo orden que insights.ts (NIVEL_TRAFICO), duplicado deliberadamente
@@ -351,6 +365,72 @@ function detectarLluviaSobreTrafico(
   return detecciones;
 }
 
+/**
+ * v5 (spec 010 §3) — "¿puede un corte bloquear el acceso de una ambulancia o un camión
+ * de bomberos?". Recomendación #1 (de mayor valor) de un análisis del asesor de ciencia
+ * de datos del proyecto (2026-10-01). Decisiones de diseño explícitas, ver spec:
+ * - Solo tramos `cortado` (no `congestionado` — demasiado frecuente cerca de hospitales
+ *   grandes, habría disparado casi siempre).
+ * - Solo categorías `sanidad`/`bomberos` — `policia` excluida a propósito (límite ético,
+ *   CLAUDE.md §4, el mismo cruce ahí suena a orientar vigilancia, no logística).
+ * - Dedup por distrito: si hay varios cortes cerca de varios equipamientos, se queda el
+ *   par (tramo, equipamiento) más cercano — una tarjeta, no una por corte.
+ */
+function detectarCorteCercaEquipamientoCritico(
+  agregados: Map<string, AgregadoDistrito>,
+  tramos: TramoTrafico[],
+  equipamientos: EquipamientoCritico[],
+): Map<string, DeteccionCruda> {
+  const detecciones = new Map<string, DeteccionCruda>();
+  const criticos = equipamientos.filter((e) => e.categoria === 'sanidad' || e.categoria === 'bomberos');
+  if (criticos.length === 0) return detecciones;
+
+  interface Candidato {
+    tramo: TramoTrafico;
+    equipamiento: EquipamientoCritico;
+    distanciaM: number;
+  }
+  const porDistrito = new Map<string, Candidato[]>();
+  for (const t of tramos) {
+    if (t.estado !== 'cortado' || !t.distrito) continue;
+    let masCercano: { equipamiento: EquipamientoCritico; distanciaM: number } | null = null;
+    for (const e of criticos) {
+      const d = distanciaPuntoALinea([e.lon, e.lat], t.geometry);
+      if (d <= RADIO_EQUIPAMIENTO_CRITICO_M && (!masCercano || d < masCercano.distanciaM)) {
+        masCercano = { equipamiento: e, distanciaM: d };
+      }
+    }
+    if (!masCercano) continue;
+    const lista = porDistrito.get(t.distrito) ?? [];
+    lista.push({ tramo: t, equipamiento: masCercano.equipamiento, distanciaM: masCercano.distanciaM });
+    porDistrito.set(t.distrito, lista);
+  }
+
+  for (const [codigo, candidatos] of porDistrito) {
+    const ag = agregados.get(codigo);
+    if (!ag) continue;
+    candidatos.sort((a, b) => a.distanciaM - b.distanciaM);
+    const mejor = candidatos[0]!;
+    const distanciaRedondeada = Math.round(mejor.distanciaM);
+    detecciones.set(codigo, {
+      id: 'corte-cerca-equipamiento-critico',
+      nivel: 'prioritario',
+      anticipacionMin: null,
+      motivo: `Corte en ${mejor.tramo.nombre} a ${distanciaRedondeada} m de ${mejor.equipamiento.nombre} (${mejor.equipamiento.categoria}), podría afectar al acceso de emergencias.`,
+      zonas: [],
+      centroideAfectado: puntoMedio(mejor.tramo.geometry),
+      tramosAfectados: candidatos.slice(0, MAX_TRAMOS_AFECTADOS_MOSTRADOS).map((c) => tramoAfectadoDe(c.tramo)),
+      equipamientoCritico: {
+        id: mejor.equipamiento.id,
+        nombre: mejor.equipamiento.nombre,
+        categoria: mejor.equipamiento.categoria as 'sanidad' | 'bomberos',
+        distanciaM: distanciaRedondeada,
+      },
+    });
+  }
+  return detecciones;
+}
+
 export function calcularPulsoEscenarios(entrada: EntradaPulso, estadoPrevio: EstadoHisteresisPulso): ResultadoPulso {
   const ahoraIso = entrada.ahora ?? new Date().toISOString();
   const ahoraMs = new Date(ahoraIso).getTime();
@@ -365,6 +445,10 @@ export function calcularPulsoEscenarios(entrada: EntradaPulso, estadoPrevio: Est
     [
       'lluvia-inminente-sobre-trafico-denso',
       detectarLluviaSobreTrafico(agregados, entrada.prediccion, tramosEmpeorados, ahoraMs),
+    ],
+    [
+      'corte-cerca-equipamiento-critico',
+      detectarCorteCercaEquipamientoCritico(agregados, entrada.tramos, entrada.equipamientosCriticos),
     ],
   ]);
 

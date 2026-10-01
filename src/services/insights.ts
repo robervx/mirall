@@ -40,7 +40,7 @@ export interface ProtocoloSugerido {
   cuerpo: string;
 }
 
-export type FuenteInsight = '001' | '002' | '004' | '008' | '010' | '016' | '023' | '026';
+export type FuenteInsight = '001' | '002' | '004' | '008' | '010' | '016' | '023' | '026' | '054';
 
 export interface Insight {
   id: string;
@@ -484,6 +484,7 @@ const FUENTES_POR_ESCENARIO: Record<EscenarioActivo['id'], FuenteInsight[]> = {
   'incidencia-sobre-trafico-denso': ['004', '026'],
   'fallas-y-trafico': ['004', '008'],
   'lluvia-inminente-sobre-trafico-denso': ['004', '016'],
+  'corte-cerca-equipamiento-critico': ['004', '054'],
 };
 
 /**

@@ -35,6 +35,7 @@ const SEÑALES_POR_ESCENARIO: Record<IdEscenario, string[]> = {
   'incidencia-sobre-trafico-denso': ['incidencia-via-publica', 'trafico-denso'],
   'fallas-y-trafico': ['zona-fallas', 'trafico-denso'],
   'lluvia-inminente-sobre-trafico-denso': ['lluvia-inminente', 'trafico-denso'],
+  'corte-cerca-equipamiento-critico': ['corte-via', 'equipamiento-critico-cercano'],
 };
 
 // Mismo mapeo que FUENTES_POR_ESCENARIO de insights.ts (spec 013) — '010'
@@ -43,6 +44,7 @@ const FUENTES_POR_ESCENARIO: Record<IdEscenario, string[]> = {
   'incidencia-sobre-trafico-denso': ['010', '004', '026'],
   'fallas-y-trafico': ['010', '004', '008'],
   'lluvia-inminente-sobre-trafico-denso': ['010', '004', '016'],
+  'corte-cerca-equipamiento-critico': ['010', '004', '054'],
 };
 
 function calleDe(escenario: EscenarioActivo): string | undefined {
@@ -60,6 +62,11 @@ function sugerenciaTextoPara(escenario: EscenarioActivo, distritoNombre: string)
       return `Podría convenir valorar reforzar la zona de Fallas en ${distritoNombre}, donde la zona de movilidad reducida coincide con tráfico ya denso.`;
     case 'lluvia-inminente-sobre-trafico-denso':
       return `Podría convenir valorar preposicionar unidades cerca de ${dondeCalle} ante la lluvia prevista, que coincide con tráfico ya denso en la zona.`;
+    case 'corte-cerca-equipamiento-critico': {
+      const eq = escenario.equipamientoCritico;
+      const nombreEq = eq ? eq.nombre : 'un equipamiento crítico cercano';
+      return `Podría convenir valorar una vía alternativa de acceso cerca de ${dondeCalle}, donde el corte podría afectar al acceso de emergencias a ${nombreEq}.`;
+    }
   }
 }
 

@@ -5,6 +5,7 @@ import type { IncidenciaViaPublica } from './via-publica';
 import type { ZonaMovilidadReducida } from './fallas';
 import type { PrediccionCortoPlazo } from './prediccion-corto-plazo';
 import type { CalidadAire } from './calidad-aire';
+import type { EquipamientoCritico } from './equipamientos-criticos';
 
 const AHORA = '2026-09-16T10:00:00.000Z';
 
@@ -98,6 +99,22 @@ function prediccion(over: Partial<PrediccionCortoPlazo> = {}): PrediccionCortoPl
   };
 }
 
+// El tramo fixture `tramo()` siempre usa esta geometría — [-0.3805, 39.4705]
+// está prácticamente encima de la línea (~0 m), [-0.40, 39.50] está a varios km.
+function equipamiento(over: Partial<EquipamientoCritico> = {}): EquipamientoCritico {
+  return {
+    id: 'eq-1',
+    nombre: 'Hospital Clínico Universitario',
+    categoria: 'sanidad',
+    lat: 39.4705,
+    lon: -0.3805,
+    telefono: null,
+    fetchedAt: AHORA,
+    source: 'geoportal-valencia-equipamientos',
+    ...over,
+  };
+}
+
 const AIRE_MALA: CalidadAire = {
   id: 'valencia',
   lat: 39.4699,
@@ -125,6 +142,7 @@ function entradaBase(over: Partial<Parameters<typeof calcularPulsoEscenarios>[0]
     prediccion: null,
     aire: null,
     tramosPrevios: null,
+    equipamientosCriticos: [],
     ahora: AHORA,
     ...over,
   };
@@ -338,6 +356,101 @@ describe('calcularPulsoEscenarios — notaAire', () => {
     const d01 = segunda.distritos.find((d) => d.distritoCodigo === '01')!;
     expect(d01.nivel).toBe('prioritario');
     expect(d01.notaAire).toContain('mala');
+  });
+});
+
+describe('calcularPulsoEscenarios — corte-cerca-equipamiento-critico (v5)', () => {
+  it('tramo cortado a ~0 m de un hospital → se detecta (cold start, sin confirmar)', () => {
+    const r = calcularPulsoEscenarios(
+      entradaBase({ tramos: tramosDistrito('01', 1), equipamientosCriticos: [equipamiento()] }),
+      {},
+    );
+    const d01 = r.distritos.find((d) => d.distritoCodigo === '01')!;
+    const esc = d01.escenariosActivos.find((e) => e.id === 'corte-cerca-equipamiento-critico');
+    expect(esc).toBeDefined();
+    expect(esc?.modo).toBe('vivo');
+    expect(esc?.equipamientoCritico?.nombre).toBe('Hospital Clínico Universitario');
+    expect(esc?.equipamientoCritico?.distanciaM).toBeLessThan(250);
+  });
+
+  it('2ª evaluación consecutiva confirma → nivel prioritario', () => {
+    const entrada = entradaBase({ tramos: tramosDistrito('01', 1), equipamientosCriticos: [equipamiento()] });
+    const primera = calcularPulsoEscenarios(entrada, {});
+    const segunda = calcularPulsoEscenarios({ ...entrada, ahora: '2026-09-16T10:03:00.000Z' }, primera.estadoHisteresis);
+    const d01 = segunda.distritos.find((d) => d.distritoCodigo === '01')!;
+    expect(d01.nivel).toBe('prioritario');
+  });
+
+  it('solo congestionado (no cortado) no dispara, aunque esté muy cerca', () => {
+    const tramoCongestionado = tramo('01-cong', '01', 'congestionado');
+    const r = calcularPulsoEscenarios(
+      entradaBase({ tramos: [tramoCongestionado, ...tramosDistrito('01', 0, 3)], equipamientosCriticos: [equipamiento()] }),
+      {},
+    );
+    expect(r.distritos.find((d) => d.distritoCodigo === '01')!.escenariosActivos).toHaveLength(0);
+  });
+
+  it('fuera del radio (equipamiento a varios km) no dispara', () => {
+    const r = calcularPulsoEscenarios(
+      entradaBase({
+        tramos: tramosDistrito('01', 1),
+        equipamientosCriticos: [equipamiento({ lat: 39.5, lon: -0.4 })],
+      }),
+      {},
+    );
+    expect(r.distritos.find((d) => d.distritoCodigo === '01')!.escenariosActivos).toHaveLength(0);
+  });
+
+  it('categoría policia no dispara (exclusión deliberada, CLAUDE.md §4)', () => {
+    const r = calcularPulsoEscenarios(
+      entradaBase({
+        tramos: tramosDistrito('01', 1),
+        equipamientosCriticos: [equipamiento({ categoria: 'policia' })],
+      }),
+      {},
+    );
+    expect(r.distritos.find((d) => d.distritoCodigo === '01')!.escenariosActivos).toHaveLength(0);
+  });
+
+  it('categoría bomberos sí dispara, igual que sanidad', () => {
+    const r = calcularPulsoEscenarios(
+      entradaBase({
+        tramos: tramosDistrito('01', 1),
+        equipamientosCriticos: [equipamiento({ categoria: 'bomberos', nombre: 'Parque de Bomberos Centro' })],
+      }),
+      {},
+    );
+    const esc = r.distritos.find((d) => d.distritoCodigo === '01')!.escenariosActivos[0];
+    expect(esc?.equipamientoCritico?.categoria).toBe('bomberos');
+  });
+
+  it('sin equipamientos críticos en la entrada, no dispara (degradación)', () => {
+    const r = calcularPulsoEscenarios(entradaBase({ tramos: tramosDistrito('01', 1) }), {});
+    expect(r.distritos.find((d) => d.distritoCodigo === '01')!.escenariosActivos).toHaveLength(0);
+  });
+
+  it('con varios tramos cortados a distinta distancia del mismo equipamiento, se queda con el más cercano (dedup por distrito)', () => {
+    const cercano = tramo('01-cercano', '01', 'cortado'); // geometría por defecto, ~0 m del equipamiento
+    const lejano: TramoTrafico = {
+      ...tramo('01-lejano', '01', 'cortado'),
+      // Desplazado ~130 m en longitud — sigue dentro del radio de 250 m, pero más lejos que `cercano`.
+      geometry: {
+        type: 'LineString',
+        coordinates: [
+          [-0.38 - 0.0015, 39.47],
+          [-0.381 - 0.0015, 39.471],
+        ],
+      },
+    };
+    const r = calcularPulsoEscenarios(
+      entradaBase({
+        tramos: [lejano, cercano, ...tramosDistrito('01', 0, 2)], // `lejano` primero a propósito — el orden de entrada no debe importar
+        equipamientosCriticos: [equipamiento()],
+      }),
+      {},
+    );
+    const esc = r.distritos.find((d) => d.distritoCodigo === '01')!.escenariosActivos[0];
+    expect(esc?.tramosAfectados[0]?.id).toBe('01-cercano');
   });
 });
 

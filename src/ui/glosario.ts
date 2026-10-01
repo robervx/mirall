@@ -203,6 +203,10 @@ function cuerpoPulso(): string {
       todavía). Riesgo de lluvia en la ciudad en las próximas 2 h coincidiendo con
       ${UMBRAL_TRAFICO_CONCENTRADO_URGENTE} o más tramos densos, o con tráfico que
       acaba de empeorar, en el mismo distrito.</li>
+      <li><strong>Corte cerca de un equipamiento crítico.</strong> Un tramo de tráfico
+      cortado a menos de 250 m de un hospital, centro de salud o parque de bomberos —
+      podría afectar al acceso de emergencias. No incluye comisarías de policía a
+      propósito (ver "Fuentes y licencias").</li>
     </ul>
     <p>Cada distrito tiene un nivel — <strong>seguimiento</strong> (mirar) o
     <strong>prioritario</strong> (adelantarse ya) — el más alto entre sus escenarios

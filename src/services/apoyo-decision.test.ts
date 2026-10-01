@@ -112,6 +112,25 @@ describe('calcularSugerencias', () => {
     expect(sugerencia!.señalesCombinadas).toEqual(['incidencia-via-publica', 'trafico-denso']);
     expect(sugerencia!.fuenteSpec).toEqual(['010', '004', '026']);
   });
+
+  it('corte-cerca-equipamiento-critico (v5, spec 010): nombra el equipamiento real en el texto', () => {
+    const distritos = [
+      distrito({
+        escenariosActivos: [
+          escenario({
+            id: 'corte-cerca-equipamiento-critico',
+            motivo: 'Corte en Carrer de Sant Vicent a 80 m de Hospital Clínico Universitario (sanidad), podría afectar al acceso de emergencias.',
+            equipamientoCritico: { id: 'eq-1', nombre: 'Hospital Clínico Universitario', categoria: 'sanidad', distanciaM: 80 },
+          }),
+        ],
+      }),
+    ];
+    const [sugerencia] = calcularSugerencias(distritos, GENERADA_EN);
+    expect(sugerencia!.sugerenciaTexto).toContain('Hospital Clínico Universitario');
+    expect(sugerencia!.sugerenciaTexto).toMatch(/^Podría convenir valorar/);
+    expect(sugerencia!.señalesCombinadas).toEqual(['corte-via', 'equipamiento-critico-cercano']);
+    expect(sugerencia!.fuenteSpec).toEqual(['010', '004', '054']);
+  });
 });
 
 // v2 (spec 041) — enriquecimiento con el aviso oficial de Emergencias GVA

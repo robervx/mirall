@@ -85,6 +85,9 @@ async function main(): Promise<void> {
       prediccion,
       aire: null,
       tramosPrevios: null,
+      // Este script solo analiza el escenario de lluvia en sombra (§10.3) —
+      // no necesita equipamientos críticos (spec 010 v5, escenario distinto).
+      equipamientosCriticos: [],
     },
     {},
   );

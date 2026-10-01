@@ -2,17 +2,21 @@
 
 ```yaml
 id: 010
-titulo: "Pulso de Distrito — señal de proactividad por cruce de condiciones (tráfico + incidencias + lluvia inminente)"
+titulo: "Pulso de Distrito — señal de proactividad por cruce de condiciones (tráfico + incidencias + lluvia inminente + acceso a equipamientos críticos)"
 estado: Implemented
 tipo: indice-compuesto
-depende_de: [001, 002, 004, 008, 016, 026]
+depende_de: [001, 002, 004, 008, 016, 026, 054]
 propietario: ""
-version: 4
+version: 5
 ```
 
-> **Estado:** v1-v4 `Implemented` y en producción. **v4 (2026-09-16)**: el índice
+> **Estado:** v1-v5 `Implemented` y en producción. **v4 (2026-09-16)**: el índice
 > ponderado 0-100 se sustituye por el catálogo de escenarios de conjunción — ver §10 y
-> el historial.
+> el historial. **v5 (2026-10-01):** 4º escenario — corte de tráfico cerca de un
+> equipamiento crítico de sanidad/bomberos (spec 054), recomendación priorizada #1 de un
+> análisis del asesor de ciencia de datos del proyecto sobre qué cruces nuevos aportarían
+> valor real a la toma de decisiones (petición explícita del usuario, ver memoria de
+> proyecto) — ver §3 y el historial.
 
 ---
 
@@ -55,6 +59,7 @@ externa propia. Reutiliza sus cachés.
 | Predicción a corto plazo / nowcast (spec `016`) | `GET /api/meteo/v1/prediccion-corto-plazo` | Lado "lluvia inminente". `probabilidadPrecipitacion` y `precipitacion` por hora, ventana 4 h. | **ciudad (punto único ≈ Ciutat Vella)** |
 | Meteorología actual (spec `001`) | `GET /api/meteo/v1/actual` | Solo `observedAt` para el sello de frescura. | ciudad |
 | Calidad del aire (spec `002`) | `GET /api/aire/v1/actual` | **Ya no es componente.** Solo se usa como **nota** en la tarjeta si el distrito ya está encendido por otra causa y `categoria ∈ {Mala, Muy mala}`. Best-effort: si la caché no está caliente, se omite la nota. | ciudad |
+| Equipamientos públicos críticos (spec `054`) | asset estático (`data/equipamientos-criticos.json`, sin caché — igual que `geo-distritos.ts`) | **v5.** Lado "equipamiento crítico" del escenario `corte-cerca-equipamiento-critico`: solo categorías `sanidad`/`bomberos` (ver §3, exclusión deliberada de `policia`). | **por punto** (lat/lon reales) |
 
 **Aire fuera como disparador (decisión del usuario, 2026-09-10):** es un valor de ciudad
 idéntico en los 19 distritos — no discrimina zona ni orienta ninguna decisión operativa
@@ -80,6 +85,7 @@ ya exportadas** por el motor de insights — no se crea un cuarto juego de núme
 | `incidencia-sobre-trafico-denso` | Incidencia de `026` en el distrito con `tipo ∈ {incidencias, festejos}` **o** `tipo = obras` con afectación de calzada, **y** `vigenciaDesde` ≤ 7 días (ver §7 — `vigenciaHasta` es vigencia de permiso, no duración real) — **Y** ≥ `UMBRAL_TRAFICO_CONCENTRADO_AVISO` (=3) tramos `congestionado`/`cortado` en el mismo distrito **y** ≥ 25 % de los tramos monitorizados del distrito | `prioritario` | **vivo** | inmediato |
 | `fallas-y-trafico` | = regla `trafico-en-zona-fallas` de spec `024` (`ZonaMovilidadReducida` activa cuyo `distrito` coincide con un tramo `congestionado`/`cortado`). Se **añade su render en la capa** además de la tarjeta que ya emite. | `prioritario` | **vivo** | inmediato |
 | `lluvia-inminente-sobre-trafico-denso` | nowcast (`016`) con `probabilidadPrecipitacion` ≥ `UMBRAL_LLUVIA_PROB_PCT` (=60) **o** `precipitacion` ≥ 2 mm en algún tramo de la ventana ≤ 2 h — **Y** ≥ `UMBRAL_TRAFICO_CONCENTRADO_URGENTE` (=6) tramos `congestionado`/`cortado` en el distrito **o** el distrito tiene un `trafico-empeora` activo (spec `013` v4b) | `seguimiento` | **sombra** (ver §10.3) | ~30-120 min |
+| `corte-cerca-equipamiento-critico` (**v5**) | Un tramo de `004` en estado **`cortado`** (no `congestionado` — ver justificación abajo) a ≤ `RADIO_EQUIPAMIENTO_CRITICO_M` (=250 m, distancia punto-línea real) de un `EquipamientoCritico` (`054`) de categoría `sanidad` **o** `bomberos` | `prioritario` | **vivo** | inmediato |
 
 **Umbral de tráfico dual** (`≥3 Y ≥25 %`, o `≥6` para el escenario de lluvia): un umbral
 absoluto no es comparable entre distritos — los distritos 14/15/17 tienen 7-13 tramos
@@ -92,6 +98,34 @@ es muy heterogénea espacialmente — el escenario se enciende para cualquier di
 tráfico denso ante una señal de lluvia de *ciudad*. Sube a `prioritario` solo si en el
 futuro hay precipitación resuelta por distrito (ver §7, spec futura de nowcast por
 centroide).
+
+**`corte-cerca-equipamiento-critico` (v5) — decisiones de diseño explícitas:**
+
+- **Solo `cortado`, nunca `congestionado`.** A diferencia de los otros escenarios (que
+  usan `congestionado`/`cortado` indistintamente como "tráfico denso"), este exige corte
+  real. La congestión cerca de un hospital grande en una ciudad es habitual — incluirla
+  habría disparado el escenario casi permanentemente, defeating su propósito ("avisa
+  cuando de verdad falta hacer algo", no ruido de fondo). `cortado` es un estado
+  inequívoco y de baja frecuencia (spec `004`, clasificación oficial determinista) — por
+  eso va directo a **vivo**, igual criterio que `incidencia-sobre-trafico-denso` y
+  `fallas-y-trafico` en v4 (§10.3: "deterministas, bajo riesgo de ruido"), sin pasar por
+  modo sombra como sí le tocó a la lluvia (señal probabilística, no un estado oficial).
+- **`RADIO_EQUIPAMIENTO_CRITICO_M = 250 m`**: heurística de partida, no calibrada contra
+  ningún backtest (no hay ground truth, mismo riesgo de fondo que el resto del catálogo —
+  ver §7). El asesor de ciencia de datos propuso un rango de 150-300 m; 250 m es el punto
+  intermedio. Si en producción dispara con demasiada frecuencia (p. ej. en distritos con
+  varios equipamientos muy próximos entre sí), se recalibra en una versión futura con
+  datos reales de disparo, mismo proceso que siguió la lluvia en v4 (§10.3).
+- **Excluye `policia` a propósito.** Sanidad y bomberos son logística de acceso de
+  emergencia, encuadre inequívoco. El mismo cruce para comisarías empieza a sonar a
+  orientar postura/vigilancia policial en vez de informar sobre infraestructura — más
+  cerca del límite de `CLAUDE.md` §4 que de "avisa, no actúa" neutral. Recomendación
+  explícita del asesor de ciencia de datos (2026-10-01), adoptada tal cual.
+- **Dedup por distrito** (una tarjeta, no una por tramo cortado), igual criterio que
+  `incidencia-sobre-trafico-denso` — si hay varios cortes cerca de varios equipamientos a
+  la vez en el mismo distrito, se muestra el más cercano (`distanciaM` mínima).
+- **No sube `severidad` de otros escenarios ni se combina con ellos** — es una conjunción
+  independiente más, nunca una suma (mismo principio de todo el catálogo, §10.1).
 
 **Fuera del catálogo v4, deliberadamente:**
 
@@ -114,7 +148,7 @@ type NivelPulso = 'sin-senal' | 'seguimiento' | 'prioritario';
 type ModoEscenario = 'vivo' | 'sombra';   // 'sombra' = evaluado y registrado, no se pinta ni alerta
 
 interface EscenarioActivo {
-  id: 'incidencia-sobre-trafico-denso' | 'fallas-y-trafico' | 'lluvia-inminente-sobre-trafico-denso';
+  id: 'incidencia-sobre-trafico-denso' | 'fallas-y-trafico' | 'lluvia-inminente-sobre-trafico-denso' | 'corte-cerca-equipamiento-critico';
   nivel: 'seguimiento' | 'prioritario';
   modo: ModoEscenario;
   confirmado: boolean;              // true tras verse en 2 evaluaciones consecutivas (histéresis, §6)
@@ -125,6 +159,8 @@ interface EscenarioActivo {
   tramosAfectados: Array<{ id: string; nombre: string; estado: string; puntoMedio: [number, number] }>;
   incidencia?: { id: string; descripcion: string; tipo: string; lat: number; lon: number };
   zonaFallas?: { nombre: string; centroide: [number, number] };
+  /** v5 — solo en 'corte-cerca-equipamiento-critico'. `distanciaM` siempre al tramo cortado más cercano. */
+  equipamientoCritico?: { id: string; nombre: string; categoria: 'sanidad' | 'bomberos'; distanciaM: number };
 }
 
 interface PulsoDistrito {
@@ -196,7 +232,7 @@ funciona igual.
 | Estado para histéresis | Clave nueva `pulso:escenarios-previos:v1` — mapa `"${distrito}:${escenarioId}" → { primeraDeteccion, ultimaDeteccion }`, TTL 30 min, `cachePeek`/`cachePoke` (mismo patrón que `insights:trafico:estado-previo`, spec `013` v4b). |
 | Histéresis (anti-parpadeo del choropleth) | Un escenario detectado pasa a `confirmado: true` solo si estaba en la evaluación anterior (2 consecutivas). Una vez confirmado, **permanece pintado 20 min** tras dejar de detectarse (`ultimaDeteccion + 20 min`). **Cold start** (sin estado previo) → los escenarios se detectan pero `confirmado: false`, no pintan y no lanzan toast. Degrada, no rompe. |
 | Dedup / rollup | **Una tarjeta y un toast por distrito**, no uno por escenario. El panel de insights recibe **un `Insight` agrupado por distrito** (`tipo: 'pulso-distrito'`) que lista los escenarios contribuyentes + un chip por `fuenteSpec`. (Spec `013` §8 dejaba el dedup "fuera de alcance" — v4 lo mete en alcance para el Pulso.) |
-| Comportamiento si la fuente falla | Si falla `004` → 502 (sin tráfico no hay ningún escenario). Si falla `016` → el escenario de lluvia no se evalúa, el resto sí (degrada). Si falla `026` u `008` → sus escenarios no se evalúan. Si falla `002` → se omite `notaAire`. Nunca se emite un escenario con datos parciales de una de sus dos señales. |
+| Comportamiento si la fuente falla | Si falla `004` → 502 (sin tráfico no hay ningún escenario). Si falla `016` → el escenario de lluvia no se evalúa, el resto sí (degrada). Si falla `026` u `008` → sus escenarios no se evalúan. Si falla `002` → se omite `notaAire`. `054` es un asset estático bundleado (no hay fetch que falle) — si por lo que sea llega vacío, `corte-cerca-equipamiento-critico` simplemente no detecta nada, igual que el resto degrada. Nunca se emite un escenario con datos parciales de una de sus dos señales. |
 | Clave de caché propia de resultado | Ninguna (además de la de histéresis). |
 | Endpoint interno | `GET /api/pulso/v1/distrito` — misma URL, contrato de respuesta nuevo (§4). |
 
@@ -244,9 +280,21 @@ en el panel). **No** un evaluador paralelo dentro de `pulso-distrito.ts`. La reg
   se emite `[]` hasta entonces.
 - **Distritos administrativos vs. distritos policiales.** Sin verificar si coinciden. No
   bloquea: el tinte de distrito es contexto; la señal accionable es el marcador + calles.
-- **Fuera de alcance de v4:** ponderación configurable por el usuario, histórico/tendencia
+- **`corte-cerca-equipamiento-critico` (v5) — riesgo propio, explícito:** radio de 250 m
+  sin calibrar contra ningún backtest (mismo riesgo de fondo que el resto del catálogo,
+  arriba). Si en producción dispara con más frecuencia de la esperada en distritos con
+  varios equipamientos próximos, hace falta recalibrar — no se congela como definitivo.
+  La exclusión de `policia` es una decisión de diseño deliberada (ver §3), no un hueco de
+  dato: no hay intención de añadirla sin que cambie el encuadre a algo que no sea logística
+  de acceso de emergencia.
+- **Fuera de alcance de v4/v5:** ponderación configurable por el usuario, histórico/tendencia
   del Pulso, cualquier acción automática o lista de destinatarios (`CLAUDE.md` §4), nowcast
-  por distrito, escenarios que necesiten el grafo viario (`032`), un tercer nivel ordinal.
+  por distrito, escenarios que necesiten el grafo viario (`032`), un tercer nivel ordinal,
+  el escenario #2 propuesto por el asesor de ciencia de datos (aviso oficial GVA + Pulso —
+  implementado en su lugar como enriquecimiento de texto en spec `041` v2, no como
+  escenario de Pulso, por ser contexto de ciudad sin geolocalización propia) y el #3
+  (sonometría ZAS + agenda — bloqueado por falta de `distritoCodigo` en `ZonaZas`, spec
+  `049`).
 
 ## 8. Historial
 
@@ -257,6 +305,7 @@ en el panel). **No** un evaluador paralelo dentro de `pulso-distrito.ts`. La reg
 | 3 | 2026-09-09 | Recalibración del índice ponderado (§9): tráfico ×2.5, 4º componente de incidencias (spec `026`, peso 0.15), meteo desde 28 °C + sensación térmica, pesos `0.45/0.15/0.25/0.15`, umbrales `18/38/62`. `PESOS_PULSO`/`UMBRALES_CATEGORIA_PULSO` exportados. 20 tests. |
 | 4 | 2026-09-10 | **Rediseño (§10):** el índice ponderado se sustituye por un catálogo de 3 escenarios de conjunción (`incidencia-sobre-trafico-denso`, `fallas-y-trafico`, `lluvia-inminente-sobre-trafico-denso`) con localización por calle + marcador en el mapa, nivel ordinal `seguimiento`/`prioritario`, histéresis anti-parpadeo, dedup por distrito, evaluador consolidado con specs `013`/`024`. Aire fuera como disparador. Prerrequisito: spec `017` v4. Consumidores a re-secuenciar: `013` (`distrito-critico`), `034`, `036`, `037`. `Draft` — el índice v3 sigue en producción hasta implementar v4. |
 | 4 (implementación) | 2026-09-16 | **DoD completo, pasa a `Implemented`** (ver §10.5). Nuevo `src/services/pulso-escenarios.ts` (evaluador consolidado, ~350 líneas): `agregarPorDistrito` (monitorizados = todos los tramos del distrito, mismo criterio que spec 024), heurística de "afectación de calzada" por texto (`afectaCalzada`, spec 026 no tiene campo booleano — documentado como aproximación), `incidenciaElegible` (tipo + `vigenciaDesde` ≤ 7 días, aplicado a los tres tipos), umbral dual (`≥3 ∧ ≥25 %` vs `≥6` absoluto para lluvia), histéresis con `confirmado` + `ultimoEscenario` cacheados (elaboración deliberada sobre el `{primeraDeteccion, ultimaDeteccion}` mínimo de §6 — sin contenido cacheado no hay qué redibujar durante la permanencia). `src/services/pulso-distrito.ts` se reduce a `componenteTrafico` (lo sigue usando spec 017); `PulsoDistrito`/`NivelPulso`/`EscenarioActivo` viven ahora en `pulso-escenarios.ts`. `api/pulso/v1/distrito.ts` y `api/insights/v1/actual.ts` comparten el mismo evaluador y la misma clave de histéresis (`pulso:escenarios-previos:v1`, `cachePeek`/`cachePoke`). `insights.ts`: `insightsDistritoCritico` retirada, nueva `insightsPulsoDistrito` (agrupada por distrito, vivo+confirmado). Capa en `main.ts`: choropleth de 3 estados (gris / gris tenue "insuficiente" — simplificación del tramado, deck.gl no tiene patrones de relleno sin shaders — / ámbar-rojo) + `ScatterplotLayer` de tramos afectados + `ScatterplotLayer` de marcadores + `TextLayer` de etiquetas por escenario vivo+confirmado. `scripts/snapshot-pulso-sombra.ts` nuevo, enganchado a `.github/workflows/trafico-historico-cron.yml` (paso con `continue-on-error`), simplificado respecto al evaluador en vivo (sin histéresis entre ejecuciones horarias, sin gate de `trafico-empeora` — ambos necesitan estado de minutos que un cron horario no puede leer entre ejecuciones, documentado en el propio script). Ejecutado una vez contra datos reales (`data/pulso-sombra.json`, 0 distritos activos). Consumidores actualizados: spec `013` v6, `034` v4, `036` v2, `037` v3. Bug real encontrado y corregido durante la verificación: `lluviaInminente()` usaba `Date.now()` en vez de la hora inyectable de la entrada, rompiendo los tests deterministas del escenario de lluvia — corregido pasando `ahoraMs` explícitamente. 26 tests nuevos (`pulso-escenarios.test.ts` + ajustes en `insights.test.ts`/`pulso-distrito.test.ts`/`glosario.test.ts`), 346/346 en total. `npm run typecheck`/`build` verdes, verificado en navegador contra datos reales (endpoint 200 con 19 distritos, capa activable sin errores, "sin escenarios activos" — comportamiento correcto, no hay ningún cruce real ahora mismo en la ciudad). |
+| 5 | 2026-10-01 | **4º escenario (§11):** `corte-cerca-equipamiento-critico` — tramo `cortado` a ≤250 m de un equipamiento crítico de sanidad/bomberos (spec `054`), `prioritario`, `vivo` desde el principio (determinista, mismo criterio que v4 §10.3). Excluye `policia` a propósito (límite ético, `CLAUDE.md` §4 — recomendación del asesor de ciencia de datos). Cero cambios en la capa de mapa/leyenda (ya eran genéricas). Recomendación #1 (de mayor valor) de un análisis del asesor sobre qué cruces nuevos aportarían valor real a apoyo a decisión operativa; las #2 y #3 van por otra vía (spec `041` v2 y pendiente, respectivamente — ver §7). Consumidores actualizados: `insights.ts` (`FuenteInsight` gana `'054'`, `FUENTES_POR_ESCENARIO`), `apoyo-decision.ts` (spec `041`, nuevo caso de texto), `glosario.ts`. |
 
 ## 9. v3 — recalibración del índice ponderado (2026-09-09) — SUPERSEDED por v4
 
@@ -368,3 +417,45 @@ reloj de las 3-4 semanas de datos empieza a correr desde ese merge.
       (lo usa spec `017`).
 - [x] `npm run typecheck` / `test` (346/346) / `build` en verde. Disclaimer "heurística no
       validada" visible en la leyenda del Pulso. Sin badge MOCK (nada es sintético).
+
+## 11. v5 — escenario de corte cerca de un equipamiento crítico (2026-10-01)
+
+Petición directa del usuario: "analizar la información y contexto que nutre a apoyo a
+decisión operativa porque de ahí tiene que ofrecer insights de valor". El asesor de
+ciencia de datos del proyecto propuso 3 cruces nuevos priorizados (ver memoria de
+proyecto); este es el **#1**, el de mayor valor operativo según su análisis —
+"¿puede un corte bloquear el acceso de una ambulancia o un camión de bomberos?" — y el
+único que necesitaba tocar el evaluador consolidado (los otros dos, de menor alcance,
+fueron a spec `041` v2 y quedan pendientes respectivamente).
+
+Diseño completo en §3 (decisiones explícitas: solo `cortado`, radio 250 m sin calibrar,
+exclusión de `policia`, modo `vivo` desde el principio por ser determinista — mismo
+criterio que justificó ir a `vivo` a los dos primeros escenarios en v4 §10.3).
+
+### 11.1 Definition of Done (v5)
+
+- [x] `EquipamientoCritico` (spec `054`, `Implemented`) disponible como prerrequisito de
+      datos — 2026-10-01.
+- [x] `src/services/pulso-escenarios.ts`: nuevo `IdEscenario` (`corte-cerca-equipamiento-critico`),
+      nuevo campo opcional `equipamientoCritico` en `EscenarioActivo`, nuevo campo
+      `equipamientosCriticos: EquipamientoCritico[]` en `EntradaPulso`, función
+      `detectarCorteCercaEquipamientoCritico` (distancia punto-línea real vía
+      `distanciaPuntoALinea` de `proximidad.ts`, mismo patrón que usa `cordon-incidente.ts`),
+      registrada en `IDS_ESCENARIO`/`MODO_POR_ESCENARIO` (`'vivo'`). Tests con fixtures:
+      dispara con corte real dentro del radio, no dispara con solo congestión, no dispara
+      fuera del radio, no dispara con `policia`, dedup por distrito (el más cercano).
+- [x] `GET /api/pulso/v1/distrito`, `GET /api/insights/v1/actual` y
+      `GET /api/decision/v1/sugerencias` pasan `equipamientosCriticos` (lectura estática de
+      `data/equipamientos-criticos.json`, sin fetch/caché propia) a `calcularPulsoEscenarios`.
+- [x] `insights.ts`: `'054'` añadido a `FuenteInsight`; `FUENTES_POR_ESCENARIO` incluye el
+      escenario nuevo — llega gratis a `insightsPulsoDistrito` (agrupación genérica por
+      distrito, sin cambios en esa función).
+- [x] `apoyo-decision.ts`: `SEÑALES_POR_ESCENARIO`/`FUENTES_POR_ESCENARIO`/
+      `sugerenciaTextoPara` incluyen el escenario nuevo, con el nombre real del
+      equipamiento en el texto de sugerencia.
+- [x] Capa de mapa y leyenda del Pulso: **sin cambios de código** — confirmado que
+      `main.ts` ya lee `escenario.motivo`/`centroideAfectado`/`tramosAfectados`/`nivel` de
+      forma genérica, sin switch por `id` de escenario (verificado leyendo el código antes
+      de implementar, no asumido).
+- [x] `src/ui/glosario.ts` (`cuerpoPulso`): 4º `<li>` describiendo el escenario nuevo.
+- [x] `npm run typecheck`/`test`/`build` verdes, verificado en navegador.
