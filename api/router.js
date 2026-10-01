@@ -101513,6 +101513,20 @@ function sugerenciaTextoPara(escenario, distritoNombre) {
       return `Podr\xEDa convenir valorar preposicionar unidades cerca de ${dondeCalle} ante la lluvia prevista, que coincide con tr\xE1fico ya denso en la zona.`;
   }
 }
+function avisoOficialMasSevero(avisos) {
+  const relevantes = avisos.filter((a2) => a2.nivel === "rojo" || a2.nivel === "naranja");
+  if (relevantes.length === 0) return null;
+  return relevantes.find((a2) => a2.nivel === "rojo") ?? relevantes[0];
+}
+function enriquecerConAvisoOficial(sugerencia, aviso) {
+  if (!aviso) return sugerencia;
+  return {
+    ...sugerencia,
+    se\u00F1alesCombinadas: [...sugerencia.se\u00F1alesCombinadas, `aviso-oficial-${aviso.nivel}`],
+    fuenteSpec: [...sugerencia.fuenteSpec, "001"],
+    sugerenciaTexto: `${sugerencia.sugerenciaTexto} Adem\xE1s, hay un aviso oficial ${aviso.nivel} de Emergencias (GVA) vigente en la Comunitat Valenciana.`
+  };
+}
 function sugerenciaDeEscenario(distrito, escenario, generadaEn) {
   return {
     id: `${distrito.distritoCodigo}:${escenario.id}`,
@@ -101527,12 +101541,13 @@ function sugerenciaDeEscenario(distrito, escenario, generadaEn) {
     centroide: escenario.centroideAfectado
   };
 }
-function calcularSugerencias(distritos2, generadaEn) {
+function calcularSugerencias(distritos2, generadaEn, avisosOficiales = []) {
+  const avisoMasSevero = avisoOficialMasSevero(avisosOficiales);
   const sugerencias = [];
   for (const distrito of distritos2) {
     for (const escenario of distrito.escenariosActivos) {
       if (escenario.modo !== "vivo" || !escenario.confirmado) continue;
-      sugerencias.push(sugerenciaDeEscenario(distrito, escenario, generadaEn));
+      sugerencias.push(enriquecerConAvisoOficial(sugerenciaDeEscenario(distrito, escenario, generadaEn), avisoMasSevero));
     }
   }
   return sugerencias.sort((a2, b2) => a2.severidad === b2.severidad ? 0 : a2.severidad === "prioritario" ? -1 : 1);
@@ -101554,18 +101569,22 @@ async function handler23() {
       getOrFetch("aire:valencia-actual:v1", 60 * 60 * 1e3, fetchCalidadAire),
       getOrFetch("trafico:valencia-estado:v1", 3 * 60 * 1e3, () => fetchEstadoTrafico(resolverDistrito2))
     ]);
-    const [incidenciasResult, fallasResult, prediccionResult] = await Promise.allSettled([
+    const [incidenciasResult, fallasResult, prediccionResult, avisosResult] = await Promise.allSettled([
       getOrFetch(
         "via-publica:incidencias-valencia:v1",
         60 * 60 * 1e3,
         () => fetchIncidenciasViaPublica(resolverDistrito2)
       ),
       getOrFetch("fallas:valencia-actual:v1", 6 * 60 * 60 * 1e3, () => fetchDatosFallas(resolverDistrito2)),
-      getOrFetch("meteo:valencia-prediccion-4h:v1", 15 * 60 * 1e3, fetchPrediccionCortoPlazo)
+      getOrFetch("meteo:valencia-prediccion-4h:v1", 15 * 60 * 1e3, fetchPrediccionCortoPlazo),
+      // v2 (spec 041) — mismo endpoint/caché que ya usa api/meteo/v1/avisos.ts
+      // y api/insights/v1/actual.ts, no una llamada propia nueva.
+      getOrFetch("meteo:valencia-avisos:v1", 15 * 60 * 1e3, fetchAvisosVigentes)
     ]);
     const incidencias = incidenciasResult.status === "fulfilled" ? incidenciasResult.value.value.filter((i) => new Date(i.vigenciaHasta).getTime() >= Date.now()) : [];
     const zonasFallas = fallasResult.status === "fulfilled" ? fallasResult.value.value.zonasMovilidadReducida : [];
     const prediccion = prediccionResult.status === "fulfilled" ? prediccionResult.value.value : null;
+    const avisosOficiales = avisosResult.status === "fulfilled" ? avisosResult.value.value.avisos : [];
     const tramosTraficoPrevios = cachePeek(CLAVE_TRAFICO_PREVIO3) ?? null;
     const estadoHisteresisPrevio = cachePeek(CLAVE_HISTERESIS_PULSO3) ?? {};
     const { distritos: distritos2, estadoHisteresis } = calcularPulsoEscenarios(
@@ -101583,7 +101602,7 @@ async function handler23() {
     cachePoke(CLAVE_HISTERESIS_PULSO3, estadoHisteresis, 30 * 60 * 1e3);
     cachePoke(CLAVE_TRAFICO_PREVIO3, traficoResult.value, 15 * 60 * 1e3);
     const generadaEn = (/* @__PURE__ */ new Date()).toISOString();
-    const sugerencias = calcularSugerencias(distritos2, generadaEn);
+    const sugerencias = calcularSugerencias(distritos2, generadaEn, avisosOficiales);
     const fresh = meteoResult.fresh && aireResult.fresh && traficoResult.fresh;
     return new Response(JSON.stringify({ sugerencias, fresh }), {
       status: 200,

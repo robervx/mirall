@@ -14,6 +14,7 @@ import { fetchEstadoTrafico, type TramoTrafico } from '../services/trafico';
 import { fetchIncidenciasViaPublica } from '../services/via-publica';
 import { fetchDatosFallas } from '../services/fallas';
 import { fetchPrediccionCortoPlazo } from '../services/prediccion-corto-plazo';
+import { fetchAvisosVigentes } from '../services/avisos-meteo';
 import {
   distritosFromGeoJSON,
   setLoadedDistricts,
@@ -45,12 +46,15 @@ export default async function handler(): Promise<Response> {
 
     // spec 041 §4 — si una señal falla, se muestran las sugerencias que sí se
     // pudieron calcular con el resto; nunca se oculta la página entera.
-    const [incidenciasResult, fallasResult, prediccionResult] = await Promise.allSettled([
+    const [incidenciasResult, fallasResult, prediccionResult, avisosResult] = await Promise.allSettled([
       getOrFetch('via-publica:incidencias-valencia:v1', 60 * 60 * 1000, () =>
         fetchIncidenciasViaPublica(resolverDistrito),
       ),
       getOrFetch('fallas:valencia-actual:v1', 6 * 60 * 60 * 1000, () => fetchDatosFallas(resolverDistrito)),
       getOrFetch('meteo:valencia-prediccion-4h:v1', 15 * 60 * 1000, fetchPrediccionCortoPlazo),
+      // v2 (spec 041) — mismo endpoint/caché que ya usa api/meteo/v1/avisos.ts
+      // y api/insights/v1/actual.ts, no una llamada propia nueva.
+      getOrFetch('meteo:valencia-avisos:v1', 15 * 60 * 1000, fetchAvisosVigentes),
     ]);
 
     const incidencias =
@@ -59,6 +63,7 @@ export default async function handler(): Promise<Response> {
         : [];
     const zonasFallas = fallasResult.status === 'fulfilled' ? fallasResult.value.value.zonasMovilidadReducida : [];
     const prediccion = prediccionResult.status === 'fulfilled' ? prediccionResult.value.value : null;
+    const avisosOficiales = avisosResult.status === 'fulfilled' ? avisosResult.value.value.avisos : [];
 
     const tramosTraficoPrevios = cachePeek<TramoTrafico[]>(CLAVE_TRAFICO_PREVIO) ?? null;
     const estadoHisteresisPrevio = cachePeek<EstadoHisteresisPulso>(CLAVE_HISTERESIS_PULSO) ?? {};
@@ -80,7 +85,7 @@ export default async function handler(): Promise<Response> {
     cachePoke(CLAVE_TRAFICO_PREVIO, traficoResult.value, 15 * 60 * 1000);
 
     const generadaEn = new Date().toISOString();
-    const sugerencias = calcularSugerencias(distritos, generadaEn);
+    const sugerencias = calcularSugerencias(distritos, generadaEn, avisosOficiales);
     const fresh = meteoResult.fresh && aireResult.fresh && traficoResult.fresh;
 
     return new Response(JSON.stringify({ sugerencias, fresh }), {

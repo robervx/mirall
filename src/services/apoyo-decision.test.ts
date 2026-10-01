@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { calcularSugerencias } from './apoyo-decision';
 import type { PulsoDistrito, EscenarioActivo } from './pulso-escenarios';
+import type { AvisoMeteo } from './avisos-meteo';
 
 function escenario(overrides: Partial<EscenarioActivo>): EscenarioActivo {
   return {
@@ -110,5 +111,66 @@ describe('calcularSugerencias', () => {
     const [sugerencia] = calcularSugerencias(distritos, GENERADA_EN);
     expect(sugerencia!.señalesCombinadas).toEqual(['incidencia-via-publica', 'trafico-denso']);
     expect(sugerencia!.fuenteSpec).toEqual(['010', '004', '026']);
+  });
+});
+
+// v2 (spec 041) — enriquecimiento con el aviso oficial de Emergencias GVA
+// más severo, recomendación #2 del asesor de ciencia de datos (2026-10-01).
+function aviso(overrides: Partial<AvisoMeteo>): AvisoMeteo {
+  return {
+    id: 'https://comunica.gva.es/es/detalle?id=1',
+    nivel: 'naranja',
+    titulo: 'Emergencias activa la alerta naranja',
+    resumen: null,
+    url: 'https://comunica.gva.es/es/detalle?id=1',
+    publicadoEn: '2026-10-01T00:00:00.000Z',
+    fetchedAt: GENERADA_EN,
+    source: 'gva-emergencias-scraping',
+    ...overrides,
+  };
+}
+
+describe('calcularSugerencias — aviso oficial (v2, spec 041)', () => {
+  it('sin avisos oficiales, el texto no cambia', () => {
+    const distritos = [distrito({ escenariosActivos: [escenario({})] })];
+    const [sugerencia] = calcularSugerencias(distritos, GENERADA_EN, []);
+    expect(sugerencia!.sugerenciaTexto).not.toContain('aviso oficial');
+    expect(sugerencia!.señalesCombinadas).toEqual(['incidencia-via-publica', 'trafico-denso']);
+  });
+
+  it('con un aviso oficial ROJO vigente, añade la cláusula y la señal trazable, sin tocar severidad', () => {
+    const distritos = [distrito({ escenariosActivos: [escenario({ nivel: 'seguimiento' })] })];
+    const [sugerencia] = calcularSugerencias(distritos, GENERADA_EN, [aviso({ nivel: 'rojo' })]);
+    expect(sugerencia!.sugerenciaTexto).toContain('aviso oficial rojo');
+    expect(sugerencia!.señalesCombinadas).toContain('aviso-oficial-rojo');
+    expect(sugerencia!.fuenteSpec).toContain('001');
+    expect(sugerencia!.severidad).toBe('seguimiento'); // nunca sube la severidad por sí solo
+  });
+
+  it('con un aviso AMARILLO vigente, no enriquece (solo rojo/naranja, mismo corte que insights.ts)', () => {
+    const distritos = [distrito({ escenariosActivos: [escenario({})] })];
+    const [sugerencia] = calcularSugerencias(distritos, GENERADA_EN, [aviso({ nivel: 'amarillo' })]);
+    expect(sugerencia!.sugerenciaTexto).not.toContain('aviso oficial');
+  });
+
+  it('con rojo y naranja a la vez, usa el rojo (el más severo)', () => {
+    const distritos = [distrito({ escenariosActivos: [escenario({})] })];
+    const [sugerencia] = calcularSugerencias(distritos, GENERADA_EN, [aviso({ nivel: 'naranja' }), aviso({ nivel: 'rojo', id: '2' })]);
+    expect(sugerencia!.sugerenciaTexto).toContain('aviso oficial rojo');
+    expect(sugerencia!.señalesCombinadas).toContain('aviso-oficial-rojo');
+    expect(sugerencia!.señalesCombinadas).not.toContain('aviso-oficial-naranja');
+  });
+
+  it('el texto sigue en condicional con el aviso añadido, nunca imperativo', () => {
+    const distritos = [distrito({ escenariosActivos: [escenario({})] })];
+    const [sugerencia] = calcularSugerencias(distritos, GENERADA_EN, [aviso({ nivel: 'rojo' })]);
+    expect(sugerencia!.sugerenciaTexto).toMatch(/^Podría convenir valorar/);
+    expect(sugerencia!.sugerenciaTexto.toLowerCase()).not.toMatch(/\b(enviar|cortar|despachar|ejecutar)\b/);
+  });
+
+  it('sin tercer argumento (llamadas antiguas), sigue funcionando igual que v1', () => {
+    const distritos = [distrito({ escenariosActivos: [escenario({})] })];
+    const [sugerencia] = calcularSugerencias(distritos, GENERADA_EN);
+    expect(sugerencia!.sugerenciaTexto).not.toContain('aviso oficial');
   });
 });

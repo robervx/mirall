@@ -8,6 +8,7 @@
  * que spec 024.
  */
 import type { PulsoDistrito, EscenarioActivo, IdEscenario } from './pulso-escenarios';
+import type { AvisoMeteo } from './avisos-meteo';
 
 export interface SugerenciaOperativa {
   id: string;
@@ -62,6 +63,40 @@ function sugerenciaTextoPara(escenario: EscenarioActivo, distritoNombre: string)
   }
 }
 
+/**
+ * v2 (spec 041) — el aviso oficial de Emergencias GVA más severo entre
+ * rojo/naranja, si hay alguno vigente (`avisosOficiales` ya viene filtrado a
+ * vigentes por `fetchAvisosVigentes`, spec 001 — no se re-comprueba aquí).
+ * Amarillo se queda fuera a propósito: mismo corte que ya usa
+ * `SEVERIDAD_POR_NIVEL_AVISO` en insights.ts (rojo/naranja → urgente,
+ * amarillo → aviso) — recomendación del asesor de ciencia de datos
+ * (2026-10-01), prioridad #2 de las propuestas para esta spec.
+ */
+function avisoOficialMasSevero(avisos: AvisoMeteo[]): AvisoMeteo | null {
+  const relevantes = avisos.filter((a) => a.nivel === 'rojo' || a.nivel === 'naranja');
+  if (relevantes.length === 0) return null;
+  return relevantes.find((a) => a.nivel === 'rojo') ?? relevantes[0]!;
+}
+
+/**
+ * Enriquece el texto con el aviso oficial vigente — NUNCA cambia `severidad`
+ * ni `señalesCombinadas` más allá de añadir una entrada trazable: la
+ * severidad la sigue decidiendo solo la conjunción de tráfico/incidencias ya
+ * calculada por spec 010 (mismo criterio que recomendó el asesor de datos —
+ * esto es contexto que matiza el texto, no una señal que suba el nivel por
+ * sí sola, para no acercarse a un score ponderado entre señales, CLAUDE.md
+ * y spec 013 §0/§8).
+ */
+function enriquecerConAvisoOficial(sugerencia: SugerenciaOperativa, aviso: AvisoMeteo | null): SugerenciaOperativa {
+  if (!aviso) return sugerencia;
+  return {
+    ...sugerencia,
+    señalesCombinadas: [...sugerencia.señalesCombinadas, `aviso-oficial-${aviso.nivel}`],
+    fuenteSpec: [...sugerencia.fuenteSpec, '001'],
+    sugerenciaTexto: `${sugerencia.sugerenciaTexto} Además, hay un aviso oficial ${aviso.nivel} de Emergencias (GVA) vigente en la Comunitat Valenciana.`,
+  };
+}
+
 function sugerenciaDeEscenario(
   distrito: PulsoDistrito,
   escenario: EscenarioActivo,
@@ -85,13 +120,22 @@ function sugerenciaDeEscenario(
  * Solo escenarios `modo: 'vivo'` y `confirmado` (mismo gate que usan spec 010
  * v4 para el choropleth e `insightsPulsoDistrito` de spec 013 — un escenario
  * en modo sombra o sin confirmar no genera sugerencia, spec 010 §10.3).
+ *
+ * `avisosOficiales` (v2, spec 041) — opcional, por defecto `[]` para no
+ * romper ninguna llamada existente. Mismo patrón que `avisosOficiales` en
+ * `calcularInsights` (insights.ts, spec 013 v4).
  */
-export function calcularSugerencias(distritos: PulsoDistrito[], generadaEn: string): SugerenciaOperativa[] {
+export function calcularSugerencias(
+  distritos: PulsoDistrito[],
+  generadaEn: string,
+  avisosOficiales: AvisoMeteo[] = [],
+): SugerenciaOperativa[] {
+  const avisoMasSevero = avisoOficialMasSevero(avisosOficiales);
   const sugerencias: SugerenciaOperativa[] = [];
   for (const distrito of distritos) {
     for (const escenario of distrito.escenariosActivos) {
       if (escenario.modo !== 'vivo' || !escenario.confirmado) continue;
-      sugerencias.push(sugerenciaDeEscenario(distrito, escenario, generadaEn));
+      sugerencias.push(enriquecerConAvisoOficial(sugerenciaDeEscenario(distrito, escenario, generadaEn), avisoMasSevero));
     }
   }
   // Prioritario primero — es lo que más falta hace decidir (spec 041 §1).
