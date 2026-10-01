@@ -5,7 +5,9 @@
 //   - `#controls` (capas), `#media-panel`, `#tendencia-panel`, `#camaras-panel`,
 //     `#camaras-dgt-panel` (spec 043), `#agenda-panel`,
 //     `#actualidad-redes-panel` (spec 040), `#apoyo-decision-panel` (spec 041),
-//     `#altimetria-panel`/`#meteo-zona-panel` (spec 044), `#senales-ia-panel`/
+//     `#altimetria-panel`/`#lluvia-viento-distrito-panel`/
+//     `#temperatura-zona-panel`/`#riesgo-escorrentia-panel` (spec 044, cuatro
+//     cajas separadas desde 2026-10-01), `#senales-ia-panel`/
 //     `#recomendaciones-ia-panel` (spec 047, sustituye a `#sintesis-ia-panel`
 //     de spec 045), `#protocolos-panel` (spec 042), `#movilidad-avisos-panel`
 //     (spec 048) y `#zas-ruido-panel` (spec 049) se reparentan dentro del
@@ -37,7 +39,9 @@ const IDS_REPARENTABLES = [
   'actualidad-redes-panel',
   'apoyo-decision-panel',
   'altimetria-panel',
-  'meteo-zona-panel',
+  'lluvia-viento-distrito-panel',
+  'temperatura-zona-panel',
+  'riesgo-escorrentia-panel',
   'senales-ia-panel',
   'recomendaciones-ia-panel',
   'protocolos-panel',

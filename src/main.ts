@@ -86,7 +86,12 @@ import { montarMeteoActualPanel, montarPrediccionPanel } from './ui/meteo-panel'
 import { buildActualidadRedesContent } from './ui/actualidad-redes';
 import { initRouter, irAVista } from './ui/router';
 import { montarApoyoDecisionPanel } from './ui/apoyo-decision-panel';
-import { montarAltimetriaPanel, montarMeteoZonaPanel } from './ui/emergencia-meteo-panel';
+import {
+  montarAltimetriaPanel,
+  montarLluviaVientoDistritoPanel,
+  montarTemperaturaZonaPanel,
+  montarRiesgoEscorrentiaPanel,
+} from './ui/emergencia-meteo-panel';
 import { montarSenalesPanel } from './ui/senales-ia-panel';
 import { montarRecomendacionesPanel } from './ui/recomendaciones-actuacion-panel';
 import { buildProtocolosContent } from './ui/protocolos-panel';
@@ -3383,7 +3388,9 @@ async function main(): Promise<void> {
   montarApoyoDecisionPanel();
   montarCamarasDgtPanel();
   montarAltimetriaPanel();
-  montarMeteoZonaPanel();
+  montarLluviaVientoDistritoPanel();
+  montarTemperaturaZonaPanel();
+  montarRiesgoEscorrentiaPanel();
   montarSenalesPanel();
   montarRecomendacionesPanel();
   onPeticionCentrarMapa(({ coordenadas, zoom }) => {
@@ -3534,7 +3541,9 @@ async function main(): Promise<void> {
     'actualidad-redes-panel',
     'apoyo-decision-panel',
     'altimetria-panel',
-    'meteo-zona-panel',
+    'lluvia-viento-distrito-panel',
+    'temperatura-zona-panel',
+    'riesgo-escorrentia-panel',
     'senales-ia-panel',
     'recomendaciones-ia-panel',
     'protocolos-panel',

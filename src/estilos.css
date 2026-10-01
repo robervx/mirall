@@ -1672,7 +1672,9 @@
       #protocolos-panel,
       #camaras-dgt-panel,
       #altimetria-panel,
-      #meteo-zona-panel,
+      #lluvia-viento-distrito-panel,
+      #temperatura-zona-panel,
+      #riesgo-escorrentia-panel,
       #senales-ia-panel,
       #recomendaciones-ia-panel {
         width: 320px;
@@ -1692,57 +1694,78 @@
       #protocolos-panel[hidden],
       #camaras-dgt-panel[hidden],
       #altimetria-panel[hidden],
-      #meteo-zona-panel[hidden],
+      #lluvia-viento-distrito-panel[hidden],
+      #temperatura-zona-panel[hidden],
+      #riesgo-escorrentia-panel[hidden],
       #senales-ia-panel[hidden],
       #recomendaciones-ia-panel[hidden] {
         display: none;
       }
 
-      /* Orden de los bloques dentro de /inteligencia (pedido explícito del
-         usuario, 2026-09-17; reordenado el mismo día) — cámaras primero (DGT
-         antes que ciudad), señales+recomendaciones IA justo al lado
-         (prioridad del usuario: "esa tarjeta la vamos a poner la primera
-         arriba, al lado de las cámaras" — spec 047 la dividió en dos cajas),
-         agenda, altimetría junto a lluvia/viento, actualidad
-         institucional/apoyo a decisión después, contexto mediático relegado
-         más abajo (mismo pedido), tendencia la última (de momento aporta
-         poco, spec 025). Solo afecta al orden visual dentro del flex de
-         /inteligencia — el orden de montaje en `main.ts` no cambia. */
+      /* Orden de los bloques dentro de /inteligencia. Reordenado por última
+         vez el 2026-10-01 (petición explícita del usuario): en el despliegue
+         público (Vercel) no hay cámaras personales de Turisme CV (`#camaras-panel`,
+         ADR-003, gateada tras `VITE_PERSONAL_CAMARA_TURISME_CV` — vacía ahí),
+         así que la prioridad visual pasa a las cajas con datos reales que
+         antes vivían más abajo o agrupadas: altimetría, lluvia/viento por
+         distrito, temperatura por zona, riesgo de acumulación de agua y
+         sonometría de ZAS, todas justo después de las cámaras DGT (esas sí
+         públicas, spec 043). Señales+recomendaciones IA conservan su
+         prioridad histórica (2026-09-17: "esa tarjeta la vamos a poner la
+         primera arriba, al lado de las cámaras"). Las cámaras personales
+         bajan de posición (siguen funcionando igual si alguien despliega su
+         propia instancia con la variable activa) — contexto mediático y
+         tendencia siguen relegados al final (mismo pedido de siempre). Solo
+         afecta al orden visual dentro del flex de /inteligencia — el orden
+         de montaje en `main.ts` no cambia. */
       :root[data-vista='inteligencia']:not([data-layout='movil']) #camaras-dgt-panel {
         order: 1;
       }
-      :root[data-vista='inteligencia']:not([data-layout='movil']) #camaras-panel {
+      :root[data-vista='inteligencia']:not([data-layout='movil']) #altimetria-panel {
         order: 2;
       }
-      :root[data-vista='inteligencia']:not([data-layout='movil']) #senales-ia-panel {
+      :root[data-vista='inteligencia']:not([data-layout='movil']) #lluvia-viento-distrito-panel {
         order: 3;
       }
-      :root[data-vista='inteligencia']:not([data-layout='movil']) #recomendaciones-ia-panel {
+      :root[data-vista='inteligencia']:not([data-layout='movil']) #temperatura-zona-panel {
         order: 4;
       }
-      :root[data-vista='inteligencia']:not([data-layout='movil']) #agenda-panel {
+      :root[data-vista='inteligencia']:not([data-layout='movil']) #riesgo-escorrentia-panel {
         order: 5;
       }
-      :root[data-vista='inteligencia']:not([data-layout='movil']) #altimetria-panel {
+      /* Spec 049 — sonometría de ZAS (sonómetros de Russafa, sin geometría
+         verificada, no es una capa de mapa — spec 049 §7). Antes relegada al
+         final junto con movilidad-avisos-panel; promovida aquí el
+         2026-10-01 (petición explícita del usuario). */
+      :root[data-vista='inteligencia']:not([data-layout='movil']) #zas-ruido-panel {
         order: 6;
       }
-      :root[data-vista='inteligencia']:not([data-layout='movil']) #meteo-zona-panel {
+      :root[data-vista='inteligencia']:not([data-layout='movil']) #senales-ia-panel {
         order: 7;
       }
-      :root[data-vista='inteligencia']:not([data-layout='movil']) #actualidad-redes-panel {
+      :root[data-vista='inteligencia']:not([data-layout='movil']) #recomendaciones-ia-panel {
         order: 8;
       }
-      :root[data-vista='inteligencia']:not([data-layout='movil']) #apoyo-decision-panel {
+      :root[data-vista='inteligencia']:not([data-layout='movil']) #camaras-panel {
         order: 9;
       }
-      :root[data-vista='inteligencia']:not([data-layout='movil']) #media-panel {
+      :root[data-vista='inteligencia']:not([data-layout='movil']) #agenda-panel {
         order: 10;
       }
-      :root[data-vista='inteligencia']:not([data-layout='movil']) #protocolos-panel {
+      :root[data-vista='inteligencia']:not([data-layout='movil']) #actualidad-redes-panel {
         order: 11;
       }
-      :root[data-vista='inteligencia']:not([data-layout='movil']) #tendencia-panel {
+      :root[data-vista='inteligencia']:not([data-layout='movil']) #apoyo-decision-panel {
         order: 12;
+      }
+      :root[data-vista='inteligencia']:not([data-layout='movil']) #media-panel {
+        order: 13;
+      }
+      :root[data-vista='inteligencia']:not([data-layout='movil']) #protocolos-panel {
+        order: 14;
+      }
+      :root[data-vista='inteligencia']:not([data-layout='movil']) #tendencia-panel {
+        order: 15;
       }
       /* #movilidad-avisos-panel (spec 048) se añadió sin entrada aquí — bug
          real: sin `order` explícito caía en el 0 por defecto de flex y se
@@ -1750,13 +1773,7 @@
          usuario (2026-09-24): que quede en un segundo plano, no como
          principal — se manda al final. */
       :root[data-vista='inteligencia']:not([data-layout='movil']) #movilidad-avisos-panel {
-        order: 13;
-      }
-      /* Spec 049 — lista de sonómetros de Russafa (sin geometría verificada,
-         no es una capa de mapa, ver spec 049 §7). Contenido secundario, igual
-         criterio que movilidad-avisos-panel. */
-      :root[data-vista='inteligencia']:not([data-layout='movil']) #zas-ruido-panel {
-        order: 14;
+        order: 16;
       }
 
       /* Spec 045/047 — advertencia de IA, compartida por síntesis v1 y por
@@ -2660,7 +2677,9 @@
       :root[data-layout='movil'] #info-panels > #actualidad-redes-panel,
       :root[data-layout='movil'] #info-panels > #apoyo-decision-panel,
       :root[data-layout='movil'] #info-panels > #altimetria-panel,
-      :root[data-layout='movil'] #info-panels > #meteo-zona-panel,
+      :root[data-layout='movil'] #info-panels > #lluvia-viento-distrito-panel,
+      :root[data-layout='movil'] #info-panels > #temperatura-zona-panel,
+      :root[data-layout='movil'] #info-panels > #riesgo-escorrentia-panel,
       :root[data-layout='movil'] #info-panels > #senales-ia-panel,
       :root[data-layout='movil'] #info-panels > #recomendaciones-ia-panel,
       :root[data-layout='movil'] #info-panels > #protocolos-panel,
@@ -2681,7 +2700,9 @@
       :root[data-layout='movil'] #info-panels > #actualidad-redes-panel,
       :root[data-layout='movil'] #info-panels > #apoyo-decision-panel,
       :root[data-layout='movil'] #info-panels > #altimetria-panel,
-      :root[data-layout='movil'] #info-panels > #meteo-zona-panel,
+      :root[data-layout='movil'] #info-panels > #lluvia-viento-distrito-panel,
+      :root[data-layout='movil'] #info-panels > #temperatura-zona-panel,
+      :root[data-layout='movil'] #info-panels > #riesgo-escorrentia-panel,
       :root[data-layout='movil'] #info-panels > #senales-ia-panel,
       :root[data-layout='movil'] #info-panels > #recomendaciones-ia-panel,
       :root[data-layout='movil'] #info-panels > #protocolos-panel {
@@ -2695,7 +2716,9 @@
       :root[data-layout='movil'] #info-panels > #actualidad-redes-panel[hidden],
       :root[data-layout='movil'] #info-panels > #apoyo-decision-panel[hidden],
       :root[data-layout='movil'] #info-panels > #altimetria-panel[hidden],
-      :root[data-layout='movil'] #info-panels > #meteo-zona-panel[hidden],
+      :root[data-layout='movil'] #info-panels > #lluvia-viento-distrito-panel[hidden],
+      :root[data-layout='movil'] #info-panels > #temperatura-zona-panel[hidden],
+      :root[data-layout='movil'] #info-panels > #riesgo-escorrentia-panel[hidden],
       :root[data-layout='movil'] #info-panels > #senales-ia-panel[hidden],
       :root[data-layout='movil'] #info-panels > #recomendaciones-ia-panel[hidden],
       :root[data-layout='movil'] #info-panels > #protocolos-panel[hidden] {

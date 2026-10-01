@@ -1,10 +1,17 @@
 // Panel de emergencia meteorológica avanzada — spec 044, dentro de
-// /inteligencia (spec 040). Dos cajas separadas a partir de la
-// reestructuración pedida por el usuario el 2026-09-17 — antes vivían juntas
-// en un único panel: altimetría (estática, IGN) por un lado; lluvia/viento
-// por distrito (modelo Open-Meteo) + pluviómetros reales (SAIH Júcar,
-// medido) por otro, porque estos dos últimos comparten el mismo tema
-// ("cuánta agua está cayendo ahora mismo") y cadencia de refresco.
+// /inteligencia (spec 040). Empezó como un único panel, se dividió en dos el
+// 2026-09-17 (altimetría aparte de lluvia/viento+pluviómetros) y de nuevo en
+// cuatro el 2026-10-01 (petición explícita del usuario: "sacar las
+// temperaturas por zona y el riesgo de acumulación de agua para que tengan
+// su propia área") — cada caja tira de su propio endpoint y hace su propio
+// polling, nunca comparten estado entre sí:
+//   1. Altimetría (estática, IGN) — `montarAltimetriaPanel`.
+//   2. Lluvia/viento por distrito (modelo Open-Meteo) + pluviómetros reales
+//      (SAIH Júcar, medido) — comparten caja porque comparten tema ("cuánta
+//      agua está cayendo ahora mismo") — `montarLluviaVientoDistritoPanel`.
+//   3. Temperatura y lluvia por zona, estaciones AVAMET reales —
+//      `montarTemperaturaZonaPanel`.
+//   4. Riesgo de acumulación de agua (spec 046) — `montarRiesgoEscorrentiaPanel`.
 // "Capacidad de absorción" queda fuera — sin fuente oficial identificada, no
 // se inventa una heurística (§7, mismo criterio que EMT en spec 007 o Waze
 // en spec 015).
@@ -162,18 +169,24 @@ export function montarAltimetriaPanel(): void {
 }
 
 // ---------------------------------------------------------------------------
-// Caja 2 — Lluvia y viento por distrito (modelo) + pluviómetros reales (medido)
+// Cajas 2-5 — antes vivían juntas en #meteo-zona-panel (una sola caja con 4
+// bloques internos). Separadas en cajas propias a petición explícita del
+// usuario (2026-10-01): "sacar las temperaturas por zona y el riesgo de
+// acumulación de agua para que tengan su propia área" — mismo criterio que
+// ya se aplicó una vez a altimetría (ver cabecera del fichero, 2026-09-17).
+// Lluvia/viento por distrito y pluviómetros comparten tema ("cuánta agua
+// cae ahora") y se mantienen juntos; temperatura (AVAMET) y riesgo de
+// escorrentía pasan a caja propia cada una.
 // ---------------------------------------------------------------------------
 
-export function montarMeteoZonaPanel(): void {
+export function montarLluviaVientoDistritoPanel(): void {
   const root = document.createElement('div');
-  root.id = 'meteo-zona-panel';
+  root.id = 'lluvia-viento-distrito-panel';
   root.hidden = true;
   root.innerHTML = `
     <div class="media-panel__header">Lluvia y viento por distrito</div>
-    <p class="cordon-intro">Por distrito es un modelo (Open-Meteo), no una estación real; los pluviómetros SAIH y las estaciones AVAMET de abajo sí son dato medido. Sin dato de "capacidad de absorción del terreno" — no existe una fuente oficial para eso, no se inventa una estimación (spec 044 §7).</p>
+    <p class="cordon-intro">Por distrito es un modelo (Open-Meteo), no una estación real — los pluviómetros SAIH de abajo sí son dato medido.</p>
     <div class="emergencia-meteo__bloque">
-      <div class="emergencia-meteo__subtitulo">Por distrito (modelo)</div>
       <div id="emergencia-meteo-zona-list"></div>
       <div class="info-panel__meta" id="emergencia-meteo-zona-meta"></div>
     </div>
@@ -182,24 +195,11 @@ export function montarMeteoZonaPanel(): void {
       <div id="emergencia-pluviometros-list"></div>
       <div class="info-panel__meta" id="emergencia-pluviometros-meta"></div>
     </div>
-    <div class="emergencia-meteo__bloque">
-      <div class="emergencia-meteo__subtitulo">Temperatura y lluvia por zona — estaciones reales (AVAMET)</div>
-      <div id="emergencia-avamet-list"></div>
-      <div class="info-panel__meta" id="emergencia-avamet-meta"></div>
-    </div>
-    <div class="emergencia-meteo__bloque">
-      <div class="emergencia-meteo__subtitulo">Riesgo de acumulación de agua (imbornales × lluvia) — spec 046</div>
-      <p class="cordon-intro">${escapeHtml(ADVERTENCIA_RIESGO_ESCORRENTIA)}</p>
-      <div id="emergencia-escorrentia-list"></div>
-      <div class="info-panel__meta" id="emergencia-escorrentia-meta"></div>
-    </div>
   `;
   document.body.appendChild(root);
 
   const meteoZonaList = root.querySelector('#emergencia-meteo-zona-list')!;
   const pluviometrosList = root.querySelector('#emergencia-pluviometros-list')!;
-  const avametList = root.querySelector('#emergencia-avamet-list')!;
-  const escorrentiaList = root.querySelector('#emergencia-escorrentia-list')!;
 
   async function refrescarMeteoZona(): Promise<void> {
     try {
@@ -223,6 +223,22 @@ export function montarMeteoZonaPanel(): void {
     }
   }
 
+  startPolling(refrescarMeteoZona, 15 * 60 * 1000);
+  startPolling(refrescarPluviometros, 15 * 60 * 1000);
+}
+
+export function montarTemperaturaZonaPanel(): void {
+  const root = document.createElement('div');
+  root.id = 'temperatura-zona-panel';
+  root.hidden = true;
+  root.innerHTML = `
+    <div class="media-panel__header">Temperatura y lluvia por zona — estaciones reales (AVAMET)</div>
+    <div id="emergencia-avamet-list"></div>
+    <div class="info-panel__meta" id="emergencia-avamet-meta"></div>
+  `;
+  document.body.appendChild(root);
+  const avametList = root.querySelector('#emergencia-avamet-list')!;
+
   async function refrescarAvamet(): Promise<void> {
     try {
       const { estaciones, fresh } = await fetchAvamet();
@@ -233,6 +249,22 @@ export function montarMeteoZonaPanel(): void {
       console.error('Fallo al cargar estaciones AVAMET:', err);
     }
   }
+
+  startPolling(refrescarAvamet, 15 * 60 * 1000);
+}
+
+export function montarRiesgoEscorrentiaPanel(): void {
+  const root = document.createElement('div');
+  root.id = 'riesgo-escorrentia-panel';
+  root.hidden = true;
+  root.innerHTML = `
+    <div class="media-panel__header">Riesgo de acumulación de agua (imbornales × lluvia) — spec 046</div>
+    <p class="cordon-intro">${escapeHtml(ADVERTENCIA_RIESGO_ESCORRENTIA)}</p>
+    <div id="emergencia-escorrentia-list"></div>
+    <div class="info-panel__meta" id="emergencia-escorrentia-meta"></div>
+  `;
+  document.body.appendChild(root);
+  const escorrentiaList = root.querySelector('#emergencia-escorrentia-list')!;
 
   async function refrescarEscorrentia(): Promise<void> {
     try {
@@ -249,8 +281,5 @@ export function montarMeteoZonaPanel(): void {
     }
   }
 
-  startPolling(refrescarMeteoZona, 15 * 60 * 1000);
-  startPolling(refrescarPluviometros, 15 * 60 * 1000);
-  startPolling(refrescarAvamet, 15 * 60 * 1000);
-  startPolling(refrescarEscorrentia, 15 * 60 * 1000); // misma cadencia que meteo-zona — el único término dinámico es la lluvia
+  startPolling(refrescarEscorrentia, 15 * 60 * 1000);
 }
