@@ -124,6 +124,33 @@ function authDevPlugin(): Plugin {
 }
 
 /**
+ * En `npm run dev` la raíz sirve la landing pública (spec 053) — correcto en
+ * producción (`publico`, el único despliegue real en Vercel), pero `master`
+ * es la línea de trabajo interna (ADR-007) y quien arranca el dev server
+ * aquí quiere la herramienta operativa, no la landing. Redirección solo de
+ * servidor de desarrollo (`configureServer`, no afecta a `vite build` ni a
+ * `vite preview`, que sirve el build real): `/` exacto → `/mapa/`. `/proceso`
+ * y el resto de rutas siguen igual.
+ */
+function devMapaPorDefectoPlugin(): Plugin {
+  return {
+    name: 'vlc-monitor-dev-mapa-por-defecto',
+    configureServer(server: ViteDevServer) {
+      server.middlewares.use((req, res, next) => {
+        const pathname = new URL(req.url ?? '/', 'http://localhost').pathname;
+        if (pathname === '/' || pathname === '/index.html') {
+          res.statusCode = 302;
+          res.setHeader('location', '/mapa/');
+          res.end();
+          return;
+        }
+        next();
+      });
+    },
+  };
+}
+
+/**
  * PWA — spec 028. Manifest + service worker (Workbox vía generateSW).
  * `registerType: 'prompt'`: nunca recarga sola, muestra un aviso (src/pwa.ts).
  * `devOptions.enabled: false`: en `npm run dev` no se registra ningún SW.
@@ -210,7 +237,7 @@ export default defineConfig(({ mode }) => {
   }
 
   return {
-    plugins: [authDevPlugin(), apiDevPlugin(), ...pwaPlugin()],
+    plugins: [devMapaPorDefectoPlugin(), authDevPlugin(), apiDevPlugin(), ...pwaPlugin()],
     server: {
       port: Number(process.env.DEV_PORT) || 3000,
     },
