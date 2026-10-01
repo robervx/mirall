@@ -94,6 +94,31 @@ import { marcadoresSentido, type MarcadorSentido } from './services/flechas-sent
 import { puntosFlujoParaTramo } from './services/flujo-animado';
 import type { Coordenada } from './services/proximidad';
 
+// @deck.gl/mapbox (hasta su versión 9.4.0, la más reciente a fecha de este
+// comentario) lee `map.transform` directamente en cada frame del render
+// interleaved (`getViewport()` en su paquete, p.ej. `map.transform.height`).
+// maplibre-gl v6 eliminó esa propiedad pública de `Map` como parte de un
+// refactor de composición (`Map` ya no extiende `Camera`; en v5 sí, y
+// `@deck.gl/mapbox` sigue construido para esa API) — confirmado leyendo su
+// `.d.ts`: v5 `class Map extends Camera` (con `transform` heredado), v6
+// `class Map extends Evented` (sin `transform`). El transform real y vivo en
+// v6 sigue existiendo, solo que ahora cuelga de `map.painter.transform`. Sin
+// este shim, cada render de deck.gl lanza `TypeError: Cannot read properties
+// of undefined (reading 'height')` dentro del callback `custom` de MapLibre y
+// NINGUNA capa deck.gl llega a pintar nunca (investigado 2026-10-01, ver
+// memoria de proyecto — no downgradear a maplibre-gl v5 para evitar esto: v5
+// tiene una vulnerabilidad XSS crítica sin parchear, GHSA-jrc7-96c5-q579,
+// parcheada solo a partir de v6.4.1). Debe ejecutarse antes de crear el
+// primer `Map` / `MapboxOverlay`, de ahí que viva a nivel de módulo.
+if (!Object.getOwnPropertyDescriptor(maplibregl.Map.prototype, 'transform')) {
+  Object.defineProperty(maplibregl.Map.prototype, 'transform', {
+    configurable: true,
+    get(this: { painter: { transform: unknown } }) {
+      return this.painter.transform;
+    },
+  });
+}
+
 const OPENFREEMAP_STYLE = 'https://tiles.openfreemap.org/styles/liberty';
 const VALENCIA_CENTER: [number, number] = [-0.3763, 39.4699];
 const DEFAULT_ZOOM = 12;
