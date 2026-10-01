@@ -33,12 +33,18 @@ export function iniciarHeroCiudad3D(canvas: HTMLCanvasElement): void {
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
   const tamano = () => canvas.parentElement?.getBoundingClientRect() ?? { width: window.innerWidth, height: 480 };
 
+  const DISTANCIA_BASE = 18;
+  const ALTURA_BASE = 3.4;
+  const FOG_CERCA_BASE = 9;
+  const FOG_LEJOS_BASE = 17;
+
   const camera = new THREE.PerspectiveCamera(22, 1, 1, 500);
-  camera.position.set(0, 3.4, 18);
+  camera.position.set(0, ALTURA_BASE, DISTANCIA_BASE);
 
   const scene = new THREE.Scene();
   scene.background = new THREE.Color(NAVY);
-  scene.fog = new THREE.Fog(NAVY, 9, 17);
+  const niebla = new THREE.Fog(NAVY, FOG_CERCA_BASE, FOG_LEJOS_BASE);
+  scene.fog = niebla;
 
   const ciudad = new THREE.Object3D();
   const particulas = new THREE.Object3D();
@@ -150,7 +156,20 @@ export function iniciarHeroCiudad3D(canvas: HTMLCanvasElement): void {
   const ajustarTamano = (): void => {
     const { width, height } = tamano();
     renderer.setSize(width, height, false);
-    camera.aspect = width / Math.max(height, 1);
+    const aspecto = width / Math.max(height, 1);
+    camera.aspect = aspecto;
+
+    // En móvil (retrato, aspecto < 1) el FOV vertical fijo deja un encuadre
+    // horizontal muy estrecho — un solo edificio puede llenar el ancho y
+    // taparse con el texto. Retranquea la cámara (y la niebla con ella, en
+    // la misma proporción) cuanto más estrecho es el hueco, con un tope para
+    // no alejarla de más en pantallas extremadamente altas y finas.
+    const retroceso = aspecto < 1 ? Math.min(1 / aspecto, 2.2) : 1;
+    camera.position.z = DISTANCIA_BASE * retroceso;
+    camera.position.y = ALTURA_BASE * Math.min(retroceso, 1.6);
+    niebla.near = FOG_CERCA_BASE * retroceso;
+    niebla.far = FOG_LEJOS_BASE * retroceso;
+
     camera.updateProjectionMatrix();
   };
   ajustarTamano();
