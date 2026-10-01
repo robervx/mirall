@@ -54,6 +54,14 @@ export interface Insight {
   // 'viento-fuerte' también usa fuenteSpec ['001'] (mismo EstadoMeteo, campo vientoRachas).
   detectedAt: string;
   fetchedAt: string;
+  /**
+   * Solo en `tipo: 'aviso-oficial-meteo'` — nivel real del aviso oficial
+   * (GVA Emergencias). Permite al banner persistente (petición explícita
+   * del usuario, 2026-10-01) distinguir un aviso rojo de uno naranja sin
+   * tener que parsear el texto de `titulo`. `severidad` no basta: naranja y
+   * rojo comparten `'urgente'` (ver `SEVERIDAD_POR_NIVEL_AVISO`).
+   */
+  nivelAvisoOficial?: AvisoMeteo['nivel'];
 }
 
 export interface PanelInsights {
@@ -213,6 +221,20 @@ function esCodigoLluvia(weatherCode: number): boolean {
  * llegar al umbral de lluvia *intensa* (`insightsLluviaIntensa`, >= 5 mm). Se
  * excluyen los tramos que ya cubre esa regla para no duplicar el aviso.
  */
+/**
+ * "HH:MM" en hora local — bug real corregido (2026-10-01, ver memoria de
+ * proyecto): el título/descripción de este insight interpolaban
+ * `horaObjetivo` tal cual (ISO completo, "2026-10-01T17:00:00.000Z"), un
+ * timestamp lleno de ceros que no aporta nada legible. La predicción es
+ * siempre a pocas horas vista (spec 016, ventana de 4h) — basta la hora, no
+ * hace falta fecha ni "hoy/mañana".
+ */
+function formatoHoraPrediccion(iso: string): string {
+  const fecha = new Date(iso);
+  if (Number.isNaN(fecha.getTime())) return iso;
+  return fecha.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' });
+}
+
 function insightsLluviaPrevista(prediccion: PrediccionCortoPlazo, fetchedAt: string): Insight[] {
   return prediccion.predicciones
     .filter((tramo) => tramo.precipitacion < UMBRAL_LLUVIA_MM)
@@ -221,24 +243,27 @@ function insightsLluviaPrevista(prediccion: PrediccionCortoPlazo, fetchedAt: str
         tramo.probabilidadPrecipitacion >= UMBRAL_LLUVIA_PROB_PCT ||
         (tramo.precipitacion > 0 && esCodigoLluvia(tramo.weatherCode)),
     )
-    .map((tramo) => ({
-      id: `lluvia-prevista:${tramo.horaObjetivo}`,
-      tipo: 'lluvia-prevista' as const,
-      severidad: 'aviso' as const,
-      titulo: `Lluvia prevista hacia las ${tramo.horaObjetivo}`,
-      descripcion: `Predicción: ${tramo.probabilidadPrecipitacion}% de probabilidad de precipitación (${tramo.precipitacion} mm) para ${tramo.horaObjetivo}.`,
-      protocoloSugerido: {
-        asunto: 'Aviso de lluvia prevista — Valencia',
-        cuerpo:
-          `Open-Meteo prevé lluvia hacia las ${tramo.horaObjetivo} en Valencia ` +
-          `(${tramo.probabilidadPrecipitacion}% de probabilidad, ${tramo.precipitacion} mm estimados). ` +
-          'Se sugiere aviso preventivo a unidades y atención a puntos de acumulación de agua habituales. ' +
-          'Dato de origen: Open-Meteo (Mirall, spec 016). Revisar y decidir antes de actuar.',
-      },
-      fuenteSpec: ['016'] as FuenteInsight[],
-      detectedAt: tramo.horaObjetivo,
-      fetchedAt,
-    }));
+    .map((tramo) => {
+      const hora = formatoHoraPrediccion(tramo.horaObjetivo);
+      return {
+        id: `lluvia-prevista:${tramo.horaObjetivo}`,
+        tipo: 'lluvia-prevista' as const,
+        severidad: 'aviso' as const,
+        titulo: `Lluvia prevista hacia las ${hora}`,
+        descripcion: `Predicción: ${tramo.probabilidadPrecipitacion}% de probabilidad de precipitación (${tramo.precipitacion} mm) para las ${hora}.`,
+        protocoloSugerido: {
+          asunto: 'Aviso de lluvia prevista — Valencia',
+          cuerpo:
+            `Open-Meteo prevé lluvia hacia las ${hora} en Valencia ` +
+            `(${tramo.probabilidadPrecipitacion}% de probabilidad, ${tramo.precipitacion} mm estimados). ` +
+            'Se sugiere aviso preventivo a unidades y atención a puntos de acumulación de agua habituales. ' +
+            'Dato de origen: Open-Meteo (Mirall, spec 016). Revisar y decidir antes de actuar.',
+        },
+        fuenteSpec: ['016'] as FuenteInsight[],
+        detectedAt: tramo.horaObjetivo,
+        fetchedAt,
+      };
+    });
 }
 
 // Peso ordinal de cada estado de tráfico para detectar "empeora" (spec 013 v4b §9.1).
@@ -531,6 +556,7 @@ function insightsAvisoOficial(avisos: AvisoMeteo[], fetchedAt: string): Insight[
     fuenteSpec: ['001'],
     detectedAt: aviso.publicadoEn,
     fetchedAt,
+    nivelAvisoOficial: aviso.nivel,
   }));
 }
 

@@ -44,6 +44,25 @@ export function formatoFechaHora(iso: string): string {
   return `${diaMes} ${horaMin}`;
 }
 
+// Fecha SIN hora — para fuentes que de verdad solo dan un día (p.ej. las
+// notas de prensa de avisos oficiales de Emergencias GVA, que solo publican
+// DD/MM/YYYY). Bug real corregido (2026-10-01): usar `formatoFechaHora` ahí
+// fabricaba un "00:00" falso — parecía que el aviso se había detectado a
+// medianoche en punto, cuando en realidad solo se sabe el día, no la hora.
+// Mostrar una hora inventada es peor que no mostrarla, no mejor.
+export function formatoFecha(iso: string): string {
+  const fecha = new Date(iso);
+  if (Number.isNaN(fecha.getTime())) return '';
+  const ahora = new Date();
+  const esMismoDia = (a: Date, b: Date): boolean =>
+    a.getFullYear() === b.getFullYear() && a.getMonth() === b.getMonth() && a.getDate() === b.getDate();
+  if (esMismoDia(fecha, ahora)) return 'hoy';
+  const ayer = new Date(ahora);
+  ayer.setDate(ayer.getDate() - 1);
+  if (esMismoDia(fecha, ayer)) return 'ayer';
+  return fecha.toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: 'numeric' });
+}
+
 export function metaFrescura(fuente: string, fetchedAt: string, fresh: boolean): string {
   const aviso = fresh
     ? ''

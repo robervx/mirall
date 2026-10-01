@@ -565,6 +565,24 @@ export const SIDEBAR_REGISTRY: SidebarSectionDefinition[] = [
 
 const SIDEBAR_EXPANDED_KEY = 'mirall:sidebar-expanded';
 
+let alertaCriticaBtnRef: HTMLButtonElement | null = null;
+let alertaCriticaTextoRef: HTMLSpanElement | null = null;
+let alertaCriticaOnClick: (() => void) | null = null;
+
+/**
+ * Activa/desactiva el banner persistente de alerta oficial ROJA de la
+ * cabecera — llamar en cada refresco de insights con el aviso vigente más
+ * severo (o `activo:false` si ya no hay ninguno rojo). `onClick` se invoca
+ * al pulsar el banner (main.ts decide qué hacer — normalmente ir a /mapa y
+ * resaltar el panel de insights).
+ */
+export function setAlertaCriticaHeader(activo: boolean, texto: string, onClick: () => void): void {
+  alertaCriticaOnClick = onClick;
+  if (!alertaCriticaBtnRef || !alertaCriticaTextoRef) return;
+  alertaCriticaBtnRef.hidden = !activo;
+  if (activo) alertaCriticaTextoRef.textContent = texto;
+}
+
 function buildHeader(): HTMLElement {
   const header = document.createElement('header');
   header.id = 'app-header';
@@ -617,6 +635,26 @@ function buildHeader(): HTMLElement {
   const status = document.createElement('div');
   status.id = 'app-header__status';
 
+  // Banner persistente de alerta oficial ROJA (petición explícita del
+  // usuario, 2026-10-01): "debe ser una alerta permanente durante el tiempo
+  // que dure el aviso... tiene que salir de alguna forma especial". Vive en
+  // la cabecera fija (visible en /mapa Y /inteligencia, a diferencia de la
+  // barra de KPIs que solo se ve en /mapa) para que sea imposible no verla
+  // mientras el aviso siga vigente — lo activa/desactiva main.ts vía
+  // `setAlertaCriticaHeader()` en cada refresco de insights, nunca un
+  // "cerrar y no volver a ver": desaparece sola cuando el aviso deja de
+  // estar en la lista de insights vigentes (spec 001 — ventana de 48h).
+  const alertaCritica = document.createElement('button');
+  alertaCritica.type = 'button';
+  alertaCritica.id = 'app-header__alerta-critica';
+  alertaCritica.hidden = true;
+  const alertaCriticaTexto = document.createElement('span');
+  alertaCriticaTexto.id = 'app-header__alerta-critica-texto';
+  alertaCritica.appendChild(alertaCriticaTexto);
+  alertaCritica.addEventListener('click', () => alertaCriticaOnClick?.());
+  alertaCriticaBtnRef = alertaCritica;
+  alertaCriticaTextoRef = alertaCriticaTexto;
+
   const live = document.createElement('span');
   live.id = 'app-header__live';
   const dot = document.createElement('span');
@@ -662,7 +700,7 @@ function buildHeader(): HTMLElement {
   date.id = 'app-header__date';
   datetime.append(clock, date);
 
-  status.append(live, divider, datetime);
+  status.append(alertaCritica, live, divider, datetime);
   header.append(logo, brand, nav, status);
 
   const capitalizar = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);

@@ -54,7 +54,7 @@ import type { ResumenAltimetriaDistrito, MuestraElevacion } from './services/alt
 import { featureCollectionAltimetriaPuntos } from './services/altimetria';
 import type { EquipamientoCritico, CategoriaEquipamientoCritico } from './services/equipamientos-criticos';
 import { rejillaInterpolada, featureCollectionInterpolada, PASO_LAT_INTERPOLACION, PASO_LON_INTERPOLACION, DISTANCIA_MAXIMA_INTERPOLACION_M } from './services/interpolacion-meteo';
-import { mountChasis } from './ui/chasis';
+import { mountChasis, setAlertaCriticaHeader } from './ui/chasis';
 import { applyPanelVisibility, PANEL_PREFERENCES_REGISTRY } from './ui/panel-preferences';
 import { registrarFrescura } from './ui/estado-frescura';
 import { montarDashboardKpis, registrarKpi } from './ui/dashboard-kpis';
@@ -84,14 +84,14 @@ import { cargarGrafoViario } from './services/grafo-viario-cliente';
 import { montarCamarasPanel, montarCamarasDgtPanel } from './ui/camaras-panel';
 import { montarMeteoActualPanel, montarPrediccionPanel } from './ui/meteo-panel';
 import { buildActualidadRedesContent } from './ui/actualidad-redes';
-import { initRouter } from './ui/router';
+import { initRouter, irAVista } from './ui/router';
 import { montarApoyoDecisionPanel } from './ui/apoyo-decision-panel';
 import { montarAltimetriaPanel, montarMeteoZonaPanel } from './ui/emergencia-meteo-panel';
 import { montarSenalesPanel } from './ui/senales-ia-panel';
 import { montarRecomendacionesPanel } from './ui/recomendaciones-actuacion-panel';
 import { buildProtocolosContent } from './ui/protocolos-panel';
 import { onPeticionCentrarMapa } from './ui/centrar-mapa';
-import { escapeHtml, metaFrescura, formatoFechaHora, buildInfoPanel, startPolling } from './ui/panel-utils';
+import { escapeHtml, metaFrescura, formatoFechaHora, formatoFecha, buildInfoPanel, startPolling } from './ui/panel-utils';
 import { marcadoresSentido, type MarcadorSentido } from './services/flechas-sentido';
 import { puntosFlujoParaTramo } from './services/flujo-animado';
 import type { Coordenada } from './services/proximidad';
@@ -288,6 +288,29 @@ function onKeydownAlertaModal(ev: KeyboardEvent): void {
   }
 }
 
+/**
+ * Etiqueta del momento de un insight — "Detectado hoy 14:32" para señales con
+ * hora real, pero "Publicado hoy" (sin hora) para `aviso-oficial-meteo`: la
+ * fuente (GVA Emergencias) solo da el día, nunca la hora de publicación, y
+ * `detectedAt` ahí es en realidad medianoche fabricada — mostrarla como si
+ * fuera precisa confundía más que ayudaba (bug real corregido 2026-10-01).
+ */
+function etiquetaMomentoInsight(insight: Insight): string {
+  if (insight.tipo === 'aviso-oficial-meteo') return `Publicado ${formatoFecha(insight.detectedAt)}`;
+  return `Detectado ${formatoFechaHora(insight.detectedAt)}`;
+}
+
+/** Va a /mapa (si hiciera falta) y resalta el panel de insights — reutilizado por el modal de alerta y el banner persistente de la cabecera. */
+function irAPanelInsights(): void {
+  irAVista('mapa');
+  window.setTimeout(() => {
+    const panel = document.getElementById('insights-panel');
+    panel?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    panel?.classList.add('info-panel--resaltado');
+    window.setTimeout(() => panel?.classList.remove('info-panel--resaltado'), 1500);
+  }, 0);
+}
+
 function renderAlertaModalActual(): void {
   const { backdrop, modal } = elementosModalAlerta();
   const insight = colaAlertasModal[0];
@@ -311,7 +334,7 @@ function renderAlertaModalActual(): void {
     <div class="alert-modal__cuerpo">
       <div class="alert-modal__titulo" id="alert-modal-titulo">${escapeHtml(insight.titulo)}</div>
       <div class="alert-modal__desc">${escapeHtml(insight.descripcion)}</div>
-      <div class="alert-modal__momento">Detectado ${formatoFechaHora(insight.detectedAt)}</div>
+      <div class="alert-modal__momento">${etiquetaMomentoInsight(insight)}</div>
     </div>
     <div class="alert-modal__footer">
       <button type="button" class="alert-modal__ver">Ver en el panel</button>
@@ -320,10 +343,7 @@ function renderAlertaModalActual(): void {
 
   modal.querySelector('.alert-modal__cerrar')!.addEventListener('click', cerrarAlertaModalActual);
   modal.querySelector('.alert-modal__ver')!.addEventListener('click', () => {
-    const panel = document.getElementById('insights-panel');
-    panel?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-    panel?.classList.add('info-panel--resaltado');
-    window.setTimeout(() => panel?.classList.remove('info-panel--resaltado'), 1500);
+    irAPanelInsights();
     cerrarAlertaModalActual();
   });
 
@@ -385,6 +405,13 @@ function renderInsightsPanel(root: HTMLDivElement, panel: PanelInsights, fresh: 
     tono: panel.insights.length === 0 ? 'ok' : nUrgentes > 0 ? 'urgente' : 'aviso',
   });
 
+  // Banner persistente de cabecera (petición explícita del usuario,
+  // 2026-10-01): mientras exista un aviso oficial ROJO vigente, visible en
+  // /mapa y /inteligencia por igual — desaparece solo cuando deja de estar
+  // en `panel.insights` (spec 001, ventana de 48h), nunca por un "cerrar".
+  const avisoRojo = panel.insights.find((i) => i.nivelAvisoOficial === 'rojo');
+  setAlertaCriticaHeader(avisoRojo !== undefined, avisoRojo ? `Aviso rojo — ${avisoRojo.titulo.replace(/^Aviso oficial rojo — /, '')}` : '', irAPanelInsights);
+
   if (panel.insights.length === 0) {
     root.innerHTML = `
       <div class="info-panel__desc">✓ Sin alertas activas</div>
@@ -402,7 +429,7 @@ function renderInsightsPanel(root: HTMLDivElement, panel: PanelInsights, fresh: 
         <div class="insight-card insight-card--${insight.severidad}">
           <div class="insight-card__titulo">${insight.titulo}</div>
           <div class="insight-card__desc">${insight.descripcion}</div>
-          <div class="insight-card__momento">Detectado ${formatoFechaHora(insight.detectedAt)}</div>
+          <div class="insight-card__momento">${etiquetaMomentoInsight(insight)}</div>
           <div class="insight-card__fuentes">${chips}</div>
           <button class="insight-card__copiar" type="button" data-insight-index="${i}">Copiar borrador</button>
         </div>`;

@@ -376,6 +376,19 @@ describe('calcularInsights', () => {
       expect(lluvia?.fuenteSpec).toEqual(['016']);
     });
 
+    it('lluvia-prevista: el título/descripción muestran una hora legible, no el ISO crudo (bug real corregido 2026-10-01)', () => {
+      const prediccion: PrediccionCortoPlazo = {
+        ...PREDICCION_SIN_LLUVIA,
+        predicciones: [
+          { ...PREDICCION_SIN_LLUVIA.predicciones[0]!, probabilidadPrecipitacion: 70, precipitacion: 1, weatherCode: 61, horaObjetivo: '2026-10-01T17:00:00.000Z' },
+        ],
+      };
+      const r = calcularInsights(METEO_NEUTRA, AIRE_BUENA, null, prediccion);
+      const lluvia = r.insights.find((i) => i.tipo === 'lluvia-prevista');
+      expect(lluvia?.titulo).not.toContain('T17:00:00.000Z');
+      expect(lluvia?.descripcion).not.toContain('T17:00:00.000Z');
+    });
+
     it('lluvia-prevista: no duplica cuando ya hay lluvia intensa (>= 5 mm)', () => {
       const prediccion: PrediccionCortoPlazo = {
         ...PREDICCION_SIN_LLUVIA,

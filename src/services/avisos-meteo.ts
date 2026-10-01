@@ -128,10 +128,21 @@ function parsearFechaPublicacion(fechaTexto: string): string | null {
   return Number.isNaN(fecha.getTime()) ? null : fecha.toISOString();
 }
 
-/** "Emergencias activa la alerta naranja..." / "...el aviso amarillo..." — patrón consistente de esta fuente (ver §2 de la spec para el resto de fraseos observados). */
-function esActivacionDeAviso(titulo: string): boolean {
-  const t = titulo.toLowerCase();
-  return /\bactiva\b/.test(t) && /\b(alerta|aviso)\b/.test(t);
+/**
+ * Bug real encontrado en producción (2026-10-01, ver memoria de proyecto):
+ * exigir el verbo "activa" en el TÍTULO (fraseo original, único observado en
+ * la verificación de spec 001 v4) dejaba fuera notas de seguimiento/
+ * escalada que usan otros verbos — "Emergencias insiste a la ciudadanía..."
+ * con "Se establece alerta roja..." en el resumen fue exactamente el caso
+ * que hizo desaparecer una alerta ROJA real y vigente sin ningún error
+ * visible (el riesgo ya estaba documentado en spec 001 §7, pero sin
+ * detección de "0 avisos inesperado"). Ya no se exige ningún verbo
+ * concreto — el filtro de relevancia real lo dan `detectarNivel` (debe
+ * mencionar un color) y `mencionaValencia`, mucho más fiables que adivinar
+ * el verbo exacto que use la Generalitat ese día.
+ */
+function mencionaAlertaOAviso(texto: string): boolean {
+  return /\b(alerta|aviso)s?\b/i.test(texto);
 }
 
 function detectarNivel(texto: string): NivelAviso | null {
@@ -155,8 +166,8 @@ function mencionaValencia(texto: string): boolean {
 
 /** Ensambla el contrato final a partir de una tarjeta ya troceada. */
 export function construirAviso(tarjeta: TarjetaCruda, fetchedAt: string): AvisoMeteo | null {
-  if (!esActivacionDeAviso(tarjeta.titulo)) return null;
   const textoCompleto = `${tarjeta.titulo} ${tarjeta.resumen ?? ''}`;
+  if (!mencionaAlertaOAviso(textoCompleto)) return null;
   if (!mencionaValencia(textoCompleto)) return null;
   const nivel = detectarNivel(textoCompleto);
   if (!nivel) return null;
