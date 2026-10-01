@@ -140,13 +140,13 @@ const META_CAPAS: Record<string, MetaCapa> = {
   },
   temperaturaZona: {
     nombre: 'Temperatura por zona',
-    mide: 'Temperatura real en 15 estaciones meteorológicas dentro de Valencia ciudad — no es una interpolación de toda la superficie de la ciudad, solo esas ubicaciones',
+    mide: 'Temperatura real en ~13-15 estaciones meteorológicas dentro de Valencia ciudad (insignia con el valor exacto), más una superficie de color de fondo estimada por interpolación (IDW) entre esas estaciones — la superficie es una estimación visual, no mediciones adicionales, y se desvanece lejos de cualquier estación real en vez de cubrir toda la ciudad por igual',
     frecuencia: 'Caché refrescada cada ~15 min',
     fuente: 'AVAMET (Associació Valenciana de Meteorologia), spec 044',
   },
   precipitacionZona: {
     nombre: 'Precipitación',
-    mide: 'Lluvia acumulada hoy (mm) en las mismas 15 estaciones de AVAMET — dato crudo por estación, distinto del índice de riesgo de acumulación de agua (que usa lluvia por distrito de Open-Meteo)',
+    mide: 'Lluvia acumulada hoy (mm) en las mismas ~13-15 estaciones de AVAMET (insignia con el valor exacto), más una superficie de color de fondo estimada por interpolación (IDW) entre esas estaciones — dato crudo por estación, distinto del índice de riesgo de acumulación de agua (que usa lluvia por distrito de Open-Meteo)',
     frecuencia: 'Caché refrescada cada ~15 min',
     fuente: 'AVAMET (Associació Valenciana de Meteorologia), spec 044',
   },

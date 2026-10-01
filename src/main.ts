@@ -52,6 +52,7 @@ import type { EstacionAvamet } from './services/avamet-estaciones';
 import type { ZonaZas, SonometroRuzafa, PanelZas } from './services/zas';
 import type { ResumenAltimetriaDistrito, MuestraElevacion } from './services/altimetria';
 import { featureCollectionAltimetriaPuntos } from './services/altimetria';
+import { rejillaInterpolada, featureCollectionInterpolada, PASO_LAT_INTERPOLACION, PASO_LON_INTERPOLACION, DISTANCIA_MAXIMA_INTERPOLACION_M } from './services/interpolacion-meteo';
 import { mountChasis } from './ui/chasis';
 import { applyPanelVisibility, PANEL_PREFERENCES_REGISTRY } from './ui/panel-preferences';
 import { registrarFrescura } from './ui/estado-frescura';
@@ -857,15 +858,28 @@ function crearCapaInsignia<T>(opciones: {
 
 // Spec 050 — gradiente azul (frío) a rojo (cálido), acotado a un rango de
 // temperatura urbana realista para Valencia (10-35°C); fuera de rango se
-// satura al extremo más cercano, no se extrapola el color.
+// satura al extremo más cercano, no se extrapola el color. v4 — factorizada
+// a partir de un número (antes tomaba la `EstacionAvamet` entera) para
+// poder reutilizarla también en la superficie interpolada de abajo (spec
+// 050 v4 §5), no solo en la insignia.
 const TEMPERATURA_ZONA_MIN_C = 10;
 const TEMPERATURA_ZONA_MAX_C = 35;
+function colorEscalaTemperatura(temperaturaC: number, alpha = 220): Color {
+  const t = Math.min(1, Math.max(0, (temperaturaC - TEMPERATURA_ZONA_MIN_C) / (TEMPERATURA_ZONA_MAX_C - TEMPERATURA_ZONA_MIN_C)));
+  return [Math.round(40 + t * 215), Math.round(120 - t * 100), Math.round(215 - t * 195), alpha];
+}
 function colorTemperaturaZona(estacion: EstacionAvamet): Color {
-  const t = Math.min(
-    1,
-    Math.max(0, (estacion.temperaturaC - TEMPERATURA_ZONA_MIN_C) / (TEMPERATURA_ZONA_MAX_C - TEMPERATURA_ZONA_MIN_C)),
-  );
-  return [Math.round(40 + t * 215), Math.round(120 - t * 100), Math.round(215 - t * 195), 220];
+  return colorEscalaTemperatura(estacion.temperaturaC);
+}
+/** CSS del degradado de la leyenda de temperatura — misma rampa que pinta la superficie del mapa. */
+function cssGradienteTemperatura(): string {
+  const paradas = [0, 0.25, 0.5, 0.75, 1]
+    .map((t) => {
+      const rgb = colorEscalaTemperatura(TEMPERATURA_ZONA_MIN_C + t * (TEMPERATURA_ZONA_MAX_C - TEMPERATURA_ZONA_MIN_C), 255);
+      return `rgb(${rgb[0]},${rgb[1]},${rgb[2]}) ${(t * 100).toFixed(0)}%`;
+    })
+    .join(', ');
+  return `linear-gradient(90deg, ${paradas})`;
 }
 
 function renderTemperaturaZonaLeyenda(root: HTMLDivElement, estaciones: EstacionAvamet[], fresh: boolean): void {
@@ -877,9 +891,11 @@ function renderTemperaturaZonaLeyenda(root: HTMLDivElement, estaciones: Estacion
   const masFria = estaciones.reduce((a, b) => (b.temperaturaC < a.temperaturaC ? b : a));
   root.innerHTML = `
     <div class="info-panel__desc">Temperatura por zona — ${estaciones.length} estaciones reales</div>
+    <div class="leyenda-gradiente"><span style="background:${cssGradienteTemperatura()}"></span></div>
+    <div class="leyenda-gradiente__extremos"><span>${TEMPERATURA_ZONA_MIN_C}°C</span><span>${TEMPERATURA_ZONA_MAX_C}°C</span></div>
     <div class="trafico-leyenda__row"><span class="trafico-leyenda__dot" style="background:rgb(255,20,20)"></span>Más cálida: ${escapeHtml(masCalida.nombre)} (${masCalida.temperaturaC}°C)</div>
     <div class="trafico-leyenda__row"><span class="trafico-leyenda__dot" style="background:rgb(40,120,215)"></span>Más fría: ${escapeHtml(masFria.nombre)} (${masFria.temperaturaC}°C)</div>
-    <div class="info-panel__meta">Solo estas ${estaciones.length} ubicaciones — no es una interpolación de toda la ciudad</div>
+    <div class="info-panel__meta">La superficie de color es una estimación por interpolación (IDW) entre estas ${estaciones.length} estaciones reales, no una medición continua — se desvanece a partir de ${(DISTANCIA_MAXIMA_INTERPOLACION_M / 1000).toFixed(1)} km de la estación más cercana, sin inventar dato donde no hay cobertura. El número de cada insignia es siempre la medición real de esa estación.</div>
     <div class="info-panel__meta">${metaFrescura('AVAMET', estaciones[0]?.observadoEn ?? new Date().toISOString(), fresh)}</div>
   `;
 }
@@ -890,22 +906,91 @@ function renderTemperaturaZonaLeyenda(root: HTMLDivElement, estaciones: Estacion
 // es información, igual que antes.
 const COLOR_PRECIPITACION_ZONA: Color = [30, 100, 220, 210];
 
+// Spec 051 v4 — rampa secuencial de un solo tono para la superficie
+// interpolada (NO para la insignia, que sigue con el azul fijo de v3):
+// convención cartográfica real de precipitación (AEMET, servicios WMO,
+// paleta "Blues" de ColorBrewer) — un único matiz, claro = poco/nada,
+// oscuro = mucho, nunca arcoíris. Saturada a PRECIPITACION_ZONA_MAX_MM: un
+// chubasco real en Valencia supera esa cifra en un día con facilidad, no es
+// el máximo histórico, solo el punto en que el tono ya no se oscurece más.
+const PRECIPITACION_ZONA_MAX_MM = 30;
+const RAMPA_PRECIPITACION: ReadonlyArray<{ mm: number; rgb: [number, number, number] }> = [
+  { mm: 0, rgb: [240, 248, 255] },
+  { mm: 1, rgb: [198, 219, 239] },
+  { mm: 5, rgb: [107, 174, 214] },
+  { mm: 15, rgb: [33, 113, 181] },
+  { mm: PRECIPITACION_ZONA_MAX_MM, rgb: [8, 48, 107] },
+];
+function colorEscalaPrecipitacion(mm: number, alpha = 190): Color {
+  const min = RAMPA_PRECIPITACION[0]!;
+  const max = RAMPA_PRECIPITACION[RAMPA_PRECIPITACION.length - 1]!;
+  const m = Math.min(max.mm, Math.max(min.mm, mm));
+  for (let i = 0; i < RAMPA_PRECIPITACION.length - 1; i++) {
+    const a = RAMPA_PRECIPITACION[i]!;
+    const b = RAMPA_PRECIPITACION[i + 1]!;
+    if (m <= b.mm) {
+      const t = (m - a.mm) / (b.mm - a.mm);
+      return [
+        Math.round(a.rgb[0] + t * (b.rgb[0] - a.rgb[0])),
+        Math.round(a.rgb[1] + t * (b.rgb[1] - a.rgb[1])),
+        Math.round(a.rgb[2] + t * (b.rgb[2] - a.rgb[2])),
+        alpha,
+      ];
+    }
+  }
+  return [max.rgb[0], max.rgb[1], max.rgb[2], alpha];
+}
+/** CSS del degradado de la leyenda de precipitación — misma rampa que pinta la superficie del mapa. */
+function cssGradientePrecipitacion(): string {
+  const paradas = RAMPA_PRECIPITACION.map((s) => `rgb(${s.rgb.join(',')}) ${((s.mm / PRECIPITACION_ZONA_MAX_MM) * 100).toFixed(1)}%`).join(
+    ', ',
+  );
+  return `linear-gradient(90deg, ${paradas})`;
+}
+
+// Spec 050/051 v4 — el alpha de la superficie interpolada baja con la
+// distancia a la estación real más cercana: casi opaco junto a una
+// estación (dato con respaldo real inmediato), desvanecido hacia el borde
+// de cobertura (DISTANCIA_MAXIMA_INTERPOLACION_M) — comunica visualmente
+// que la certeza baja con la distancia, en vez de un borde duro que
+// sugeriría el mismo nivel de confianza en toda la superficie.
+const SUPERFICIE_ZONA_ALPHA_BASE = 150;
+const SUPERFICIE_ZONA_ALPHA_MIN_FACTOR = 0.25;
+function factorCaidaPorDistancia(distanciaM: number): number {
+  const t = Math.min(1, Math.max(0, distanciaM / DISTANCIA_MAXIMA_INTERPOLACION_M));
+  return 1 - t * (1 - SUPERFICIE_ZONA_ALPHA_MIN_FACTOR);
+}
+function colorSuperficieTemperatura(valorC: number, distanciaEstacionMasCercanaM: number): Color {
+  const base = colorEscalaTemperatura(valorC, SUPERFICIE_ZONA_ALPHA_BASE);
+  return [base[0]!, base[1]!, base[2]!, Math.round(SUPERFICIE_ZONA_ALPHA_BASE * factorCaidaPorDistancia(distanciaEstacionMasCercanaM))];
+}
+function colorSuperficiePrecipitacion(mm: number, distanciaEstacionMasCercanaM: number): Color {
+  const base = colorEscalaPrecipitacion(mm, SUPERFICIE_ZONA_ALPHA_BASE);
+  return [base[0]!, base[1]!, base[2]!, Math.round(SUPERFICIE_ZONA_ALPHA_BASE * factorCaidaPorDistancia(distanciaEstacionMasCercanaM))];
+}
+
 function renderPrecipitacionZonaLeyenda(root: HTMLDivElement, estaciones: EstacionAvamet[], fresh: boolean): void {
   if (estaciones.length === 0) {
     root.innerHTML = `<div class="info-panel__desc">Precipitación — sin estaciones disponibles ahora mismo</div>`;
     return;
   }
   const conLluvia = estaciones.filter((e) => e.precipitacionDiaMm > 0).sort((a, b) => b.precipitacionDiaMm - a.precipitacionDiaMm);
+  const gradienteHtml = `
+        <div class="leyenda-gradiente"><span style="background:${cssGradientePrecipitacion()}"></span></div>
+        <div class="leyenda-gradiente__extremos"><span>0 mm</span><span>${PRECIPITACION_ZONA_MAX_MM}+ mm</span></div>
+        <div class="info-panel__meta">La superficie de color es una estimación por interpolación (IDW) entre estas ${estaciones.length} estaciones reales, no una medición continua — se desvanece a partir de ${(DISTANCIA_MAXIMA_INTERPOLACION_M / 1000).toFixed(1)} km de la estación más cercana, sin inventar dato donde no hay cobertura. El mm de cada insignia es siempre la medición real de esa estación.</div>`;
   root.innerHTML =
     conLluvia.length === 0
       ? `
         <div class="info-panel__desc">Precipitación — ${estaciones.length} estaciones reales</div>
         <div class="trafico-leyenda__row">Sin lluvia registrada hoy en ninguna estación</div>
+        ${gradienteHtml}
         <div class="info-panel__meta">${metaFrescura('AVAMET', estaciones[0]?.observadoEn ?? new Date().toISOString(), fresh)}</div>
       `
       : `
         <div class="info-panel__desc">Precipitación — ${conLluvia.length} de ${estaciones.length} estaciones con lluvia hoy</div>
         <div class="trafico-leyenda__row"><span class="trafico-leyenda__dot" style="background:rgb(30,100,220)"></span>Máxima hoy: ${escapeHtml(conLluvia[0]!.nombre)} (${conLluvia[0]!.precipitacionDiaMm} mm)</div>
+        ${gradienteHtml}
         <div class="info-panel__meta">${metaFrescura('AVAMET', estaciones[0]?.observadoEn ?? new Date().toISOString(), fresh)}</div>
       `;
 }
@@ -1897,6 +1982,39 @@ async function main(): Promise<void> {
     // solo para la leyenda (más alto/más bajo). La rejilla se construye más
     // abajo, junto al resto de featureCollections derivadas.
     const altimetriaFeatureCollection = featureCollectionAltimetriaPuntos(altimetriaPuntos);
+    // Spec 050/051 v4 — superficie continua interpolada (IDW) por debajo de
+    // las insignias, ver src/services/interpolacion-meteo.ts para el
+    // método y por qué NO es una rejilla de datos medidos como la de
+    // altimetría (solo ~13-15 estaciones reales, muy dispersas). Solo se
+    // calcula cuando la capa está visible — es barato (unas pocas
+    // decenas/cientos de celdas, recalculado al refrescar AVAMET o al
+    // activar el checkbox, no en cada frame), pero no hace falta hacerlo
+    // cuando nadie lo ve.
+    const FEATURE_COLLECTION_VACIA: GeoJSON.FeatureCollection<GeoJSON.Polygon, { valor: number; distanciaEstacionMasCercanaM: number }> = {
+      type: 'FeatureCollection',
+      features: [],
+    };
+    const opcionesRejillaZona = { pasoLat: PASO_LAT_INTERPOLACION, pasoLon: PASO_LON_INTERPOLACION, distanciaMaximaM: DISTANCIA_MAXIMA_INTERPOLACION_M };
+    const temperaturaZonaFeatureCollection = temperaturaZonaVisible
+      ? featureCollectionInterpolada(
+          rejillaInterpolada(
+            estacionesAvamet.map((e) => ({ lat: e.lat, lon: e.lon, valor: e.temperaturaC })),
+            opcionesRejillaZona,
+          ),
+          PASO_LAT_INTERPOLACION,
+          PASO_LON_INTERPOLACION,
+        )
+      : FEATURE_COLLECTION_VACIA;
+    const precipitacionZonaFeatureCollection = precipitacionZonaVisible
+      ? featureCollectionInterpolada(
+          rejillaInterpolada(
+            estacionesAvamet.map((e) => ({ lat: e.lat, lon: e.lon, valor: e.precipitacionDiaMm })),
+            opcionesRejillaZona,
+          ),
+          PASO_LAT_INTERPOLACION,
+          PASO_LON_INTERPOLACION,
+        )
+      : FEATURE_COLLECTION_VACIA;
     // v4 (spec 010 §5) — escenarios vivo+confirmado, base de los marcadores y
     // de los puntos de tramo resaltados (primario); el choropleth de abajo es
     // el contexto.
@@ -2033,6 +2151,32 @@ async function main(): Promise<void> {
             pickable: false,
             getFillColor: (f) => colorChoroplethEscorrentia(riesgoEscorrentiaPorDistrito.get(f.properties.codigo)),
             updateTriggers: { getFillColor: [riesgoEscorrentia] },
+          }),
+        // Spec 050 v4 — superficie continua interpolada (IDW) por debajo de
+        // la insignia (petición explícita del usuario, 2026-10-01: "una
+        // superficie de color que permita ver en qué zonas hay más calor").
+        // Va ANTES que la insignia en el array (se pinta primero, debajo) —
+        // nunca debe tapar el círculo+número, que es el dato real exacto.
+        temperaturaZonaVisible &&
+          new GeoJsonLayer<{ valor: number; distanciaEstacionMasCercanaM: number }>({
+            id: 'temperatura-zona-superficie',
+            data: temperaturaZonaFeatureCollection,
+            stroked: false,
+            filled: true,
+            pickable: false,
+            getFillColor: (f) => colorSuperficieTemperatura(f.properties.valor, f.properties.distanciaEstacionMasCercanaM),
+            updateTriggers: { getFillColor: [estacionesAvamet] },
+          }),
+        // Spec 051 v4 — misma idea, rampa secuencial de precipitación.
+        precipitacionZonaVisible &&
+          new GeoJsonLayer<{ valor: number; distanciaEstacionMasCercanaM: number }>({
+            id: 'precipitacion-zona-superficie',
+            data: precipitacionZonaFeatureCollection,
+            stroked: false,
+            filled: true,
+            pickable: false,
+            getFillColor: (f) => colorSuperficiePrecipitacion(f.properties.valor, f.properties.distanciaEstacionMasCercanaM),
+            updateTriggers: { getFillColor: [estacionesAvamet] },
           }),
         // v2 — insignia (círculo de color fijo en pantalla) + valor numérico
         // encima, como el mapa embebido de AVAMET (petición del usuario,
