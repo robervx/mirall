@@ -328,5 +328,9 @@
         "anticipacionMin": 25
       }
     ]
+  },
+  {
+    "timestamp": "2026-10-03T04:04:18.692Z",
+    "distritosActivos": []
   }
 ]
