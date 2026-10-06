@@ -302,5 +302,87 @@
   {
     "timestamp": "2026-10-01T21:34:35.996Z",
     "distritosActivos": []
+  },
+  {
+    "timestamp": "2026-10-02T01:18:46.810Z",
+    "distritosActivos": []
+  },
+  {
+    "timestamp": "2026-10-02T07:59:32.144Z",
+    "distritosActivos": []
+  },
+  {
+    "timestamp": "2026-10-02T14:41:15.086Z",
+    "distritosActivos": []
+  },
+  {
+    "timestamp": "2026-10-02T19:46:25.102Z",
+    "distritosActivos": []
+  },
+  {
+    "timestamp": "2026-10-02T23:34:30.851Z",
+    "distritosActivos": [
+      {
+        "codigo": "03",
+        "nombre": "Extramurs",
+        "anticipacionMin": 25
+      }
+    ]
+  },
+  {
+    "timestamp": "2026-10-03T04:04:18.692Z",
+    "distritosActivos": []
+  },
+  {
+    "timestamp": "2026-10-03T10:13:58.937Z",
+    "distritosActivos": []
+  },
+  {
+    "timestamp": "2026-10-03T15:03:28.428Z",
+    "distritosActivos": []
+  },
+  {
+    "timestamp": "2026-10-03T19:01:47.540Z",
+    "distritosActivos": []
+  },
+  {
+    "timestamp": "2026-10-03T22:42:35.116Z",
+    "distritosActivos": []
+  },
+  {
+    "timestamp": "2026-10-04T02:25:57.668Z",
+    "distritosActivos": []
+  },
+  {
+    "timestamp": "2026-10-04T09:23:56.883Z",
+    "distritosActivos": []
+  },
+  {
+    "timestamp": "2026-10-04T15:10:02.617Z",
+    "distritosActivos": []
+  },
+  {
+    "timestamp": "2026-10-04T19:14:37.274Z",
+    "distritosActivos": []
+  },
+  {
+    "timestamp": "2026-10-04T22:48:10.159Z",
+    "distritosActivos": []
+  },
+  {
+    "timestamp": "2026-10-05T01:39:30.323Z",
+    "distritosActivos": []
+  },
+  {
+    "timestamp": "2026-10-05T08:27:59.982Z",
+    "distritosActivos": []
+  },
+  {
+    "timestamp": "2026-10-05T17:58:52.275Z",
+    "distritosActivos": []
+  },
+  {
+    "timestamp": "2026-10-06T06:06:52.014Z",
+    "distritosActivos": []
   }
 ]
