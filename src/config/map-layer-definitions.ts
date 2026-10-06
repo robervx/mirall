@@ -218,10 +218,12 @@ export const LAYER_REGISTRY: Record<string, LayerDefinition> = {
   equipamientosCriticos: {
     key: 'equipamientosCriticos',
     specId: '054',
-    // 'contexto': referencia geográfica fija (sanidad/policía/bomberos no
-    // cambian de un día para otro), no una señal "ahora mismo" — no compite
-    // con las prioritarias.
-    grupo: 'contexto',
+    // v2 (2026-10-06, petición explícita del usuario): pasa de 'contexto' a
+    // 'primaria' — reencuadrada como "Infraestructura crítica", primera pieza
+    // visible de ese paraguas (junto con EMT en vivo, spec 055) en vez de una
+    // referencia de fondo. La clave interna (`equipamientosCriticos`) y el
+    // endpoint no cambian, solo la agrupación y el nombre que ve el usuario.
+    grupo: 'primaria',
     renderers: ['deck'],
     zoomMinimo: 0,
     agregacion: 'punto',

@@ -163,7 +163,7 @@ const META_CAPAS: Record<string, MetaCapa> = {
     fuente: 'IGN (Instituto Geográfico Nacional), Modelo Digital del Terreno',
   },
   equipamientosCriticos: {
-    nombre: 'Equipamientos críticos',
+    nombre: 'Infraestructura crítica',
     mide: 'Hospitales/centros de salud, comisarías de policía y parques de bomberos — equipamientos públicos abiertos (CLAUDE.md §4), no infraestructura sensible. "Protección Civil" no tiene fuente pública conocida, no está incluida (spec 054 §2/§7)',
     frecuencia: 'Dato fijo (seed único) — los equipamientos municipales no cambian de un día para otro',
     fuente: 'Geoportal del Ajuntament de València (Equipamientos municipales)',

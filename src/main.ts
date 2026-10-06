@@ -1245,7 +1245,7 @@ const NOMBRE_CATEGORIA_EQUIPAMIENTO_CRITICO: Record<CategoriaEquipamientoCritico
 
 function renderEquipamientosCriticosLeyenda(root: HTMLDivElement, equipamientos: EquipamientoCritico[]): void {
   if (equipamientos.length === 0) {
-    root.innerHTML = `<div class="info-panel__desc">Equipamientos críticos — sin datos disponibles ahora mismo</div>`;
+    root.innerHTML = `<div class="info-panel__desc">Infraestructura crítica — sin datos disponibles ahora mismo</div>`;
     return;
   }
   const categorias: CategoriaEquipamientoCritico[] = ['sanidad', 'policia', 'bomberos'];
@@ -1257,7 +1257,7 @@ function renderEquipamientosCriticosLeyenda(root: HTMLDivElement, equipamientos:
     })
     .join('');
   root.innerHTML = `
-    <div class="info-panel__desc">Equipamientos críticos — ${equipamientos.length} ubicaciones reales</div>
+    <div class="info-panel__desc">Infraestructura crítica — ${equipamientos.length} ubicaciones reales</div>
     ${filas}
     <div class="info-panel__meta">Hospitales, centros de salud, comisarías de policía y parques de bomberos — equipamientos públicos abiertos, no infraestructura sensible (CLAUDE.md §4). Dato fijo (equipamientos municipales), no cambia con el tiempo.</div>
     <div class="info-panel__meta">Fuente: Geoportal del Ajuntament de València (Equipamientos municipales)</div>
@@ -1804,6 +1804,10 @@ function buildControlPanel(): ControlPanel {
         <input type="checkbox" id="toggle-emt-buses" />
         Autobuses EMT en vivo
       </label>
+      <label class="controls__row">
+        <input type="checkbox" id="toggle-equipamientos-criticos" />
+        Infraestructura crítica
+      </label>
     </div>
     <details class="controls__group controls__group--contexto" id="controls-contexto"${contextoAbiertoInicial ? ' open' : ''}>
       <summary class="controls__group-head">
@@ -1830,10 +1834,6 @@ function buildControlPanel(): ControlPanel {
       <label class="controls__row">
         <input type="checkbox" id="toggle-fallas" />
         Fallas
-      </label>
-      <label class="controls__row">
-        <input type="checkbox" id="toggle-equipamientos-criticos" />
-        Equipamientos críticos
       </label>
       <label class="controls__row">
         <input type="checkbox" id="toggle-emt-paradas" />
@@ -3303,8 +3303,8 @@ async function main(): Promise<void> {
       renderLayers();
       renderEquipamientosCriticosLeyenda(equipamientosCriticosLeyendaRoot, equipamientos);
     } catch (err) {
-      equipamientosCriticosLeyendaRoot.textContent = 'Equipamientos críticos no disponibles';
-      console.error('Fallo al cargar equipamientos críticos:', err);
+      equipamientosCriticosLeyendaRoot.textContent = 'Infraestructura crítica no disponible';
+      console.error('Fallo al cargar infraestructura crítica:', err);
     }
   }
   panel.equipamientosCriticosToggle.addEventListener('change', () => {

@@ -2,13 +2,20 @@
 
 ```yaml
 id: 054
-titulo: "Equipamientos públicos críticos (hospitales, policía, bomberos) en el mapa"
+titulo: "Infraestructura crítica (hospitales, policía, bomberos) en el mapa"
 estado: Implemented
 tipo: capa
 depende_de: [000]
 propietario: ""
-version: 1
+version: 2
 ```
+
+> **v2 (2026-10-06, petición explícita del usuario):** renombrada de "Equipamientos
+> críticos" a **"Infraestructura crítica"** en toda la UI (checkbox, leyenda, glosario) y
+> movida del grupo "Contexto e informativas" a "Prioritarias" — pasa a ser la primera pieza
+> visible de ese paraguas, junto con Autobuses EMT en vivo (spec 055). La clave interna
+> (`equipamientosCriticos`), el endpoint (`GET /api/emergencia/v1/equipamientos-criticos`) y
+> el contrato de datos/capa no cambian — solo agrupación y copy. Ver §5/§8.
 
 > Origen: petición explícita del usuario (2026-10-01) — quiere identificar rápido en el mapa
 > dónde están los equipamientos críticos de la ciudad (ejemplos citados: hospitales, bomberos,
@@ -79,9 +86,9 @@ interface EquipamientoCritico {
 {
   key: 'equipamientosCriticos',
   specId: '054',
-  grupo: 'contexto',       // referencia geográfica fija, no señal "ahora mismo" — igual
-                            // criterio que distritos/valenbisi, no compite con las
-                            // prioritarias que si cambian en vivo
+  grupo: 'primaria',       // v2: reencuadrada como "Infraestructura crítica" — el usuario la
+                            // quiere junto al resto de piezas prioritarias, no como referencia
+                            // de fondo (razonamiento original de v1, ya no aplica).
   renderers: ['deck'],
   zoomMinimo: 0,
   agregacion: 'punto',
@@ -104,10 +111,10 @@ tipo en v1 (lista para iterar si se pide) — el color ya resuelve "identificarl
       coordenadas válidas dentro del término municipal de Valencia — verificado
       (`npm run seed:equipamientos-criticos`, 2026-10-01).
 - [x] Endpoint responde con el contrato de datos de la §3 — `GET /api/emergencia/v1/equipamientos-criticos`, verificado con `curl` real (106 elementos).
-- [x] Capa visible en `/mapa`, checkbox propio en el selector (grupo "Contexto e
-      informativas"), colores distintos por categoría — verificado en navegador con captura
-      real: puntos rojos/azules/naranjas distribuidos por la ciudad, leyenda con los 3
-      recuentos exactos (75/25/6) coincidiendo con el seed.
+- [x] Capa visible en `/mapa`, checkbox propio en el selector (v2: grupo "Prioritarias",
+      renombrada a "Infraestructura crítica"), colores distintos por categoría — verificado
+      en navegador con captura real: puntos rojos/azules/naranjas distribuidos por la ciudad,
+      leyenda con los 3 recuentos exactos (75/25/6) coincidiendo con el seed.
 - [x] Leyenda explica las 3 categorías + fuente + que es un dato estático (no "en vivo").
 - [x] Entrada en `META_CAPAS` (`src/ui/glosario.ts`) — test `capasSinMetadato` en verde.
 - [x] `typecheck`/`test` (496/496, 6 nuevos)/`build` limpios.
@@ -134,3 +141,4 @@ tipo en v1 (lista para iterar si se pide) — el color ya resuelve "identificarl
 |---|---|---|
 | 1 | 2026-10-01 | Creación — due-diligence con llamadas reales, contrato de datos/capa congelado, pendiente de implementación |
 | 1 | 2026-10-01 | Implementada de punta a punta en la misma sesión: seed, endpoint, capa, leyenda, glosario. Verificada en navegador con captura real. `Implemented` |
+| 2 | 2026-10-06 | Petición explícita del usuario: renombrada a "Infraestructura crítica" (checkbox, leyenda, glosario) y movida de "Contexto e informativas" a "Prioritarias" — mismo criterio de agrupación que se aplicará a las demás piezas de infraestructura crítica pendientes (nodos de transporte, embalses de abastecimiento, electromovilidad). Sin cambios en el contrato de datos, el endpoint ni la clave interna (`equipamientosCriticos`). |
