@@ -2439,6 +2439,40 @@
         opacity: 0.75;
       }
 
+      /* Spec 055 — tooltip mínimo específico de los buses EMT, mismo patrón
+         bespoke que #via-publica-tooltip. */
+      #emt-bus-tooltip {
+        position: fixed;
+        z-index: 20;
+        pointer-events: none;
+        background: rgba(20, 20, 20, 0.92);
+        color: #fff;
+        padding: 6px 10px;
+        border-radius: 6px;
+        font-size: 11px;
+        line-height: 1.4;
+        max-width: 220px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+      }
+
+      .emt-bus-tooltip__linea {
+        font-weight: 700;
+        font-size: 10px;
+        letter-spacing: 0.02em;
+        opacity: 0.85;
+        text-transform: uppercase;
+      }
+
+      .emt-bus-tooltip__trayecto {
+        font-weight: 600;
+        margin-top: 2px;
+      }
+
+      .emt-bus-tooltip__fecha {
+        margin-top: 3px;
+        opacity: 0.75;
+      }
+
       #media-panel .info-panel__meta {
         padding: 8px 12px;
         margin-top: 0;

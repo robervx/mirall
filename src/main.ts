@@ -53,6 +53,8 @@ import type { ZonaZas, SonometroRuzafa, PanelZas } from './services/zas';
 import type { ResumenAltimetriaDistrito, MuestraElevacion } from './services/altimetria';
 import { featureCollectionAltimetriaPuntos } from './services/altimetria';
 import type { EquipamientoCritico, CategoriaEquipamientoCritico } from './services/equipamientos-criticos';
+import type { BusEmt } from './services/emt-buses';
+import type { ParadaEmt } from './services/emt-paradas';
 import { rejillaInterpolada, featureCollectionInterpolada, PASO_LAT_INTERPOLACION, PASO_LON_INTERPOLACION, DISTANCIA_MAXIMA_INTERPOLACION_M } from './services/interpolacion-meteo';
 import { mountChasis, setAlertaCriticaHeader } from './ui/chasis';
 import { applyPanelVisibility, PANEL_PREFERENCES_REGISTRY } from './ui/panel-preferences';
@@ -1165,6 +1167,69 @@ async function fetchEquipamientosCriticosActual(): Promise<EquipamientoCritico[]
   return body.equipamientos;
 }
 
+async function fetchBusesEmtActual(): Promise<{ buses: BusEmt[]; fresh: boolean }> {
+  const res = await fetch('/api/transporte/v1/emt-buses');
+  if (!res.ok) throw new Error(`GET /api/transporte/v1/emt-buses -> HTTP ${res.status}`);
+  return (await res.json()) as { buses: BusEmt[]; fresh: boolean };
+}
+
+async function fetchParadasEmtActual(): Promise<ParadaEmt[]> {
+  const res = await fetch('/api/transporte/v1/emt-paradas');
+  if (!res.ok) throw new Error(`GET /api/transporte/v1/emt-paradas -> HTTP ${res.status}`);
+  const body = (await res.json()) as { paradas: ParadaEmt[] };
+  return body.paradas;
+}
+
+// Spec 055 — un único color: con ~60 líneas en circulación a la vez no tiene
+// sentido un color por línea (la leyenda sería ilegible). Azul EMT, distinto
+// del resto de la paleta de puntos ya en uso (sanidad/policía/bomberos/
+// Valenbisi/aparcamiento).
+const COLOR_EMT_BUS: Color = [16, 109, 183, 220];
+const COLOR_EMT_PARADA: Color = [16, 109, 183, 140];
+
+function renderEmtBusesLeyenda(root: HTMLDivElement, buses: BusEmt[], fresh: boolean): void {
+  const [r, g, b] = COLOR_EMT_BUS;
+  const lineas = new Set(buses.map((bus) => bus.linea)).size;
+  root.innerHTML = `
+    <div class="info-panel__desc"><span class="trafico-leyenda__dot" style="background:rgb(${r},${g},${b})"></span>Autobuses EMT — ${buses.length} en circulación (${lineas} líneas)</div>
+    <div class="info-panel__meta">Posición GPS real, no una estimación — pasa el ratón sobre un punto para ver línea y trayecto. El número varía mucho por hora (de madrugada baja a unos pocos, en hora punta sube a varios cientos).</div>
+    <div class="info-panel__meta">${metaFrescura('Ajuntament de València', buses[0]?.fetchedAt ?? new Date().toISOString(), fresh)}</div>
+  `;
+}
+
+function renderEmtParadasLeyenda(root: HTMLDivElement, paradas: ParadaEmt[]): void {
+  const [r, g, b] = COLOR_EMT_PARADA;
+  root.innerHTML = `
+    <div class="info-panel__desc"><span class="trafico-leyenda__dot" style="background:rgb(${r},${g},${b})"></span>Paradas EMT — ${paradas.length} ubicaciones reales</div>
+    <div class="info-panel__meta">Dato fijo (las paradas no cambian de un día para otro). Clic en un punto para ver qué líneas pasan.</div>
+    <div class="info-panel__meta">Fuente: Geoportal del Ajuntament de València (EMT)</div>
+  `;
+}
+
+/** Tooltip mínimo específico de esta capa, mismo patrón bespoke que buildViaPublicaTooltip (spec 026) — no se generaliza sin que otra spec lo pida. */
+function buildEmtBusTooltip(): HTMLDivElement {
+  const el = document.createElement('div');
+  el.id = 'emt-bus-tooltip';
+  el.hidden = true;
+  document.body.appendChild(el);
+  return el;
+}
+
+function renderEmtBusTooltip(el: HTMLDivElement, bus: BusEmt | null, x: number, y: number): void {
+  if (!bus) {
+    el.hidden = true;
+    return;
+  }
+  el.hidden = false;
+  el.style.left = `${x + 12}px`;
+  el.style.top = `${y + 12}px`;
+  el.innerHTML = `
+    <div class="emt-bus-tooltip__linea">Línea ${escapeHtml(bus.linea)}</div>
+    <div class="emt-bus-tooltip__trayecto">${escapeHtml(bus.trayecto)}</div>
+    <div class="emt-bus-tooltip__fecha">Actualizado ${formatoTiempoRelativo(bus.observedAt)}</div>
+  `;
+}
+
 // Spec 054 §5 — un color por categoría, claramente distinto entre sí y del
 // resto de la paleta ya en uso (trafico/pulso/fallas/escorrentia/precipitación/ZAS).
 const COLOR_EQUIPAMIENTO_CRITICO: Record<CategoriaEquipamientoCritico, Color> = {
@@ -1667,6 +1732,8 @@ interface ControlPanel {
   viaPublicaToggle: HTMLInputElement;
   camarasToggle: HTMLInputElement;
   equipamientosCriticosToggle: HTMLInputElement;
+  emtBusesToggle: HTMLInputElement;
+  emtParadasToggle: HTMLInputElement;
   /** spec 033: grupo plegable "Contexto e informativas" y sus adornos. */
   contextoDetails: HTMLDetailsElement;
   contextoContador: HTMLSpanElement;
@@ -1733,6 +1800,10 @@ function buildControlPanel(): ControlPanel {
         <input type="checkbox" id="toggle-via-publica" />
         Incidencias de vía pública
       </label>
+      <label class="controls__row">
+        <input type="checkbox" id="toggle-emt-buses" />
+        Autobuses EMT en vivo
+      </label>
     </div>
     <details class="controls__group controls__group--contexto" id="controls-contexto"${contextoAbiertoInicial ? ' open' : ''}>
       <summary class="controls__group-head">
@@ -1763,6 +1834,10 @@ function buildControlPanel(): ControlPanel {
       <label class="controls__row">
         <input type="checkbox" id="toggle-equipamientos-criticos" />
         Equipamientos críticos
+      </label>
+      <label class="controls__row">
+        <input type="checkbox" id="toggle-emt-paradas" />
+        Paradas EMT
       </label>
     </details>
   `;
@@ -1815,6 +1890,8 @@ function buildControlPanel(): ControlPanel {
     camarasToggle: toggleSiempreActivo(),
     viaPublicaToggle: panel.querySelector('#toggle-via-publica')!,
     equipamientosCriticosToggle: panel.querySelector('#toggle-equipamientos-criticos')!,
+    emtBusesToggle: panel.querySelector('#toggle-emt-buses')!,
+    emtParadasToggle: panel.querySelector('#toggle-emt-paradas')!,
     contextoDetails,
     contextoContador: panel.querySelector('#contexto-contador')!,
     presetOperativaBtn: panel.querySelector('#preset-operativa')!,
@@ -1907,6 +1984,15 @@ async function main(): Promise<void> {
   let equipamientosCriticosVisible = false;
   let equipamientosCriticos: EquipamientoCritico[] = [];
   let equipamientosCriticosCargados = false;
+  // Spec 055 — buses: señal en vivo (igual patrón de polling que tráfico).
+  // Paradas: dato estático (igual patrón de fetch perezoso que equipamientos
+  // críticos/altimetría).
+  let emtBusesVisible = false;
+  let busesEmt: BusEmt[] = [];
+  let emtParadasVisible = false;
+  let paradasEmt: ParadaEmt[] = [];
+  let emtParadasCargadas = false;
+  const emtBusTooltip = buildEmtBusTooltip();
   // v3 (DoD de V1, 2026-09-16) — los puntos calientes del mock de densidad
   // (más abajo) necesitan los monumentos falleros aunque la capa "Fallas" en
   // sí no esté activada; se cargan una vez, la primera vez que hagan falta.
@@ -2246,6 +2332,45 @@ async function main(): Promise<void> {
                 equipamientosCriticosLeyendaRoot.classList.add('is-expandida');
                 equipamientosCriticosLeyendaRoot.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
               }
+            },
+          }),
+        // Spec 055 — paradas: referencia geográfica fija, mismo patrón que
+        // equipamientos críticos (clic expande la leyenda).
+        emtParadasVisible &&
+          new ScatterplotLayer<ParadaEmt>({
+            id: 'emt-paradas',
+            data: paradasEmt,
+            pickable: true,
+            getPosition: (p) => [p.lon, p.lat],
+            getFillColor: COLOR_EMT_PARADA,
+            getRadius: 4,
+            radiusMinPixels: 2,
+            radiusMaxPixels: 5,
+            onClick: (info: PickingInfo<ParadaEmt>) => {
+              if (info.object) {
+                emtParadasLeyendaRoot.classList.add('is-expandida');
+                emtParadasLeyendaRoot.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+              }
+            },
+          }),
+        // Spec 055 — buses: posición GPS en vivo, encima de las paradas.
+        // Tooltip al pasar el ratón (línea + trayecto), mismo patrón bespoke
+        // que vía pública (spec 026) — no hay color por línea (~60 líneas
+        // haría la leyenda ilegible).
+        emtBusesVisible &&
+          new ScatterplotLayer<BusEmt>({
+            id: 'emt-buses',
+            data: busesEmt,
+            pickable: true,
+            getPosition: (b) => [b.lon, b.lat],
+            getFillColor: COLOR_EMT_BUS,
+            stroked: true,
+            getLineColor: [255, 255, 255, 230],
+            lineWidthMinPixels: 1,
+            getRadius: 6,
+            radiusUnits: 'pixels',
+            onHover: (info: PickingInfo<BusEmt>) => {
+              renderEmtBusTooltip(emtBusTooltip, info.object ?? null, info.x, info.y);
             },
           }),
         riesgoEscorrentiaVisible &&
@@ -3192,6 +3317,60 @@ async function main(): Promise<void> {
     }
   });
 
+  const emtParadasLeyendaRoot = buildInfoPanel('emt-paradas-leyenda', { colapsable: true });
+  emtParadasLeyendaRoot.hidden = true;
+  async function cargarEmtParadasSiHaceFalta(): Promise<void> {
+    if (emtParadasCargadas) {
+      renderLayers();
+      return;
+    }
+    emtParadasCargadas = true;
+    try {
+      const paradas = await fetchParadasEmtActual();
+      paradasEmt = paradas;
+      renderLayers();
+      renderEmtParadasLeyenda(emtParadasLeyendaRoot, paradas);
+    } catch (err) {
+      emtParadasLeyendaRoot.textContent = 'Paradas de EMT no disponibles';
+      console.error('Fallo al cargar paradas de EMT:', err);
+    }
+  }
+  panel.emtParadasToggle.addEventListener('change', () => {
+    emtParadasVisible = panel.emtParadasToggle.checked;
+    emtParadasLeyendaRoot.hidden = !emtParadasVisible;
+    if (emtParadasVisible) {
+      void cargarEmtParadasSiHaceFalta();
+    } else {
+      renderLayers();
+    }
+  });
+
+  const emtBusesLeyendaRoot = buildInfoPanel('emt-buses-leyenda', { colapsable: true });
+  emtBusesLeyendaRoot.hidden = true;
+  let emtBusesPollingIniciado = false;
+  async function refreshEmtBuses(): Promise<void> {
+    try {
+      const { buses, fresh } = await fetchBusesEmtActual();
+      busesEmt = buses;
+      renderLayers();
+      renderEmtBusesLeyenda(emtBusesLeyendaRoot, buses, fresh);
+    } catch (err) {
+      emtBusesLeyendaRoot.textContent = 'Autobuses EMT no disponibles';
+      console.error('Fallo al cargar autobuses EMT:', err);
+    }
+  }
+  panel.emtBusesToggle.addEventListener('change', () => {
+    emtBusesVisible = panel.emtBusesToggle.checked;
+    emtBusesLeyendaRoot.hidden = !emtBusesVisible;
+    if (!emtBusesVisible) emtBusTooltip.hidden = true;
+    if (emtBusesVisible && !emtBusesPollingIniciado) {
+      emtBusesPollingIniciado = true;
+      startPolling(refreshEmtBuses, 20 * 1000); // igual TTL que la caché del endpoint, spec 055 §4
+    } else {
+      renderLayers();
+    }
+  });
+
   const viaPublicaLeyendaRoot = buildInfoPanel('via-publica-leyenda', { colapsable: true });
   viaPublicaLeyendaRoot.hidden = true;
   let viaPublicaPollingIniciado = false;
@@ -3528,6 +3707,8 @@ async function main(): Promise<void> {
     ['zonas-zas-leyenda', panel.zonasZasToggle],
     ['altimetria-leyenda', panel.altimetriaToggle],
     ['equipamientos-criticos-leyenda', panel.equipamientosCriticosToggle],
+    ['emt-buses-leyenda', panel.emtBusesToggle],
+    ['emt-paradas-leyenda', panel.emtParadasToggle],
   ];
   const idsPaneleFijos = PANEL_PREFERENCES_REGISTRY.map((d) => d.key);
   const idsInteligencia = [

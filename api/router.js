@@ -26229,106 +26229,6 @@ function construirHistoricoDistrito(snapshots, rollups, distritoCodigo, dias, ah
 // data/trafico-historico.json
 var trafico_historico_default = [
   {
-    timestamp: "2026-09-01T18:11:01.605Z",
-    distritos: [
-      {
-        codigo: "01",
-        congestion: 0,
-        muestras: 29
-      },
-      {
-        codigo: "02",
-        congestion: 0.014285714285714285,
-        muestras: 21
-      },
-      {
-        codigo: "03",
-        congestion: 0.15384615384615385,
-        muestras: 26
-      },
-      {
-        codigo: "04",
-        congestion: 0,
-        muestras: 45
-      },
-      {
-        codigo: "05",
-        congestion: 0,
-        muestras: 18
-      },
-      {
-        codigo: "06",
-        congestion: 0,
-        muestras: 35
-      },
-      {
-        codigo: "07",
-        congestion: 0,
-        muestras: 19
-      },
-      {
-        codigo: "08",
-        congestion: 0.07692307692307693,
-        muestras: 13
-      },
-      {
-        codigo: "09",
-        congestion: 0,
-        muestras: 24
-      },
-      {
-        codigo: "10",
-        congestion: 0,
-        muestras: 48
-      },
-      {
-        codigo: "11",
-        congestion: 0,
-        muestras: 29
-      },
-      {
-        codigo: "12",
-        congestion: 0,
-        muestras: 29
-      },
-      {
-        codigo: "13",
-        congestion: 0,
-        muestras: 15
-      },
-      {
-        codigo: "14",
-        congestion: 0,
-        muestras: 7
-      },
-      {
-        codigo: "15",
-        congestion: 0,
-        muestras: 13
-      },
-      {
-        codigo: "16",
-        congestion: 0,
-        muestras: 19
-      },
-      {
-        codigo: "17",
-        congestion: 0,
-        muestras: 10
-      },
-      {
-        codigo: "18",
-        congestion: 0,
-        muestras: 3
-      },
-      {
-        codigo: "19",
-        congestion: 0,
-        muestras: 2
-      }
-    ]
-  },
-  {
     timestamp: "2026-09-01T21:36:47.191Z",
     distritos: [
       {
@@ -51452,6 +51352,220 @@ var trafico_historico_default = [
   },
   {
     timestamp: "2026-10-01T16:01:58.279Z",
+    distritos: [
+      {
+        codigo: "01",
+        congestion: 0,
+        muestras: 29,
+        porEstado: {
+          fluido: 29,
+          denso: 0,
+          congestionado: 0,
+          cortado: 0
+        }
+      },
+      {
+        codigo: "02",
+        congestion: 0,
+        muestras: 23,
+        porEstado: {
+          fluido: 23,
+          denso: 0,
+          congestionado: 0,
+          cortado: 0
+        }
+      },
+      {
+        codigo: "03",
+        congestion: 0.11538461538461539,
+        muestras: 26,
+        porEstado: {
+          fluido: 23,
+          denso: 0,
+          congestionado: 0,
+          cortado: 3
+        }
+      },
+      {
+        codigo: "04",
+        congestion: 0,
+        muestras: 45,
+        porEstado: {
+          fluido: 45,
+          denso: 0,
+          congestionado: 0,
+          cortado: 0
+        }
+      },
+      {
+        codigo: "05",
+        congestion: 0,
+        muestras: 18,
+        porEstado: {
+          fluido: 18,
+          denso: 0,
+          congestionado: 0,
+          cortado: 0
+        }
+      },
+      {
+        codigo: "06",
+        congestion: 0,
+        muestras: 35,
+        porEstado: {
+          fluido: 35,
+          denso: 0,
+          congestionado: 0,
+          cortado: 0
+        }
+      },
+      {
+        codigo: "07",
+        congestion: 0,
+        muestras: 19,
+        porEstado: {
+          fluido: 19,
+          denso: 0,
+          congestionado: 0,
+          cortado: 0
+        }
+      },
+      {
+        codigo: "08",
+        congestion: 0.07692307692307693,
+        muestras: 13,
+        porEstado: {
+          fluido: 12,
+          denso: 0,
+          congestionado: 0,
+          cortado: 1
+        }
+      },
+      {
+        codigo: "09",
+        congestion: 0,
+        muestras: 24,
+        porEstado: {
+          fluido: 24,
+          denso: 0,
+          congestionado: 0,
+          cortado: 0
+        }
+      },
+      {
+        codigo: "10",
+        congestion: 0,
+        muestras: 48,
+        porEstado: {
+          fluido: 48,
+          denso: 0,
+          congestionado: 0,
+          cortado: 0
+        }
+      },
+      {
+        codigo: "11",
+        congestion: 0,
+        muestras: 29,
+        porEstado: {
+          fluido: 29,
+          denso: 0,
+          congestionado: 0,
+          cortado: 0
+        }
+      },
+      {
+        codigo: "12",
+        congestion: 0,
+        muestras: 29,
+        porEstado: {
+          fluido: 29,
+          denso: 0,
+          congestionado: 0,
+          cortado: 0
+        }
+      },
+      {
+        codigo: "13",
+        congestion: 0,
+        muestras: 15,
+        porEstado: {
+          fluido: 15,
+          denso: 0,
+          congestionado: 0,
+          cortado: 0
+        }
+      },
+      {
+        codigo: "14",
+        congestion: 0,
+        muestras: 7,
+        porEstado: {
+          fluido: 7,
+          denso: 0,
+          congestionado: 0,
+          cortado: 0
+        }
+      },
+      {
+        codigo: "15",
+        congestion: 0,
+        muestras: 13,
+        porEstado: {
+          fluido: 13,
+          denso: 0,
+          congestionado: 0,
+          cortado: 0
+        }
+      },
+      {
+        codigo: "16",
+        congestion: 0,
+        muestras: 19,
+        porEstado: {
+          fluido: 19,
+          denso: 0,
+          congestionado: 0,
+          cortado: 0
+        }
+      },
+      {
+        codigo: "17",
+        congestion: 0,
+        muestras: 10,
+        porEstado: {
+          fluido: 10,
+          denso: 0,
+          congestionado: 0,
+          cortado: 0
+        }
+      },
+      {
+        codigo: "18",
+        congestion: 0,
+        muestras: 3,
+        porEstado: {
+          fluido: 3,
+          denso: 0,
+          congestionado: 0,
+          cortado: 0
+        }
+      },
+      {
+        codigo: "19",
+        congestion: 0,
+        muestras: 2,
+        porEstado: {
+          fluido: 2,
+          denso: 0,
+          congestionado: 0,
+          cortado: 0
+        }
+      }
+    ]
+  },
+  {
+    timestamp: "2026-10-01T21:34:34.051Z",
     distritos: [
       {
         codigo: "01",
@@ -102795,9 +102909,9 @@ async function handler23() {
 var CACHE_KEY14 = "sintesis-ia:actual:v1";
 var TTL_MS16 = 90 * 60 * 1e3;
 var MODELO = "gemini-3-flash-preview";
-async function leerJson(handler32) {
+async function leerJson(handler34) {
   try {
-    const res = await handler32();
+    const res = await handler34();
     if (!res.ok) return null;
     return await res.json();
   } catch (err) {
@@ -109235,9 +109349,9 @@ var camaras_dgt_valencia_default = [
 var CACHE_KEY15 = "sintesis-ia:v2:actual";
 var TTL_MS17 = 90 * 60 * 1e3;
 var MODELO2 = "gemini-3-flash-preview";
-async function leerJson2(handler32) {
+async function leerJson2(handler34) {
   try {
-    const res = await handler32();
+    const res = await handler34();
     if (!res.ok) return null;
     return await res.json();
   } catch (err) {
@@ -110271,6 +110385,13788 @@ async function handler28() {
   });
 }
 
+// src/services/emt-buses.ts
+var GEOPORTAL_EMT_BUSES_URL = "https://geoportal.valencia.es/server/rest/services/EMT/Seguimiento_EMT/MapServer/384/query?where=1=1&outFields=gid,linea,trayecto,fecha&outSR=4326&f=json";
+async function fetchBusesEmt() {
+  const res = await fetch(GEOPORTAL_EMT_BUSES_URL, {
+    headers: { "User-Agent": "vlc-monitor/1.0 (+https://github.com/)" }
+  });
+  if (!res.ok) {
+    throw new Error(`Geoportal (EMT buses) respondi\xF3 HTTP ${res.status}`);
+  }
+  const body = await res.json();
+  if (body.error) {
+    throw new Error(`Geoportal (EMT buses) devolvi\xF3 un error de ArcGIS: ${body.error.message}`);
+  }
+  if (!Array.isArray(body.features)) {
+    throw new Error('Geoportal (EMT buses) respondi\xF3 sin "features" \u2014 posible incidencia del servicio');
+  }
+  const fetchedAt = (/* @__PURE__ */ new Date()).toISOString();
+  return body.features.filter(
+    (f) => f.geometry !== null && f.attributes.gid !== null && f.attributes.linea !== null && f.attributes.trayecto !== null && f.attributes.fecha !== null
+  ).map((f) => ({
+    id: String(f.attributes.gid),
+    linea: f.attributes.linea,
+    trayecto: f.attributes.trayecto,
+    lat: f.geometry.y,
+    lon: f.geometry.x,
+    observedAt: new Date(f.attributes.fecha).toISOString(),
+    fetchedAt,
+    source: "ajuntament-valencia-geoportal"
+  }));
+}
+
+// src/server/emt-buses-en-vivo.ts
+var CACHE_KEY18 = "emt:valencia-buses:v1";
+var TTL_MS20 = 20 * 1e3;
+async function handler29() {
+  try {
+    const { value: buses, fresh } = await getOrFetch(CACHE_KEY18, TTL_MS20, fetchBusesEmt);
+    return new Response(JSON.stringify({ buses, fresh }), {
+      status: 200,
+      headers: {
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "public, max-age=10, stale-while-revalidate=30"
+      }
+    });
+  } catch (err) {
+    return new Response(
+      JSON.stringify({ error: err instanceof Error ? err.message : String(err) }),
+      { status: 502, headers: { "content-type": "application/json; charset=utf-8" } }
+    );
+  }
+}
+
+// data/emt-paradas.json
+var emt_paradas_default = [
+  {
+    id: "1044",
+    nombre: "Poliesportiu de Burjassot (1044)",
+    lineas: [
+      "63"
+    ],
+    lat: 39.50780754039447,
+    lon: -0.41671632169767564,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "383",
+    nombre: "Doctor Soriano Benlloch - Rafael Tenes Escrich (383)",
+    lineas: [
+      "62"
+    ],
+    lat: 39.49955546473998,
+    lon: -0.4173282952580855,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "390",
+    nombre: "Terramelar  (390)",
+    lineas: [
+      "62"
+    ],
+    lat: 39.50819355102462,
+    lon: -0.4279307015844851,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "394",
+    nombre: "Polvor\xED - Campament (394)",
+    lineas: [
+      "62"
+    ],
+    lat: 39.50091907738515,
+    lon: -0.4252980582728853,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "397",
+    nombre: "Felipe Valls - Llu\xEDs Cano (397)",
+    lineas: [
+      "62"
+    ],
+    lat: 39.50142013809385,
+    lon: -0.41907214163379247,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "948",
+    nombre: "Tavernes Blanques - Pla\xE7a del Mercat (948)",
+    lineas: [
+      "16"
+    ],
+    lat: 39.50653074587399,
+    lon: -0.36580255321622196,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "855",
+    nombre: "Orxata - Mestre Serrano (855)",
+    lineas: [
+      "70"
+    ],
+    lat: 39.495950606273986,
+    lon: -0.3541326622459023,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "384",
+    nombre: "Benim\xE0met (384)",
+    lineas: [
+      "62"
+    ],
+    lat: 39.50142102191983,
+    lon: -0.4186736686930373,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "385",
+    nombre: "Campament - Felipe Valls (385)",
+    lineas: [
+      "62"
+    ],
+    lat: 39.502639139327684,
+    lon: -0.4203397972149483,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "389",
+    nombre: "Alginet - Algemes\xED (389)",
+    lineas: [
+      "62"
+    ],
+    lat: 39.507159289217675,
+    lon: -0.4291207081824961,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "393",
+    nombre: "Vel\xF2drom Llu\xEDs Puig (393)",
+    lineas: [
+      "62"
+    ],
+    lat: 39.501688776036005,
+    lon: -0.426272562163733,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "296",
+    nombre: "Benifaraig a Moncada - Boquera (296)",
+    lineas: [
+      "26"
+    ],
+    lat: 39.52526656567516,
+    lon: -0.38622093551819103,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "299",
+    nombre: "Cam\xED de Moncada (imparell) - Matador (299)",
+    lineas: [
+      "26"
+    ],
+    lat: 39.51547241470949,
+    lon: -0.3869752307507966,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "373",
+    nombre: "Pius XII (parell) - Metro Campanar (373)",
+    lineas: [
+      "62",
+      "64",
+      "92",
+      "99"
+    ],
+    lat: 39.48439589204899,
+    lon: -0.3946933426654246,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2372",
+    nombre: "Pla\xE7a d'Espanya - Albacete (2372)",
+    lineas: [
+      "67",
+      "93"
+    ],
+    lat: 39.46557742900542,
+    lon: -0.382336789132043,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "338",
+    nombre: "Museu de Belles Arts (338)",
+    lineas: [
+      "11",
+      "16",
+      "26",
+      "6",
+      "79",
+      "94",
+      "95"
+    ],
+    lat: 39.479009428451256,
+    lon: -0.37134902676484455,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "361",
+    nombre: "Joaquim Ballester (imparell) - Ricardo Mic\xF3 (361)",
+    lineas: [
+      "98"
+    ],
+    lat: 39.48269477590207,
+    lon: -0.3897472524713733,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "420",
+    nombre: "Manuel de Falla - Professor L\xF3pez Ibor (420)",
+    lineas: [
+      "67",
+      "95"
+    ],
+    lat: 39.47555036998553,
+    lon: -0.40126744899861505,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "488",
+    nombre: "Avinguda del Cid (488)",
+    lineas: [
+      "93"
+    ],
+    lat: 39.469710651417344,
+    lon: -0.4161076326788016,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "508",
+    nombre: "Parc de l'Oest - Enguera (508)",
+    lineas: [
+      "70",
+      "93"
+    ],
+    lat: 39.467940675331974,
+    lon: -0.3956813608832114,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "548",
+    nombre: "Mercat de Jes\xFAs (548)",
+    lineas: [
+      "11"
+    ],
+    lat: 39.46020040145738,
+    lon: -0.38868375587289833,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "564",
+    nombre: "Cementeri (564)",
+    lineas: [
+      "10"
+    ],
+    lat: 39.44806242190842,
+    lon: -0.39622330211505463,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "771",
+    nombre: "Torres dels Serrans (771)",
+    lineas: [
+      "28",
+      "95",
+      "C1"
+    ],
+    lat: 39.47908858982917,
+    lon: -0.37516117145164285,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "892",
+    nombre: "La Plata - Poeta Miguel Hern\xE1ndez (892)",
+    lineas: [
+      "18"
+    ],
+    lat: 39.45565910959351,
+    lon: -0.36540442572386034,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "912",
+    nombre: "Cam\xED de les Vaques (parell)  (912)",
+    lineas: [
+      "23"
+    ],
+    lat: 39.423416173096705,
+    lon: -0.37038635966883937,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1562",
+    nombre: "Palmaret - Rosa dels Vents (1562)",
+    lineas: [
+      "26"
+    ],
+    lat: 39.5162648309316,
+    lon: -0.3813883690477337,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "950",
+    nombre: "Cases de B\xE0rcena (I) (950)",
+    lineas: [
+      "16"
+    ],
+    lat: 39.52056170380673,
+    lon: -0.3586220862236414,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "954",
+    nombre: "Cases de B\xE0rcena (IV) (954)",
+    lineas: [
+      "16"
+    ],
+    lat: 39.52061364093235,
+    lon: -0.35876203721985245,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "967",
+    nombre: "Ram\xF3n Asensio - Gu\xE0rdia Civil (967)",
+    lineas: [
+      "10"
+    ],
+    lat: 39.481713788272096,
+    lon: -0.3592046406911025,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1008",
+    nombre: "Jes\xFAs Morante Borr\xE1s (II) (1008)",
+    lineas: [
+      "23"
+    ],
+    lat: 39.44943710530103,
+    lon: -0.3444452987592216,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1012",
+    nombre: "Jes\xFAs Morante Borr\xE1s (V) (1012)",
+    lineas: [
+      "23"
+    ],
+    lat: 39.441741959111134,
+    lon: -0.3438039620453227,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1015",
+    nombre: "Jes\xFAs Morante Borr\xE1s (VIII) (1015)",
+    lineas: [
+      "23"
+    ],
+    lat: 39.449373939290034,
+    lon: -0.344281002073847,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1026",
+    nombre: "Rib\xE0s (imparell) - Ador (1026)",
+    lineas: [
+      "14",
+      "23"
+    ],
+    lat: 39.43252903119747,
+    lon: -0.3608973602416576,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1030",
+    nombre: "Crist del Refugi - Davant Sant Agust\xED (1030)",
+    lineas: [
+      "23"
+    ],
+    lat: 39.42448613363243,
+    lon: -0.3639443374125587,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1136",
+    nombre: "Palma de Gandia - Venta del Moro (1136)",
+    lineas: [
+      "26"
+    ],
+    lat: 39.52954705203061,
+    lon: -0.384152246004457,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1706",
+    nombre: "Platja de Pinedo (1706)",
+    lineas: [
+      "23",
+      "24"
+    ],
+    lat: 39.41943998841618,
+    lon: -0.33600322772785474,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2318",
+    nombre: "Quevedo - MuVIM (2318)",
+    lineas: [
+      "27"
+    ],
+    lat: 39.47024472603223,
+    lon: -0.3801028031890534,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1813",
+    nombre: "Metro Reus - Alqueria de l'Estrella (1813)",
+    lineas: [
+      "98"
+    ],
+    lat: 39.48575360904153,
+    lon: -0.38289044255992055,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1289",
+    nombre: "Vicent Puchol (imparell) - Centre de Salut (1289)",
+    lineas: [
+      "14",
+      "23"
+    ],
+    lat: 39.427941803406156,
+    lon: -0.3639371871175227,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "329",
+    nombre: "Constituci\xF3 - Pla de la Sa\xEFdia (329)",
+    lineas: [
+      "16",
+      "26",
+      "6"
+    ],
+    lat: 39.483088137647115,
+    lon: -0.37883995715509966,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1139",
+    nombre: "Ferrer i Bign\xE9 - Nelo el Fariner (1139)",
+    lineas: [
+      "26"
+    ],
+    lat: 39.530800086745636,
+    lon: -0.3853412126066686,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2192",
+    nombre: "Gavines (imparell) - Platja (2192)",
+    lineas: [
+      "25"
+    ],
+    lat: 39.29762328898449,
+    lon: -0.28915235494141944,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1149",
+    nombre: "Font d'en Corts (parell) - Davant Alqueria Reial (1149)",
+    lineas: [
+      "14"
+    ],
+    lat: 39.44739351457691,
+    lon: -0.35968190651445003,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1158",
+    nombre: "Passeig Mar\xEDtim - S\xE9quia de la Cadena (1158)",
+    lineas: [
+      "32"
+    ],
+    lat: 39.473507646316314,
+    lon: -0.3246664599885929,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1161",
+    nombre: "Passeig Mar\xEDtim - Font d'en Carr\xF2s  (1161)",
+    lineas: [
+      "32"
+    ],
+    lat: 39.48126567063038,
+    lon: -0.3246745657003995,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1229",
+    nombre: "Els Orriols - Metro Sant Miquel dels Reis (1229)",
+    lineas: [
+      "11"
+    ],
+    lat: 39.49693156619653,
+    lon: -0.36916214962642985,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "483",
+    nombre: "Cid - Burgos (483)",
+    lineas: [
+      "70",
+      "93"
+    ],
+    lat: 39.46891819861776,
+    lon: -0.3998604850482136,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "720",
+    nombre: "Mercat de Russafa (720)",
+    lineas: [
+      "14",
+      "35",
+      "6"
+    ],
+    lat: 39.461732499048225,
+    lon: -0.3705497459848096,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "921",
+    nombre: "Carrera del Riu - Entrada Sanques (921)",
+    lineas: [
+      "23"
+    ],
+    lat: 39.43565462913657,
+    lon: -0.34365236927470033,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "930",
+    nombre: "El Tremolar - Cam\xED Rac\xF3 (930)",
+    lineas: [
+      "23"
+    ],
+    lat: 39.42142929248977,
+    lon: -0.34549886593354046,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "933",
+    nombre: "El Tremolar - Casa Rabot (933)",
+    lineas: [
+      "23"
+    ],
+    lat: 39.42326102963274,
+    lon: -0.3585575595427926,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "935",
+    nombre: "El Tremolar - Cases Grill (935)",
+    lineas: [
+      "23"
+    ],
+    lat: 39.42311446853476,
+    lon: -0.35797679553617767,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "937",
+    nombre: "El Tremolar - Font d'en Corts (937)",
+    lineas: [
+      "23"
+    ],
+    lat: 39.4221603880818,
+    lon: -0.3508140677068266,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1307",
+    nombre: "Tres Creus - Llombai (1307)",
+    lineas: [
+      "70"
+    ],
+    lat: 39.464600605779744,
+    lon: -0.40538687011861485,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1329",
+    nombre: "Palmaret - Moncada (1329)",
+    lineas: [
+      "26"
+    ],
+    lat: 39.51769828167446,
+    lon: -0.3863323020915442,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1350",
+    nombre: "Sant Vicent M\xE0rtir - Almudaina (1350)",
+    lineas: [
+      "27",
+      "64"
+    ],
+    lat: 39.45298658944731,
+    lon: -0.3844587554052317,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2043",
+    nombre: "\xC0gora (front) (2043)",
+    lineas: [
+      "23",
+      "95"
+    ],
+    lat: 39.45298267187276,
+    lon: -0.3504699761199973,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "733",
+    nombre: "Ciscar - Borriana (733)",
+    lineas: [
+      "13",
+      "40"
+    ],
+    lat: 39.46536207672657,
+    lon: -0.3651373044095036,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "716",
+    nombre: "Cadis - D\xE9nia (716)",
+    lineas: [
+      "7"
+    ],
+    lat: 39.46361512929926,
+    lon: -0.3748986214330446,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1365",
+    nombre: "Tom\xE1s de Monta\xF1ana - Fran\xE7a (1365)",
+    lineas: [
+      "40"
+    ],
+    lat: 39.4609204914912,
+    lon: -0.35297020080863034,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1376",
+    nombre: "Cam\xED del Canal - Guitarrista T\xE0rrega (1376)",
+    lineas: [
+      "23"
+    ],
+    lat: 39.447212249397715,
+    lon: -0.33545916093428435,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1413",
+    nombre: "Real de Madrid - Entrada Pinet (1413)",
+    lineas: [
+      "27",
+      "9"
+    ],
+    lat: 39.43031433544586,
+    lon: -0.3926070763995008,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1428",
+    nombre: "Jacinto Benavente - Peris i Valero (1428)",
+    lineas: [
+      "13",
+      "23",
+      "24",
+      "25",
+      "95"
+    ],
+    lat: 39.463451447446765,
+    lon: -0.36126812129630476,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1441",
+    nombre: "Doctor Tom\xE1s Sala (parell) - Sant Vicent M\xE0rtir (1441)",
+    lineas: [
+      "18",
+      "59",
+      "9",
+      "99"
+    ],
+    lat: 39.44638859990565,
+    lon: -0.38700074107818627,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1475",
+    nombre: "Tanatori Municipal (1475)",
+    lineas: [
+      "10"
+    ],
+    lat: 39.44294482850522,
+    lon: -0.39794046128677896,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1500",
+    nombre: "Sants Just i Pastor - Escultor Esteve Edo (1500)",
+    lineas: [
+      "32"
+    ],
+    lat: 39.466932610563916,
+    lon: -0.33891422202229105,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1534",
+    nombre: "Fran\xE7a - Vicente Beltr\xE1n Grimal (1534)",
+    lineas: [
+      "19"
+    ],
+    lat: 39.46000330528039,
+    lon: -0.35015537385916307,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1536",
+    nombre: "Albereda - Parc Gulliver (1536)",
+    lineas: [
+      "19",
+      "94"
+    ],
+    lat: 39.4632154045625,
+    lon: -0.3584679551852094,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1541",
+    nombre: "Menorca - Balears (1541)",
+    lineas: [
+      "19",
+      "99"
+    ],
+    lat: 39.4590346945901,
+    lon: -0.3427999028776571,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1546",
+    nombre: "La Malva-rosa - Gran Can\xE0ria (1546)",
+    lineas: [
+      "92"
+    ],
+    lat: 39.483501925787834,
+    lon: -0.3288024115801968,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1551",
+    nombre: "Tarongers (imparell)  - Metro La Cadena (1551)",
+    lineas: [
+      "92",
+      "93",
+      "98"
+    ],
+    lat: 39.47530173832034,
+    lon: -0.32905164282310817,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1566",
+    nombre: "Corts Valencianes (imparell) - Metro Beniferri (1566)",
+    lineas: [
+      "62",
+      "63",
+      "99"
+    ],
+    lat: 39.49077183864252,
+    lon: -0.4000138296522475,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "319",
+    nombre: "Campanar - Doctor Nicasi Benlloch  (319)",
+    lineas: [
+      "60",
+      "90"
+    ],
+    lat: 39.48819670282503,
+    lon: -0.38961341170211683,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "323",
+    nombre: "Sagunt - Pare Urb\xE0 (323)",
+    lineas: [
+      "16",
+      "26",
+      "6"
+    ],
+    lat: 39.48898664818689,
+    lon: -0.37501197363305483,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "326",
+    nombre: "Constituci\xF3 - Xest (326)",
+    lineas: [
+      "16",
+      "26",
+      "6"
+    ],
+    lat: 39.48931273580833,
+    lon: -0.37599760734699206,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "328",
+    nombre: "Constituci\xF3 - M\xE0laga (328)",
+    lineas: [
+      "16",
+      "26",
+      "6"
+    ],
+    lat: 39.485225490769935,
+    lon: -0.37875933839996456,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "330",
+    nombre: "Burjassot - M\xE0laga (330)",
+    lineas: [
+      "94"
+    ],
+    lat: 39.48372263772981,
+    lon: -0.3832471287258547,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "342",
+    nombre: "Guadalaviar - Sagunt (342)",
+    lineas: [
+      "79",
+      "94",
+      "95"
+    ],
+    lat: 39.481869587443235,
+    lon: -0.37542375920528687,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "343",
+    nombre: "El Pla de la Sa\xEFdia - Constituci\xF3 (343)",
+    lineas: [
+      "79",
+      "94",
+      "95"
+    ],
+    lat: 39.48283285916263,
+    lon: -0.37744693196258683,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "353",
+    nombre: "Doctor Nicasi Benlloch - Alcubles (353)",
+    lineas: [
+      "28",
+      "94"
+    ],
+    lat: 39.48739000483662,
+    lon: -0.38874727397097075,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "364",
+    nombre: "Campanar - Ricardo Mic\xF3 (364)",
+    lineas: [
+      "60",
+      "90"
+    ],
+    lat: 39.48589174893528,
+    lon: -0.39068798371377594,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "370",
+    nombre: "Campanar - Pius XII (370)",
+    lineas: [
+      "90"
+    ],
+    lat: 39.48061974224602,
+    lon: -0.39325205673467856,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "409",
+    nombre: "Pius XII (imparell) - Centre Comercial (409)",
+    lineas: [
+      "60",
+      "62",
+      "63",
+      "64",
+      "92"
+    ],
+    lat: 39.479296583926754,
+    lon: -0.39161784289841495,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "426",
+    nombre: "P\xE9rez Gald\xF3s - Torres Torres (426)",
+    lineas: [
+      "67",
+      "89"
+    ],
+    lat: 39.472393692769636,
+    lon: -0.3940538265220553,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "428",
+    nombre: "Llorca - P\xE9rez Gald\xF3s (428)",
+    lineas: [
+      "72"
+    ],
+    lat: 39.46845583777315,
+    lon: -0.39196763593790207,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "436",
+    nombre: "Giorgeta (imparell) - Metro Jes\xFAs (436)",
+    lineas: [
+      "90"
+    ],
+    lat: 39.459173289676826,
+    lon: -0.38436940161579075,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "475",
+    nombre: "Brasil - Artur Piera (475)",
+    lineas: [
+      "73"
+    ],
+    lat: 39.47071907570776,
+    lon: -0.3951866421883474,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "484",
+    nombre: "Cid - Passatge Vidal (484)",
+    lineas: [
+      "70",
+      "93"
+    ],
+    lat: 39.46960970393574,
+    lon: -0.4032098687744392,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "495",
+    nombre: "Cid - Marconi (495)",
+    lineas: [
+      "93",
+      "98"
+    ],
+    lat: 39.469233328598364,
+    lon: -0.4132110636422129,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2305",
+    nombre: "Democr\xE0cia - Vel\xE1zquez (2305)",
+    lineas: [
+      "73"
+    ],
+    lat: 39.47347223893324,
+    lon: -0.4002594880753536,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "512",
+    nombre: "Tres Forques - Santa Cruz de Tenerife (512)",
+    lineas: [
+      "71"
+    ],
+    lat: 39.46390887635404,
+    lon: -0.39954995296064505,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "606",
+    nombre: "Parc Central - Centelles (606)",
+    lineas: [
+      "90"
+    ],
+    lat: 39.45790463610097,
+    lon: -0.3764721523610052,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "631",
+    nombre: "Fonteta de Sant Llu\xEDs - Riu Sec (631)",
+    lineas: [
+      "13",
+      "7"
+    ],
+    lat: 39.445842977889676,
+    lon: -0.3670989772717946,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "658",
+    nombre: "Font d'en Corts (parell) - Roig de Lagarda (658)",
+    lineas: [
+      "14"
+    ],
+    lat: 39.44562154769541,
+    lon: -0.35834724283725383,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "663",
+    nombre: "El Tremolar - Crist del Refugi (663)",
+    lineas: [
+      "23"
+    ],
+    lat: 39.42365294946867,
+    lon: -0.361519270555436,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "665",
+    nombre: "Crist del Refugi - Carretera del Pi (665)",
+    lineas: [
+      "14",
+      "23"
+    ],
+    lat: 39.42628450975147,
+    lon: -0.36413090540161985,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "669",
+    nombre: "Rib\xE0s (parell) - Ador (669)",
+    lineas: [
+      "14",
+      "23"
+    ],
+    lat: 39.43243106832801,
+    lon: -0.3609559657757215,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "673",
+    nombre: "Font d'en Corts (imparell) - Roig de Lagarda (673)",
+    lineas: [
+      "14"
+    ],
+    lat: 39.44597541073507,
+    lon: -0.35848114138275006,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "700",
+    nombre: "Cid - Hospital General (700)",
+    lineas: [
+      "93"
+    ],
+    lat: 39.46951159906982,
+    lon: -0.40575275632065544,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1153",
+    nombre: "Polvor\xED - Vel\xF2drom Llu\xEDs Puig (1153)",
+    lineas: [
+      "62"
+    ],
+    lat: 39.502257074321484,
+    lon: -0.42643097017701037,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1242",
+    nombre: "Mediterr\xE0nia - Doctor Lluch (1242)",
+    lineas: [
+      "32"
+    ],
+    lat: 39.467571542526095,
+    lon: -0.3285674711265837,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1263",
+    nombre: "Comte de Salvatierra - Col\xF3n (1263)",
+    lineas: [
+      "13",
+      "40"
+    ],
+    lat: 39.47108531939112,
+    lon: -0.36907985561477163,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1274",
+    nombre: "Tres Creus - Mercat de Castella (1274)",
+    lineas: [
+      "70",
+      "73"
+    ],
+    lat: 39.46622172882576,
+    lon: -0.4064025876393295,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1296",
+    nombre: "Marqu\xE9s de Sant Joan - Campanar (1296)",
+    lineas: [
+      "90"
+    ],
+    lat: 39.47871351970507,
+    lon: -0.39524874174510327,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1128",
+    nombre: "Mercat de Torrefiel (1128)",
+    lineas: [
+      "6",
+      "60"
+    ],
+    lat: 39.497939392725726,
+    lon: -0.3762339814634081,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1130",
+    nombre: "Pere Patrici Mey - Felip Rinaldi (1130)",
+    lineas: [
+      "60"
+    ],
+    lat: 39.49251562610009,
+    lon: -0.3770885570740326,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1210",
+    nombre: "Blasco Ib\xE1\xF1ez - Serradora (1210)",
+    lineas: [
+      "81"
+    ],
+    lat: 39.47064865128381,
+    lon: -0.3356196027448618,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1032",
+    nombre: "T\xEDrig - Gu\xE0rdia Civil (1032)",
+    lineas: [
+      "10"
+    ],
+    lat: 39.48222897430961,
+    lon: -0.35911566424645885,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1035",
+    nombre: "Arag\xF3 - Finl\xE0ndia (1035)",
+    lineas: [
+      "10",
+      "12",
+      "80",
+      "93"
+    ],
+    lat: 39.47092199333748,
+    lon: -0.3585225157651756,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1041",
+    nombre: "Pla\xE7a d'Espanya (imparell) - Ram\xF3n y Cajal (1041)",
+    lineas: [
+      "31",
+      "63",
+      "64",
+      "79",
+      "92"
+    ],
+    lat: 39.46597202372472,
+    lon: -0.3821540049878536,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1052",
+    nombre: "Eug\xE8nia Vi\xF1es - Mare de D\xE9u del Sufragi (1052)",
+    lineas: [
+      "32"
+    ],
+    lat: 39.46688956628559,
+    lon: -0.32528603978957177,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1085",
+    nombre: "Arag\xF3 - Xile (1085)",
+    lineas: [
+      "10",
+      "12",
+      "79",
+      "93"
+    ],
+    lat: 39.47017288205743,
+    lon: -0.358289505035946,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1096",
+    nombre: "Ramon Llull - Bernat Fenollar (1096)",
+    lineas: [
+      "40",
+      "71"
+    ],
+    lat: 39.47701650901022,
+    lon: -0.3463993150235927,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1110",
+    nombre: "Doctor Manuel Candela (parell) - Port (1110)",
+    lineas: [
+      "30",
+      "40"
+    ],
+    lat: 39.46597126822129,
+    lon: -0.35094725771495894,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1120",
+    nombre: "Tom\xE1s de Monta\xF1ana (parell) - Ast\xFAries (1120)",
+    lineas: [
+      "40"
+    ],
+    lat: 39.46348083629109,
+    lon: -0.352260011314417,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "972",
+    nombre: "Uruguai - Misser Rabassa (972)",
+    lineas: [
+      "10"
+    ],
+    lat: 39.45701033668357,
+    lon: -0.3870116290999677,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "978",
+    nombre: "Carters (parell) - Primer de Maig (978)",
+    lineas: [
+      "10",
+      "18"
+    ],
+    lat: 39.448197743652855,
+    lon: -0.38962327249034456,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "987",
+    nombre: "Mistral - Murta (987)",
+    lineas: [
+      "10"
+    ],
+    lat: 39.485925963498005,
+    lon: -0.3578608273989134,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "814",
+    nombre: "Jes\xFAs - Pare Jofr\xE9 (814)",
+    lineas: [
+      "10",
+      "11",
+      "27",
+      "31",
+      "59",
+      "63",
+      "67",
+      "71",
+      "9"
+    ],
+    lat: 39.46804288234756,
+    lon: -0.38185931819778174,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "834",
+    nombre: "Hern\xE1n Cort\xE9s - Ciril Amor\xF3s  (834)",
+    lineas: [
+      "40"
+    ],
+    lat: 39.46711064795623,
+    lon: -0.37064336441156753,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "869",
+    nombre: "Amadeu de Savoia - Su\xE8cia (869)",
+    lineas: [
+      "32"
+    ],
+    lat: 39.47303074723169,
+    lon: -0.3594915098152329,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "871",
+    nombre: "Misser Masc\xF3 - Doctor Moliner (871)",
+    lineas: [
+      "32"
+    ],
+    lat: 39.47549265116469,
+    lon: -0.3625963685182541,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "734",
+    nombre: "Ciscar - Comte d'Altea (734)",
+    lineas: [
+      "13",
+      "40"
+    ],
+    lat: 39.467137600397024,
+    lon: -0.3663568622157826,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "739",
+    nombre: "Jes\xFAs - Sant Francesc de Borja (739)",
+    lineas: [
+      "10",
+      "11",
+      "27",
+      "59",
+      "71",
+      "9"
+    ],
+    lat: 39.46614145962231,
+    lon: -0.38352180348006754,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "758",
+    nombre: "Aiora - Mariano Ribera (758)",
+    lineas: [
+      "72"
+    ],
+    lat: 39.46467272765563,
+    lon: -0.39332784593834796,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "764",
+    nombre: "Pla\xE7a d'Am\xE8rica - Pont d'Arag\xF3 (764)",
+    lineas: [
+      "10",
+      "12",
+      "23",
+      "24",
+      "25",
+      "4",
+      "94",
+      "95"
+    ],
+    lat: 39.469328971534495,
+    lon: -0.36430131383153685,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "777",
+    nombre: "Pla\xE7a d'Am\xE8rica - Marqu\xE9s del T\xFAria (777)",
+    lineas: [
+      "13",
+      "23",
+      "24",
+      "25",
+      "95"
+    ],
+    lat: 39.46957461906949,
+    lon: -0.36485287966558777,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "795",
+    nombre: "Guillem de Castro - Centre la Benefic\xE8ncia (795)",
+    lineas: [
+      "28",
+      "C1"
+    ],
+    lat: 39.47784091946038,
+    lon: -0.3836940721505621,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "833",
+    nombre: "Vall de la Ballestera - Pius XII (833)",
+    lineas: [
+      "98",
+      "99"
+    ],
+    lat: 39.48111630399073,
+    lon: -0.39361853204458636,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "868",
+    nombre: "Clariano - Albalat dels Tarongers (868)",
+    lineas: [
+      "18"
+    ],
+    lat: 39.47782586401168,
+    lon: -0.3512715412502758,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "674",
+    nombre: "Font d'en Corts - Casa de Roc (674)",
+    lineas: [
+      "14"
+    ],
+    lat: 39.44857965434122,
+    lon: -0.36058435215625817,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "680",
+    nombre: "Escultor Josep Capuz (imparell) - Pere Aleixandre (680)",
+    lineas: [
+      "13",
+      "14",
+      "18"
+    ],
+    lat: 39.459867371474616,
+    lon: -0.3612957965284901,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "684",
+    nombre: "Escultor Josep Capuz (parell) - La Plata (684)",
+    lineas: [
+      "14",
+      "18"
+    ],
+    lat: 39.45855752749811,
+    lon: -0.36061729656978164,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "690",
+    nombre: "Germanies - Castell\xF3 (690)",
+    lineas: [
+      "80",
+      "92",
+      "93"
+    ],
+    lat: 39.46442408662317,
+    lon: -0.37519289986656584,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "712",
+    nombre: "Marqu\xE9s del T\xFAria (parell) - Pla\xE7a C\xE1novas (712)",
+    lineas: [
+      "79",
+      "92",
+      "93"
+    ],
+    lat: 39.4681453547292,
+    lon: -0.365597822724352,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "717",
+    nombre: "Cadis - Puerto Rico (717)",
+    lineas: [
+      "7"
+    ],
+    lat: 39.462041613134026,
+    lon: -0.37377241183851984,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "722",
+    nombre: "Regne de Val\xE8ncia - Russafa (722)",
+    lineas: [
+      "19"
+    ],
+    lat: 39.46476145875562,
+    lon: -0.37304114090590046,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "726",
+    nombre: "Regne de Val\xE8ncia - Gregori Maians (726)",
+    lineas: [
+      "19"
+    ],
+    lat: 39.46482091950372,
+    lon: -0.37255308839521206,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "554",
+    nombre: "Conca - Moss\xE9n Fenollar (554)",
+    lineas: [
+      "11"
+    ],
+    lat: 39.461751802674144,
+    lon: -0.3903578486210079,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "577",
+    nombre: "Sant Vicent M\xE0rtir (parell) - Creu Coberta (577)",
+    lineas: [
+      "27",
+      "64"
+    ],
+    lat: 39.448237864398145,
+    lon: -0.3857787451534281,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "582",
+    nombre: "Real de Madrid - Algar del Pal\xE0ncia (582)",
+    lineas: [
+      "27",
+      "9"
+    ],
+    lat: 39.43329553907528,
+    lon: -0.3916115584355535,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "594",
+    nombre: "Sant Vicent M\xE0rtir - Fern\xE1ndez de Mesa (594)",
+    lineas: [
+      "27",
+      "64"
+    ],
+    lat: 39.45133671712903,
+    lon: -0.38478646065832944,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "603",
+    nombre: "Maties Perell\xF3 - Llu\xEDs de Sant\xE0ngel (603)",
+    lineas: [
+      "90"
+    ],
+    lat: 39.4620999449828,
+    lon: -0.3664206549106529,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "604",
+    nombre: "Maties Perell\xF3 - Mestre Aguilar (604)",
+    lineas: [
+      "90"
+    ],
+    lat: 39.4608810632175,
+    lon: -0.369243945776615,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "634",
+    nombre: "Gravador Jord\xE1n - Escultor Pastor (634)",
+    lineas: [
+      "13",
+      "7"
+    ],
+    lat: 39.44431934801419,
+    lon: -0.3675166120953084,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "638",
+    nombre: "Ausi\xE0s March - Alg\xEDmia d'Alfara (638)",
+    lineas: [
+      "7"
+    ],
+    lat: 39.4516065501464,
+    lon: -0.37165523534006695,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "442",
+    nombre: "P\xE9rez Gald\xF3s - Mestre Guerrero (442)",
+    lineas: [
+      "67",
+      "73",
+      "90"
+    ],
+    lat: 39.472424724388404,
+    lon: -0.3938245551673258,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "472",
+    nombre: "Petxina - Rac\xF3 d'Adem\xFAs (472)",
+    lineas: [
+      "73",
+      "95"
+    ],
+    lat: 39.47355098588599,
+    lon: -0.4027154641150171,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "481",
+    nombre: "Linares - P\xE9rez Gald\xF3s (481)",
+    lineas: [
+      "70",
+      "93"
+    ],
+    lat: 39.468927121723695,
+    lon: -0.39227427073603266,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "496",
+    nombre: "Cid - Casa de la Miseric\xF2rdia (496)",
+    lineas: [
+      "93",
+      "98"
+    ],
+    lat: 39.46957692413595,
+    lon: -0.40989552575776644,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "504",
+    nombre: "Tres Creus (imparell) - Hospital General (504)",
+    lineas: [
+      "70",
+      "73",
+      "95",
+      "99"
+    ],
+    lat: 39.468780780374985,
+    lon: -0.40571368996584645,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "510",
+    nombre: "Arxiduc Carles - Enguera (510)",
+    lineas: [
+      "72"
+    ],
+    lat: 39.465083512658076,
+    lon: -0.3949176841785839,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "535",
+    nombre: "Tres Forques - Mestre Bellver (535)",
+    lineas: [
+      "71"
+    ],
+    lat: 39.46420629352311,
+    lon: -0.39335948462720743,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "539",
+    nombre: "Arxiduc Carles - Puebla de Valverde (539)",
+    lineas: [
+      "72",
+      "73"
+    ],
+    lat: 39.459459344037036,
+    lon: -0.40105631990745944,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "350",
+    nombre: "Escola Oficial d'Idiomes (riu) (350)",
+    lineas: [
+      "80",
+      "94"
+    ],
+    lat: 39.482661487645274,
+    lon: -0.3814806908582156,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "371",
+    nombre: "Pius XII (parell) - Centre Comercial (371)",
+    lineas: [
+      "60",
+      "62",
+      "63",
+      "64",
+      "92"
+    ],
+    lat: 39.4794827753894,
+    lon: -0.39139888332342,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "405",
+    nombre: "Corts Valencianes - Escoles Professionals Sant Josep (405)",
+    lineas: [
+      "62",
+      "99"
+    ],
+    lat: 39.48697047319441,
+    lon: -0.3973411225370367,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "425",
+    nombre: "P\xE9rez Gald\xF3s - Democr\xE0cia (425)",
+    lineas: [
+      "67",
+      "89"
+    ],
+    lat: 39.47459728322123,
+    lon: -0.3956308915044598,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "199",
+    nombre: "Pare Vi\xF1as - Duc de Mandas (199)",
+    lineas: [
+      "11"
+    ],
+    lat: 39.49412668835639,
+    lon: -0.37043901258816153,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "207",
+    nombre: "Primat Reig - Almassora (207)",
+    lineas: [
+      "11",
+      "90"
+    ],
+    lat: 39.48827816450735,
+    lon: -0.3689748847019357,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "216",
+    nombre: "Primat Reig - Calder\xF3n de la Barca (216)",
+    lineas: [
+      "90"
+    ],
+    lat: 39.48606894373344,
+    lon: -0.3660357545374261,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "248",
+    nombre: "Sant Miquel dels Reis (248)",
+    lineas: [
+      "16"
+    ],
+    lat: 39.49887622195292,
+    lon: -0.37023003748012095,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "272",
+    nombre: "Sant Dom\xE9nec Savio - Mestre Mar\xE7al (272)",
+    lineas: [
+      "6",
+      "60"
+    ],
+    lat: 39.493495146952526,
+    lon: -0.3745042202568338,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "282",
+    nombre: "Cam\xED de Moncada - Entrada Cam\xED Carpesa (282)",
+    lineas: [
+      "26"
+    ],
+    lat: 39.50278255197227,
+    lon: -0.38271123147654856,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "304",
+    nombre: "Cam\xED de Moncada (imparell) - Alemany (304)",
+    lineas: [
+      "26"
+    ],
+    lat: 39.496569336540794,
+    lon: -0.38120107584547736,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "308",
+    nombre: "Burjassot - Pintor Matarana (308)",
+    lineas: [
+      "28"
+    ],
+    lat: 39.492393440457676,
+    lon: -0.3933097334910693,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "324",
+    nombre: "Sagunt - Don Bosco (324)",
+    lineas: [
+      "16",
+      "26",
+      "6"
+    ],
+    lat: 39.491575919354204,
+    lon: -0.37395432845458526,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "10",
+    nombre: "Doctor Lluch - Mediterr\xE0nia (10)",
+    lineas: [
+      "19",
+      "92"
+    ],
+    lat: 39.46723369413599,
+    lon: -0.3283055767526645,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "164",
+    nombre: "Blasco Ib\xE1\xF1ez - Rectorat (164)",
+    lineas: [
+      "70"
+    ],
+    lat: 39.47906742445329,
+    lon: -0.36509352460991623,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "285",
+    nombre: "Cam\xED de Moncada - Alqueria Ballester (285)",
+    lineas: [
+      "26"
+    ],
+    lat: 39.5102971640374,
+    lon: -0.3858256549406489,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "291",
+    nombre: "Cam\xED de Moncada (parell) - Alqueria Senent (291)",
+    lineas: [
+      "26"
+    ],
+    lat: 39.52156825960714,
+    lon: -0.38646920384219746,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "907",
+    nombre: "Guadalquivir - Karl Marx (907)",
+    lineas: [
+      "23",
+      "9"
+    ],
+    lat: 39.430657156374906,
+    lon: -0.3768679973616919,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "694",
+    nombre: "Ferran el Cat\xF2lic - Juan de Mena (694)",
+    lineas: [
+      "60",
+      "62",
+      "64",
+      "80",
+      "92"
+    ],
+    lat: 39.472298631730794,
+    lon: -0.3861653983872013,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "697",
+    nombre: "Ferran el Cat\xF2lic (imparell) - Jard\xED Bot\xE0nic (697)",
+    lineas: [
+      "60",
+      "62",
+      "63",
+      "64",
+      "79",
+      "92"
+    ],
+    lat: 39.47534854008927,
+    lon: -0.3888912529439532,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "704",
+    nombre: "Ram\xF3n y Cajal - Prefectura Policia Nacional (704)",
+    lineas: [
+      "64",
+      "79",
+      "92"
+    ],
+    lat: 39.468552825545174,
+    lon: -0.3840034907559807,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "711",
+    nombre: "Marqu\xE9s del T\xFAria - Joaqu\xEDn Costa (711)",
+    lineas: [
+      "79",
+      "92",
+      "93"
+    ],
+    lat: 39.4674337592527,
+    lon: -0.36729337271636947,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "723",
+    nombre: "Regne de Val\xE8ncia - Llu\xEDs Sant\xE0ngel (723)",
+    lineas: [
+      "19"
+    ],
+    lat: 39.46388456280478,
+    lon: -0.3690049759186081,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "738",
+    nombre: "Centre de Salut Gil i Morte (738)",
+    lineas: [
+      "10",
+      "27",
+      "31",
+      "59",
+      "64",
+      "9"
+    ],
+    lat: 39.461819775072065,
+    lon: -0.38239993189597526,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "745",
+    nombre: "Conca - Alzira (745)",
+    lineas: [
+      "11"
+    ],
+    lat: 39.46841138265399,
+    lon: -0.3848017827447571,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "759",
+    nombre: "Aiora - Xiva (759)",
+    lineas: [
+      "72"
+    ],
+    lat: 39.46644768614189,
+    lon: -0.39197801334356,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "761",
+    nombre: "Sant Francesc de Borja - Jes\xFAs (761)",
+    lineas: [
+      "67",
+      "70",
+      "71",
+      "72",
+      "93"
+    ],
+    lat: 39.46598181092274,
+    lon: -0.38465737041756576,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "796",
+    nombre: "IVAM (796)",
+    lineas: [
+      "C1"
+    ],
+    lat: 39.48010174752008,
+    lon: -0.3830036744620264,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "621",
+    nombre: "Joaqu\xEDn Benlloch - Olt\xE0 (621)",
+    lineas: [
+      "6"
+    ],
+    lat: 39.452289857773195,
+    lon: -0.375694921938044,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "625",
+    nombre: "Fonteta de Sant Llu\xEDs - Lle\xF3 XIII (625)",
+    lineas: [
+      "7"
+    ],
+    lat: 39.457549211434284,
+    lon: -0.3717303577737248,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "639",
+    nombre: "B\xE8rnia - Ausi\xE0s March (639)",
+    lineas: [
+      "7"
+    ],
+    lat: 39.45403308631525,
+    lon: -0.37278360236250446,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "643",
+    nombre: "Sapadors - Policia Nacional (643)",
+    lineas: [
+      "6"
+    ],
+    lat: 39.45549659893135,
+    lon: -0.3668820597002975,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "645",
+    nombre: "Sapadors - Sant Gregori  (645)",
+    lineas: [
+      "6"
+    ],
+    lat: 39.45905540465429,
+    lon: -0.36896939016571806,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "683",
+    nombre: "Escultor Josep Capuz (parell) - Pere Aleixandre (683)",
+    lineas: [
+      "14",
+      "18"
+    ],
+    lat: 39.46034689684454,
+    lon: -0.36180952356198437,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "687",
+    nombre: "Marqu\xE9s del T\xFAria - Jorge Juan (687)",
+    lineas: [
+      "80",
+      "92",
+      "93"
+    ],
+    lat: 39.46771578056879,
+    lon: -0.367603503285693,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "524",
+    nombre: "Jos\xE9 Andreu Alabarta - Mariano de Cavia (524)",
+    lineas: [
+      "72",
+      "73"
+    ],
+    lat: 39.45263133852844,
+    lon: -0.4038657739361858,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "529",
+    nombre: "Tres Forques - Emili Lluch (529)",
+    lineas: [
+      "71",
+      "73"
+    ],
+    lat: 39.46360005737888,
+    lon: -0.40300749308270645,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "533",
+    nombre: "Tres Forques - P\xE9rez Gald\xF3s (533)",
+    lineas: [
+      "71",
+      "89"
+    ],
+    lat: 39.46417477410832,
+    lon: -0.3889191206008254,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "540",
+    nombre: "Cam\xED nou de Picanya - Tres Creus (540)",
+    lineas: [
+      "72",
+      "73"
+    ],
+    lat: 39.45754085765082,
+    lon: -0.40323516108171203,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "546",
+    nombre: "Hospital Verge del Consol (546)",
+    lineas: [
+      "11",
+      "59",
+      "9"
+    ],
+    lat: 39.461788382104345,
+    lon: -0.38728200688139575,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "552",
+    nombre: "Pius XI - Manuel Sim\xF3 (552)",
+    lineas: [
+      "11"
+    ],
+    lat: 39.45988790750638,
+    lon: -0.3921912409370404,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "557",
+    nombre: "Gaspar Aguilar - Jes\xFAs (557)",
+    lineas: [
+      "59",
+      "9"
+    ],
+    lat: 39.45926253527163,
+    lon: -0.3885421654625065,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "580",
+    nombre: "Josep Soto Mic\xF3 - Alcal\xE0 de Xivert (580)",
+    lineas: [
+      "27",
+      "59",
+      "9"
+    ],
+    lat: 39.439941906984046,
+    lon: -0.38896552902713527,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "588",
+    nombre: "Real de Madrid - Hell\xEDn (588)",
+    lineas: [
+      "27",
+      "9"
+    ],
+    lat: 39.43395856502526,
+    lon: -0.39112143546933076,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "590",
+    nombre: "Josep Soto Mic\xF3 - S\xEDndic Mojol\xED (590)",
+    lineas: [
+      "27",
+      "59",
+      "9"
+    ],
+    lat: 39.440127790567196,
+    lon: -0.3887822720455524,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "595",
+    nombre: "Sant Vicent M\xE0rtir - Millars (595)",
+    lineas: [
+      "27",
+      "64"
+    ],
+    lat: 39.45674200962088,
+    lon: -0.3836917324622058,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "602",
+    nombre: "Mestre Racional - Regne de Val\xE8ncia (602)",
+    lineas: [
+      "90"
+    ],
+    lat: 39.46339978528206,
+    lon: -0.3633027536237093,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "609",
+    nombre: "Malilla - Pianista Empar Iturbi (609)",
+    lineas: [
+      "8"
+    ],
+    lat: 39.45430880131048,
+    lon: -0.37829294982089084,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2451",
+    nombre: "Sant Vicent M\xE0rtir (parell) - Giorgeta (2451)",
+    lineas: [
+      "64"
+    ],
+    lat: 39.458728659322865,
+    lon: -0.3833378616800438,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1627",
+    nombre: "Doctor Lluch - Setmana Santa Marinera (1627)",
+    lineas: [
+      "19",
+      "92"
+    ],
+    lat: 39.4637397584662,
+    lon: -0.3287454254375914,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "11",
+    nombre: "Doctor Lluch (11)",
+    lineas: [
+      "19",
+      "92"
+    ],
+    lat: 39.46940080239034,
+    lon: -0.3279746481730595,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "14",
+    nombre: "Cavite - Riu Tajo (14)",
+    lineas: [
+      "19",
+      "31"
+    ],
+    lat: 39.476172799249035,
+    lon: -0.3265864458737759,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "26",
+    nombre: "La Malva-rosa - Riu Tajo  (26)",
+    lineas: [
+      "19",
+      "31",
+      "92"
+    ],
+    lat: 39.476211658875044,
+    lon: -0.3277734792840378,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "59",
+    nombre: "Manuel Soto Enginyer - Comand\xE0ncia Marina (59)",
+    lineas: [
+      "30",
+      "4",
+      "95"
+    ],
+    lat: 39.455771144393495,
+    lon: -0.33034855362826254,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "116",
+    nombre: "Blasco Ib\xE1\xF1ez - Doctor Manuel Candela (116)",
+    lineas: [
+      "30",
+      "31",
+      "71",
+      "81"
+    ],
+    lat: 39.47415165669153,
+    lon: -0.34899887562925114,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "125",
+    nombre: "Blasco Ib\xE1\xF1ez - Actor Enrique Rambal (125)",
+    lineas: [
+      "31",
+      "81"
+    ],
+    lat: 39.47280446944308,
+    lon: -0.34258299366084116,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "128",
+    nombre: "Blasco Ib\xE1\xF1ez - M\xFAsic Gin\xE9s (128)",
+    lineas: [
+      "31",
+      "81"
+    ],
+    lat: 39.47215922563149,
+    lon: -0.3429072937264918,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "140",
+    nombre: "Sants Just i Pastor (parell) - Metro Amistat (140)",
+    lineas: [
+      "32"
+    ],
+    lat: 39.46983524218163,
+    lon: -0.3490743745492373,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2435",
+    nombre: "Ignacio Hern\xE1ndez Hervas (parell) - Paz Azzati Cutanda (2435)",
+    lineas: [
+      "59"
+    ],
+    lat: 39.43382029033831,
+    lon: -0.398797757202509,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "162",
+    nombre: "Blasco Ib\xE1\xF1ez - Jaume Roig (162)",
+    lineas: [
+      "31",
+      "71",
+      "79",
+      "81"
+    ],
+    lat: 39.47956800497958,
+    lon: -0.36554966787171206,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "168",
+    nombre: "Blasco Ib\xE1\xF1ez - Su\xE8cia (168)",
+    lineas: [
+      "30",
+      "31",
+      "71",
+      "81"
+    ],
+    lat: 39.47626591848854,
+    lon: -0.3569252605440274,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "171",
+    nombre: "Cavanilles - Primat Reig (171)",
+    lineas: [
+      "12",
+      "70"
+    ],
+    lat: 39.48397949712982,
+    lon: -0.36417307980460983,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "175",
+    nombre: "Jaume Roig - Primat Reig (175)",
+    lineas: [
+      "12",
+      "70"
+    ],
+    lat: 39.48319549974947,
+    lon: -0.3629854002034975,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "188",
+    nombre: "Primat Reig - Campus Universitari (188)",
+    lineas: [
+      "10",
+      "90",
+      "98"
+    ],
+    lat: 39.480185939147155,
+    lon: -0.3581040644541677,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "197",
+    nombre: "Primat Reig - Sant Vicent de Pa\xFCl (197)",
+    lineas: [
+      "11",
+      "89"
+    ],
+    lat: 39.49004687956998,
+    lon: -0.37104198114102044,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "206",
+    nombre: "Primat Reig - Bilbao (206)",
+    lineas: [
+      "90"
+    ],
+    lat: 39.490153500753934,
+    lon: -0.37148879572421206,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "219",
+    nombre: "Arag\xF3 - Passeig de l'Albereda (219)",
+    lineas: [
+      "10",
+      "12",
+      "80",
+      "93"
+    ],
+    lat: 39.46943755152033,
+    lon: -0.3600912198612178,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "224",
+    nombre: "Vivers (224)",
+    lineas: [
+      "31",
+      "70",
+      "71",
+      "79",
+      "81"
+    ],
+    lat: 39.47736203909648,
+    lon: -0.367506171795867,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "226",
+    nombre: "Cardenal Benlloch - Ernest Ferrer (226)",
+    lineas: [
+      "18",
+      "90"
+    ],
+    lat: 39.471997827549515,
+    lon: -0.3541799215650134,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "238",
+    nombre: "Doctor Peset Aleixandre - Joan XXIII (238)",
+    lineas: [
+      "60",
+      "89"
+    ],
+    lat: 39.49017873479733,
+    lon: -0.38298267824901544,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "244",
+    nombre: "Doctor Peset Aleixandre - Constituci\xF3 (244)",
+    lineas: [
+      "90"
+    ],
+    lat: 39.491765578855336,
+    lon: -0.37481042930702474,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "249",
+    nombre: "Constituci\xF3 (parell) - Campaneta (249)",
+    lineas: [
+      "16"
+    ],
+    lat: 39.50234324126192,
+    lon: -0.3685295301640631,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "273",
+    nombre: "Sant Dom\xE9nec Savio - Constituci\xF3 (273)",
+    lineas: [
+      "6",
+      "60"
+    ],
+    lat: 39.49258232673099,
+    lon: -0.37412283252736134,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "283",
+    nombre: "Cam\xED de Moncada - Poble Nou (parell) (283)",
+    lineas: [
+      "26"
+    ],
+    lat: 39.50505668967691,
+    lon: -0.38369736648269775,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "301",
+    nombre: "Cam\xED de Moncada - Carretera Daniel (301)",
+    lineas: [
+      "26"
+    ],
+    lat: 39.50643977880957,
+    lon: -0.38410612533223715,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "307",
+    nombre: "Burjassot - Mond\xFAver (307)",
+    lineas: [
+      "28"
+    ],
+    lat: 39.48948898187218,
+    lon: -0.39029057372392895,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "174",
+    nombre: "Jaume Roig - \xC1lvaro de Baz\xE1n (174)",
+    lineas: [
+      "12",
+      "70"
+    ],
+    lat: 39.48127042429335,
+    lon: -0.3639104429842347,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "179",
+    nombre: "Emili Bar\xF3 - Francesc Mart\xEDnez (179)",
+    lineas: [
+      "12",
+      "70"
+    ],
+    lat: 39.48822967071628,
+    lon: -0.3605912640406187,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "194",
+    nombre: "Primat Reig - Emili Bar\xF3 (194)",
+    lineas: [
+      "89",
+      "98"
+    ],
+    lat: 39.48423691401916,
+    lon: -0.3632212706019604,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1473",
+    nombre: "Pius IX - Cabanilles (1473)",
+    lineas: [
+      "10"
+    ],
+    lat: 39.445156561421086,
+    lon: -0.3929787208496793,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1503",
+    nombre: "Sants Just i Pastor (imparell) - Metro Ayora (1503)",
+    lineas: [
+      "32"
+    ],
+    lat: 39.46815218943974,
+    lon: -0.34263923288868986,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "54",
+    nombre: "Mercat del Cabanyal (54)",
+    lineas: [
+      "32"
+    ],
+    lat: 39.46842297530783,
+    lon: -0.3325033685390743,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "84",
+    nombre: "Eug\xE8nia Vi\xF1es - Francesc Miralles (84)",
+    lineas: [
+      "32"
+    ],
+    lat: 39.46959614345472,
+    lon: -0.32570026946414327,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1421",
+    nombre: "Petxina - Torres   (1421)",
+    lineas: [
+      "95"
+    ],
+    lat: 39.474210488424255,
+    lon: -0.3993096402695052,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1424",
+    nombre: "Petxina - Ferran el Cat\xF2lic (1424)",
+    lineas: [
+      "95"
+    ],
+    lat: 39.47721436710131,
+    lon: -0.3907596058748531,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1435",
+    nombre: "Tres Creus - Pr\xEDnceps de M\xF2naco (1435)",
+    lineas: [
+      "73"
+    ],
+    lat: 39.464658304594465,
+    lon: -0.4062792044196312,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "169",
+    nombre: "Blasco Ib\xE1\xF1ez - B\xE8lgica (169)",
+    lineas: [
+      "30",
+      "31",
+      "71",
+      "81",
+      "90"
+    ],
+    lat: 39.47583189033342,
+    lon: -0.35483999726230825,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1311",
+    nombre: "Pare Ferr\xEDs (imparell) - Gregori Gea (1311)",
+    lineas: [
+      "28",
+      "94"
+    ],
+    lat: 39.483084880323155,
+    lon: -0.3849280088349784,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1318",
+    nombre: "Molinell (parell) - Alboraia (1318)",
+    lineas: [
+      "98"
+    ],
+    lat: 39.48499655609271,
+    lon: -0.36950099337101333,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1352",
+    nombre: "La Plata - Alberola (1352)",
+    lineas: [
+      "18",
+      "6"
+    ],
+    lat: 39.454322268834574,
+    lon: -0.3691075412750853,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1374",
+    nombre: "Punta al Mar (parell) - Riu (1374)",
+    lineas: [
+      "23"
+    ],
+    lat: 39.44549029441657,
+    lon: -0.3396521756018334,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1386",
+    nombre: "Centre de Salut Serreria (1386)",
+    lineas: [
+      "32",
+      "99"
+    ],
+    lat: 39.46810190496591,
+    lon: -0.3350708399785198,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1223",
+    nombre: "Tres Creus (carril bus) - Esteban Pernet (1223)",
+    lineas: [
+      "71",
+      "99"
+    ],
+    lat: 39.4669755785561,
+    lon: -0.4063365712386262,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1232",
+    nombre: "Dolores Marqu\xE9s - Reverend Jos\xE9 Mar\xEDa Pinazo (1232)",
+    lineas: [
+      "12",
+      "70"
+    ],
+    lat: 39.48667169114854,
+    lon: -0.36284126148885215,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1690",
+    nombre: "Giorgeta - Albacete (1690)",
+    lineas: [
+      "90"
+    ],
+    lat: 39.46149747496258,
+    lon: -0.38603080599914763,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1677",
+    nombre: "Cardenal Benlloch - La Pobla de Farnals (1677)",
+    lineas: [
+      "18",
+      "89"
+    ],
+    lat: 39.469847484767534,
+    lon: -0.35507491130421526,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1680",
+    nombre: "Primat Reig - Viver (1680)",
+    lineas: [
+      "89"
+    ],
+    lat: 39.48605431724733,
+    lon: -0.36566860623638786,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1723",
+    nombre: "Rib\xE0s (parell) - Doctor Ruiz i Comes (1723)",
+    lineas: [
+      "14",
+      "23"
+    ],
+    lat: 39.431222064098726,
+    lon: -0.359827274492665,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1651",
+    nombre: "Hern\xE1ndez L\xE1zaro - Centre  Comercial (1651)",
+    lineas: [
+      "67"
+    ],
+    lat: 39.47690569068053,
+    lon: -0.40344227703509883,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1658",
+    nombre: "La Safor - Mestre Rodrigo (1658)",
+    lineas: [
+      "67"
+    ],
+    lat: 39.48828162784155,
+    lon: -0.4044280495467205,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1619",
+    nombre: "Port - Cases Carbonell (1619)",
+    lineas: [
+      "30",
+      "4",
+      "92"
+    ],
+    lat: 39.46452749498351,
+    lon: -0.34819853852550686,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1595",
+    nombre: "Illes Can\xE0ries - Trafalgar (1595)",
+    lineas: [
+      "30",
+      "4",
+      "92"
+    ],
+    lat: 39.46300655238399,
+    lon: -0.3445953308580186,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1621",
+    nombre: "Port - Noguera (1621)",
+    lineas: [
+      "30",
+      "4",
+      "92"
+    ],
+    lat: 39.46253756205425,
+    lon: -0.34182765825892686,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1599",
+    nombre: "Illes Can\xE0ries - Eduard Bosc\xE0 (1599)",
+    lineas: [
+      "4",
+      "92"
+    ],
+    lat: 39.466393997163294,
+    lon: -0.35642982396450673,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1590",
+    nombre: "Joan Verdeguer - Port (1590)",
+    lineas: [
+      "19",
+      "30",
+      "4",
+      "92"
+    ],
+    lat: 39.459179540306266,
+    lon: -0.33362965661756794,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1592",
+    nombre: "Joan Verdeguer - Isaac Peral (1592)",
+    lineas: [
+      "19",
+      "30",
+      "4",
+      "92"
+    ],
+    lat: 39.459024041969336,
+    lon: -0.33949539496786224,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1630",
+    nombre: "Menorca - Eivissa (1630)",
+    lineas: [
+      "19",
+      "99"
+    ],
+    lat: 39.460398896191634,
+    lon: -0.3406753017660112,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1361",
+    nombre: "Tarongers - Metro La Carrasca (1361)",
+    lineas: [
+      "93",
+      "98"
+    ],
+    lat: 39.47982447952501,
+    lon: -0.34463038015185615,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1660",
+    nombre: "Mestre Rodrigo (imparell) - General Avil\xE9s (1660)",
+    lineas: [
+      "67"
+    ],
+    lat: 39.483700800912,
+    lon: -0.40220967311346134,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1681",
+    nombre: "Primat Reig - Motilla del Palancar (1681)",
+    lineas: [
+      "11",
+      "89"
+    ],
+    lat: 39.488622360939736,
+    lon: -0.36913794969689223,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1691",
+    nombre: "P\xE9rez Gald\xF3s - Mart\xEDnez Aloy (1691)",
+    lineas: [
+      "71",
+      "90"
+    ],
+    lat: 39.46359107808822,
+    lon: -0.38749047714917173,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1765",
+    nombre: "Alcalde Reig - Museu Faller (1765)",
+    lineas: [
+      "13",
+      "23",
+      "24",
+      "25",
+      "95"
+    ],
+    lat: 39.45905302592112,
+    lon: -0.3584523392207174,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1741",
+    nombre: "Pius XII (imparell) - Metro Campanar (1741)",
+    lineas: [
+      "62",
+      "64",
+      "92",
+      "99"
+    ],
+    lat: 39.483439519248584,
+    lon: -0.3947915570772907,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1761",
+    nombre: "Albereda - L'Hemisf\xE8ric (1761)",
+    lineas: [
+      "94"
+    ],
+    lat: 39.45948696020638,
+    lon: -0.3526647604648751,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1757",
+    nombre: "Serradora (imparell)  - Metro Mar\xEDtim (1757)",
+    lineas: [
+      "99"
+    ],
+    lat: 39.46452164945473,
+    lon: -0.3361701804358082,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1756",
+    nombre: "Serradora - Sants Just i Pastor (1756)",
+    lineas: [
+      "99"
+    ],
+    lat: 39.46632702464613,
+    lon: -0.335387483910329,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1749",
+    nombre: "Llu\xEDs Peix\xF3 - Comte Melito (1749)",
+    lineas: [
+      "98",
+      "99"
+    ],
+    lat: 39.47538294606795,
+    lon: -0.3334662032523277,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1770",
+    nombre: "La Murta (imparell) - Assagador de La Torre (1770)",
+    lineas: [
+      "23",
+      "9"
+    ],
+    lat: 39.42699748514078,
+    lon: -0.37686307529509366,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1772",
+    nombre: "La Murta (parell) - Cementeri (1772)",
+    lineas: [
+      "23",
+      "9"
+    ],
+    lat: 39.42516661567379,
+    lon: -0.37813544582683317,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1809",
+    nombre: "Metro Reus - Poeta Fern\xE1ndez Heredia (1809)",
+    lineas: [
+      "98"
+    ],
+    lat: 39.48571159123076,
+    lon: -0.379929962710663,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1808",
+    nombre: "Ruaya (parell) - Visitaci\xF3 (1808)",
+    lineas: [
+      "98"
+    ],
+    lat: 39.48554179151142,
+    lon: -0.3771305704949375,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1822",
+    nombre: "Ausi\xE0s March - Na Rovella (1822)",
+    lineas: [
+      "6"
+    ],
+    lat: 39.45013783002448,
+    lon: -0.37132920534778463,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1844",
+    nombre: "Duc de Mandas (imparell) - Centre de Salut Arquitecte Tols\xE0 (1844)",
+    lineas: [
+      "12"
+    ],
+    lat: 39.492986499313524,
+    lon: -0.3683861708177856,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1866",
+    nombre: "Arxiduc Carles - Fontanars dels Alforins (1866)",
+    lineas: [
+      "72"
+    ],
+    lat: 39.4625872084269,
+    lon: -0.3976349028677753,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1902",
+    nombre: "Catalunya - Gu\xE0rdia Civil (1902)",
+    lineas: [
+      "93",
+      "98"
+    ],
+    lat: 39.47969835044653,
+    lon: -0.3542697867591446,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1895",
+    nombre: "Catalunya - Clariano (1895)",
+    lineas: [
+      "93",
+      "98"
+    ],
+    lat: 39.480868791725456,
+    lon: -0.35185528399458327,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1900",
+    nombre: "Tarongers - Institut Tecnol\xF2gic (1900)",
+    lineas: [
+      "93",
+      "98"
+    ],
+    lat: 39.478523473845776,
+    lon: -0.3399071164948644,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1898",
+    nombre: "Tarongers (parell) - Metro Beter\xF3 (1898)",
+    lineas: [
+      "93",
+      "98"
+    ],
+    lat: 39.47691758019335,
+    lon: -0.33584518304001165,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1930",
+    nombre: "Gaspar Aguilar (imparell) - Doctor Tom\xE1s Sala (1930)",
+    lineas: [
+      "59",
+      "9"
+    ],
+    lat: 39.45031432446362,
+    lon: -0.3944220132310692,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1929",
+    nombre: "Gaspar Aguilar (parell) - Doctor Tom\xE1s Sala (1929)",
+    lineas: [
+      "59",
+      "9"
+    ],
+    lat: 39.45044648695268,
+    lon: -0.3944530773433138,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1932",
+    nombre: "Gaspar Aguilar - Costa i Borr\xE0s (1932)",
+    lineas: [
+      "59",
+      "9"
+    ],
+    lat: 39.455876431694165,
+    lon: -0.3906631604363619,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1959",
+    nombre: "Blanqueria - Pare d'\xD2rfens (1959)",
+    lineas: [
+      "28",
+      "95",
+      "C1"
+    ],
+    lat: 39.48041909784817,
+    lon: -0.3778213921526114,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1989",
+    nombre: "Alfauir - Centre de Salut (1989)",
+    lineas: [
+      "70"
+    ],
+    lat: 39.492895752876215,
+    lon: -0.3596240098934621,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1775",
+    nombre: "Palau de la M\xFAsica  (1775)",
+    lineas: [
+      "94"
+    ],
+    lat: 39.46720721049787,
+    lon: -0.3604324058439959,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1785",
+    nombre: "Uruguai (parell) - Jeroni Muny\xF3s (1785)",
+    lineas: [
+      "10"
+    ],
+    lat: 39.458266202376784,
+    lon: -0.38696779305708057,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1819",
+    nombre: "Ausi\xE0s March - Manuel Sanchis Guarner (1819)",
+    lineas: [
+      "8"
+    ],
+    lat: 39.45556898871859,
+    lon: -0.37501668330541105,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1820",
+    nombre: "Pedreguer - Juan Ram\xF3n Jim\xE9nez (1820)",
+    lineas: [
+      "8"
+    ],
+    lat: 39.45360703259362,
+    lon: -0.37635376250832325,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1828",
+    nombre: "General Avil\xE9s - Miguel Servet (imparell) (1828)",
+    lineas: [
+      "64",
+      "94"
+    ],
+    lat: 39.48718340778759,
+    lon: -0.3926378620536511,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1841",
+    nombre: "Valladolid - Vinar\xF2s (1841)",
+    lineas: [
+      "12",
+      "70"
+    ],
+    lat: 39.48957374405483,
+    lon: -0.36246257648302826,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1499",
+    nombre: "Sants Just i Pastor (parell) - Metro Ayora (1499)",
+    lineas: [
+      "32"
+    ],
+    lat: 39.46813985950399,
+    lon: -0.3430830493881944,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1861",
+    nombre: "Constituci\xF3 - Reig Genov\xE9s (1861)",
+    lineas: [
+      "16"
+    ],
+    lat: 39.49322656403911,
+    lon: -0.3732262527982379,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1714",
+    nombre: "Fires (imparell) - Cementeri (1714)",
+    lineas: [
+      "62"
+    ],
+    lat: 39.505514815526006,
+    lon: -0.4246532209128391,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1646",
+    nombre: "La Plata - M\xFAsic \xD2scar Espl\xE0 (1646)",
+    lineas: [
+      "14",
+      "18"
+    ],
+    lat: 39.45678336536221,
+    lon: -0.3627421029142697,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1685",
+    nombre: "Campanar - Conchita Piquer (1685)",
+    lineas: [
+      "60",
+      "89"
+    ],
+    lat: 39.4859173509364,
+    lon: -0.3909191128075162,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1721",
+    nombre: "Corts Valencianes - Doctor Barraquer (1721)",
+    lineas: [
+      "16"
+    ],
+    lat: 39.508722204627325,
+    lon: -0.36517785944585274,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1676",
+    nombre: "Sueca - Gran Via Germanies (1676)",
+    lineas: [
+      "7"
+    ],
+    lat: 39.46339233736287,
+    lon: -0.3764345802968747,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1671",
+    nombre: "Reina - Espad\xE0 (1671)",
+    lineas: [
+      "19",
+      "92"
+    ],
+    lat: 39.471601819931124,
+    lon: -0.3282726384265573,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1687",
+    nombre: "Giorgeta - Carcaixent (1687)",
+    lineas: [
+      "27",
+      "89"
+    ],
+    lat: 39.46072887827247,
+    lon: -0.3857174413041223,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1693",
+    nombre: "Doctor Peset Aleixandre (imparell) - Metro Tr\xE0nsits (1693)",
+    lineas: [
+      "60",
+      "64",
+      "90"
+    ],
+    lat: 39.48902174952564,
+    lon: -0.38721140458740655,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1254",
+    nombre: "Cid - Aiora (1254)",
+    lineas: [
+      "67",
+      "70",
+      "93"
+    ],
+    lat: 39.467300239121435,
+    lon: -0.3918794762189137,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1743",
+    nombre: "Albereda - Palau de la M\xFAsica (1743)",
+    lineas: [
+      "94"
+    ],
+    lat: 39.46530782484709,
+    lon: -0.3594785640286416,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1760",
+    nombre: "Albereda - Museu de les Ci\xE8ncies (1760)",
+    lineas: [
+      "94"
+    ],
+    lat: 39.45771804316089,
+    lon: -0.3500320226610658,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1746",
+    nombre: "Menorca (imparell) - Centre Comercial (1746)",
+    lineas: [
+      "94",
+      "99"
+    ],
+    lat: 39.4576426207938,
+    lon: -0.3450810012847678,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "129",
+    nombre: "Blasco Ib\xE1\xF1ez - Enginyer Rafael Janini (129)",
+    lineas: [
+      "31",
+      "81"
+    ],
+    lat: 39.47138838202436,
+    lon: -0.34026180790883287,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "139",
+    nombre: "Sants Just i Pastor - Llu\xEDs de Mil\xE0 (139)",
+    lineas: [
+      "32"
+    ],
+    lat: 39.470763137336675,
+    lon: -0.3522022834481362,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "144",
+    nombre: "Doctor Manuel Candela (parell) - Rodr\xEDguez de Cepeda (144)",
+    lineas: [
+      "30",
+      "40"
+    ],
+    lat: 39.46830616671421,
+    lon: -0.35000286354303844,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "153",
+    nombre: "Cardenal Benlloch - Doctor Vicente Pallar\xE9s (153)",
+    lineas: [
+      "18",
+      "89"
+    ],
+    lat: 39.47422203407628,
+    lon: -0.3529160807615351,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "163",
+    nombre: "Blasco Ib\xE1\xF1ez - Jard\xED de Monforte (163)",
+    lineas: [
+      "12",
+      "80"
+    ],
+    lat: 39.47885241716496,
+    lon: -0.3656654067605898,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "170",
+    nombre: "Doctor G\xF3mez Ferrer - Men\xE9ndez y Pelayo (170)",
+    lineas: [
+      "89"
+    ],
+    lat: 39.47991496467269,
+    lon: -0.36097321436785035,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1624",
+    nombre: "Port - Joan Josep Sister (1624)",
+    lineas: [
+      "30",
+      "4"
+    ],
+    lat: 39.460111163481365,
+    lon: -0.3332810189419276,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "632",
+    nombre: "Gravador Jord\xE1n - Alabau i Arce (632)",
+    lineas: [
+      "13",
+      "7"
+    ],
+    lat: 39.4441897640725,
+    lon: -0.36774894556431714,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "314",
+    nombre: "Louis Braille (imparell) - Parc de Benicalap (314)",
+    lineas: [
+      "28"
+    ],
+    lat: 39.49579895056178,
+    lon: -0.39628772641463905,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1616",
+    nombre: "Port - Eduard Bosc\xE0 (1616)",
+    lineas: [
+      "4",
+      "92"
+    ],
+    lat: 39.46688429452092,
+    lon: -0.3561402741054441,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1618",
+    nombre: "Port - Tom\xE1s de Monta\xF1ana (1618)",
+    lineas: [
+      "30",
+      "4",
+      "92"
+    ],
+    lat: 39.46528752352962,
+    lon: -0.3507366982029879,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1623",
+    nombre: "Port - Pare Porta (1623)",
+    lineas: [
+      "19",
+      "30",
+      "4",
+      "92"
+    ],
+    lat: 39.46079100398223,
+    lon: -0.3355819424413038,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1419",
+    nombre: "Institut Obrer de Val\xE8ncia (parell) - Autopista Saler (1419)",
+    lineas: [
+      "13",
+      "35"
+    ],
+    lat: 39.45607640649157,
+    lon: -0.35673574840528627,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1427",
+    nombre: "Jacinto Benavente - Borriana (1427)",
+    lineas: [
+      "13",
+      "23",
+      "24",
+      "25",
+      "95"
+    ],
+    lat: 39.46622562948539,
+    lon: -0.36273790230767006,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1243",
+    nombre: "Mediterr\xE0nia - Reina (1243)",
+    lineas: [
+      "32"
+    ],
+    lat: 39.467708973873656,
+    lon: -0.32917255618412805,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1272",
+    nombre: "Campanar - Monestir de Poblet (1272)",
+    lineas: [
+      "62",
+      "64",
+      "92",
+      "99"
+    ],
+    lat: 39.48502182322672,
+    lon: -0.39602046058101764,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1280",
+    nombre: "Pintor Jacomart - Alcany\xEDs (1280)",
+    lineas: [
+      "12"
+    ],
+    lat: 39.495941327642825,
+    lon: -0.37985485470624547,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1305",
+    nombre: "Guillem de Castro - Na Jordana (1305)",
+    lineas: [
+      "28",
+      "95",
+      "C1"
+    ],
+    lat: 39.48110311617611,
+    lon: -0.38101324788627405,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1353",
+    nombre: "La Plata - Ausi\xE0s March (1353)",
+    lineas: [
+      "18",
+      "6"
+    ],
+    lat: 39.453207513276446,
+    lon: -0.37180310538607475,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1165",
+    nombre: "Centre de Salut Malva-rosa (1165)",
+    lineas: [
+      "32"
+    ],
+    lat: 39.476893510076394,
+    lon: -0.3258290824305557,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1190",
+    nombre: "Tres Creus - Dels Hostalers (1190)",
+    lineas: [
+      "99"
+    ],
+    lat: 39.46024928238064,
+    lon: -0.4039126647623946,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1199",
+    nombre: "Comte de Torrefiel - Escultor Piquer (1199)",
+    lineas: [
+      "6"
+    ],
+    lat: 39.492203521478714,
+    lon: -0.3755746148245982,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1436",
+    nombre: "Ausi\xE0s March - Doctor Waksman (1436)",
+    lineas: [
+      "8"
+    ],
+    lat: 39.45609013837944,
+    lon: -0.3749821696301458,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1533",
+    nombre: "Fran\xE7a - Higinio Noja (1533)",
+    lineas: [
+      "19"
+    ],
+    lat: 39.45916569573021,
+    lon: -0.34628553109356175,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1539",
+    nombre: "Fran\xE7a - Pintor Maella  (1539)",
+    lineas: [
+      "19"
+    ],
+    lat: 39.459429602422176,
+    lon: -0.34879378704694414,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "830",
+    nombre: "Russafa - Ciril Amor\xF3s (830)",
+    lineas: [
+      "14",
+      "19",
+      "35",
+      "6",
+      "7",
+      "8"
+    ],
+    lat: 39.465873741502946,
+    lon: -0.37427282897629977,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "741",
+    nombre: "Jes\xFAs - Pintor Segrelles (741)",
+    lineas: [
+      "10",
+      "11",
+      "27",
+      "59",
+      "71",
+      "9"
+    ],
+    lat: 39.46373851752162,
+    lon: -0.3855841084801652,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "692",
+    nombre: "Ram\xF3n y Cajal (parell) - Jes\xFAs (692)",
+    lineas: [
+      "67",
+      "80",
+      "92"
+    ],
+    lat: 39.46760901006955,
+    lon: -0.3828156092626294,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "20",
+    nombre: "La Malva-rosa - Mendiz\xE1bal  (20)",
+    lineas: [
+      "19",
+      "31",
+      "92"
+    ],
+    lat: 39.48380495281075,
+    lon: -0.3278219897431692,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "113",
+    nombre: "Blasco Ib\xE1\xF1ez - Ramon Llull (113)",
+    lineas: [
+      "30",
+      "31",
+      "71",
+      "81"
+    ],
+    lat: 39.47433238218825,
+    lon: -0.3487480480425605,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "155",
+    nombre: "Blasco Ib\xE1\xF1ez - Almela i Vives (155)",
+    lineas: [
+      "30",
+      "31",
+      "71",
+      "81"
+    ],
+    lat: 39.476778139609166,
+    lon: -0.35616937715609026,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "309",
+    nombre: "Burjassot - Salvador Tuset (309)",
+    lineas: [
+      "28"
+    ],
+    lat: 39.494579715291096,
+    lon: -0.39560262501317006,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "337",
+    nombre: "Doctor Moliner - Arts Gr\xE0fiques (337)",
+    lineas: [
+      "31",
+      "71",
+      "81"
+    ],
+    lat: 39.476190669109066,
+    lon: -0.36280224012377876,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1518",
+    nombre: "La Malva-rosa - Fuerteventura  (1518)",
+    lineas: [
+      "19",
+      "31",
+      "92"
+    ],
+    lat: 39.48110271906743,
+    lon: -0.3281458400364885,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "230",
+    nombre: "Eduard Bosc\xE0 - Passeig de l'Albereda (230)",
+    lineas: [
+      "18",
+      "90"
+    ],
+    lat: 39.464631131778205,
+    lon: -0.35783527798171233,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "25",
+    nombre: "La Malva-rosa - Sant Joan de D\xE9u (25)",
+    lineas: [
+      "19",
+      "31",
+      "92"
+    ],
+    lat: 39.47744170111523,
+    lon: -0.32811485067986557,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1332",
+    nombre: "Florista - Metro Garb\xED (1332)",
+    lineas: [
+      "28"
+    ],
+    lat: 39.49189142708649,
+    lon: -0.3938695415257866,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1277",
+    nombre: "Primat Reig - Ministre Luis Mayans (1277)",
+    lineas: [
+      "11"
+    ],
+    lat: 39.489763844523985,
+    lon: -0.37095715645122707,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1028",
+    nombre: "Mare de D\xE9u de Lepant (imparell) - Escultor Frederic Siurana (1028)",
+    lineas: [
+      "14",
+      "23"
+    ],
+    lat: 39.42950312793816,
+    lon: -0.3636659714523874,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "961",
+    nombre: "Jaime Beltr\xE1n - Misser Rabassa (961)",
+    lineas: [
+      "59",
+      "9"
+    ],
+    lat: 39.45660506260529,
+    lon: -0.38795203426403874,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1443",
+    nombre: "Doctor Tom\xE1s Sala - Carters (1443)",
+    lineas: [
+      "10",
+      "18",
+      "59",
+      "9",
+      "99"
+    ],
+    lat: 39.44757887741592,
+    lon: -0.39044265761256847,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1225",
+    nombre: "Cam\xED nou de Picanya - Arquitecte Segura de Lago (1225)",
+    lineas: [
+      "72",
+      "73"
+    ],
+    lat: 39.45652222133292,
+    lon: -0.40390476962115346,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "922",
+    nombre: "Carrera del Riu - Cam\xED dels Anouers (922)",
+    lineas: [
+      "23"
+    ],
+    lat: 39.43202477139067,
+    lon: -0.34311051974816426,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1387",
+    nombre: "Sants Just i Pastor - Fusta (1387)",
+    lineas: [
+      "32"
+    ],
+    lat: 39.4665109439248,
+    lon: -0.3369772826771882,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1042",
+    nombre: "Regne de Val\xE8ncia - Ciscar (1042)",
+    lineas: [
+      "19",
+      "40"
+    ],
+    lat: 39.4628042574044,
+    lon: -0.3631900195310721,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1054",
+    nombre: "Arag\xF3 - Saragossa (1054)",
+    lineas: [
+      "10",
+      "12",
+      "79",
+      "93"
+    ],
+    lat: 39.46864983497346,
+    lon: -0.35997724746640253,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1062",
+    nombre: "Pere Cabanes - Bisbe Laguarda (1062)",
+    lineas: [
+      "12"
+    ],
+    lat: 39.49424189829983,
+    lon: -0.3787829198086891,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1067",
+    nombre: "Equador - Pintor Matarana (1067)",
+    lineas: [
+      "12"
+    ],
+    lat: 39.49607896649905,
+    lon: -0.39277823209961477,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1080",
+    nombre: "Sant Vicent de Pa\xFCl - Pen\xEDscola (1080)",
+    lineas: [
+      "11"
+    ],
+    lat: 39.490880785300305,
+    lon: -0.37058147626071086,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1109",
+    nombre: "Tom\xE1s de Monta\xF1ana (imparell) - Ast\xFAries (1109)",
+    lineas: [
+      "40"
+    ],
+    lat: 39.46326664186716,
+    lon: -0.3520148236528509,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1119",
+    nombre: "Doctor Manuel Candela (imparell) - Port (1119)",
+    lineas: [
+      "30",
+      "40"
+    ],
+    lat: 39.46605572218917,
+    lon: -0.35121571500871396,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "880",
+    nombre: "Pintor Salvador Abril - Maties Perell\xF3 (880)",
+    lineas: [
+      "14",
+      "35",
+      "6"
+    ],
+    lat: 39.46206246176781,
+    lon: -0.3696711307717622,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1589",
+    nombre: "Doctor J.J. D\xF2mine - Front Edifici del Rellotge (1589)",
+    lineas: [
+      "19",
+      "92",
+      "95"
+    ],
+    lat: 39.460511465077694,
+    lon: -0.33260294767765636,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "910",
+    nombre: "Gl\xF2ria (imparell) - Oliveral (910)",
+    lineas: [
+      "23"
+    ],
+    lat: 39.421752007807136,
+    lon: -0.3643254242293865,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "965",
+    nombre: "Germans Villalonga - Enric Navarro (965)",
+    lineas: [
+      "10"
+    ],
+    lat: 39.485818134643964,
+    lon: -0.3570940900590176,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "976",
+    nombre: "Carters (imparell) - Primer de Maig (976)",
+    lineas: [
+      "10"
+    ],
+    lat: 39.448081306990744,
+    lon: -0.3895545172416622,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1661",
+    nombre: "P\xEDo Baroja - Bioparc (1661)",
+    lineas: [
+      "98",
+      "99"
+    ],
+    lat: 39.47622150787192,
+    lon: -0.40638308750535224,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1664",
+    nombre: "Alcalde Reig - Parc Gulliver (1664)",
+    lineas: [
+      "13",
+      "23",
+      "24",
+      "25",
+      "95"
+    ],
+    lat: 39.46151750410193,
+    lon: -0.36026962401408774,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2169",
+    nombre: "Pinars - Carretera del Palmar (2169)",
+    lineas: [
+      "24",
+      "25"
+    ],
+    lat: 39.340520391222455,
+    lon: -0.31922144719955386,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2176",
+    nombre: "C\xE0mping la Devesa (2176)",
+    lineas: [
+      "25"
+    ],
+    lat: 39.32288656553548,
+    lon: -0.30929111159165185,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2180",
+    nombre: "Gavines (parell) - Platja (2180)",
+    lineas: [
+      "25"
+    ],
+    lat: 39.297596296685256,
+    lon: -0.2892315442557703,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2205",
+    nombre: "Albufera - Pla\xE7a de la Sequiota (2205)",
+    lineas: [
+      "24"
+    ],
+    lat: 39.310617485361036,
+    lon: -0.3176828543302805,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2208",
+    nombre: "Carrera del Riu (imparell) - Rotonda Autovia (2208)",
+    lineas: [
+      "24",
+      "25"
+    ],
+    lat: 39.42987965327529,
+    lon: -0.33868628941726814,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2214",
+    nombre: "Mercat Central (2214)",
+    lineas: [
+      "27",
+      "7",
+      "73"
+    ],
+    lat: 39.4735113773036,
+    lon: -0.3797189734121026,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2266",
+    nombre: "Fra Jun\xEDper Serra (parell) - Torrent (2266)",
+    lineas: [
+      "73"
+    ],
+    lat: 39.461479587960376,
+    lon: -0.4005838900828623,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2243",
+    nombre: "Tres Creus (imparell) - Campos Crespo (2243)",
+    lineas: [
+      "99"
+    ],
+    lat: 39.454043085458686,
+    lon: -0.3996903857499405,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2244",
+    nombre: "Tres Creus - Arxiduc Carles (2244)",
+    lineas: [
+      "99"
+    ],
+    lat: 39.457321987927315,
+    lon: -0.40212203774944194,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2309",
+    nombre: "Bail\xE9n - Estaci\xF3 del Nord (2309)",
+    lineas: [
+      "63",
+      "67"
+    ],
+    lat: 39.46724547379315,
+    lon: -0.37771202492100137,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2314",
+    nombre: "Periodista Azzati - Pla\xE7a de l'Ajuntament (2314)",
+    lineas: [
+      "10",
+      "19",
+      "31",
+      "70",
+      "71",
+      "72"
+    ],
+    lat: 39.46944379943669,
+    lon: -0.37762689500910596,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2281",
+    nombre: "Pintor Sorolla (2281)",
+    lineas: [
+      "10",
+      "11",
+      "16",
+      "26",
+      "31",
+      "32",
+      "4",
+      "6",
+      "70",
+      "71",
+      "8",
+      "81"
+    ],
+    lat: 39.471378924928246,
+    lon: -0.3713127736118742,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2304",
+    nombre: "Democr\xE0cia - Baladre (2304)",
+    lineas: [
+      "73"
+    ],
+    lat: 39.47398916528061,
+    lon: -0.3973987187131002,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2306",
+    nombre: "Democr\xE0cia - Conselleries (2306)",
+    lineas: [
+      "73"
+    ],
+    lat: 39.47271591004903,
+    lon: -0.4028089982171465,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2221",
+    nombre: "Pla\xE7a de l'Ajuntament - Correus (2221)",
+    lineas: [
+      "11",
+      "31",
+      "70"
+    ],
+    lat: 39.46994673891215,
+    lon: -0.37594819207322877,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2240",
+    nombre: "Actor Antonio Ferrandis (imparell) - En Corts (2240)",
+    lineas: [
+      "99"
+    ],
+    lat: 39.448564184186,
+    lon: -0.3625233889596675,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2219",
+    nombre: "Pla\xE7a de l'Ajuntament - Barques (2219)",
+    lineas: [
+      "11",
+      "6",
+      "70",
+      "8"
+    ],
+    lat: 39.47010343346074,
+    lon: -0.3758577883648716,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2032",
+    nombre: "Torres dels Serrans - Les Corts (2032)",
+    lineas: [
+      "11",
+      "16",
+      "26",
+      "6",
+      "80",
+      "94"
+    ],
+    lat: 39.478755220721474,
+    lon: -0.3743535923486732,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2096",
+    nombre: "P\xEDo Baroja - Front Bioparc (2096)",
+    lineas: [
+      "98",
+      "99"
+    ],
+    lat: 39.4760708466264,
+    lon: -0.40598491071585935,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2194",
+    nombre: "Gavines - Botavara (2194)",
+    lineas: [
+      "25"
+    ],
+    lat: 39.3052198439254,
+    lon: -0.2945157143559374,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2178",
+    nombre: "Gavines - Entrada Trenca Perols (2178)",
+    lineas: [
+      "25"
+    ],
+    lat: 39.305193102203646,
+    lon: -0.2945970378892489,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2193",
+    nombre: "Gavines - Les dunes (2193)",
+    lineas: [
+      "25"
+    ],
+    lat: 39.302079978312186,
+    lon: -0.29174128785999703,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2191",
+    nombre: "Gavines (imparell) - Sirena (2191)",
+    lineas: [
+      "25"
+    ],
+    lat: 39.29380421333727,
+    lon: -0.2869423052493911,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2196",
+    nombre: "Embarcador de l'Albufera (II) (2196)",
+    lineas: [
+      "24",
+      "25"
+    ],
+    lat: 39.34969341964141,
+    lon: -0.32351975595820004,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2210",
+    nombre: "Sant Vicent M\xE0rtir - \xC0nimes (2210)",
+    lineas: [
+      "10",
+      "31",
+      "70",
+      "71",
+      "72"
+    ],
+    lat: 39.46936102504617,
+    lon: -0.37892292729678806,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2246",
+    nombre: "Mare Nostrum - Alboran (2246)",
+    lineas: [
+      "31"
+    ],
+    lat: 39.48942640856824,
+    lon: -0.3255990978315837,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2262",
+    nombre: "Palmaret (parell) - Moncada (2262)",
+    lineas: [
+      "26"
+    ],
+    lat: 39.517611953395466,
+    lon: -0.3864405359425253,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2242",
+    nombre: "Actor Antonio Ferrandis (imparell) - Centre Comercial (2242)",
+    lineas: [
+      "99"
+    ],
+    lat: 39.452636588319436,
+    lon: -0.35284397501902387,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2307",
+    nombre: "Campanar - General Avil\xE9s (illeta) (2307)",
+    lineas: [
+      "94"
+    ],
+    lat: 39.48553360549185,
+    lon: -0.3959122061897429,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2046",
+    nombre: "Barraques del Figuero (parell) - Llauradors (2046)",
+    lineas: [
+      "23",
+      "95"
+    ],
+    lat: 39.45069350445654,
+    lon: -0.3406306772096494,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2049",
+    nombre: "Barraques del Figuero (imparell) - Llauradors (2049)",
+    lineas: [
+      "23",
+      "95"
+    ],
+    lat: 39.45074333127734,
+    lon: -0.3405085191654003,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2060",
+    nombre: "Eivissa (parell) - Illes Can\xE0ries (2060)",
+    lineas: [
+      "99"
+    ],
+    lat: 39.46119653256346,
+    lon: -0.3397364665564235,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2097",
+    nombre: "Vall de la Ballestera (imparell) - Mestre Rodrigo (2097)",
+    lineas: [
+      "98",
+      "99"
+    ],
+    lat: 39.47915546959452,
+    lon: -0.397790087905668,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2098",
+    nombre: "Hospital 9 d'Octubre (front) (2098)",
+    lineas: [
+      "98",
+      "99"
+    ],
+    lat: 39.47847369417689,
+    lon: -0.40040658403488455,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2154",
+    nombre: "Parc Central - Manuel Granero (2154)",
+    lineas: [
+      "8"
+    ],
+    lat: 39.45836263411309,
+    lon: -0.37659690466540086,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2127",
+    nombre: "Filipines - Gibraltar (2127)",
+    lineas: [
+      "8"
+    ],
+    lat: 39.46068377178971,
+    lon: -0.3787320830390935,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2177",
+    nombre: "Centre de Salut El Perellonet (2177)",
+    lineas: [
+      "25"
+    ],
+    lat: 39.307562320650234,
+    lon: -0.29741631454422524,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2183",
+    nombre: "Gavines - Entrada Ventura (2183)",
+    lineas: [
+      "25"
+    ],
+    lat: 39.28841885751709,
+    lon: -0.28394220134132986,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2167",
+    nombre: "Gola de Puchol (II) (2167)",
+    lineas: [
+      "24",
+      "25"
+    ],
+    lat: 39.354680956359346,
+    lon: -0.3223284496215579,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2198",
+    nombre: "Gola de Puchol (IV) (2198)",
+    lineas: [
+      "24",
+      "25"
+    ],
+    lat: 39.35710475493532,
+    lon: -0.32055347465472817,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2165",
+    nombre: "Pinars (parell) - El Saler (2165)",
+    lineas: [
+      "24",
+      "25"
+    ],
+    lat: 39.383211380392176,
+    lon: -0.33249245298971386,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2202",
+    nombre: "C\xE0mping Coll Vert (front) (2202)",
+    lineas: [
+      "24",
+      "25"
+    ],
+    lat: 39.39660910753863,
+    lon: -0.33239946836992335,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2206",
+    nombre: "Pla\xE7a d'Am\xE8rica - Navarro Reverter (2206)",
+    lineas: [
+      "10",
+      "4",
+      "94"
+    ],
+    lat: 39.47071432008025,
+    lon: -0.3657857995590327,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2252",
+    nombre: "Porta de la Mar - Just\xEDcia (2252)",
+    lineas: [
+      "94",
+      "95"
+    ],
+    lat: 39.472266052032396,
+    lon: -0.3678118148871528,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2255",
+    nombre: "Porta de la Mar - Glorieta (2255)",
+    lineas: [
+      "8"
+    ],
+    lat: 39.4721643528089,
+    lon: -0.36888992689362027,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2257",
+    nombre: "Palau de Just\xEDcia (2257)",
+    lineas: [
+      "11",
+      "16",
+      "26",
+      "31",
+      "32",
+      "6",
+      "70",
+      "71",
+      "81"
+    ],
+    lat: 39.47200867062805,
+    lon: -0.36921814947555265,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2230",
+    nombre: "Palau de Congressos (2230)",
+    lineas: [
+      "99"
+    ],
+    lat: 39.49549662531196,
+    lon: -0.40099128237009884,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2223",
+    nombre: "Tetuan (exterior) (2223)",
+    lineas: [
+      "28",
+      "71",
+      "81",
+      "94",
+      "95",
+      "C1"
+    ],
+    lat: 39.47378867811786,
+    lon: -0.3696966613373561,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2271",
+    nombre: "Passeig Mar\xEDtim - Hospital Malva-rosa (2271)",
+    lineas: [
+      "93",
+      "98"
+    ],
+    lat: 39.474406359424236,
+    lon: -0.3247435681921094,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2260",
+    nombre: "Col\xF3n - Pascual i Gen\xEDs (2260)",
+    lineas: [
+      "10",
+      "28",
+      "40",
+      "71",
+      "8",
+      "81",
+      "C1"
+    ],
+    lat: 39.46833883994087,
+    lon: -0.3732083509117776,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2261",
+    nombre: "X\xE0tiva - Estaci\xF3 del Nord (2261)",
+    lineas: [
+      "19",
+      "35",
+      "6",
+      "8"
+    ],
+    lat: 39.467514635721294,
+    lon: -0.37649526457013743,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2227",
+    nombre: "Carrer de la Pau (2227)",
+    lineas: [
+      "11",
+      "16",
+      "26",
+      "31",
+      "32",
+      "4",
+      "6",
+      "70"
+    ],
+    lat: 39.47313225093208,
+    lon: -0.37218051008000963,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2438",
+    nombre: "Ignacio Hern\xE1ndez Hervas (imparell) - Paz Azzati Cutanda (2438)",
+    lineas: [
+      "59"
+    ],
+    lat: 39.433673295389696,
+    lon: -0.3988071434862063,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2279",
+    nombre: "Marqu\xE9s de Sotelo - Pla\xE7a de l'Ajuntament (2279)",
+    lineas: [
+      "14",
+      "35"
+    ],
+    lat: 39.46882670166277,
+    lon: -0.3768076656592608,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2291",
+    nombre: "Amado Granell Mesado (parell) - Llu\xEDs Oliag (2291)",
+    lineas: [
+      "35",
+      "6"
+    ],
+    lat: 39.45972944605254,
+    lon: -0.36557808015837917,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2300",
+    nombre: "Amado Granell Mesado (imparell) - Llu\xEDs Oliag (2300)",
+    lineas: [
+      "35"
+    ],
+    lat: 39.459631067230866,
+    lon: -0.36525765106845404,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2298",
+    nombre: "Amado Granell Mesado (imparell) - Arabista Ambrosio Huici (2298)",
+    lineas: [
+      "14",
+      "35"
+    ],
+    lat: 39.45572152360232,
+    lon: -0.36247797388506636,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2290",
+    nombre: "Avinguda de l'Oest - Hospital (2290)",
+    lineas: [
+      "11",
+      "27",
+      "60",
+      "7",
+      "73"
+    ],
+    lat: 39.47143278217249,
+    lon: -0.37980566243455394,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2289",
+    nombre: "Avinguda de l'Oest - Roger de Flor (2289)",
+    lineas: [
+      "62"
+    ],
+    lat: 39.472115434915885,
+    lon: -0.3798508968575862,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2285",
+    nombre: "Estaci\xF3 del Nord - Sant Agust\xED (2285)",
+    lineas: [
+      "59"
+    ],
+    lat: 39.46867383392793,
+    lon: -0.3794571528928485,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1231",
+    nombre: "Dolores Marqu\xE9s - Metro Benimaclet (1231)",
+    lineas: [
+      "12",
+      "70"
+    ],
+    lat: 39.4856123093423,
+    lon: -0.3633986504071834,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1233",
+    nombre: "Dolores Marqu\xE9s - Assagador d'Alboraia (1233)",
+    lineas: [
+      "12",
+      "70"
+    ],
+    lat: 39.48824069508487,
+    lon: -0.3620464390358236,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1266",
+    nombre: "Avinguda Campanar - Centre de Salut (1266)",
+    lineas: [
+      "60",
+      "90"
+    ],
+    lat: 39.48436328828924,
+    lon: -0.39144406042442237,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1283",
+    nombre: "Ramon Llull - Campus Tarongers (1283)",
+    lineas: [
+      "40",
+      "71"
+    ],
+    lat: 39.47940571914006,
+    lon: -0.3453200284154157,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1298",
+    nombre: "Espinosa - Guillem de Castro (1298)",
+    lineas: [
+      "60",
+      "62",
+      "73"
+    ],
+    lat: 39.4721221939705,
+    lon: -0.3843959717064521,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1127",
+    nombre: "Comte de Torrefiel - Riu Bidasoa (1127)",
+    lineas: [
+      "6",
+      "60"
+    ],
+    lat: 39.498054078561246,
+    lon: -0.37734728829652325,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1129",
+    nombre: "Sant Dom\xE9nec Savio - Josep Esteve (1129)",
+    lineas: [
+      "6",
+      "60"
+    ],
+    lat: 39.49608929820293,
+    lon: -0.3755051822395791,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1131",
+    nombre: "Pintor Jacomart - Comte de Torrefiel (1131)",
+    lineas: [
+      "12"
+    ],
+    lat: 39.49646764365853,
+    lon: -0.3772548411393017,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1134",
+    nombre: "Blasco Ib\xE1\xF1ez (parell) - Jos\xE9 Mar\xEDa Haro (1134)",
+    lineas: [
+      "31",
+      "81"
+    ],
+    lat: 39.47076469527825,
+    lon: -0.33812917557120276,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1143",
+    nombre: "Centre de Salut Fonteta (1143)",
+    lineas: [
+      "13",
+      "7"
+    ],
+    lat: 39.442507726023,
+    lon: -0.3681617463809649,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1151",
+    nombre: "Centre de Salut Salvador Allende (1151)",
+    lineas: [
+      "16"
+    ],
+    lat: 39.49470964180887,
+    lon: -0.3726149654412634,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1168",
+    nombre: "Comissaria Policia Local Mar\xEDtim (1168)",
+    lineas: [
+      "95"
+    ],
+    lat: 39.463042169525075,
+    lon: -0.3286362383253742,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1183",
+    nombre: "General Avil\xE9s - Doctor Nicasi Benlloch (1183)",
+    lineas: [
+      "64",
+      "94"
+    ],
+    lat: 39.48811642071319,
+    lon: -0.39111964627136414,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1928",
+    nombre: "Gaspar Aguilar - Montesa (1928)",
+    lineas: [
+      "59",
+      "9"
+    ],
+    lat: 39.45414968299164,
+    lon: -0.3919482265321387,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2007",
+    nombre: "Pare Esteban Pernet - Casa Miseric\xF2rdia (2007)",
+    lineas: [
+      "71"
+    ],
+    lat: 39.46710250439953,
+    lon: -0.4097920637517092,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2027",
+    nombre: "Port - Trafalgar (2027)",
+    lineas: [
+      "30",
+      "4",
+      "92"
+    ],
+    lat: 39.46337366171322,
+    lon: -0.3442684043951653,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1812",
+    nombre: "Joaquim Ballester (imparell) - Pare Ferr\xEDs (1812)",
+    lineas: [
+      "98"
+    ],
+    lat: 39.48487437685326,
+    lon: -0.3854085753529272,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1810",
+    nombre: "Reus - Periodista Llorente (1810)",
+    lineas: [
+      "98"
+    ],
+    lat: 39.48579471022703,
+    lon: -0.38354880506521344,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1807",
+    nombre: "Argenter Su\xE1rez - Ministre Luis Mayans (1807)",
+    lineas: [
+      "98"
+    ],
+    lat: 39.485415931478805,
+    lon: -0.372977763055339,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1845",
+    nombre: "Duc de Mandas (imparell) - Arquitecte Rodr\xEDguez (1845)",
+    lineas: [
+      "12"
+    ],
+    lat: 39.49435538013844,
+    lon: -0.3701315190912524,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1849",
+    nombre: "Equador - General Llorens (1849)",
+    lineas: [
+      "12",
+      "64"
+    ],
+    lat: 39.49322921478475,
+    lon: -0.3881271576348344,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1905",
+    nombre: "Tres Creus - Gaspar Aguilar (1905)",
+    lineas: [
+      "99"
+    ],
+    lat: 39.45026024523059,
+    lon: -0.3951479131664287,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1937",
+    nombre: "Arquitecte Segura de Lago - Doctor Rafael Bartual (1937)",
+    lineas: [
+      "72",
+      "73"
+    ],
+    lat: 39.453428490915634,
+    lon: -0.4029192481463293,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1938",
+    nombre: "Tres Creus - Bol\xEDvia (1938)",
+    lineas: [
+      "99"
+    ],
+    lat: 39.4562637895461,
+    lon: -0.4010525583948738,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1946",
+    nombre: "Bulevard Sud (imparell) - Hospital La Fe (1946)",
+    lineas: [
+      "64",
+      "99"
+    ],
+    lat: 39.444894187466524,
+    lon: -0.37565408015723506,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1951",
+    nombre: "Pere II el Cerimoni\xF3s - Vicente Beltr\xE1n Grimal (1951)",
+    lineas: [
+      "35"
+    ],
+    lat: 39.462558899092706,
+    lon: -0.347192148340816,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1957",
+    nombre: "Pintor Maella - Balears (1957)",
+    lineas: [
+      "35"
+    ],
+    lat: 39.461028648407954,
+    lon: -0.3475774099330002,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1956",
+    nombre: "Pintor Maella (imparell) - Fran\xE7a (1956)",
+    lineas: [
+      "35"
+    ],
+    lat: 39.45904217387203,
+    lon: -0.3482911962097062,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1955",
+    nombre: "Pintor Maella - Menorca (1955)",
+    lineas: [
+      "35"
+    ],
+    lat: 39.45688927708486,
+    lon: -0.3474169686607337,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1806",
+    nombre: "Molinell (imparell) - Alboraia (1806)",
+    lineas: [
+      "98"
+    ],
+    lat: 39.4851680514318,
+    lon: -0.3703519860382284,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1817",
+    nombre: "Font de la Figuera - Doctor Waksman (1817)",
+    lineas: [
+      "7"
+    ],
+    lat: 39.45652226799292,
+    lon: -0.3727187029668206,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1834",
+    nombre: "Poeta Serrano Clavero - Equador (1834)",
+    lineas: [
+      "12"
+    ],
+    lat: 39.49359407241165,
+    lon: -0.38830951622535487,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1842",
+    nombre: "Valladolid - Dolores Marqu\xE9s (1842)",
+    lineas: [
+      "12",
+      "70"
+    ],
+    lat: 39.48971557846511,
+    lon: -0.362428868146571,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1865",
+    nombre: "P\xE9rez Gald\xF3s - Sant Josep de la Muntanya (1865)",
+    lineas: [
+      "67",
+      "90"
+    ],
+    lat: 39.473838367556496,
+    lon: -0.39485007212066464,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1962",
+    nombre: "Mestre Rodrigo - Canal de Navarr\xE9s (1962)",
+    lineas: [
+      "67"
+    ],
+    lat: 39.490920635703,
+    lon: -0.40702509937869324,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1947",
+    nombre: "Bulevard Sud - Rotonda Ausi\xE0s March (1947)",
+    lineas: [
+      "6",
+      "64",
+      "99"
+    ],
+    lat: 39.44594044791921,
+    lon: -0.3700383911701912,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1968",
+    nombre: "Pla\xE7a d'Espanya (parell) - Ram\xF3n y Cajal (1968)",
+    lineas: [
+      "64",
+      "93"
+    ],
+    lat: 39.46644993440367,
+    lon: -0.38194995132233106,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1994",
+    nombre: "Bulevard Sud - Ausi\xE0s March (1994)",
+    lineas: [
+      "99"
+    ],
+    lat: 39.445581920709174,
+    lon: -0.36967281934561,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2014",
+    nombre: "Poeta Querol - Teatre Principal (2014)",
+    lineas: [
+      "16",
+      "26"
+    ],
+    lat: 39.47080096723921,
+    lon: -0.374266826969884,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2008",
+    nombre: "Pare Esteban Pernet (parell) - Miquel Adlert (2008)",
+    lineas: [
+      "71"
+    ],
+    lat: 39.46706816175477,
+    lon: -0.41286514104078,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2064",
+    nombre: "Terrateig - Jorge Com\xEDn (2064)",
+    lineas: [
+      "67"
+    ],
+    lat: 39.48117418031152,
+    lon: -0.40373970902544437,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2067",
+    nombre: "Vall de la Ballestera - Eduardo Soler i P\xE9rez (2067)",
+    lineas: [
+      "67"
+    ],
+    lat: 39.47864140148794,
+    lon: -0.39888273929642876,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2071",
+    nombre: "Ciutat Administrativa 9 d'Octubre - Llu\xEDs Lamarca (2071)",
+    lineas: [
+      "73",
+      "95",
+      "98",
+      "99"
+    ],
+    lat: 39.47100869854022,
+    lon: -0.40510120694005,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2084",
+    nombre: "Vinalesa (2084)",
+    lineas: [
+      "16"
+    ],
+    lat: 39.53386136550627,
+    lon: -0.36814292905377016,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2105",
+    nombre: "Moncada - Alfara (2105)",
+    lineas: [
+      "26"
+    ],
+    lat: 39.54272454717222,
+    lon: -0.3878574724826773,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2112",
+    nombre: "Mare Nostrum - Mar Tirreno (2112)",
+    lineas: [
+      "31"
+    ],
+    lat: 39.487652364008326,
+    lon: -0.3257831323836238,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2122",
+    nombre: "Punta al Mar - Algemes\xED (2122)",
+    lineas: [
+      "30",
+      "4"
+    ],
+    lat: 39.444541511523575,
+    lon: -0.3332463089015735,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2172",
+    nombre: "El Palmar (2172)",
+    lineas: [
+      "24"
+    ],
+    lat: 39.31166460753551,
+    lon: -0.31771386517965233,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2190",
+    nombre: "Gavines - Dofins (2190)",
+    lineas: [
+      "25"
+    ],
+    lat: 39.291716617465326,
+    lon: -0.2857108090156688,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2203",
+    nombre: "Carrera del Riu - Montanyars (2203)",
+    lineas: [
+      "24",
+      "25"
+    ],
+    lat: 39.409791818847836,
+    lon: -0.33525924584666666,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2231",
+    nombre: "Alboraia - Centre d'especialitats (2231)",
+    lineas: [
+      "11"
+    ],
+    lat: 39.48181836656434,
+    lon: -0.37063473354135945,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2234",
+    nombre: "Almassora - Pintor Vilar (2234)",
+    lineas: [
+      "11"
+    ],
+    lat: 39.48310951888868,
+    lon: -0.37262144734540964,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2239",
+    nombre: "Actor Antonio Ferrandis (imparell) - Font de Sant Llu\xEDs (2239)",
+    lineas: [
+      "99"
+    ],
+    lat: 39.446424701082066,
+    lon: -0.36769493705000766,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2282",
+    nombre: "Avinguda de l'Oest (imparell) - Sant Agust\xED (2282)",
+    lineas: [
+      "27",
+      "7",
+      "73"
+    ],
+    lat: 39.46951207065959,
+    lon: -0.3795899949003181,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2315",
+    nombre: "Roger de Ll\xF2ria - Col\xF3n (2315)",
+    lineas: [
+      "40"
+    ],
+    lat: 39.469139763141676,
+    lon: -0.3724267727417035,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2288",
+    nombre: "Mercat Central - Beata (2288)",
+    lineas: [
+      "7"
+    ],
+    lat: 39.472591408919094,
+    lon: -0.37980068977633424,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2295",
+    nombre: "Amado Granell Mesado (parell) - Antonio Ferrandis (2295)",
+    lineas: [
+      "14"
+    ],
+    lat: 39.45064884159421,
+    lon: -0.35920142965635643,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2297",
+    nombre: "Amado Granell Mesado (imparell) - Antonio Sacramento (2297)",
+    lineas: [
+      "14"
+    ],
+    lat: 39.45274143158424,
+    lon: -0.36024438180455226,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2312",
+    nombre: "Sant Pau - Estaci\xF3 del Nord (2312)",
+    lineas: [
+      "11",
+      "60",
+      "62",
+      "7",
+      "73",
+      "9"
+    ],
+    lat: 39.468555072722424,
+    lon: -0.37821153625865855,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2301",
+    nombre: "F\xE9lix del R\xEDo - Cam\xED de Moncada (2301)",
+    lineas: [
+      "60"
+    ],
+    lat: 39.491957231463424,
+    lon: -0.37971416650507106,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2330",
+    nombre: "Alacant - Castell\xF3 (2330)",
+    lineas: [
+      "8"
+    ],
+    lat: 39.466143264593555,
+    lon: -0.3769551489015706,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2338",
+    nombre: "Pa\xEDs Valenci\xE0 - Val\xE8ncia (2338)",
+    lineas: [
+      "9"
+    ],
+    lat: 39.42660082506863,
+    lon: -0.38174396925706,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2340",
+    nombre: "Pa\xEDs Valenci\xE0 - Pintor Sorolla (2340)",
+    lineas: [
+      "9"
+    ],
+    lat: 39.427966203019466,
+    lon: -0.38477011143400464,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2341",
+    nombre: "Passeig Mar\xEDtim - Mediterr\xE0nia (2341)",
+    lineas: [
+      "32"
+    ],
+    lat: 39.4679677430721,
+    lon: -0.32474362275821483,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2030",
+    nombre: "Alboraia (2030)",
+    lineas: [
+      "70"
+    ],
+    lat: 39.49591792714691,
+    lon: -0.3545636735902768,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2052",
+    nombre: "\xC0gora (2052)",
+    lineas: [
+      "23",
+      "95"
+    ],
+    lat: 39.45308094444726,
+    lon: -0.35040498282713256,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1532",
+    nombre: "Menorca - Fran\xE7a (1532)",
+    lineas: [
+      "19",
+      "99"
+    ],
+    lat: 39.45886642379499,
+    lon: -0.34352839387267875,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2045",
+    nombre: "Centre d'Investigaci\xF3 Pr\xEDncep Felip (front) (2045)",
+    lineas: [
+      "95"
+    ],
+    lat: 39.45155934087381,
+    lon: -0.3450211381300359,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2053",
+    nombre: "Museu de les Ci\xE8ncies (2053)",
+    lineas: [
+      "23",
+      "24",
+      "25",
+      "35",
+      "95"
+    ],
+    lat: 39.45480863143022,
+    lon: -0.35344919367138533,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2063",
+    nombre: "Vinalesa - Cases de B\xE0rcena (2063)",
+    lineas: [
+      "16"
+    ],
+    lat: 39.52284525545958,
+    lon: -0.3571156052028391,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2080",
+    nombre: "Germanies - Cuba (2080)",
+    lineas: [
+      "8"
+    ],
+    lat: 39.46320424994328,
+    lon: -0.37737934701806086,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2171",
+    nombre: "Vicent Baldov\xED - Novelda (2171)",
+    lineas: [
+      "24"
+    ],
+    lat: 39.3139557904989,
+    lon: -0.317802373573426,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1138",
+    nombre: "Ferrer i Bign\xE9 - Sant\xEDssima Creu (1138)",
+    lineas: [
+      "26"
+    ],
+    lat: 39.529741255111375,
+    lon: -0.38559198805930817,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1140",
+    nombre: "Cam\xED de Moncada - Gasolinera (1140)",
+    lineas: [
+      "26"
+    ],
+    lat: 39.5122945733796,
+    lon: -0.3864642654513256,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1148",
+    nombre: "Font d'en Corts (imparell) - Alqueria Reial (1148)",
+    lineas: [
+      "14"
+    ],
+    lat: 39.447536399119265,
+    lon: -0.35967982408156496,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1152",
+    nombre: "Cam\xED de Moncada - Cam\xED Alqueria de Marquet (1152)",
+    lineas: [
+      "26"
+    ],
+    lat: 39.5122017270186,
+    lon: -0.38633082134124713,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1159",
+    nombre: "Passeig Mar\xEDtim - Platja de la Malva-rosa (1159)",
+    lineas: [
+      "32"
+    ],
+    lat: 39.47706074065104,
+    lon: -0.3246215364819441,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1160",
+    nombre: "Passeig Mar\xEDtim - Vicent la Roda (1160)",
+    lineas: [
+      "32"
+    ],
+    lat: 39.479031039875615,
+    lon: -0.3246291079020086,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1162",
+    nombre: "Passeig Mar\xEDtim - Mendiz\xE1bal (1162)",
+    lineas: [
+      "32"
+    ],
+    lat: 39.48355244046615,
+    lon: -0.3252024019888047,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1177",
+    nombre: "Tres Creus - Tres Forques (1177)",
+    lineas: [
+      "99"
+    ],
+    lat: 39.462802876516236,
+    lon: -0.40546988921610605,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1240",
+    nombre: "Benimaclet - Lliri Blau (1240)",
+    lineas: [
+      "10"
+    ],
+    lat: 39.48701543582473,
+    lon: -0.35702099315254293,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1245",
+    nombre: "Pont de l'Exposici\xF3 - Albereda (1245)",
+    lineas: [
+      "31",
+      "32",
+      "71",
+      "81"
+    ],
+    lat: 39.47381504411436,
+    lon: -0.3644307156656695,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1290",
+    nombre: "Vicent Puchol (parell) - Centre de Salut (1290)",
+    lineas: [
+      "14",
+      "23"
+    ],
+    lat: 39.42824245232271,
+    lon: -0.36397154558350575,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1319",
+    nombre: "Corts Valencianes - Palau de Congressos (1319)",
+    lineas: [
+      "62",
+      "63",
+      "99"
+    ],
+    lat: 39.4941905775456,
+    lon: -0.40179263049899455,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1333",
+    nombre: "Bon Rec\xE9s - Florista (1333)",
+    lineas: [
+      "28"
+    ],
+    lat: 39.49042124787218,
+    lon: -0.39243942435170476,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "956",
+    nombre: "Tavernes Blanques - Poeta Miguel Hern\xE1ndez (956)",
+    lineas: [
+      "16"
+    ],
+    lat: 39.506245781199965,
+    lon: -0.3663294197715666,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "382",
+    nombre: "Moss\xE9n Miguel Tar\xEDn (imparell) - Miquel Agra\xEFt (382)",
+    lineas: [
+      "62"
+    ],
+    lat: 39.49855085008644,
+    lon: -0.4163317861472611,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "387",
+    nombre: "Polvor\xED - Sinarques (387)",
+    lineas: [
+      "62"
+    ],
+    lat: 39.500844326901145,
+    lon: -0.4251535463078827,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "391",
+    nombre: "Alginet - Alcossebre (391)",
+    lineas: [
+      "62"
+    ],
+    lat: 39.50696053323531,
+    lon: -0.4294591147930408,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "396",
+    nombre: "Pintor Garnelo - Campament (396)",
+    lineas: [
+      "62"
+    ],
+    lat: 39.502419997988454,
+    lon: -0.4200934295636432,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "493",
+    nombre: "Joan Baptista Comes - Antonio Machado (493)",
+    lineas: [
+      "71"
+    ],
+    lat: 39.467204464180085,
+    lon: -0.4150691089234118,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "7",
+    nombre: "Doctor J.J. D\xF2mine  - Edifici del Rellotge (7)",
+    lineas: [
+      "19",
+      "92",
+      "95"
+    ],
+    lat: 39.46035702072443,
+    lon: -0.3324961026053938,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "13",
+    nombre: "Doctor Lluch - Vicent Guillot (13)",
+    lineas: [
+      "19",
+      "31",
+      "92"
+    ],
+    lat: 39.47346932567156,
+    lon: -0.3273769192808869,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "47",
+    nombre: "Esgl\xE9sia dels \xC0ngels - Pintor Ferrandis (47)",
+    lineas: [
+      "31"
+    ],
+    lat: 39.47240169835362,
+    lon: -0.3317898096010802,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1587",
+    nombre: "Reina - Setmana Santa Marinera (1587)",
+    lineas: [
+      "19",
+      "92"
+    ],
+    lat: 39.46378658245906,
+    lon: -0.3294739656056153,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "250",
+    nombre: "Constituci\xF3 (parell) - Tavernes Blanques (250)",
+    lineas: [
+      "16"
+    ],
+    lat: 39.50420124851776,
+    lon: -0.36780207454484715,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "257",
+    nombre: "Constituci\xF3 (imparell) - Tavernes Blanques (257)",
+    lineas: [
+      "16"
+    ],
+    lat: 39.50468991014583,
+    lon: -0.36768916292093856,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "126",
+    nombre: "Blasco Ib\xE1\xF1ez - Hondures (126)",
+    lineas: [
+      "31",
+      "81"
+    ],
+    lat: 39.473771039695734,
+    lon: -0.3458813765630433,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "136",
+    nombre: "Sants Just i Pastor - Lleons (136)",
+    lineas: [
+      "32"
+    ],
+    lat: 39.469473143047416,
+    lon: -0.34723084587562897,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "138",
+    nombre: "Centre de Salut Rep\xFAblica Argentina (138)",
+    lineas: [
+      "32"
+    ],
+    lat: 39.471065738688765,
+    lon: -0.3526903787661065,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "145",
+    nombre: "Doctor Manuel Candela (parell) - Blasco Ib\xE1\xF1ez (145)",
+    lineas: [
+      "30",
+      "40"
+    ],
+    lat: 39.47280587995607,
+    lon: -0.3481652800378513,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "154",
+    nombre: "Blasco Ib\xE1\xF1ez - Rub\xE9n Dar\xEDo (154)",
+    lineas: [
+      "30",
+      "31",
+      "71",
+      "81",
+      "89"
+    ],
+    lat: 39.47584619273735,
+    lon: -0.353876683457462,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "160",
+    nombre: "Blasco Ib\xE1\xF1ez (imparell) - Hospitals (160)",
+    lineas: [
+      "12",
+      "31",
+      "71",
+      "79",
+      "81"
+    ],
+    lat: 39.47890484036466,
+    lon: -0.36343598541110783,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "165",
+    nombre: "Blasco Ib\xE1\xF1ez (parell) - Hospitals (165)",
+    lineas: [
+      "12",
+      "80"
+    ],
+    lat: 39.47811289788991,
+    lon: -0.363160502229074,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "166",
+    nombre: "Blasco Ib\xE1\xF1ez - Facultat de Geografia (166)",
+    lineas: [
+      "12",
+      "30",
+      "31",
+      "71",
+      "80",
+      "81"
+    ],
+    lat: 39.47759013039807,
+    lon: -0.36138191556713767,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "173",
+    nombre: "Cavanilles - Vivers (173)",
+    lineas: [
+      "70"
+    ],
+    lat: 39.47989046456592,
+    lon: -0.3661970041012953,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "178",
+    nombre: "Emili Bar\xF3 - Manuel Castellanos (178)",
+    lineas: [
+      "12",
+      "70"
+    ],
+    lat: 39.486596201221175,
+    lon: -0.3613970266776758,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "186",
+    nombre: "Primat Reig - Jaume Roig (186)",
+    lineas: [
+      "90",
+      "98"
+    ],
+    lat: 39.48407398723863,
+    lon: -0.3633803278420699,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "200",
+    nombre: "Pare Vi\xF1as - Daroca (200)",
+    lineas: [
+      "11"
+    ],
+    lat: 39.495788552858784,
+    lon: -0.3690063657606699,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "202",
+    nombre: "Sant Joan Bosco - Daroca (202)",
+    lineas: [
+      "11"
+    ],
+    lat: 39.49660449656371,
+    lon: -0.36985435172776204,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "225",
+    nombre: "Cardenal Benlloch - Ciutat de Mula (225)",
+    lineas: [
+      "18",
+      "90"
+    ],
+    lat: 39.474174439305045,
+    lon: -0.3531334210798174,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "227",
+    nombre: "Ernest Ferrer - Polo y Peyrol\xF3n (227)",
+    lineas: [
+      "32"
+    ],
+    lat: 39.47181906574513,
+    lon: -0.3552113802504313,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "229",
+    nombre: "Cardenal Benlloch (imparell) - Port (229)",
+    lineas: [
+      "18",
+      "90"
+    ],
+    lat: 39.46744060572909,
+    lon: -0.3564396011599298,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "231",
+    nombre: "Eduard Bosc\xE0 - Balears (231)",
+    lineas: [
+      "18",
+      "89"
+    ],
+    lat: 39.464560935977914,
+    lon: -0.3576526806077629,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1432",
+    nombre: "Tirso de Molina - Mestre Rodrigo (1432)",
+    lineas: [
+      "95"
+    ],
+    lat: 39.476769520180994,
+    lon: -0.39634575370413494,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1461",
+    nombre: "Fran\xE7a (imparell) - Albereda (1461)",
+    lineas: [
+      "19",
+      "40",
+      "94"
+    ],
+    lat: 39.46145731345607,
+    lon: -0.3565568006031128,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1463",
+    nombre: "Malilla (imparell) - Illa Formentera (1463)",
+    lineas: [
+      "18",
+      "8"
+    ],
+    lat: 39.446731622278996,
+    lon: -0.3800144103874094,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1310",
+    nombre: "Manuel Carboneres - Sant Francesc de Paula (1310)",
+    lineas: [
+      "30",
+      "4"
+    ],
+    lat: 39.44598665248886,
+    lon: -0.3309747199974069,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1326",
+    nombre: "Ciutat de l'Artista Faller (1326)",
+    lineas: [
+      "12",
+      "28"
+    ],
+    lat: 39.50054417981202,
+    lon: -0.3932803080066511,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1330",
+    nombre: "Quartell - Metro Florista (1330)",
+    lineas: [
+      "28"
+    ],
+    lat: 39.495574489483765,
+    lon: -0.39743263129890005,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1349",
+    nombre: "Sant Vicent M\xE0rtir - Moss\xE9n Febrer (1349)",
+    lineas: [
+      "27",
+      "64"
+    ],
+    lat: 39.4509734139078,
+    lon: -0.3850657580415466,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1355",
+    nombre: "Olt\xE0 - Ausi\xE0s March (1355)",
+    lineas: [
+      "18",
+      "6"
+    ],
+    lat: 39.45331966420312,
+    lon: -0.3738169387238477,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1357",
+    nombre: "Parc central de Bombers (1357)",
+    lineas: [
+      "18",
+      "6"
+    ],
+    lat: 39.45413737772627,
+    lon: -0.3689452621504715,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1363",
+    nombre: "Regne de Val\xE8ncia (imparell) - Alcalde Reig (1363)",
+    lineas: [
+      "40"
+    ],
+    lat: 39.46235265129024,
+    lon: -0.36110350546280634,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1380",
+    nombre: "Punta al Mar (imparell) - Canal (1380)",
+    lineas: [
+      "23"
+    ],
+    lat: 39.44519715626188,
+    lon: -0.3373197186179486,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1385",
+    nombre: "Mart\xED Grajales - Serradora (1385)",
+    lineas: [
+      "32"
+    ],
+    lat: 39.46832939086613,
+    lon: -0.3344285695940056,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1217",
+    nombre: "Doctor Peset Aleixandre - Felip Rinaldi (1217)",
+    lineas: [
+      "26",
+      "60",
+      "89"
+    ],
+    lat: 39.491677945438184,
+    lon: -0.37615314299910707,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "242",
+    nombre: "Doctor Peset Aleixandre - Guardacostes (242)",
+    lineas: [
+      "60",
+      "64",
+      "90"
+    ],
+    lat: 39.490030762280796,
+    lon: -0.38279018410388804,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "243",
+    nombre: "Doctor Peset Aleixandre - Cam\xED de Moncada (243)",
+    lineas: [
+      "90"
+    ],
+    lat: 39.4908821799816,
+    lon: -0.3788978163633934,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "246",
+    nombre: "Constituci\xF3 - Duc de Mandas (246)",
+    lineas: [
+      "16"
+    ],
+    lat: 39.49458023587792,
+    lon: -0.3719127426578701,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "258",
+    nombre: "Constituci\xF3 (imparell) - Campaneta (258)",
+    lineas: [
+      "16"
+    ],
+    lat: 39.50242732158184,
+    lon: -0.3686183059043758,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "280",
+    nombre: "Cam\xED de Moncada (parell) - Cambrils (280)",
+    lineas: [
+      "26"
+    ],
+    lat: 39.49465442415177,
+    lon: -0.38019902457300864,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "284",
+    nombre: "Cam\xED de Moncada - Casa d'\xC0ngel (284)",
+    lineas: [
+      "26"
+    ],
+    lat: 39.50684791911043,
+    lon: -0.3840195050156422,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "303",
+    nombre: "Cam\xED de Moncada - Carretera Carpesa (303)",
+    lineas: [
+      "26"
+    ],
+    lat: 39.50272003804522,
+    lon: -0.3826941019460085,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "305",
+    nombre: "Cam\xED de Moncada (imparell) - Cambrils (305)",
+    lineas: [
+      "26"
+    ],
+    lat: 39.494885367300924,
+    lon: -0.3804652451457578,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "172",
+    nombre: "Cavanilles - \xC1lvaro de Baz\xE1n (172)",
+    lineas: [
+      "12",
+      "70"
+    ],
+    lat: 39.481951771652824,
+    lon: -0.36517408512714145,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "177",
+    nombre: "Emili Bar\xF3 - Metro Benimaclet (177)",
+    lineas: [
+      "12",
+      "70"
+    ],
+    lat: 39.485119937712554,
+    lon: -0.3620501083818511,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "192",
+    nombre: "Primat Reig - Cam\xED Vera (192)",
+    lineas: [
+      "10",
+      "98"
+    ],
+    lat: 39.48031508492639,
+    lon: -0.35793541973502596,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1492",
+    nombre: "Albalat dels Tarongers - Vinalop\xF3 (1492)",
+    lineas: [
+      "18"
+    ],
+    lat: 39.47831284653092,
+    lon: -0.34767845536293346,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "17",
+    nombre: "Cavite - Font d'en Carr\xF2s (17)",
+    lineas: [
+      "19",
+      "31"
+    ],
+    lat: 39.48152869340244,
+    lon: -0.32669531422501547,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "44",
+    nombre: "Pintor Ferrandis - Progr\xE9s (44)",
+    lineas: [
+      "31"
+    ],
+    lat: 39.47204294765348,
+    lon: -0.3287321840117674,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "46",
+    nombre: "Pintor Ferrandis - \xC0ngels (46)",
+    lineas: [
+      "31"
+    ],
+    lat: 39.47223991576139,
+    lon: -0.3317096065808362,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "58",
+    nombre: "Manuel Soto Enginyer - Estaci\xF3 (58)",
+    lineas: [
+      "30",
+      "4",
+      "95"
+    ],
+    lat: 39.45831475531802,
+    lon: -0.3322696427041429,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "64",
+    nombre: "Vall de la Ballestera - Campanar (64)",
+    lineas: [
+      "98",
+      "99"
+    ],
+    lat: 39.48089065004806,
+    lon: -0.3936849875190129,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "70",
+    nombre: "Parc de Natzaret - Poliesportiu (70)",
+    lineas: [
+      "30",
+      "4",
+      "95"
+    ],
+    lat: 39.45040686769599,
+    lon: -0.33253740480593513,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "506",
+    nombre: "Cid - Josep Maestre (506)",
+    lineas: [
+      "70",
+      "93"
+    ],
+    lat: 39.469054309623274,
+    lon: -0.40243599517429135,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1417",
+    nombre: "Institut Obrer de Val\xE8ncia (imparell) - Amado Granell Mesado (1417)",
+    lineas: [
+      "13",
+      "35"
+    ],
+    lat: 39.45457962167039,
+    lon: -0.36071520920458994,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1422",
+    nombre: "Petxina - P\xE9rez Galdos (1422)",
+    lineas: [
+      "95"
+    ],
+    lat: 39.47466279870804,
+    lon: -0.39686718222458583,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1430",
+    nombre: "Albereda - Illes Can\xE0ries (1430)",
+    lineas: [
+      "4",
+      "92",
+      "94"
+    ],
+    lat: 39.467983466923314,
+    lon: -0.3605312752389916,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "286",
+    nombre: "Cam\xED de Moncada (parell) - Matador (286)",
+    lineas: [
+      "26"
+    ],
+    lat: 39.51549381822795,
+    lon: -0.3868858558918682,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "290",
+    nombre: "Carpesa (290)",
+    lineas: [
+      "26"
+    ],
+    lat: 39.51498518766213,
+    lon: -0.3769308195348479,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "872",
+    nombre: "Misser Masc\xF3 - Monforte (872)",
+    lineas: [
+      "32"
+    ],
+    lat: 39.47649691397563,
+    lon: -0.36611040780683785,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "882",
+    nombre: "Fonteta de Sant Llu\xEDs (parell) - \xC0ngel Villena  (882)",
+    lineas: [
+      "13",
+      "7"
+    ],
+    lat: 39.44847864717629,
+    lon: -0.36851308336438376,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "886",
+    nombre: "Peris i Valero - Pintor Salvador Abril (886)",
+    lineas: [
+      "14",
+      "35"
+    ],
+    lat: 39.46021444960133,
+    lon: -0.36813157460367707,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "904",
+    nombre: "Gl\xF2ria (parell) - Oliveral (904)",
+    lineas: [
+      "23"
+    ],
+    lat: 39.42177693952525,
+    lon: -0.3643791741690663,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "693",
+    nombre: "Ferran el Cat\xF2lic (parell) - \xC0ngel Guimer\xE0 (693)",
+    lineas: [
+      "63",
+      "64",
+      "80",
+      "92"
+    ],
+    lat: 39.470153909372456,
+    lon: -0.384660966269592,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "696",
+    nombre: "Ferran el Cat\xF2lic (imparell)  - Metro T\xFAria (696)",
+    lineas: [
+      "60",
+      "62",
+      "64",
+      "79",
+      "92"
+    ],
+    lat: 39.47693037774403,
+    lon: -0.3899992734370425,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "701",
+    nombre: "Ferran el Cat\xF2lic - Gabriel Mir\xF3 (701)",
+    lineas: [
+      "64",
+      "79",
+      "92"
+    ],
+    lat: 39.472645093603944,
+    lon: -0.3869576913625423,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "702",
+    nombre: "Ferran el Cat\xF2lic (imparell) - \xC0ngel Guimer\xE0 (702)",
+    lineas: [
+      "63",
+      "64",
+      "79",
+      "92"
+    ],
+    lat: 39.47005169980923,
+    lon: -0.38507871090108586,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "705",
+    nombre: "Ram\xF3n y Cajal (imparell) - Jes\xFAs (705)",
+    lineas: [
+      "64",
+      "79",
+      "92"
+    ],
+    lat: 39.467139679828996,
+    lon: -0.38298410318205045,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "709",
+    nombre: "Marqu\xE9s del T\xFAria - Gregori Maians (709)",
+    lineas: [
+      "79",
+      "92",
+      "93"
+    ],
+    lat: 39.46529629576867,
+    lon: -0.37238697199659154,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "721",
+    nombre: "Sant Valero (721)",
+    lineas: [
+      "14",
+      "35",
+      "6"
+    ],
+    lat: 39.46335407066486,
+    lon: -0.3719598650914852,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "725",
+    nombre: "Regne de Val\xE8ncia - Mestre Gozalbo (725)",
+    lineas: [
+      "19"
+    ],
+    lat: 39.46378339275749,
+    lon: -0.36768697391191263,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "732",
+    nombre: "Ciscar - Mestre Racional (732)",
+    lineas: [
+      "13"
+    ],
+    lat: 39.463507844616686,
+    lon: -0.3638254251834878,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "744",
+    nombre: "Conca - Bisbe Amig\xF3 (744)",
+    lineas: [
+      "11",
+      "71"
+    ],
+    lat: 39.466055250943484,
+    lon: -0.3867334301192416,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "749",
+    nombre: "Quart - Terol (749)",
+    lineas: [
+      "73"
+    ],
+    lat: 39.47453796061706,
+    lon: -0.3913406203442842,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "750",
+    nombre: "Sant Josep de la Muntanya - P\xE9rez Gald\xF3s (750)",
+    lineas: [
+      "73"
+    ],
+    lat: 39.47436431391785,
+    lon: -0.39423468950795126,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "793",
+    nombre: "Torres de Quart (793)",
+    lineas: [
+      "28",
+      "C1"
+    ],
+    lat: 39.47499764085279,
+    lon: -0.3840113425742822,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "620",
+    nombre: "Joaqu\xEDn Benlloch - Illa Cabrera (620)",
+    lineas: [
+      "6"
+    ],
+    lat: 39.44970823121308,
+    lon: -0.37387741527555807,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "622",
+    nombre: "Joaqu\xEDn Benlloch - Pianista Empar Iturbi (622)",
+    lineas: [
+      "8"
+    ],
+    lat: 39.454059437807764,
+    lon: -0.3769328665688658,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "626",
+    nombre: "Fonteta de Sant Llu\xEDs  - Doctor Waksman (626)",
+    lineas: [
+      "7"
+    ],
+    lat: 39.45571452052689,
+    lon: -0.37158422169292066,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "627",
+    nombre: "Fonteta de Sant Llu\xEDs - B\xE8rnia (627)",
+    lineas: [
+      "7"
+    ],
+    lat: 39.453824884966544,
+    lon: -0.37156398940185775,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "628",
+    nombre: "Fonteta de Sant Llu\xEDs - Alg\xEDmia d'Alfara  (628)",
+    lineas: [
+      "7"
+    ],
+    lat: 39.45169004001029,
+    lon: -0.3707052873294845,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "635",
+    nombre: "Gravador Jord\xE1n - Riu Sec (635)",
+    lineas: [
+      "13",
+      "7"
+    ],
+    lat: 39.44614366707589,
+    lon: -0.36699849069714513,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "637",
+    nombre: "Fonteta de Sant Llu\xEDs - Germans Maristes  (637)",
+    lineas: [
+      "13",
+      "7"
+    ],
+    lat: 39.45028970301694,
+    lon: -0.36968236199883747,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "654",
+    nombre: "Germans Maristes - Institut Jordi de Sant Jordi (654)",
+    lineas: [
+      "13"
+    ],
+    lat: 39.453456024379236,
+    lon: -0.3630414895434378,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "679",
+    nombre: "Escultor Josep Capuz (imparell) - La Plata (679)",
+    lineas: [
+      "13",
+      "14",
+      "18"
+    ],
+    lat: 39.45827964160775,
+    lon: -0.3602561879983776,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "681",
+    nombre: "Escultor Josep Capuz (imparell) - Centre d'especialitats (681)",
+    lineas: [
+      "13",
+      "14",
+      "18"
+    ],
+    lat: 39.46138908979508,
+    lon: -0.3623643234094475,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "685",
+    nombre: "La Plata - Amado Granell Mesado (685)",
+    lineas: [
+      "14",
+      "18"
+    ],
+    lat: 39.45696253905087,
+    lon: -0.36281243453451184,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "689",
+    nombre: "Marqu\xE9s del T\xFAria - Russafa (689)",
+    lineas: [
+      "80",
+      "92",
+      "93"
+    ],
+    lat: 39.465220055402696,
+    lon: -0.37350006873557196,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "612",
+    nombre: "Malilla (parell) - Illa Formentera (612)",
+    lineas: [
+      "18",
+      "8"
+    ],
+    lat: 39.44700918558819,
+    lon: -0.38009403726597973,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "525",
+    nombre: "Jos\xE9 Andreu Alabarta - Professor \xC0ngel Lacalle (525)",
+    lineas: [
+      "72",
+      "73"
+    ],
+    lat: 39.45469491757893,
+    lon: -0.40506706399494796,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "530",
+    nombre: "Tres Forques - Mare de D\xE9u de la Cabe\xE7a (530)",
+    lineas: [
+      "71"
+    ],
+    lat: 39.46368117339872,
+    lon: -0.3998469363943848,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "532",
+    nombre: "Tres Forques - Churat i Saur\xED (532)",
+    lineas: [
+      "71"
+    ],
+    lat: 39.464062096283236,
+    lon: -0.3917657055269838,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "534",
+    nombre: "Tres Forques - Xiva (534)",
+    lineas: [
+      "71"
+    ],
+    lat: 39.464296074860535,
+    lon: -0.3895501936110066,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "538",
+    nombre: "Arxiduc Carles (parell) - Fra Jun\xEDper Serra (538)",
+    lineas: [
+      "72"
+    ],
+    lat: 39.46094659909602,
+    lon: -0.3994087244364481,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "544",
+    nombre: "Arxiduc Carles - Fra Jun\xEDper Serra (544)",
+    lineas: [
+      "72"
+    ],
+    lat: 39.460968485481835,
+    lon: -0.39914858943850756,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "549",
+    nombre: "Centre de Salut Pare Jofr\xE9 (549)",
+    lineas: [
+      "11"
+    ],
+    lat: 39.46056929802192,
+    lon: -0.3900039475767412,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "559",
+    nombre: "Gaspar Aguilar - Fontanars (559)",
+    lineas: [
+      "59",
+      "9"
+    ],
+    lat: 39.456851729053824,
+    lon: -0.3901631183925974,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "576",
+    nombre: "Sant Vicent M\xE0rtir - Joaqu\xEDn Navarro (576)",
+    lineas: [
+      "27",
+      "64"
+    ],
+    lat: 39.4527911504647,
+    lon: -0.38469769380185215,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "579",
+    nombre: "Sant Vicent M\xE0rtir (parell) - Arquebisbe Olaechea (579)",
+    lineas: [
+      "27",
+      "59",
+      "9"
+    ],
+    lat: 39.44360892653825,
+    lon: -0.38752133787209386,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "583",
+    nombre: "Real de Madrid (parell) - Eduardo Dato (583)",
+    lineas: [
+      "27",
+      "9"
+    ],
+    lat: 39.429929164492044,
+    lon: -0.392912081101602,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "586",
+    nombre: "La Torre (586)",
+    lineas: [
+      "27"
+    ],
+    lat: 39.42734333419728,
+    lon: -0.39352045474235403,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "593",
+    nombre: "Sant Vicent M\xE0rtir - Altamira (593)",
+    lineas: [
+      "27",
+      "64"
+    ],
+    lat: 39.449146389388616,
+    lon: -0.38527892909105504,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "598",
+    nombre: "Peris i Valero - Sapadors (598)",
+    lineas: [
+      "89"
+    ],
+    lat: 39.45889634819313,
+    lon: -0.3708592303088574,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "600",
+    nombre: "Peris i Valero - Pere Aleixandre (600)",
+    lineas: [
+      "14",
+      "89"
+    ],
+    lat: 39.46115171659934,
+    lon: -0.36553905133325426,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "605",
+    nombre: "Els Centelles - Sueca (605)",
+    lineas: [
+      "90"
+    ],
+    lat: 39.45929082762569,
+    lon: -0.3730266890989101,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "610",
+    nombre: "Malilla - Olt\xE0 (610)",
+    lineas: [
+      "8"
+    ],
+    lat: 39.45251619396399,
+    lon: -0.378722045568727,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "9",
+    nombre: "Doctor Lluch - Vicent Gallart (9)",
+    lineas: [
+      "19",
+      "92"
+    ],
+    lat: 39.465626278354556,
+    lon: -0.32856884235337386,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "12",
+    nombre: "Doctor Lluch - Metro Cabanyal (12)",
+    lineas: [
+      "19",
+      "92"
+    ],
+    lat: 39.47166464315274,
+    lon: -0.32764953486094134,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "16",
+    nombre: "Cavite - Vicent la Roda (16)",
+    lineas: [
+      "19",
+      "31"
+    ],
+    lat: 39.479071105952755,
+    lon: -0.3267089404310535,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "45",
+    nombre: "Pintor Ferrandis - Josep Benlliure (45)",
+    lineas: [
+      "31"
+    ],
+    lat: 39.471989276198485,
+    lon: -0.32943318562039997,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "50",
+    nombre: "Reina - Columbretes (50)",
+    lineas: [
+      "19",
+      "92"
+    ],
+    lat: 39.46811488906263,
+    lon: -0.32880587229524366,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "61",
+    nombre: "Major de Natzaret - Vilanova i Piera (61)",
+    lineas: [
+      "30",
+      "4",
+      "95"
+    ],
+    lat: 39.451968312763064,
+    lon: -0.33364700826082266,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "66",
+    nombre: "Punta al Mar - Cam\xED Canal (66)",
+    lineas: [
+      "4"
+    ],
+    lat: 39.44483679710412,
+    lon: -0.33521890525321685,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "83",
+    nombre: "Eug\xE8nia Vi\xF1es - Platja del Cabanyal (83)",
+    lineas: [
+      "32"
+    ],
+    lat: 39.47252152804648,
+    lon: -0.32566931498128576,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "114",
+    nombre: "Blasco Ib\xE1\xF1ez - Vinalop\xF3 (114)",
+    lineas: [
+      "30",
+      "31",
+      "71",
+      "81"
+    ],
+    lat: 39.47507898120469,
+    lon: -0.35116633077549575,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "117",
+    nombre: "Ramon Llull - Escultor Alfons Gabino (117)",
+    lineas: [
+      "40",
+      "71"
+    ],
+    lat: 39.47525120870095,
+    lon: -0.3471767622068463,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1362",
+    nombre: "Tom\xE1s de Monta\xF1ana - Albereda (1362)",
+    lineas: [
+      "40"
+    ],
+    lat: 39.46110212730102,
+    lon: -0.353244471770442,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1369",
+    nombre: "Tres Creus (central) - Pare Esteban Pernet (1369)",
+    lineas: [
+      "71"
+    ],
+    lat: 39.46738211830844,
+    lon: -0.4061249585406528,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1370",
+    nombre: "Pare Esteban Pernet - Miseric\xF2rdia (1370)",
+    lineas: [
+      "71"
+    ],
+    lat: 39.467175714859664,
+    lon: -0.4097691888012104,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1382",
+    nombre: "Hospital Cl\xEDnic - Facultat Medicina (1382)",
+    lineas: [
+      "30"
+    ],
+    lat: 39.47871717961821,
+    lon: -0.36393953519107336,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1410",
+    nombre: "Guillermina Medrano (imparell) - Borbot\xF3 (1410)",
+    lineas: [
+      "26"
+    ],
+    lat: 39.51417685809506,
+    lon: -0.3886061286687056,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1411",
+    nombre: "Guillermina Medrano (parell) - Borbot\xF3 (1411)",
+    lineas: [
+      "26"
+    ],
+    lat: 39.51416426164852,
+    lon: -0.3885393804925239,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1438",
+    nombre: "Doctor Tom\xE1s Sala - Gaspar Aguilar (1438)",
+    lineas: [
+      "59",
+      "9",
+      "99"
+    ],
+    lat: 39.4493857477831,
+    lon: -0.3946850215769233,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1442",
+    nombre: "Doctor Tom\xE1s Sala (imparell) - Sant Vicent M\xE0rtir (1442)",
+    lineas: [
+      "18",
+      "59",
+      "9",
+      "99"
+    ],
+    lat: 39.446790049569024,
+    lon: -0.38705910467689625,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1444",
+    nombre: "Doctor Tom\xE1s Sala - Jer\xF3nima Gal\xE9s (1444)",
+    lineas: [
+      "10",
+      "18",
+      "59",
+      "9",
+      "99"
+    ],
+    lat: 39.44894245938844,
+    lon: -0.3934425541924531,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1448",
+    nombre: "Camp de T\xFAria - Mestre Rodrigo (1448)",
+    lineas: [
+      "62"
+    ],
+    lat: 39.49306996221396,
+    lon: -0.4066151511261447,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1462",
+    nombre: "Albereda - Pont del Regne (1462)",
+    lineas: [
+      "19",
+      "40",
+      "94"
+    ],
+    lat: 39.46099724454466,
+    lon: -0.35667667464859776,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1465",
+    nombre: "Malilla (imparell) - Centre de Salut (1465)",
+    lineas: [
+      "18",
+      "8"
+    ],
+    lat: 39.45093472229507,
+    lon: -0.3789804311940321,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1472",
+    nombre: "Pius IX - Salvador Perles (1472)",
+    lineas: [
+      "10"
+    ],
+    lat: 39.44327254984931,
+    lon: -0.3938288375602652,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1474",
+    nombre: "Cam\xED Vell Picassent - Acc\xE9s Cementeri (1474)",
+    lineas: [
+      "10"
+    ],
+    lat: 39.4457785923486,
+    lon: -0.39691611782509767,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1485",
+    nombre: "Palmaret - Rosa dels Vents (davant) (1485)",
+    lineas: [
+      "26"
+    ],
+    lat: 39.51616588692006,
+    lon: -0.3813187048067969,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1489",
+    nombre: "Tarongers - Facultat de Magisteri (1489)",
+    lineas: [
+      "18",
+      "93",
+      "98"
+    ],
+    lat: 39.48018168958541,
+    lon: -0.3471591146167213,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1490",
+    nombre: "Tarongers - Escola d'Edificaci\xF3 (1490)",
+    lineas: [
+      "93",
+      "98"
+    ],
+    lat: 39.480695460717214,
+    lon: -0.3476670497017613,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1535",
+    nombre: "Fran\xE7a - Tom\xE1s de Monta\xF1ana (1535)",
+    lineas: [
+      "19"
+    ],
+    lat: 39.46048642829503,
+    lon: -0.35234705656963905,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1537",
+    nombre: "Albereda (riu) - Parc Gulliver (1537)",
+    lineas: [
+      "19",
+      "94"
+    ],
+    lat: 39.46301802324019,
+    lon: -0.3585878203277946,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1593",
+    nombre: "Eivissa  - Professor Vicente Llorens (1593)",
+    lineas: [
+      "30",
+      "4",
+      "92"
+    ],
+    lat: 39.461045542657345,
+    lon: -0.3395451078194701,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1547",
+    nombre: "Uruguai - Carretera d'Escriv\xE0 (1547)",
+    lineas: [
+      "10",
+      "59",
+      "9"
+    ],
+    lat: 39.457986149752934,
+    lon: -0.3868514072313649,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1550",
+    nombre: "Hospital Val\xE8ncia al Mar (1550)",
+    lineas: [
+      "92"
+    ],
+    lat: 39.47714090330046,
+    lon: -0.3298721992129004,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1552",
+    nombre: "Mar\xED Blas de Lezo - Felip de Gauna (1552)",
+    lineas: [
+      "31",
+      "98",
+      "99"
+    ],
+    lat: 39.47221496947032,
+    lon: -0.3340549746665246,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "311",
+    nombre: "Sant Josep Artes\xE0 - Luis Mart\xED Alegre (311)",
+    lineas: [
+      "12",
+      "28"
+    ],
+    lat: 39.49831109192509,
+    lon: -0.3937997970497825,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "321",
+    nombre: "Sagunt - Sant Guillem (321)",
+    lineas: [
+      "16",
+      "26",
+      "6"
+    ],
+    lat: 39.48437604141631,
+    lon: -0.374740756553748,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "322",
+    nombre: "Sagunt - Fra Pere Vives (322)",
+    lineas: [
+      "16",
+      "26",
+      "6"
+    ],
+    lat: 39.48622981059055,
+    lon: -0.3746561002045707,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2437",
+    nombre: "Ignacio Hern\xE1ndez Hervas - Ru\xEDz (2437)",
+    lineas: [
+      "59"
+    ],
+    lat: 39.43063977729472,
+    lon: -0.3959912808927661,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "325",
+    nombre: "Constituci\xF3 - Doctor Peset Aleixandre (325)",
+    lineas: [
+      "16",
+      "26",
+      "6"
+    ],
+    lat: 39.49152974184241,
+    lon: -0.37445270153291627,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "327",
+    nombre: "Constituci\xF3 - Sarri\xF3n (327)",
+    lineas: [
+      "16",
+      "26",
+      "6"
+    ],
+    lat: 39.48727551522925,
+    lon: -0.3774566027843745,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "331",
+    nombre: "Burjassot - Centre Cultural Bombas Gens (331)",
+    lineas: [
+      "28",
+      "94"
+    ],
+    lat: 39.48548516355135,
+    lon: -0.38562989681110177,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "333",
+    nombre: "Burjassot - Doctor Peset Aleixandre (333)",
+    lineas: [
+      "28",
+      "94"
+    ],
+    lat: 39.48833469992052,
+    lon: -0.3890689091090323,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "339",
+    nombre: "La Plata - Sapadors (339)",
+    lineas: [
+      "18",
+      "6"
+    ],
+    lat: 39.45580491133561,
+    lon: -0.36550559630939045,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "341",
+    nombre: "Pont de Fusta (341)",
+    lineas: [
+      "16",
+      "26",
+      "6",
+      "79",
+      "94",
+      "95"
+    ],
+    lat: 39.48083273196692,
+    lon: -0.373986949993946,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "345",
+    nombre: "Men\xE9ndez Pidal (parell) - Pare Ferr\xEDs (345)",
+    lineas: [
+      "79",
+      "95"
+    ],
+    lat: 39.48161900703186,
+    lon: -0.38454737363013675,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "351",
+    nombre: "El Pla de la Sa\xEFdia (riu) - Constituci\xF3 (351)",
+    lineas: [
+      "80",
+      "94"
+    ],
+    lat: 39.482819222368335,
+    lon: -0.3795320357104756,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "367",
+    nombre: "Campanar - Joan Pau II (367)",
+    lineas: [
+      "89"
+    ],
+    lat: 39.48002580974515,
+    lon: -0.3936900452282408,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "372",
+    nombre: "Pius XII - Campanar (372)",
+    lineas: [
+      "62",
+      "63",
+      "64",
+      "92",
+      "99"
+    ],
+    lat: 39.482328820080895,
+    lon: -0.39337707384542636,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "407",
+    nombre: "Pius XII - Bisbe Soler (407)",
+    lineas: [
+      "62",
+      "63",
+      "64",
+      "92"
+    ],
+    lat: 39.48169323089274,
+    lon: -0.39339495091505416,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "419",
+    nombre: "Manuel de Falla - Mestre Rodrigo (419)",
+    lineas: [
+      "67",
+      "95"
+    ],
+    lat: 39.476248896045426,
+    lon: -0.3977812318410095,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "422",
+    nombre: "Mestre Rodrigo - Manuel de Falla (422)",
+    lineas: [
+      "67"
+    ],
+    lat: 39.47740719955839,
+    lon: -0.3976802166791798,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "432",
+    nombre: "P\xE9rez Gald\xF3s - Lladr\xF3 i Mall\xED (432)",
+    lineas: [
+      "89"
+    ],
+    lat: 39.462876035596025,
+    lon: -0.3872500057405394,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "445",
+    nombre: "Joan XXIII - Periodista Gil Sumbiela (445)",
+    lineas: [
+      "64"
+    ],
+    lat: 39.492645058643646,
+    lon: -0.3831333141583574,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "473",
+    nombre: "Brasil - Vel\xE1zquez  (473)",
+    lineas: [
+      "73"
+    ],
+    lat: 39.4723802423445,
+    lon: -0.4002461709447102,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "482",
+    nombre: "Parc de l'Oest - Germans Rivas (482)",
+    lineas: [
+      "70",
+      "93"
+    ],
+    lat: 39.4683797161816,
+    lon: -0.3956902938274933,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "486",
+    nombre: "Cid - Particular (486)",
+    lineas: [
+      "93",
+      "98"
+    ],
+    lat: 39.46986970651067,
+    lon: -0.4115559259297016,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "509",
+    nombre: "Arxiduc Carles - Xiva (509)",
+    lineas: [
+      "72",
+      "89"
+    ],
+    lat: 39.46644618368769,
+    lon: -0.3934192647401403,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "513",
+    nombre: "Tres Forques - Josep Maestre (513)",
+    lineas: [
+      "71",
+      "73"
+    ],
+    lat: 39.463747064761456,
+    lon: -0.4030731360145531,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "630",
+    nombre: "Fonteta de Sant Llu\xEDs - Ebenista Caselles  (630)",
+    lineas: [
+      "13",
+      "7"
+    ],
+    lat: 39.4502972836801,
+    lon: -0.369780477821075,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "649",
+    nombre: "Germans Maristes - Institut Font de Sant Llu\xEDs (649)",
+    lineas: [
+      "13"
+    ],
+    lat: 39.45356114542696,
+    lon: -0.3632364963297238,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "657",
+    nombre: "Font d'en Corts - Levantina Alegre (657)",
+    lineas: [
+      "14"
+    ],
+    lat: 39.44801544141531,
+    lon: -0.3601605174316811,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "659",
+    nombre: "Font d'en Corts (parell) - Matador d'en Corts (659)",
+    lineas: [
+      "14"
+    ],
+    lat: 39.44271560423901,
+    lon: -0.35601795022189014,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "660",
+    nombre: "Mercaval\xE8ncia (660)",
+    lineas: [
+      "14"
+    ],
+    lat: 39.4366265004198,
+    lon: -0.3556067886749803,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "664",
+    nombre: "Crist del Refugi - Del Remol\xED (664)",
+    lineas: [
+      "14",
+      "23"
+    ],
+    lat: 39.42470350239161,
+    lon: -0.3639365492256364,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "668",
+    nombre: "Major de Castellar - Cam\xED del Rib\xE0s (668)",
+    lineas: [
+      "14",
+      "23"
+    ],
+    lat: 39.43266143813121,
+    lon: -0.3624422455634721,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "671",
+    nombre: "Mercaval\xE8ncia (671)",
+    lineas: [
+      "14"
+    ],
+    lat: 39.4366238619567,
+    lon: -0.3554283324130458,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "672",
+    nombre: "Font d'en Corts (imparell) - Matador d'en Corts (672)",
+    lineas: [
+      "14"
+    ],
+    lat: 39.443360295662636,
+    lon: -0.35675086518442567,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "695",
+    nombre: "Ferran el Cat\xF2lic (parell) - Jard\xED Bot\xE0nic (695)",
+    lineas: [
+      "60",
+      "62",
+      "63",
+      "64",
+      "80",
+      "92"
+    ],
+    lat: 39.47494319084601,
+    lon: -0.38801143232612045,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "703",
+    nombre: "\xC0ngel Guimer\xE0 - Ferran el Cat\xF2lic (central) (703)",
+    lineas: [
+      "67",
+      "93"
+    ],
+    lat: 39.470438508879205,
+    lon: -0.3851340254077345,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1145",
+    nombre: "Campus de Burjassot (1145)",
+    lineas: [
+      "63"
+    ],
+    lat: 39.50895546540396,
+    lon: -0.42053556699164407,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "400",
+    nombre: "Moss\xE9n Miguel Tar\xEDn (parell) - Carretera de Paterna (400)",
+    lineas: [
+      "62"
+    ],
+    lat: 39.497534019636824,
+    lon: -0.4161993594130801,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "392",
+    nombre: "Avinguda de les Fires - Metro Fira Val\xE8ncia (392)",
+    lineas: [
+      "62"
+    ],
+    lat: 39.503451897852656,
+    lon: -0.42647941451006505,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1366",
+    nombre: "La Llum (1366)",
+    lineas: [
+      "71"
+    ],
+    lat: 39.46845737329358,
+    lon: -0.41714866161426606,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "381",
+    nombre: "Moss\xE9n Miguel Tar\xEDn (imparell) - Carretera de Paterna (381)",
+    lineas: [
+      "62"
+    ],
+    lat: 39.49729678719269,
+    lon: -0.41611154736340067,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "386",
+    nombre: "Campament (parell) - Joaqu\xEDn Mar\xEDn (386)",
+    lineas: [
+      "62"
+    ],
+    lat: 39.501343459199624,
+    lon: -0.42325347230792804,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "388",
+    nombre: "Fira Val\xE8ncia (388)",
+    lineas: [
+      "62"
+    ],
+    lat: 39.503301521798285,
+    lon: -0.42623901625961647,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "395",
+    nombre: "Campament (imparell) - Joaqu\xEDn Mar\xEDn (395)",
+    lineas: [
+      "62"
+    ],
+    lat: 39.50148699751043,
+    lon: -0.4226941165430092,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "399",
+    nombre: "Moss\xE9n Miguel Tar\xEDn (parell) - Miquel Agra\xEFt (399)",
+    lineas: [
+      "62"
+    ],
+    lat: 39.49852979705106,
+    lon: -0.4163863442932665,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1320",
+    nombre: "Camp de T\xFAria (parell) - Beniferri. (1320)",
+    lineas: [
+      "62"
+    ],
+    lat: 39.49432534052181,
+    lon: -0.40400419354279304,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1321",
+    nombre: "Camp de T\xFAria (imparell) - Beniferri. (1321)",
+    lineas: [
+      "62"
+    ],
+    lat: 39.493943742507774,
+    lon: -0.4036604930562439,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "292",
+    nombre: "Benifaraig a Moncada - Casa Silvestre (292)",
+    lineas: [
+      "26"
+    ],
+    lat: 39.52525355985053,
+    lon: -0.38604529372573154,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "297",
+    nombre: "Cam\xED de Moncada (imparell) - Alqueria Senent (297)",
+    lineas: [
+      "26"
+    ],
+    lat: 39.52158668478957,
+    lon: -0.3865461914127788,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "300",
+    nombre: "Cam\xED de Moncada - Alqueria Paella (300)",
+    lineas: [
+      "26"
+    ],
+    lat: 39.51007142658831,
+    lon: -0.3858231542082964,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "347",
+    nombre: "Men\xE9ndez Pidal - Pasarel\xB7la (347)",
+    lineas: [
+      "80"
+    ],
+    lat: 39.47904627455158,
+    lon: -0.39009125558470037,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "349",
+    nombre: "Men\xE9ndez Pidal (imparell) - Pare Ferr\xEDs (349)",
+    lineas: [
+      "80"
+    ],
+    lat: 39.4814951355631,
+    lon: -0.38430272538675647,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "358",
+    nombre: "Joaquim Ballester (parell) - Ricardo Mic\xF3 (358)",
+    lineas: [
+      "98"
+    ],
+    lat: 39.48299029724242,
+    lon: -0.38969617077927005,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "376",
+    nombre: "Corts Valencianes (parell) - Metro Beniferri (376)",
+    lineas: [
+      "62",
+      "63",
+      "99"
+    ],
+    lat: 39.49104620984379,
+    lon: -0.3995238526401024,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "403",
+    nombre: "Corts Valencianes - L'Alt Maestrat (403)",
+    lineas: [
+      "62",
+      "63",
+      "99"
+    ],
+    lat: 39.493877493190475,
+    lon: -0.40227792405305474,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "485",
+    nombre: "Cid - Nou d'Octubre (485)",
+    lineas: [
+      "93"
+    ],
+    lat: 39.47013317475743,
+    lon: -0.40557850645080745,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "501",
+    nombre: "Col\xF2nia Espanyola de M\xE8xic - Casa de la Miseric\xF2rdia (501)",
+    lineas: [
+      "70",
+      "73"
+    ],
+    lat: 39.46458688379083,
+    lon: -0.4091122935421712,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "514",
+    nombre: "Tres Creus (carril bus) - Llombai (514)",
+    lineas: [
+      "71",
+      "73",
+      "99"
+    ],
+    lat: 39.4641354507893,
+    lon: -0.4054757897239886,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "563",
+    nombre: "Crematori Municipal (563)",
+    lineas: [
+      "10"
+    ],
+    lat: 39.449269788373535,
+    lon: -0.39526960632751545,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "849",
+    nombre: "Font d'en Corts (parell) - Moss\xE9n Palanca (849)",
+    lineas: [
+      "14"
+    ],
+    lat: 39.444694224019656,
+    lon: -0.35772259232380105,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "850",
+    nombre: "Font d'en Corts - Cam\xED dels Rocs (850)",
+    lineas: [
+      "14"
+    ],
+    lat: 39.444781112709165,
+    lon: -0.3576707849759421,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "867",
+    nombre: "Clariano - Pal\xE0ncia (867)",
+    lineas: [
+      "18"
+    ],
+    lat: 39.47781198729507,
+    lon: -0.3515804453510618,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "906",
+    nombre: "Karl Marx - Guadalquivir (906)",
+    lineas: [
+      "23",
+      "9"
+    ],
+    lat: 39.43110342851587,
+    lon: -0.3771671898839303,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "911",
+    nombre: "Cam\xED de les Vaques (imparell)  (911)",
+    lineas: [
+      "23"
+    ],
+    lat: 39.42348210807029,
+    lon: -0.3703641428546455,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "929",
+    nombre: "Carrera del Riu (imparell) - Canal (929)",
+    lineas: [
+      "23",
+      "24",
+      "25"
+    ],
+    lat: 39.424047382284215,
+    lon: -0.34100844198580477,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "931",
+    nombre: "El Tremolar - Guadiana (931)",
+    lineas: [
+      "23"
+    ],
+    lat: 39.42224051171744,
+    lon: -0.3505780032764713,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "932",
+    nombre: "El Tremolar - Barraca de Troia (932)",
+    lineas: [
+      "23"
+    ],
+    lat: 39.42212159360788,
+    lon: -0.3539112463978602,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "934",
+    nombre: "El Tremolar - Cam\xED del Cavall\xF3 (934)",
+    lineas: [
+      "23"
+    ],
+    lat: 39.42362453298987,
+    lon: -0.3616071522357836,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "936",
+    nombre: "El Tremolar - S\xE9quia de l'Or (936)",
+    lineas: [
+      "23"
+    ],
+    lat: 39.4222133347554,
+    lon: -0.35447614475234235,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "938",
+    nombre: "El Tremolar - Cam\xED del Bracet (938)",
+    lineas: [
+      "23"
+    ],
+    lat: 39.42138577240574,
+    lon: -0.34549100157494556,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "939",
+    nombre: "Carrera del Riu - Entrada casa Rosquilla (939)",
+    lineas: [
+      "23"
+    ],
+    lat: 39.43211317444846,
+    lon: -0.3429951473059988,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "949",
+    nombre: "Alm\xE0ssera (949)",
+    lineas: [
+      "16"
+    ],
+    lat: 39.51644246267989,
+    lon: -0.361433504423718,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "953",
+    nombre: "Cases de B\xE0rcena (III) (953)",
+    lineas: [
+      "16"
+    ],
+    lat: 39.522022159862786,
+    lon: -0.35775334267869485,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "955",
+    nombre: "Bonrep\xF2s i Mirambell (955)",
+    lineas: [
+      "16"
+    ],
+    lat: 39.516439866772735,
+    lon: -0.3615337570793801,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1007",
+    nombre: "Jes\xFAs Morante Borr\xE1s (I) (1007)",
+    lineas: [
+      "23"
+    ],
+    lat: 39.4509444721226,
+    lon: -0.3453728614027388,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1009",
+    nombre: "Jes\xFAs Morante Borr\xE1s (III) (1009)",
+    lineas: [
+      "23"
+    ],
+    lat: 39.4480213639231,
+    lon: -0.34395437137537144,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1010",
+    nombre: "Jes\xFAs Morante Borr\xE1s (IV) (1010)",
+    lineas: [
+      "23"
+    ],
+    lat: 39.44366287143873,
+    lon: -0.3438962330462814,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1013",
+    nombre: "Jes\xFAs Morante Borr\xE1s (VI) (1013)",
+    lineas: [
+      "23"
+    ],
+    lat: 39.44377315841456,
+    lon: -0.3437963632767304,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1014",
+    nombre: "Jes\xFAs Morante Borr\xE1s (VII) (1014)",
+    lineas: [
+      "23"
+    ],
+    lat: 39.447863661885144,
+    lon: -0.3438770377532116,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1016",
+    nombre: "Jes\xFAs Morante Borr\xE1s (IX) (1016)",
+    lineas: [
+      "23"
+    ],
+    lat: 39.450966197776495,
+    lon: -0.34526720222246643,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1027",
+    nombre: "Major de Castellar - Caroig (1027)",
+    lineas: [
+      "14",
+      "23"
+    ],
+    lat: 39.432436399100744,
+    lon: -0.36270713776229374,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1029",
+    nombre: "Vicent Puchol - Font de Bonet (1029)",
+    lineas: [
+      "14",
+      "23"
+    ],
+    lat: 39.4266084086136,
+    lon: -0.36419505902750116,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1137",
+    nombre: "Ferrer i Bign\xE9 - Clavells  (1137)",
+    lineas: [
+      "26"
+    ],
+    lat: 39.52764394833105,
+    lon: -0.3858038886055501,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1126",
+    nombre: "Comte de Torrefiel - Josep Esteve (1126)",
+    lineas: [
+      "6",
+      "60"
+    ],
+    lat: 39.4958258230829,
+    lon: -0.3768122756845486,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1021",
+    nombre: "Pla del Real (1021)",
+    lineas: [
+      "11",
+      "16",
+      "26",
+      "6",
+      "70",
+      "94",
+      "95"
+    ],
+    lat: 39.47621072525627,
+    lon: -0.366729817751298,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1036",
+    nombre: "Uruguai - Vene\xE7uela (1036)",
+    lineas: [
+      "10"
+    ],
+    lat: 39.4556435159421,
+    lon: -0.3870536108959913,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1039",
+    nombre: "Ernest Ferrer - Arag\xF3 (1039)",
+    lineas: [
+      "32"
+    ],
+    lat: 39.47235294264223,
+    lon: -0.3569745830807477,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1057",
+    nombre: "Estadi de Mestalla (front) (1057)",
+    lineas: [
+      "10",
+      "12",
+      "79",
+      "93"
+    ],
+    lat: 39.474951600711734,
+    lon: -0.35595078277776965,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1116",
+    nombre: "Doctor Manuel Candela (imparell) - Blasco Ib\xE1\xF1ez (1116)",
+    lineas: [
+      "30",
+      "40"
+    ],
+    lat: 39.47300295162906,
+    lon: -0.34835433471501204,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1118",
+    nombre: "Doctor Manuel Candela (imparell) - Rodr\xEDguez de Cepeda (1118)",
+    lineas: [
+      "30",
+      "40"
+    ],
+    lat: 39.46832430135712,
+    lon: -0.3502795013990946,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1125",
+    nombre: "Comte de Torrefiel - Mestre Mar\xE7al (1125)",
+    lineas: [
+      "6",
+      "60"
+    ],
+    lat: 39.493253291163185,
+    lon: -0.3759370546929818,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "923",
+    nombre: "Carrera del Riu (parell) - Canal (923)",
+    lineas: [
+      "23",
+      "24",
+      "25"
+    ],
+    lat: 39.42353871866604,
+    lon: -0.3409812493919025,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "924",
+    nombre: "Carrera del Riu - Travessia Pinedo a la Mar (924)",
+    lineas: [
+      "23",
+      "24",
+      "25"
+    ],
+    lat: 39.42141970021204,
+    lon: -0.3404345076602181,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "928",
+    nombre: "Carrera del Riu - Moss\xE9n Cuenca (928)",
+    lineas: [
+      "23",
+      "24",
+      "25"
+    ],
+    lat: 39.42165821981562,
+    lon: -0.34043185829616535,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "966",
+    nombre: "Vicent Zaragoz\xE0 (966)",
+    lineas: [
+      "10"
+    ],
+    lat: 39.48399691680339,
+    lon: -0.35755464025976996,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "974",
+    nombre: "Carters - Llanera de Ranes (974)",
+    lineas: [
+      "10"
+    ],
+    lat: 39.45267681215737,
+    lon: -0.3886714143985809,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "983",
+    nombre: "Ram\xF3n y Cajal - Bail\xE9n (983)",
+    lineas: [
+      "31",
+      "63",
+      "64",
+      "67"
+    ],
+    lat: 39.463174483570185,
+    lon: -0.37973140733786914,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1688",
+    nombre: "Peris i Valero - Escultor Josep Capuz (1688)",
+    lineas: [
+      "89"
+    ],
+    lat: 39.46212622244002,
+    lon: -0.3632402385009357,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1672",
+    nombre: "Reina - Pescadors (1672)",
+    lineas: [
+      "19",
+      "92"
+    ],
+    lat: 39.46986107034692,
+    lon: -0.3285296166249586,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1682",
+    nombre: "Primat Reig - Constituci\xF3 (1682)",
+    lineas: [
+      "89"
+    ],
+    lat: 39.491795459693684,
+    lon: -0.3734256788383502,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1700",
+    nombre: "Camp de T\xFAria - Marina Baixa  (1700)",
+    lineas: [
+      "62",
+      "67"
+    ],
+    lat: 39.49258248879419,
+    lon: -0.40669235267451553,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1724",
+    nombre: "Rib\xE0s (imparell) - Doctor Ruiz i Comes (1724)",
+    lineas: [
+      "14",
+      "23"
+    ],
+    lat: 39.43140565091867,
+    lon: -0.35956505541215694,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1655",
+    nombre: "Mestre Rodrigo - La Plana Baixa (1655)",
+    lineas: [
+      "67"
+    ],
+    lat: 39.48906742167068,
+    lon: -0.40577963914289744,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1574",
+    nombre: "Ferran el Cat\xF2lic (parell) - Metro T\xFAria (1574)",
+    lineas: [
+      "60",
+      "62",
+      "64",
+      "80",
+      "92"
+    ],
+    lat: 39.47712387781061,
+    lon: -0.3896245836195454,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1597",
+    nombre: "Illes Can\xE0ries - Lebon (1597)",
+    lineas: [
+      "30",
+      "4",
+      "92"
+    ],
+    lat: 39.46501250401448,
+    lon: -0.35064067706780855,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1596",
+    nombre: "Illes Can\xE0ries - Vicente Beltr\xE1n Grimal (1596)",
+    lineas: [
+      "30",
+      "35",
+      "4",
+      "92"
+    ],
+    lat: 39.464084171425455,
+    lon: -0.34745863964504736,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1594",
+    nombre: "Illes Can\xE0ries - Noguera (1594)",
+    lineas: [
+      "30",
+      "4",
+      "92"
+    ],
+    lat: 39.4617634832284,
+    lon: -0.3416829029234098,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1584",
+    nombre: "Joaquim Ballester - Pare Ferr\xEDs (1584)",
+    lineas: [
+      "98"
+    ],
+    lat: 39.48463051305917,
+    lon: -0.38656923613100713,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1591",
+    nombre: "Joan Verdeguer - Las Naves (1591)",
+    lineas: [
+      "19",
+      "30",
+      "4",
+      "92"
+    ],
+    lat: 39.458834537726645,
+    lon: -0.3361129717187797,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1602",
+    nombre: "Serradora - Peanya (1602)",
+    lineas: [
+      "99"
+    ],
+    lat: 39.462750854681914,
+    lon: -0.3375785602586188,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1598",
+    nombre: "Illes Can\xE0ries - Riu Escalona (1598)",
+    lineas: [
+      "4",
+      "92"
+    ],
+    lat: 39.4658439788117,
+    lon: -0.3535468486601204,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1631",
+    nombre: "Port - Illes Can\xE0ries (1631)",
+    lineas: [
+      "19",
+      "92"
+    ],
+    lat: 39.46152898895248,
+    lon: -0.33815712861873515,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "985",
+    nombre: "Centre de Salut Benimaclet (985)",
+    lineas: [
+      "10"
+    ],
+    lat: 39.48318609212424,
+    lon: -0.35863494359391473,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "816",
+    nombre: "Sant Vicent M\xE0rtir - Espanya (816)",
+    lineas: [
+      "70",
+      "71",
+      "72"
+    ],
+    lat: 39.46656685561697,
+    lon: -0.38098395386583794,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "823",
+    nombre: "F\xE9lix Pizcueta - Ciril Amor\xF3s (823)",
+    lineas: [
+      "14",
+      "35",
+      "6"
+    ],
+    lat: 39.465975502597125,
+    lon: -0.37242993588813417,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "866",
+    nombre: "Catalunya - Santa Cruz de la Zarza (866)",
+    lineas: [
+      "93",
+      "98"
+    ],
+    lat: 39.47891320340901,
+    lon: -0.35414650762059546,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "870",
+    nombre: "Misser Masc\xF3 - Doctor Rodr\xEDgez Forn\xF3s (870)",
+    lineas: [
+      "32"
+    ],
+    lat: 39.47481180458751,
+    lon: -0.3602476940663454,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "737",
+    nombre: "Sant Vicent M\xE0rtir - Giorgeta (737)",
+    lineas: [
+      "27",
+      "64"
+    ],
+    lat: 39.460397566994864,
+    lon: -0.3827042317631112,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "746",
+    nombre: "\xC0ngel Guimer\xE0 - Bon Ordre (746)",
+    lineas: [
+      "67",
+      "70",
+      "72",
+      "93"
+    ],
+    lat: 39.46978978408814,
+    lon: -0.38810693539685204,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "748",
+    nombre: "Centre de Salut Joan Lloren\xE7 (748)",
+    lineas: [
+      "73"
+    ],
+    lat: 39.473803578974575,
+    lon: -0.39194249563149747,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "760",
+    nombre: "Sant Josep de Calassan\xE7 - Alberic (760)",
+    lineas: [
+      "67",
+      "70",
+      "72",
+      "93"
+    ],
+    lat: 39.46653359893673,
+    lon: -0.38779454175096373,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "773",
+    nombre: "Pla\xE7a del Temple (773)",
+    lineas: [
+      "11",
+      "16",
+      "26",
+      "28",
+      "6",
+      "80",
+      "94",
+      "95",
+      "C1"
+    ],
+    lat: 39.47696867447908,
+    lon: -0.37116275816721755,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "792",
+    nombre: "Encarnaci\xF3 - Guillem de Castro (792)",
+    lineas: [
+      "28",
+      "C1"
+    ],
+    lat: 39.47390747768613,
+    lon: -0.3838901738526975,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "803",
+    nombre: "Quart - Guillem de Castro (803)",
+    lineas: [
+      "73"
+    ],
+    lat: 39.47562664488846,
+    lon: -0.38486510632006743,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "731",
+    nombre: "Joaqu\xEDn Costa - Regne de Val\xE8ncia (731)",
+    lineas: [
+      "40"
+    ],
+    lat: 39.46352812894705,
+    lon: -0.365382408400748,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "653",
+    nombre: "Poliesportiu Fonteta de Sant Llu\xEDs (653)",
+    lineas: [
+      "13"
+    ],
+    lat: 39.451997698248405,
+    lon: -0.36644468579657125,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "666",
+    nombre: "Mare de D\xE9u de Lepant (parell) - Escultor Frederic Siurana (666)",
+    lineas: [
+      "14",
+      "23"
+    ],
+    lat: 39.42990887741543,
+    lon: -0.36347491228672346,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "682",
+    nombre: "Escultor Josep Capuz (parell) - Centre d'especialitats (682)",
+    lineas: [
+      "14",
+      "18"
+    ],
+    lat: 39.46151928238098,
+    lon: -0.36260215107868965,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "686",
+    nombre: "Marqu\xE9s del T\xFAria (imparell) - Pla\xE7a C\xE1novas (686)",
+    lineas: [
+      "80",
+      "92",
+      "93"
+    ],
+    lat: 39.46848898117759,
+    lon: -0.3658185852528091,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "688",
+    nombre: "Marqu\xE9s del T\xFAria - Hern\xE1n Cort\xE9s (688)",
+    lineas: [
+      "80",
+      "92",
+      "93"
+    ],
+    lat: 39.466398815536664,
+    lon: -0.3707285800610642,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "691",
+    nombre: "Pla\xE7a d'Espanya - Ermita (691)",
+    lineas: [
+      "80",
+      "92"
+    ],
+    lat: 39.465206725820195,
+    lon: -0.3811539511966175,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "708",
+    nombre: "Germanies - Sevilla (708)",
+    lineas: [
+      "19",
+      "79",
+      "92",
+      "93"
+    ],
+    lat: 39.464445318073786,
+    lon: -0.3746627905804392,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "555",
+    nombre: "Conca - P\xE9rez Gald\xF3s (555)",
+    lineas: [
+      "11"
+    ],
+    lat: 39.46376152818204,
+    lon: -0.38861365682090043,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "724",
+    nombre: "Regne de Val\xE8ncia - Peris i Valero (724)",
+    lineas: [
+      "19",
+      "40"
+    ],
+    lat: 39.462745519421986,
+    lon: -0.36379128292686347,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "728",
+    nombre: "Pintor Salvador Abril - Mestre Josep Serrano (728)",
+    lineas: [
+      "14",
+      "35",
+      "6"
+    ],
+    lat: 39.463716195864485,
+    lon: -0.3708706076306123,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "575",
+    nombre: "Sant Vicent M\xE0rtir - Dolores Alcaide (575)",
+    lineas: [
+      "27",
+      "64"
+    ],
+    lat: 39.45579176347575,
+    lon: -0.38405670254061286,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "581",
+    nombre: "Real de Madrid - Carretera d'Alba (581)",
+    lineas: [
+      "27",
+      "9"
+    ],
+    lat: 39.43481753539517,
+    lon: -0.39103845578368684,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "585",
+    nombre: "Forn d'Alcedo (585)",
+    lineas: [
+      "23",
+      "9"
+    ],
+    lat: 39.43216736507176,
+    lon: -0.37642131477609914,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1949",
+    nombre: "Universitats - Facultat de Magisteri (1949)",
+    lineas: [
+      "18"
+    ],
+    lat: 39.47981793212776,
+    lon: -0.3458800402852578,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "591",
+    nombre: "Sant Vicent M\xE0rtir (imparell) - Arquebisbe Olaechea (591)",
+    lineas: [
+      "27",
+      "59",
+      "9"
+    ],
+    lat: 39.443663815003084,
+    lon: -0.3873715696846103,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "599",
+    nombre: "Peris i Valero - Bisbe Jaume P\xE9rez (599)",
+    lineas: [
+      "14",
+      "35",
+      "6",
+      "89"
+    ],
+    lat: 39.460325872657315,
+    lon: -0.36750459899232674,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2467",
+    nombre: "Buen Orden - Cuenca (2467)",
+    lineas: [
+      "90"
+    ],
+    lat: 39.46726330357253,
+    lon: -0.3867932100849482,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2468",
+    nombre: "Joan Lloren\xE7 - Erudito Orellana (2468)",
+    lineas: [
+      "90"
+    ],
+    lat: 39.47040746889625,
+    lon: -0.3890568786069462,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "611",
+    nombre: "Malilla (parell) - Illa Cabrera (611)",
+    lineas: [
+      "18",
+      "8"
+    ],
+    lat: 39.44883967595454,
+    lon: -0.3796237449598059,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "636",
+    nombre: "Fonteta de Sant Llu\xEDs (imparell) - \xC0ngel Villena  (636)",
+    lineas: [
+      "13",
+      "7"
+    ],
+    lat: 39.44849499810588,
+    lon: -0.36841778480613885,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "640",
+    nombre: "Puigcampana - Fonteta de Sant Llu\xEDs  (640)",
+    lineas: [
+      "7"
+    ],
+    lat: 39.45503703584988,
+    lon: -0.37114871477104244,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "644",
+    nombre: "Sapadors - Dos d'Abril (644)",
+    lineas: [
+      "6"
+    ],
+    lat: 39.45740629203101,
+    lon: -0.36806377566362475,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "550",
+    nombre: "Humanista Mariner - Beat Nicolau Factor (550)",
+    lineas: [
+      "11"
+    ],
+    lat: 39.46175845019469,
+    lon: -0.3925975926470898,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "441",
+    nombre: "P\xE9rez Gald\xF3s - Calixt III (441)",
+    lineas: [
+      "67"
+    ],
+    lat: 39.46962157274306,
+    lon: -0.39176355416355046,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "474",
+    nombre: "Brasil - Francisco Moreno Usedo (474)",
+    lineas: [
+      "73"
+    ],
+    lat: 39.47147480007337,
+    lon: -0.3974846877256919,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "487",
+    nombre: "Cid - Pere Maria Orts (487)",
+    lineas: [
+      "93",
+      "98"
+    ],
+    lat: 39.46966758256066,
+    lon: -0.4141605112854869,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "498",
+    nombre: "Tres Creus (carril bus) - Mercat de Castella (498)",
+    lineas: [
+      "71",
+      "99"
+    ],
+    lat: 39.46537231833509,
+    lon: -0.4061516380472157,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "500",
+    nombre: "La Fontsanta (500)",
+    lineas: [
+      "70"
+    ],
+    lat: 39.465744281936274,
+    lon: -0.4096526227801847,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "507",
+    nombre: "Central de Policia Local de Val\xE8ncia (507)",
+    lineas: [
+      "70",
+      "93"
+    ],
+    lat: 39.46860867760029,
+    lon: -0.39982943703543306,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "511",
+    nombre: "Tres Forques (parell) - Arxiduc Carles (511)",
+    lineas: [
+      "71"
+    ],
+    lat: 39.4640549316569,
+    lon: -0.3968986906759247,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "515",
+    nombre: "Tres Creus (carril bus) - M\xFAsic Ayll\xF3n (515)",
+    lineas: [
+      "73",
+      "99"
+    ],
+    lat: 39.467034948962635,
+    lon: -0.4057824966172316,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "543",
+    nombre: "Arxiduc Carles - M\xFAsic Gomis (543)",
+    lineas: [
+      "72",
+      "73"
+    ],
+    lat: 39.45888851863713,
+    lon: -0.401408982086067,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "545",
+    nombre: "Arquitecte Segura de Lago - Professor \xC0ngel Lacalle (545)",
+    lineas: [
+      "72",
+      "73"
+    ],
+    lat: 39.45525513824356,
+    lon: -0.40408668948647286,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "348",
+    nombre: "Estaci\xF3 d'autobusos (riu) (348)",
+    lineas: [
+      "80"
+    ],
+    lat: 39.47990831062056,
+    lon: -0.3878023082981763,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "354",
+    nombre: "Pare Ferr\xEDs - Joaquim Ballester (354)",
+    lineas: [
+      "28",
+      "94"
+    ],
+    lat: 39.48489814632734,
+    lon: -0.3863990068662174,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "359",
+    nombre: "Joaquim Ballester - Campanar (359)",
+    lineas: [
+      "98"
+    ],
+    lat: 39.48186012022586,
+    lon: -0.39209987792529455,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "368",
+    nombre: "Campanar - Tirso de Molina (368)",
+    lineas: [
+      "89"
+    ],
+    lat: 39.47777580159739,
+    lon: -0.3947695586673236,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "375",
+    nombre: "Corts Valencianes - Davant Escoles Professionals Sant Josep  (375)",
+    lineas: [
+      "62",
+      "99"
+    ],
+    lat: 39.48675365562223,
+    lon: -0.39640249347987155,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "427",
+    nombre: "P\xE9rez Gald\xF3s - Olimpia Arozena Torres (427)",
+    lineas: [
+      "67",
+      "89"
+    ],
+    lat: 39.47003256298607,
+    lon: -0.3923936521088177,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "215",
+    nombre: "Alboraia - Primat Reig (215)",
+    lineas: [
+      "11"
+    ],
+    lat: 39.486993814193085,
+    lon: -0.36789066928723907,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "223",
+    nombre: "Vivers - General Elio (223)",
+    lineas: [
+      "70",
+      "80"
+    ],
+    lat: 39.477926925343425,
+    lon: -0.36697004839074615,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "247",
+    nombre: "Constituci\xF3 - Sant Joan de la Penya (247)",
+    lineas: [
+      "16"
+    ],
+    lat: 39.496534997808794,
+    lon: -0.37081552357976555,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "259",
+    nombre: "Sant Miquel dels Reis (front) (259)",
+    lineas: [
+      "16"
+    ],
+    lat: 39.499307928340734,
+    lon: -0.37027352951645276,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "279",
+    nombre: "Cam\xED de Moncada - Doctor Peset Aleixandre (279)",
+    lineas: [
+      "26"
+    ],
+    lat: 39.491460845188556,
+    lon: -0.378705851911092,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "281",
+    nombre: "Cam\xED de Moncada (parell) - Alemany (281)",
+    lineas: [
+      "26"
+    ],
+    lat: 39.49644902710382,
+    lon: -0.38092369797961956,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "302",
+    nombre: "Cam\xED de Moncada - Poble Nou (imparell) (302)",
+    lineas: [
+      "26"
+    ],
+    lat: 39.50503064441887,
+    lon: -0.3838043839546851,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "306",
+    nombre: "Cam\xED de Moncada - F\xE9lix del R\xEDo (306)",
+    lineas: [
+      "26"
+    ],
+    lat: 39.491804332774244,
+    lon: -0.3790335314123425,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "310",
+    nombre: "Louis Braille (parell) - Parc de Benicalap (310)",
+    lineas: [
+      "28"
+    ],
+    lat: 39.49567884866867,
+    lon: -0.39621068808143994,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "198",
+    nombre: "Pare Vi\xF1as - Reig Genov\xE9s (198)",
+    lineas: [
+      "11"
+    ],
+    lat: 39.4921700152903,
+    lon: -0.3716188944752156,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1615",
+    nombre: "Port - Saragossa (1615)",
+    lineas: [
+      "4",
+      "92"
+    ],
+    lat: 39.4680028833731,
+    lon: -0.35997067282867895,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1384",
+    nombre: "Serradora - Poliesportiu (1384)",
+    lineas: [
+      "32",
+      "99"
+    ],
+    lat: 39.46667732511951,
+    lon: -0.33503715902562003,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "650",
+    nombre: "Poliesportiu Fonteta de Sant Llu\xEDs (front) (650)",
+    lineas: [
+      "13"
+    ],
+    lat: 39.452500521724005,
+    lon: -0.3657970193654089,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "352",
+    nombre: "Guadalaviar - Pont dels Serrans (352)",
+    lineas: [
+      "16",
+      "26",
+      "6",
+      "80",
+      "94"
+    ],
+    lat: 39.48164319706041,
+    lon: -0.3753595170469953,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "346",
+    nombre: "Estaci\xF3 d'autobusos (346)",
+    lineas: [
+      "79",
+      "95"
+    ],
+    lat: 39.480211915773715,
+    lon: -0.38770875302825153,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "344",
+    nombre: "Escola Oficial d'Idiomes (344)",
+    lineas: [
+      "79",
+      "94",
+      "95"
+    ],
+    lat: 39.4829023257568,
+    lon: -0.3811858621983909,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1617",
+    nombre: "Port - Riu Escalona (1617)",
+    lineas: [
+      "4",
+      "92"
+    ],
+    lat: 39.46597512442984,
+    lon: -0.35307768896681424,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1622",
+    nombre: "Port - Eivissa (1622)",
+    lineas: [
+      "30",
+      "4"
+    ],
+    lat: 39.46181884040959,
+    lon: -0.339188778152408,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1416",
+    nombre: "Institut Obrer de Val\xE8ncia (imparell) - Autopista Saler (1416)",
+    lineas: [
+      "13",
+      "35"
+    ],
+    lat: 39.45583696163748,
+    lon: -0.35770716425861065,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1418",
+    nombre: "Institut Obrer de Val\xE8ncia (parell) - Amado Granell Mesado (1418)",
+    lineas: [
+      "13",
+      "35"
+    ],
+    lat: 39.45441539577533,
+    lon: -0.3605944113820716,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1423",
+    nombre: "Petxina - Terol (1423)",
+    lineas: [
+      "95"
+    ],
+    lat: 39.476083774406554,
+    lon: -0.3935623122922023,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1425",
+    nombre: "Petxina - T\xFAria (1425)",
+    lineas: [
+      "95"
+    ],
+    lat: 39.47926971913269,
+    lon: -0.38509429902869535,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1431",
+    nombre: "Tirso de Molina - Pius XII (1431)",
+    lineas: [
+      "95"
+    ],
+    lat: 39.47853598697551,
+    lon: -0.39236078785695033,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1440",
+    nombre: "Sant Marcel\xB7l\xED (1440)",
+    lineas: [
+      "10",
+      "59",
+      "9",
+      "99"
+    ],
+    lat: 39.44730253069677,
+    lon: -0.3909874799254226,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1354",
+    nombre: "Poliesportiu Malilla (1354)",
+    lineas: [
+      "18"
+    ],
+    lat: 39.451758851684104,
+    lon: -0.37449436864375235,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1268",
+    nombre: "Tres Creus (parell) - Hospital General (1268)",
+    lineas: [
+      "70",
+      "73",
+      "95",
+      "99"
+    ],
+    lat: 39.46829645679532,
+    lon: -0.4064216249809414,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1278",
+    nombre: "\xC0ngel Guimer\xE0 - Ferran el Cat\xF2lic (1278)",
+    lineas: [
+      "60",
+      "62",
+      "70",
+      "72"
+    ],
+    lat: 39.47035738319923,
+    lon: -0.3845053720083935,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1282",
+    nombre: "Universitats - Facultat de Ci\xE8ncies Socials (1282)",
+    lineas: [
+      "40",
+      "71"
+    ],
+    lat: 39.47942592691572,
+    lon: -0.34564242854406146,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1295",
+    nombre: "Mestre Rodrigo - Marqu\xE9s de Sant Joan (1295)",
+    lineas: [
+      "90"
+    ],
+    lat: 39.47736498067847,
+    lon: -0.3973619466708244,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1306",
+    nombre: "Pont de les Drassanes - Terminal mar\xEDtima (1306)",
+    lineas: [
+      "30",
+      "4",
+      "95"
+    ],
+    lat: 39.45502429819919,
+    lon: -0.3299893346567196,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1331",
+    nombre: "Florista - Carrasqueta (1331)",
+    lineas: [
+      "28"
+    ],
+    lat: 39.49382586205318,
+    lon: -0.39593523633455385,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1348",
+    nombre: "Doctor Nicasi Benlloch - Emili Nadal (1348)",
+    lineas: [
+      "28"
+    ],
+    lat: 39.488894875356465,
+    lon: -0.39208349996763125,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1141",
+    nombre: "Germans Maristes (imparell) - Fonteta de Sant Llu\xEDs  (1141)",
+    lineas: [
+      "13"
+    ],
+    lat: 39.45162386202675,
+    lon: -0.36782796892469366,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1163",
+    nombre: "Isabel de Villena - Font d'en Carr\xF2s  (1163)",
+    lineas: [
+      "32"
+    ],
+    lat: 39.48115818380831,
+    lon: -0.3258003515262037,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1170",
+    nombre: "Foc - Amadeu Desfilis (1170)",
+    lineas: [
+      "12",
+      "28"
+    ],
+    lat: 39.49994284636663,
+    lon: -0.394510305142508,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1175",
+    nombre: "Tres Creus - Segona Rep\xFAblica Espanyola (1175)",
+    lineas: [
+      "99"
+    ],
+    lat: 39.4586289177038,
+    lon: -0.40277651924174435,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1184",
+    nombre: "General Avil\xE9s - Miguel Servet (parell) (1184)",
+    lineas: [
+      "64",
+      "94"
+    ],
+    lat: 39.486923330874475,
+    lon: -0.39392485212435097,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1211",
+    nombre: "Blasco Ib\xE1\xF1ez (imparell) - Jos\xE9 Mar\xEDa Haro (1211)",
+    lineas: [
+      "31",
+      "81"
+    ],
+    lat: 39.471212131668686,
+    lon: -0.33730654332002213,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1239",
+    nombre: "Primat Reig - X\xE0bia (1239)",
+    lineas: [
+      "10",
+      "90",
+      "98"
+    ],
+    lat: 39.47903700510067,
+    lon: -0.3565538438375893,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1538",
+    nombre: "Fran\xE7a (parell) - Albereda (1538)",
+    lineas: [
+      "19"
+    ],
+    lat: 39.46014915122494,
+    lon: -0.3520688727206702,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1540",
+    nombre: "Fran\xE7a - Trafalgar  (1540)",
+    lineas: [
+      "19"
+    ],
+    lat: 39.458744220265295,
+    lon: -0.34567544433338776,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "698",
+    nombre: "Quart - Ferran el Cat\xF2lic (698)",
+    lineas: [
+      "73"
+    ],
+    lat: 39.4748689971469,
+    lon: -0.38939758881821784,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "718",
+    nombre: "Cadis - Dels Centelles (718)",
+    lineas: [
+      "7"
+    ],
+    lat: 39.4592662745097,
+    lon: -0.37180672861868974,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "623",
+    nombre: "Pianista Empar Iturbi - Ausi\xE0s March (623)",
+    lineas: [
+      "8"
+    ],
+    lat: 39.45499464750784,
+    lon: -0.37510971923223346,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "531",
+    nombre: "Tres Forques (imparell) - Arxiduc Carles (531)",
+    lineas: [
+      "71"
+    ],
+    lat: 39.463849525403994,
+    lon: -0.3969394592659,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "592",
+    nombre: "San Vicent M\xE0rtir (imparell) - Creu Coberta (592)",
+    lineas: [
+      "27",
+      "64"
+    ],
+    lat: 39.447288822121244,
+    lon: -0.3859506645702107,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1117",
+    nombre: "Doctor Manuel Candela - Sants Just i Pastor (1117)",
+    lineas: [
+      "30",
+      "40"
+    ],
+    lat: 39.47046921535966,
+    lon: -0.3494101060867925,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "874",
+    nombre: "Finl\xE0ndia - General Gil Dolz (874)",
+    lineas: [
+      "32"
+    ],
+    lat: 39.472735551530434,
+    lon: -0.3603020300284028,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "940",
+    nombre: "Carrera del Riu - Casa Andr\xE9s (940)",
+    lineas: [
+      "23"
+    ],
+    lat: 39.4352266710145,
+    lon: -0.34352564053359913,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "958",
+    nombre: "Doctor Peset Aleixandre (parell) - Metro Tr\xE0nsits (958)",
+    lineas: [
+      "60",
+      "64",
+      "89"
+    ],
+    lat: 39.489341663874015,
+    lon: -0.38676447054061014,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "975",
+    nombre: "Carters - Calvo Acacio (975)",
+    lineas: [
+      "10"
+    ],
+    lat: 39.45007623793038,
+    lon: -0.3893010472610265,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "979",
+    nombre: "Carters - Moss\xE9n Febrer (979)",
+    lineas: [
+      "10"
+    ],
+    lat: 39.45030279066593,
+    lon: -0.38907213657465467,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1662",
+    nombre: "Vall de la Ballestera - P\xEDo Baroja (1662)",
+    lineas: [
+      "98",
+      "99"
+    ],
+    lat: 39.47861797851623,
+    lon: -0.40409592378293296,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1665",
+    nombre: "Alcalde Reig (riu) - Museu Faller (1665)",
+    lineas: [
+      "23",
+      "24",
+      "25",
+      "95"
+    ],
+    lat: 39.45986161104104,
+    lon: -0.3587170268205189,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1715",
+    nombre: "Fires (parell) - Cementeri (1715)",
+    lineas: [
+      "62"
+    ],
+    lat: 39.50549926805493,
+    lon: -0.4243590596966949,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "115",
+    nombre: "Blasco Ib\xE1\xF1ez - Rep\xFAblica Argentina (115)",
+    lineas: [
+      "30",
+      "31",
+      "71",
+      "81"
+    ],
+    lat: 39.474843640310816,
+    lon: -0.3511832967519183,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "268",
+    nombre: "Joan XXIII (parell) - F\xE9lix del R\xEDo (268)",
+    lineas: [
+      "60",
+      "64"
+    ],
+    lat: 39.49112434419915,
+    lon: -0.3822753925293589,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1515",
+    nombre: "Sants Just i Pastor - Jos\xE9 Mar\xEDa Haro  (1515)",
+    lineas: [
+      "32"
+    ],
+    lat: 39.467309501061784,
+    lon: -0.3396904499677612,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1520",
+    nombre: "Sant Agust\xED (1520)",
+    lineas: [
+      "28",
+      "60",
+      "62",
+      "70",
+      "72",
+      "C1"
+    ],
+    lat: 39.4684775398968,
+    lon: -0.3805491517703816,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "815",
+    nombre: "Pla\xE7a d'Espanya - Julio Antonio (815)",
+    lineas: [
+      "10",
+      "27",
+      "31",
+      "59",
+      "9"
+    ],
+    lat: 39.46596632854621,
+    lon: -0.3812156649651316,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "124",
+    nombre: "Blasco Ib\xE1\xF1ez - Jos\xE9 Mar\xEDa Orense (124)",
+    lineas: [
+      "31",
+      "81"
+    ],
+    lat: 39.47198386089297,
+    lon: -0.33994528756018216,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "415",
+    nombre: "Vall de la Ballestera (parell) - Mestre Rodrigo (415)",
+    lineas: [
+      "98",
+      "99"
+    ],
+    lat: 39.47915079843792,
+    lon: -0.39817137336273034,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "18",
+    nombre: "La Malva-rosa - Cavite (18)",
+    lineas: [
+      "19",
+      "31"
+    ],
+    lat: 39.48316297597103,
+    lon: -0.3265992751957409,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "62",
+    nombre: "Mercat de Natzaret (62)",
+    lineas: [
+      "30",
+      "4",
+      "95"
+    ],
+    lat: 39.450237298460074,
+    lon: -0.3341561776066225,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1218",
+    nombre: "Amadeu de Savoia - Palau de l'Exposici\xF3 (1218)",
+    lineas: [
+      "32"
+    ],
+    lat: 39.47367046825706,
+    lon: -0.36203090788212866,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1133",
+    nombre: "Tossal del Rei (1133)",
+    lineas: [
+      "12",
+      "16"
+    ],
+    lat: 39.49612941385141,
+    lon: -0.37223274759073566,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1164",
+    nombre: "Isabel de Villena - Vicent la Roda (1164)",
+    lineas: [
+      "32"
+    ],
+    lat: 39.47896606657254,
+    lon: -0.32585751432503196,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1061",
+    nombre: "Pere Cabanes - Sant Dom\xE9nec Savio (1061)",
+    lineas: [
+      "12"
+    ],
+    lat: 39.494984979652976,
+    lon: -0.3753286315220565,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1020",
+    nombre: "Metro Alameda (1020)",
+    lineas: [
+      "11",
+      "16",
+      "26",
+      "6",
+      "70",
+      "94",
+      "95"
+    ],
+    lat: 39.47420705924125,
+    lon: -0.3650865198775659,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "652",
+    nombre: "Germans Maristes (parell) - Fonteta de Sant Llu\xEDs  (652)",
+    lineas: [
+      "13"
+    ],
+    lat: 39.451115524885246,
+    lon: -0.3685535280469331,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1464",
+    nombre: "Malilla (imparell) - Illa Cabrera (1464)",
+    lineas: [
+      "18",
+      "8"
+    ],
+    lat: 39.44940748891105,
+    lon: -0.37941169412957937,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1501",
+    nombre: "Sants Just i Pastor - Serradora (1501)",
+    lineas: [
+      "32"
+    ],
+    lat: 39.46633216531723,
+    lon: -0.33700774933519556,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "60",
+    nombre: "Pont de les Drassanes - Terminal mar\xEDtima (front) (60)",
+    lineas: [
+      "30",
+      "4",
+      "95"
+    ],
+    lat: 39.454493936024,
+    lon: -0.3306578542809831,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1132",
+    nombre: "M\xFAsic Esp\xED - Gravador Fabregat (1132)",
+    lineas: [
+      "12"
+    ],
+    lat: 39.49703873977057,
+    lon: -0.37441683267028475,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1176",
+    nombre: "Tres Creus - Doctor P\xE9rez Feliu (1176)",
+    lineas: [
+      "99"
+    ],
+    lat: 39.460550613587486,
+    lon: -0.4039866975595716,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1356",
+    nombre: "La Plata  - Fonteta de Sant Llu\xEDs (1356)",
+    lineas: [
+      "18",
+      "6"
+    ],
+    lat: 39.452962313166154,
+    lon: -0.37183863884490803,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1364",
+    nombre: "Regne de Val\xE8ncia (parell) - Alcalde Reig (1364)",
+    lineas: [
+      "40"
+    ],
+    lat: 39.462105077307264,
+    lon: -0.3608611478408509,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1766",
+    nombre: "Guillem de Castro - Comissaria de policia (1766)",
+    lineas: [
+      "11",
+      "28",
+      "C1"
+    ],
+    lat: 39.47089942789735,
+    lon: -0.38364772012707554,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1375",
+    nombre: "Punta al Mar (parell) - Canal (1375)",
+    lineas: [
+      "23"
+    ],
+    lat: 39.445113941418356,
+    lon: -0.3370638927908519,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1381",
+    nombre: "Punta al Mar (imparell) - Riu (1381)",
+    lineas: [
+      "23"
+    ],
+    lat: 39.44552606939952,
+    lon: -0.33955650702922663,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1409",
+    nombre: "Blasco Ib\xE1\xF1ez - Manuela Estell\xE9s  (1409)",
+    lineas: [
+      "31",
+      "81"
+    ],
+    lat: 39.47016261376788,
+    lon: -0.3360703315071054,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1038",
+    nombre: "Arxiduc Carles (imparell) - Tres Forques (1038)",
+    lineas: [
+      "72"
+    ],
+    lat: 39.4635291553939,
+    lon: -0.39638620889681847,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1050",
+    nombre: "Mediterr\xE0nia - Vicent Brull (1050)",
+    lineas: [
+      "32"
+    ],
+    lat: 39.46786498498383,
+    lon: -0.3323133080665371,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1055",
+    nombre: "Arag\xF3 - Ernest Ferrer (1055)",
+    lineas: [
+      "10",
+      "12",
+      "79",
+      "93"
+    ],
+    lat: 39.47281889990952,
+    lon: -0.35699662361942563,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1060",
+    nombre: "Pere Cabanes - Mont Carmel (1060)",
+    lineas: [
+      "12"
+    ],
+    lat: 39.49542320736504,
+    lon: -0.3727853060063415,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1083",
+    nombre: "Arag\xF3 - Amadeu de Savoia (1083)",
+    lineas: [
+      "10",
+      "12",
+      "80",
+      "93"
+    ],
+    lat: 39.4726482362926,
+    lon: -0.3576899786819302,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1091",
+    nombre: "Malilla (parell) - Centre de Salut (1091)",
+    lineas: [
+      "18",
+      "8"
+    ],
+    lat: 39.45047578469134,
+    lon: -0.379216293473856,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1111",
+    nombre: "Doctor Manuel Candela (parell) - Sants Just i Pastor (1111)",
+    lineas: [
+      "30",
+      "40"
+    ],
+    lat: 39.47035781167899,
+    lon: -0.3491650188267821,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1114",
+    nombre: "Ramon Llull - Garc\xEDa Donato (1114)",
+    lineas: [
+      "40",
+      "71"
+    ],
+    lat: 39.47694736507999,
+    lon: -0.34674468519630985,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1585",
+    nombre: "Natzaret (1585)",
+    lineas: [
+      "30",
+      "4"
+    ],
+    lat: 39.44747024180433,
+    lon: -0.33177604010792494,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1657",
+    nombre: "Nou Campanar - Hospital Arnau de Vilanova (1657)",
+    lineas: [
+      "67"
+    ],
+    lat: 39.49009974886632,
+    lon: -0.4043021542697896,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1659",
+    nombre: "Mestre Rodrigo (imparell) - La Safor (1659)",
+    lineas: [
+      "67"
+    ],
+    lat: 39.48696401915349,
+    lon: -0.4045826351956455,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1695",
+    nombre: "Cardenal Benlloch - Doctor Ferran (1695)",
+    lineas: [
+      "18",
+      "90"
+    ],
+    lat: 39.46962229282471,
+    lon: -0.3554064009425994,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1678",
+    nombre: "Cardenal Benlloch - Sants Just i Pastor (1678)",
+    lineas: [
+      "18",
+      "89"
+    ],
+    lat: 39.472083985782305,
+    lon: -0.3539623962901265,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1684",
+    nombre: "Doctor Peset Aleixandre - Avinguda de Burjassot (1684)",
+    lineas: [
+      "60",
+      "64",
+      "89"
+    ],
+    lat: 39.48893284987757,
+    lon: -0.3885702988290171,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1763",
+    nombre: "Jacinto Benavente - Pont de l'\xC0ngel Custodi (1763)",
+    lineas: [
+      "23",
+      "24",
+      "25",
+      "95"
+    ],
+    lat: 39.46468321501288,
+    lon: -0.36135077564016693,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1764",
+    nombre: "Jacinto Benavente - Palau de la M\xFAsica (1764)",
+    lineas: [
+      "23",
+      "24",
+      "25",
+      "95"
+    ],
+    lat: 39.466477977322036,
+    lon: -0.36242967080474925,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1734",
+    nombre: "Carda - Moro Zeit (1734)",
+    lineas: [
+      "73"
+    ],
+    lat: 39.47511272140295,
+    lon: -0.3808729918214302,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1744",
+    nombre: "Albereda (riu) - L'Hemisf\xE8ric (1744)",
+    lineas: [
+      "94"
+    ],
+    lat: 39.45933609434594,
+    lon: -0.35280791384132487,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1747",
+    nombre: "Serradora - Port (1747)",
+    lineas: [
+      "99"
+    ],
+    lat: 39.46208706690172,
+    lon: -0.3379865935145151,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1752",
+    nombre: "Fausto Elio (imparell) - Universitat Polit\xE8cnica (1752)",
+    lineas: [
+      "99"
+    ],
+    lat: 39.47897080452997,
+    lon: -0.3330228542187774,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1750",
+    nombre: "Fausto Elio (parell) - Universitat Polit\xE8cnica (1750)",
+    lineas: [
+      "99"
+    ],
+    lat: 39.478991590314784,
+    lon: -0.3326726343820033,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1748",
+    nombre: "Serradora (parell) - Metro Mar\xEDtim (1748)",
+    lineas: [
+      "99"
+    ],
+    lat: 39.46406477445172,
+    lon: -0.33615540536491395,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1754",
+    nombre: "Mar\xED Blas de Lezo - Cam\xED del Cabanyal (1754)",
+    lineas: [
+      "31",
+      "98",
+      "99"
+    ],
+    lat: 39.47242809193103,
+    lon: -0.33427406694577133,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1753",
+    nombre: "Llu\xEDs Peix\xF3 - Tarongers (1753)",
+    lineas: [
+      "98",
+      "99"
+    ],
+    lat: 39.47523895277456,
+    lon: -0.3337100328633822,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1751",
+    nombre: "Mendiz\xE1bal - Doctor \xC1lvaro L\xF3pez (1751)",
+    lineas: [
+      "99"
+    ],
+    lat: 39.48390151416922,
+    lon: -0.3293853822653139,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1769",
+    nombre: "La Murta (imparell) - Cementeri (1769)",
+    lineas: [
+      "23",
+      "9"
+    ],
+    lat: 39.42516416837988,
+    lon: -0.37806312859479946,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1771",
+    nombre: "La Murta (parell) - Assagador de La Torre (1771)",
+    lineas: [
+      "23",
+      "9"
+    ],
+    lat: 39.42702323816914,
+    lon: -0.37694209843664284,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1776",
+    nombre: "Albereda - Palau de la M\xFAsica (imparell) (1776)",
+    lineas: [
+      "94"
+    ],
+    lat: 39.4657818337765,
+    lon: -0.3593966234108326,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1814",
+    nombre: "Reus - Poeta Fern\xE1ndez Heredia (1814)",
+    lineas: [
+      "98"
+    ],
+    lat: 39.48556721241867,
+    lon: -0.3794624066204213,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1815",
+    nombre: "Ruaya (imparell) - Visitaci\xF3 (1815)",
+    lineas: [
+      "98"
+    ],
+    lat: 39.485361600143776,
+    lon: -0.37646120804058725,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1821",
+    nombre: "Ausi\xE0s March - Bernat Descoll (1821)",
+    lineas: [
+      "6"
+    ],
+    lat: 39.45212409357,
+    lon: -0.3727502062015379,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1839",
+    nombre: "Duc de Mandas (parell) - Centre de Salut Arquitecte Tols\xE0 (1839)",
+    lineas: [
+      "11",
+      "12"
+    ],
+    lat: 39.49305978820085,
+    lon: -0.36858048136389665,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1843",
+    nombre: "Duc de Mandas - Alfauir  (1843)",
+    lineas: [
+      "12"
+    ],
+    lat: 39.49126694265477,
+    lon: -0.3660185115679009,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1854",
+    nombre: "Peris i Valero - Duc de Cal\xE0bria (1854)",
+    lineas: [
+      "14"
+    ],
+    lat: 39.46121611430988,
+    lon: -0.36573272636570425,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1859",
+    nombre: "Carters - Pla\xE7a Santiago Su\xE1rez (1859)",
+    lineas: [
+      "10"
+    ],
+    lat: 39.45288524293347,
+    lon: -0.3885289391941715,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1901",
+    nombre: "Catalunya - Direcci\xF3 General de Salut P\xFAblica (1901)",
+    lineas: [
+      "93",
+      "98"
+    ],
+    lat: 39.48126096344358,
+    lon: -0.35240644156968165,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1896",
+    nombre: "Tarongers - Facultat de Dret (1896)",
+    lineas: [
+      "93",
+      "98"
+    ],
+    lat: 39.47920195816982,
+    lon: -0.3436988046963712,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2450",
+    nombre: "Mora de Rubielos - Metro Jes\xFAs (2450)",
+    lineas: [
+      "10",
+      "59",
+      "9"
+    ],
+    lat: 39.45918937560256,
+    lon: -0.3850193007385023,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1897",
+    nombre: "Tarongers - Facultat d'Economia (1897)",
+    lineas: [
+      "93",
+      "98"
+    ],
+    lat: 39.478170067758015,
+    lon: -0.34008328282786965,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1918",
+    nombre: "Tarongers (imparell) - Metro Beter\xF3 (1918)",
+    lineas: [
+      "93",
+      "98"
+    ],
+    lat: 39.477089423527154,
+    lon: -0.3351480467452389,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "112",
+    nombre: "Ramon Llull - Leandro de Saralegui (112)",
+    lineas: [
+      "40",
+      "71"
+    ],
+    lat: 39.47512983827114,
+    lon: -0.34748971508775645,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "127",
+    nombre: "Blasco Ib\xE1\xF1ez - Actriu Encarna M\xE1\xF1ez (127)",
+    lineas: [
+      "31",
+      "81"
+    ],
+    lat: 39.47309778353351,
+    lon: -0.3461622387712394,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2405",
+    nombre: "Cam\xED nou de Paterna - B\xE9tera (2405)",
+    lineas: [
+      "62"
+    ],
+    lat: 39.49662733666846,
+    lon: -0.41852033811533107,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "135",
+    nombre: "Sants Just i Pastor - Humanista Furi\xF3 (135)",
+    lineas: [
+      "32"
+    ],
+    lat: 39.46881451175436,
+    lon: -0.34492059146693954,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "137",
+    nombre: "Sants Just i Pastor (imparell) - Metro Amistat (137)",
+    lineas: [
+      "32"
+    ],
+    lat: 39.47030786521833,
+    lon: -0.35006703661064437,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "141",
+    nombre: "Sants Just i Pastor - Peris Brell (141)",
+    lineas: [
+      "32"
+    ],
+    lat: 39.469025107310365,
+    lon: -0.3462744501500118,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "150",
+    nombre: "Cardenal Benlloch (parell) - Port (150)",
+    lineas: [
+      "18",
+      "89"
+    ],
+    lat: 39.46758148902873,
+    lon: -0.35618217764679816,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "157",
+    nombre: "Blasco Ib\xE1\xF1ez - Gasc\xF3 Oliag (157)",
+    lineas: [
+      "10",
+      "12",
+      "79",
+      "89"
+    ],
+    lat: 39.47719038663098,
+    lon: -0.35762837902452355,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "158",
+    nombre: "Blasco Ib\xE1\xF1ez - Facultat de Psicologia (158)",
+    lineas: [
+      "12",
+      "30",
+      "31",
+      "71",
+      "79",
+      "81",
+      "89"
+    ],
+    lat: 39.47791947402024,
+    lon: -0.3600608606609217,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "167",
+    nombre: "Blasco Ib\xE1\xF1ez - Facultat de Filologia (167)",
+    lineas: [
+      "12",
+      "30",
+      "31",
+      "71",
+      "80",
+      "81"
+    ],
+    lat: 39.476929807656525,
+    lon: -0.35915869709404247,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1654",
+    nombre: "Mestre Rodrigo - La Safor (1654)",
+    lineas: [
+      "67"
+    ],
+    lat: 39.48706742697923,
+    lon: -0.40432512492063033,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1663",
+    nombre: "Alcalde Reig (riu) - Parc Gulliver (1663)",
+    lineas: [
+      "23",
+      "24",
+      "25",
+      "95"
+    ],
+    lat: 39.46180729364421,
+    lon: -0.3601325706808689,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1265",
+    nombre: "Conselleria d'Educaci\xF3 (1265)",
+    lineas: [
+      "60",
+      "89"
+    ],
+    lat: 39.48388117543101,
+    lon: -0.39189446259034344,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1683",
+    nombre: "Doctor Peset Aleixandre - Moncada (1683)",
+    lineas: [
+      "60",
+      "89"
+    ],
+    lat: 39.49102790511905,
+    lon: -0.37907418556279887,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1720",
+    nombre: "Corts Valencianes - Constituci\xF3 (1720)",
+    lineas: [
+      "16"
+    ],
+    lat: 39.50879905146852,
+    lon: -0.36530031309582667,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1613",
+    nombre: "Comissaria Policia Local Mar\xEDtim (front) (1613)",
+    lineas: [
+      "95"
+    ],
+    lat: 39.46289592875381,
+    lon: -0.32857740828193077,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1652",
+    nombre: "Hern\xE1ndez L\xE1zaro - Vall de la Ballestera (1652)",
+    lineas: [
+      "67"
+    ],
+    lat: 39.47883249595059,
+    lon: -0.4032653054427763,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1653",
+    nombre: "Mestre Rodrigo - General Avil\xE9s (1653)",
+    lineas: [
+      "67"
+    ],
+    lat: 39.48376676838926,
+    lon: -0.4018605378627609,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1670",
+    nombre: "Reina - Remunta (1670)",
+    lineas: [
+      "19",
+      "31",
+      "92"
+    ],
+    lat: 39.4741358241332,
+    lon: -0.32789717040274136,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1675",
+    nombre: "Sueca - Puerto Rico (1675)",
+    lineas: [
+      "7"
+    ],
+    lat: 39.46124743682379,
+    lon: -0.37491041835223965,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1673",
+    nombre: "Reina - Vicent Gallart (1673)",
+    lineas: [
+      "19",
+      "92"
+    ],
+    lat: 39.46570919826764,
+    lon: -0.32913694993100223,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1679",
+    nombre: "Primat Reig - Cuenca Tramoyeres (1679)",
+    lineas: [
+      "89",
+      "98"
+    ],
+    lat: 39.48228468690356,
+    lon: -0.36047455375419435,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1965",
+    nombre: "Bulevard Sud (imparell) - Malilla (1965)",
+    lineas: [
+      "18",
+      "64",
+      "99"
+    ],
+    lat: 39.44580602124442,
+    lon: -0.3808155946284863,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2005",
+    nombre: "Marconi - Barri de la Llum (2005)",
+    lineas: [
+      "71"
+    ],
+    lat: 39.46747790499429,
+    lon: -0.4144577719427557,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2006",
+    nombre: "Pare Esteban Pernet (imparell) - Miquel Adlert (2006)",
+    lineas: [
+      "71"
+    ],
+    lat: 39.46699042836268,
+    lon: -0.4125941963771926,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "951",
+    nombre: "Cases de B\xE0rcena (II) (951)",
+    lineas: [
+      "16"
+    ],
+    lat: 39.52227177635913,
+    lon: -0.3574072155883311,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2072",
+    nombre: "Ciutat Administrativa 9 d'Octubre - Democr\xE0cia (2072)",
+    lineas: [
+      "73",
+      "95"
+    ],
+    lat: 39.47245118577891,
+    lon: -0.4053384789860725,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2070",
+    nombre: "Ciutat Administrativa 9 d'Octubre - Cieza (2070)",
+    lineas: [
+      "73",
+      "95",
+      "98",
+      "99"
+    ],
+    lat: 39.471771649142504,
+    lon: -0.405490591577175,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2085",
+    nombre: "Torrefiel (2085)",
+    lineas: [
+      "6",
+      "60"
+    ],
+    lat: 39.49856545997289,
+    lon: -0.37724638776480696,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2094",
+    nombre: "Molinell (parell) - Pintor Genaro Lahuerta (2094)",
+    lineas: [
+      "98"
+    ],
+    lat: 39.48483209535911,
+    lon: -0.36705312725586736,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2095",
+    nombre: "Molinell (imparell) - Pintor Genaro Lahuerta (2095)",
+    lineas: [
+      "98"
+    ],
+    lat: 39.48493536704622,
+    lon: -0.36693447825448816,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2111",
+    nombre: "Mare Nostrum - Illa de Tabarca (2111)",
+    lineas: [
+      "31"
+    ],
+    lat: 39.485461503063505,
+    lon: -0.32614259544418,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2113",
+    nombre: "Blasco Ib\xE1\xF1ez - Mar Tirreno (2113)",
+    lineas: [
+      "31"
+    ],
+    lat: 39.4877585796915,
+    lon: -0.3275985358265318,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2128",
+    nombre: "Filipines - Puerto Rico (2128)",
+    lineas: [
+      "8"
+    ],
+    lat: 39.46068032010514,
+    lon: -0.3783153012850221,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1694",
+    nombre: "Primat Reig - Doctor G\xF3mez Ferrer (1694)",
+    lineas: [
+      "90",
+      "98"
+    ],
+    lat: 39.48181223106321,
+    lon: -0.3603170919812813,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1696",
+    nombre: "Giorgeta (parell) - Metro Jes\xFAs (1696)",
+    lineas: [
+      "27",
+      "89"
+    ],
+    lat: 39.458967739950694,
+    lon: -0.3845070675119174,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1716",
+    nombre: "Ferran el Cat\xF2lic - Sant Ignasi de Loiola (1716)",
+    lineas: [
+      "60",
+      "62",
+      "73"
+    ],
+    lat: 39.473779321317245,
+    lon: -0.38779540800276835,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1742",
+    nombre: "Beat Juan Grande - Vicent la Roda (1742)",
+    lineas: [
+      "92",
+      "99"
+    ],
+    lat: 39.47976659411476,
+    lon: -0.32968150040779626,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1745",
+    nombre: "Albereda (riu) - Museu de les Ci\xE8ncies (1745)",
+    lineas: [
+      "94"
+    ],
+    lat: 39.457552713684514,
+    lon: -0.3502141894970232,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1755",
+    nombre: "Estaci\xF3 del Cabanyal (front) (1755)",
+    lineas: [
+      "31",
+      "98",
+      "99"
+    ],
+    lat: 39.47086541593508,
+    lon: -0.33474864089366096,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1733",
+    nombre: "Hospital Doctor Peset (1733)",
+    lineas: [
+      "59",
+      "9"
+    ],
+    lat: 39.452242328140585,
+    lon: -0.3932524318142897,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1759",
+    nombre: "Menorca (parell) - Centre Comercial (1759)",
+    lineas: [
+      "94",
+      "99"
+    ],
+    lat: 39.457347124362634,
+    lon: -0.34595485674307375,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1931",
+    nombre: "Hospital Doctor Peset - M\xFAsic Penella (1931)",
+    lineas: [
+      "59",
+      "9"
+    ],
+    lat: 39.4525110909324,
+    lon: -0.3929333702746848,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1980",
+    nombre: "Major de Natzaret - Castell de Pop (1980)",
+    lineas: [
+      "30",
+      "4",
+      "95"
+    ],
+    lat: 39.44853873629484,
+    lon: -0.3346088607125288,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1981",
+    nombre: "Aras de los Olmos - Castell de Pop (1981)",
+    lineas: [
+      "30",
+      "4",
+      "95"
+    ],
+    lat: 39.44864163151347,
+    lon: -0.33305876353505043,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1990",
+    nombre: "Alfauir - Estadi Ciutat de Val\xE8ncia (1990)",
+    lineas: [
+      "70"
+    ],
+    lat: 39.49212532029637,
+    lon: -0.3616444498031708,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2004",
+    nombre: "Cid (via servici) - Alejandro Volta (2004)",
+    lineas: [
+      "71"
+    ],
+    lat: 39.4691693865325,
+    lon: -0.41480964424979666,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1773",
+    nombre: "Doctor \xC1lvaro L\xF3pez - Illa de Hierro (1773)",
+    lineas: [
+      "99"
+    ],
+    lat: 39.482771422307145,
+    lon: -0.3305380255434382,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1774",
+    nombre: "Doctor \xC1lvaro L\xF3pez - Vicent la Roda  (1774)",
+    lineas: [
+      "99"
+    ],
+    lat: 39.480619729171366,
+    lon: -0.331053342137354,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1802",
+    nombre: "Ernest Ferrer - Centre de Salut (1802)",
+    lineas: [
+      "32"
+    ],
+    lat: 39.471848813466174,
+    lon: -0.35590183756150034,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1805",
+    nombre: "Mercat de Col\xF3n (1805)",
+    lineas: [
+      "13",
+      "40"
+    ],
+    lat: 39.46923062761119,
+    lon: -0.3678249007810473,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1804",
+    nombre: "Joaqu\xEDn Costa - Comte d'Altea (1804)",
+    lineas: [
+      "40"
+    ],
+    lat: 39.4659919193029,
+    lon: -0.3671128595028512,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1824",
+    nombre: "Benicalap - Joan XXIII (1824)",
+    lineas: [
+      "64"
+    ],
+    lat: 39.49691136567166,
+    lon: -0.38478189891674164,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1825",
+    nombre: "Joan XXIII - Federico Alc\xE1cer Aguilar (1825)",
+    lineas: [
+      "64"
+    ],
+    lat: 39.49502166239837,
+    lon: -0.3840975314338629,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1827",
+    nombre: "General Avil\xE9s - Pius XII (1827)",
+    lineas: [
+      "64"
+    ],
+    lat: 39.48615188487292,
+    lon: -0.3949645885138651,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1829",
+    nombre: "General Avil\xE9s - Conchita Piquer (1829)",
+    lineas: [
+      "64",
+      "94"
+    ],
+    lat: 39.48801949874912,
+    lon: -0.3905968368320168,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1840",
+    nombre: "Duc de Mandas - Motilla del Palancar (1840)",
+    lineas: [
+      "12"
+    ],
+    lat: 39.49084140063316,
+    lon: -0.36569699423742325,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1848",
+    nombre: "Castellonet - Alfara del Patriarca (1848)",
+    lineas: [
+      "12",
+      "64"
+    ],
+    lat: 39.49264195982704,
+    lon: -0.3860751152957365,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1862",
+    nombre: "Constituci\xF3 - Coronel Montesinos (1862)",
+    lineas: [
+      "16"
+    ],
+    lat: 39.49328629957593,
+    lon: -0.3733657791557381,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "571",
+    nombre: "Gaspar Aguilar - Calvo Acacio (571)",
+    lineas: [
+      "59",
+      "9"
+    ],
+    lat: 39.454170640425424,
+    lon: -0.39181667659677344,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1801",
+    nombre: "Finl\xE0ndia - Arag\xF3 (1801)",
+    lineas: [
+      "32"
+    ],
+    lat: 39.47154399762772,
+    lon: -0.3588141519705545,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1816",
+    nombre: "Argenter Su\xE1rez - Miraculosa (1816)",
+    lineas: [
+      "98"
+    ],
+    lat: 39.485299028910894,
+    lon: -0.37291622932606994,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1826",
+    nombre: "Joan XXIII (imparell) - F\xE9lix del R\xEDo (1826)",
+    lineas: [
+      "64"
+    ],
+    lat: 39.490540081869824,
+    lon: -0.3823564234333443,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1836",
+    nombre: "Federico Alc\xE1cer Aguilar - Joan XXIII (1836)",
+    lineas: [
+      "12"
+    ],
+    lat: 39.49520803239022,
+    lon: -0.38427544379526307,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2337",
+    nombre: "Pa\xEDs Valenci\xE0 - Col\xF3n (2337)",
+    lineas: [
+      "9"
+    ],
+    lat: 39.4279017903288,
+    lon: -0.3850887874611341,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1838",
+    nombre: "Duc de Mandas - Constituci\xF3 (1838)",
+    lineas: [
+      "11",
+      "12"
+    ],
+    lat: 39.49469063062696,
+    lon: -0.370859933746354,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1846",
+    nombre: "Pere Cabanes - Cam\xED Moncada (1846)",
+    lineas: [
+      "12"
+    ],
+    lat: 39.49362014993104,
+    lon: -0.3815638473383871,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1847",
+    nombre: "Castellonet - Joan XXIII (1847)",
+    lineas: [
+      "12",
+      "64"
+    ],
+    lat: 39.49317831870009,
+    lon: -0.38358263124852093,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1858",
+    nombre: "Estaci\xF3 del Nord - Castell\xF3 (1858)",
+    lineas: [
+      "19",
+      "7"
+    ],
+    lat: 39.466227592530196,
+    lon: -0.37674673448077506,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1919",
+    nombre: "Parc de Natzaret - Pont de les Drassanes (1919)",
+    lineas: [
+      "30",
+      "4",
+      "95"
+    ],
+    lat: 39.451857131525855,
+    lon: -0.33206456403847856,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1991",
+    nombre: "Alfauir - Arquitecte Tols\xE0 (1991)",
+    lineas: [
+      "70"
+    ],
+    lat: 39.49073140631103,
+    lon: -0.3640993317627862,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1940",
+    nombre: "Fonteta de Sant Llu\xEDs (1940)",
+    lineas: [
+      "13",
+      "7"
+    ],
+    lat: 39.441769501956166,
+    lon: -0.3685022674295316,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1943",
+    nombre: "Bulevard Sud - Pont (1943)",
+    lineas: [
+      "64"
+    ],
+    lat: 39.446218205183264,
+    lon: -0.38645069337613347,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1944",
+    nombre: "Bulevard Sud (parell) - Malilla (1944)",
+    lineas: [
+      "18",
+      "64",
+      "99"
+    ],
+    lat: 39.44543276948157,
+    lon: -0.3812779228736846,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1950",
+    nombre: "Pere II el Cerimoni\xF3s - Luis Merelo y Mas (1950)",
+    lineas: [
+      "35"
+    ],
+    lat: 39.46306545603665,
+    lon: -0.34886418744242964,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1958",
+    nombre: "Pintor Maella - Illes Can\xE0ries (1958)",
+    lineas: [
+      "35"
+    ],
+    lat: 39.46337978978373,
+    lon: -0.3464440753673859,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1952",
+    nombre: "Pintor Maella - Vicent Vidal (Cronista) (1952)",
+    lineas: [
+      "35"
+    ],
+    lat: 39.4611653165597,
+    lon: -0.34771152772574476,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1953",
+    nombre: "Pintor Maella (parell) - Fran\xE7a (1953)",
+    lineas: [
+      "35"
+    ],
+    lat: 39.45912075663048,
+    lon: -0.3484913112653722,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1954",
+    nombre: "Pintor Maella - Luis Bolinches Compa\xF1 (1954)",
+    lineas: [
+      "35"
+    ],
+    lat: 39.45760654761893,
+    lon: -0.3481929638563343,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1988",
+    nombre: "Alfauir - Cercle de Belles Arts (1988)",
+    lineas: [
+      "70"
+    ],
+    lat: 39.491004199591536,
+    lon: -0.36262953427926303,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2009",
+    nombre: "Tres Creus - M\xFAsic Ayll\xF3n  (2009)",
+    lineas: [
+      "70"
+    ],
+    lat: 39.46679997120939,
+    lon: -0.4056293379213957,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1999",
+    nombre: "Tres Forques - Casa Miseric\xF2rdia (1999)",
+    lineas: [
+      "70"
+    ],
+    lat: 39.463113560942595,
+    lon: -0.40878651711252634,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1784",
+    nombre: "Carcaixent - Giorgeta (1784)",
+    lineas: [
+      "10"
+    ],
+    lat: 39.460766380747934,
+    lon: -0.3861050897311288,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1818",
+    nombre: "Sueca - Peris i Valero (1818)",
+    lineas: [
+      "7"
+    ],
+    lat: 39.45884666057777,
+    lon: -0.37324277558242924,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1832",
+    nombre: "Equador - Salvador Tuset (1832)",
+    lineas: [
+      "12"
+    ],
+    lat: 39.49596706199383,
+    lon: -0.3928570422002508,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1833",
+    nombre: "Equador (imparell) - Centre de Salut Assutzena (1833)",
+    lineas: [
+      "12"
+    ],
+    lat: 39.494067113924665,
+    lon: -0.3907715436438417,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1835",
+    nombre: "Federico Alc\xE1cer Aguilar - Poeta Serrano Clavero (1835)",
+    lineas: [
+      "12"
+    ],
+    lat: 39.494982866941655,
+    lon: -0.38625426172086724,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1837",
+    nombre: "Riu Nervi\xF3n - Riu Segre (1837)",
+    lineas: [
+      "12"
+    ],
+    lat: 39.49565698533578,
+    lon: -0.3821985883275548,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1850",
+    nombre: "Equador (parell) - Centre de Salut Assutzena (1850)",
+    lineas: [
+      "12",
+      "64"
+    ],
+    lat: 39.49415573266056,
+    lon: -0.39069577099717745,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1860",
+    nombre: "Uruguai - Marqu\xE9s de Bellet (1860)",
+    lineas: [
+      "10"
+    ],
+    lat: 39.45547680471484,
+    lon: -0.386887035381964,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1883",
+    nombre: "Fra Jun\xEDper Serra -Torrent (1883)",
+    lineas: [
+      "73"
+    ],
+    lat: 39.46194275309899,
+    lon: -0.400881719206089,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1936",
+    nombre: "Sant Isidre (1936)",
+    lineas: [
+      "72",
+      "73"
+    ],
+    lat: 39.451174823352375,
+    lon: -0.40264762623930156,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1961",
+    nombre: "Alfauir - Germans Machado (1961)",
+    lineas: [
+      "70"
+    ],
+    lat: 39.493541561858265,
+    lon: -0.35915656947493274,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1963",
+    nombre: "Club N\xE0utic (1963)",
+    lineas: [
+      "23"
+    ],
+    lat: 39.42783704240816,
+    lon: -0.3348228688594028,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "1964",
+    nombre: "Bulevard Sud (parell) - Hospital La Fe (1964)",
+    lineas: [
+      "64",
+      "99"
+    ],
+    lat: 39.44545305953772,
+    lon: -0.37727491877543823,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2179",
+    nombre: "Gavines - Entrada Filero (2179)",
+    lineas: [
+      "25"
+    ],
+    lat: 39.30208896139362,
+    lon: -0.29184041319392234,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2181",
+    nombre: "Gavines (parell) - Sirena (2181)",
+    lineas: [
+      "25"
+    ],
+    lat: 39.2938017762892,
+    lon: -0.2870753936631477,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2188",
+    nombre: "Gavines (imparell) - Les Escales (2188)",
+    lineas: [
+      "25"
+    ],
+    lat: 39.285205918852604,
+    lon: -0.2819260887335254,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2184",
+    nombre: "Gavines (parell) - Les Escales (2184)",
+    lineas: [
+      "25"
+    ],
+    lat: 39.2850770391611,
+    lon: -0.28203837419427236,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2168",
+    nombre: "Embarcador de l'Albufera (I) (2168)",
+    lineas: [
+      "24",
+      "25"
+    ],
+    lat: 39.349619692457715,
+    lon: -0.32364677315479806,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2224",
+    nombre: "Ignacio Zuloaga - Castell de Pop (2224)",
+    lineas: [
+      "23",
+      "30",
+      "4"
+    ],
+    lat: 39.447565378031875,
+    lon: -0.3358312514061191,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2220",
+    nombre: "Llotja - Mercat Central (2220)",
+    lineas: [
+      "11",
+      "31",
+      "32",
+      "4",
+      "70"
+    ],
+    lat: 39.47212175732842,
+    lon: -0.37682169882323935,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2247",
+    nombre: "Mare Nostrum - Vent de Xaloc (2247)",
+    lineas: [
+      "31"
+    ],
+    lat: 39.49314485999567,
+    lon: -0.3253322064273052,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2248",
+    nombre: "La Patacona - Institut (2248)",
+    lineas: [
+      "31"
+    ],
+    lat: 39.49289207241269,
+    lon: -0.32663833616963667,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2235",
+    nombre: "Actor Antonio Ferrandis (parell) - Centre Comercial (2235)",
+    lineas: [
+      "99"
+    ],
+    lat: 39.45298644429831,
+    lon: -0.35315526574421224,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2236",
+    nombre: "Actor Antonio Ferrandis (parell) - Amado Granell Mesado (2236)",
+    lineas: [
+      "99"
+    ],
+    lat: 39.45086711501388,
+    lon: -0.35813149025911345,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2241",
+    nombre: "Actor Antonio Ferrandis (imparell) - Amado Granell Mesado (2241)",
+    lineas: [
+      "99"
+    ],
+    lat: 39.45047567902353,
+    lon: -0.3579383170475219,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2324",
+    nombre: "Fran\xE7a - Cam\xED Fondo del Grao (2324)",
+    lineas: [
+      "94"
+    ],
+    lat: 39.457867748283654,
+    lon: -0.3416618064229501,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2345",
+    nombre: "Carretera del Pi - Entrada Roseldo (2345)",
+    lineas: [
+      "14"
+    ],
+    lat: 39.42644460331656,
+    lon: -0.36249789024707585,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2047",
+    nombre: "Barraques del Figuero - Ignacio Zuloaga (2047)",
+    lineas: [
+      "23",
+      "95"
+    ],
+    lat: 39.44962461689297,
+    lon: -0.33623496409694265,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2048",
+    nombre: "Barraques del Figuero - Cocoters (2048)",
+    lineas: [
+      "23",
+      "95"
+    ],
+    lat: 39.449722168074075,
+    lon: -0.3362574764065459,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2069",
+    nombre: "Terrateig - Poeta Rafael Alberti (2069)",
+    lineas: [
+      "67"
+    ],
+    lat: 39.48109420137388,
+    lon: -0.4038732400807765,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2066",
+    nombre: "Hospital 9 d'Octubre (2066)",
+    lineas: [
+      "67",
+      "98",
+      "99"
+    ],
+    lat: 39.4784319828661,
+    lon: -0.4028211230171089,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2189",
+    nombre: "Gavines - Front Entrada Ventura (2189)",
+    lineas: [
+      "25"
+    ],
+    lat: 39.2883832294227,
+    lon: -0.28377364760449775,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2166",
+    nombre: "Gola de Puchol (I) (2166)",
+    lineas: [
+      "24",
+      "25"
+    ],
+    lat: 39.35710702884465,
+    lon: -0.3207925542811283,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2197",
+    nombre: "Gola de Puchol (III) (2197)",
+    lineas: [
+      "24",
+      "25"
+    ],
+    lat: 39.354545358924284,
+    lon: -0.3222803376987665,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2200",
+    nombre: "Pinars (imparell) - El Saler (2200)",
+    lineas: [
+      "24",
+      "25"
+    ],
+    lat: 39.38322487445813,
+    lon: -0.33231863951403745,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2201",
+    nombre: "C\xE0mping Val\xE8ncia Saler (front) (2201)",
+    lineas: [
+      "24",
+      "25"
+    ],
+    lat: 39.38791157726329,
+    lon: -0.33155521016283934,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2164",
+    nombre: "C\xE0mping Val\xE8ncia Saler (2164)",
+    lineas: [
+      "24",
+      "25"
+    ],
+    lat: 39.38750825113808,
+    lon: -0.33182334585634876,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2163",
+    nombre: "C\xE0mping Coll Vert (2163)",
+    lineas: [
+      "24",
+      "25"
+    ],
+    lat: 39.39637147123203,
+    lon: -0.33246890172104626,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2359",
+    nombre: "Bail\xE9n - Ermita (2359)",
+    lineas: [
+      "63"
+    ],
+    lat: 39.46462307583801,
+    lon: -0.37887647986813916,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2114",
+    nombre: "Blasco Ib\xE1\xF1ez - Arnau de Vilanova (2114)",
+    lineas: [
+      "31"
+    ],
+    lat: 39.48515460267533,
+    lon: -0.32821864008818363,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2373",
+    nombre: "Carlos Pau Espa\xF1ol - Cam\xED del Canal (2373)",
+    lineas: [
+      "30"
+    ],
+    lat: 39.4428618812554,
+    lon: -0.3354704221812843,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2378",
+    nombre: "Canal - Punta al Mar (2378)",
+    lineas: [
+      "30"
+    ],
+    lat: 39.444723637124724,
+    lon: -0.3357893488446164,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2376",
+    nombre: "Castellar - l'Oliveral - Doctor Ruiz i Comes (2376)",
+    lineas: [
+      "14"
+    ],
+    lat: 39.424208499319754,
+    lon: -0.3621447323788712,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2186",
+    nombre: "El Perell\xF3 (2186)",
+    lineas: [
+      "25"
+    ],
+    lat: 39.274153279836696,
+    lon: -0.2770913258260411,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2387",
+    nombre: "La Punta (2387)",
+    lineas: [
+      "23"
+    ],
+    lat: 39.44132262082676,
+    lon: -0.3438594684647674,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2404",
+    nombre: "Tetuan (interior) (2404)",
+    lineas: [
+      "11",
+      "16",
+      "26",
+      "31",
+      "32",
+      "6",
+      "70"
+    ],
+    lat: 39.47398891658485,
+    lon: -0.36988394269975716,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2418",
+    nombre: "Teatre Principal - Ballesters (2418)",
+    lineas: [
+      "6"
+    ],
+    lat: 39.471136633621015,
+    lon: -0.3742534142617824,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2415",
+    nombre: "Cam\xED de Montanyars (imparell) - Entrada de Romero (2415)",
+    lineas: [
+      "24"
+    ],
+    lat: 39.41541753064486,
+    lon: -0.3354810407895743,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2414",
+    nombre: "Cam\xED de Montanyars (parell) - Entrada de Romero (2414)",
+    lineas: [
+      "24"
+    ],
+    lat: 39.4151688692651,
+    lon: -0.3354327619394804,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "710",
+    nombre: "Marqu\xE9s del T\xFAria - Mestre Gozalbo (710)",
+    lineas: [
+      "40",
+      "79",
+      "92",
+      "93"
+    ],
+    lat: 39.466511725852214,
+    lon: -0.3694837190907414,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2441",
+    nombre: "Malilla (parell) - Hospital La Fe (2441)",
+    lineas: [
+      "8"
+    ],
+    lat: 39.444702883895665,
+    lon: -0.38011617708327433,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2442",
+    nombre: "Malilla (imparell) - Hospital La Fe (2442)",
+    lineas: [
+      "8"
+    ],
+    lat: 39.44482716313719,
+    lon: -0.37982381543938565,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2409",
+    nombre: "Gonzalo Tejero Langarita - Malilla (2409)",
+    lineas: [
+      "8"
+    ],
+    lat: 39.43987646615308,
+    lon: -0.38243628749200415,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2250",
+    nombre: "Porta de la Mar - Navarro Reverter (parell) (2250)",
+    lineas: [
+      "10",
+      "13",
+      "4",
+      "94",
+      "95"
+    ],
+    lat: 39.47167472901249,
+    lon: -0.36774638868634496,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2251",
+    nombre: "Porta de la Mar - Navarro Reverter (imparell) (2251)",
+    lineas: [
+      "10",
+      "23",
+      "4"
+    ],
+    lat: 39.471821644888635,
+    lon: -0.3677408486875196,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2253",
+    nombre: "Porta de la Mar - General Palanca (2253)",
+    lineas: [
+      "24",
+      "25"
+    ],
+    lat: 39.472403747576045,
+    lon: -0.3683482439350574,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2256",
+    nombre: "Palau de Just\xEDcia - Glorieta (2256)",
+    lineas: [
+      "4"
+    ],
+    lat: 39.472166097293254,
+    lon: -0.36947889277954415,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2258",
+    nombre: "Col\xF3n - Porta de la Mar (2258)",
+    lineas: [
+      "10",
+      "28",
+      "71",
+      "81",
+      "C1"
+    ],
+    lat: 39.47146724406039,
+    lon: -0.3691971220085118,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2263",
+    nombre: "La Marina - Metro Nept\xFA (2263)",
+    lineas: [
+      "95"
+    ],
+    lat: 39.46318815426632,
+    lon: -0.3259825924194048,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2270",
+    nombre: "Tarongers (parell) - Metro La Cadena (2270)",
+    lineas: [
+      "93",
+      "98"
+    ],
+    lat: 39.47506479264544,
+    lon: -0.32922222088868525,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2259",
+    nombre: "Col\xF3n - Metro Col\xF3n (2259)",
+    lineas: [
+      "10",
+      "28",
+      "40",
+      "71",
+      "8",
+      "81",
+      "C1"
+    ],
+    lat: 39.46995229274035,
+    lon: -0.37097664648162976,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2277",
+    nombre: "X\xE0tiva - Institut Llu\xEDs Vives (2277)",
+    lineas: [
+      "10",
+      "11",
+      "28",
+      "31",
+      "59",
+      "60",
+      "62",
+      "7",
+      "70",
+      "71",
+      "72",
+      "73",
+      "9",
+      "C1"
+    ],
+    lat: 39.46799921946827,
+    lon: -0.378354566594788,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2316",
+    nombre: "Marqu\xE9s de Dosaig\xFCes (2316)",
+    lineas: [
+      "16",
+      "26",
+      "6"
+    ],
+    lat: 39.473289584397406,
+    lon: -0.3743243828845,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2317",
+    nombre: "Pascual i Gen\xEDs - Roger de Ll\xF2ria (2317)",
+    lineas: [
+      "14",
+      "35",
+      "6"
+    ],
+    lat: 39.468489363421945,
+    lon: -0.3739114251410154,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2292",
+    nombre: "Amado Granell Mesado (parell) - La Plata (2292)",
+    lineas: [
+      "35",
+      "6"
+    ],
+    lat: 39.4570167787955,
+    lon: -0.36367384500953537,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2293",
+    nombre: "Amado Granell Mesado (parell) - Arabista Ambrosio Huici (2293)",
+    lineas: [
+      "14",
+      "35"
+    ],
+    lat: 39.45549351684709,
+    lon: -0.36262769591448313,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2299",
+    nombre: "Amado Granell Mesado (imparell) - La Plata (2299)",
+    lineas: [
+      "35"
+    ],
+    lat: 39.457114223934255,
+    lon: -0.36348451896652045,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2284",
+    nombre: "Estaci\xF3 Joaqu\xEDn Sorolla (2284)",
+    lineas: [
+      "31",
+      "64"
+    ],
+    lat: 39.46083008668604,
+    lon: -0.3815842726557285,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2287",
+    nombre: "Editor Manuel Aguilar - Guillem Sorolla (2287)",
+    lineas: [
+      "11",
+      "60",
+      "62",
+      "73"
+    ],
+    lat: 39.47271590985989,
+    lon: -0.3805176352806776,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2390",
+    nombre: "Arnau de Vilanova - Doctor Moll\xE0 (2390)",
+    lineas: [
+      "16"
+    ],
+    lat: 39.53518298525011,
+    lon: -0.36979337525088257,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2391",
+    nombre: "Vinalesa - Pla\xE7a d'Ausi\xE0s March (2391)",
+    lineas: [
+      "16"
+    ],
+    lat: 39.53570013652141,
+    lon: -0.3688116864342903,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2389",
+    nombre: "Llevant Uni\xF3 Esportiva - Federico Alc\xE1cer Aguilar (2389)",
+    lineas: [
+      "64"
+    ],
+    lat: 39.495797890522944,
+    lon: -0.38861979971382127,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2382",
+    nombre: "Pius XI - Xera (2382)",
+    lineas: [
+      "11"
+    ],
+    lat: 39.45815508320872,
+    lon: -0.3941004217471726,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2383",
+    nombre: "Humanista Mariner - Fontanars (2383)",
+    lineas: [
+      "11"
+    ],
+    lat: 39.45984854408729,
+    lon: -0.39454365678099745,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2384",
+    nombre: "Humanista Mariner - Jos\xE9 Roca Coll (2384)",
+    lineas: [
+      "11"
+    ],
+    lat: 39.45835078347626,
+    lon: -0.39647283587682053,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2385",
+    nombre: "Canonge T\xE0rrega - Campaners (2385)",
+    lineas: [
+      "11"
+    ],
+    lat: 39.45614679510375,
+    lon: -0.39876545479395636,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2380",
+    nombre: "Patraix (2380)",
+    lineas: [
+      "11"
+    ],
+    lat: 39.4547638954218,
+    lon: -0.39854350160916147,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2381",
+    nombre: "Campos Crespo - Fra Jun\xEDper Serra (2381)",
+    lineas: [
+      "11"
+    ],
+    lat: 39.456131780999925,
+    lon: -0.39635481900558417,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "589",
+    nombre: "Real de Madrid - Concepci\xF3n Arenal (589)",
+    lineas: [
+      "27",
+      "9"
+    ],
+    lat: 39.434941336780646,
+    lon: -0.3908172159535472,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2403",
+    nombre: "Pla\xE7a de l'Ajuntament - Ateneu (2403)",
+    lineas: [
+      "32",
+      "4"
+    ],
+    lat: 39.47053591706962,
+    lon: -0.3762610502610197,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "578",
+    nombre: "Sant Vicent M\xE0rtir - Enginyer Josep Sirera (578)",
+    lineas: [
+      "27"
+    ],
+    lat: 39.44531361784848,
+    lon: -0.3868579168364025,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "596",
+    nombre: "Peris i Valero - Ausi\xE0s March (596)",
+    lineas: [
+      "89"
+    ],
+    lat: 39.45723386281812,
+    lon: -0.3748229052551018,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2410",
+    nombre: "Gonzalo Tejero Langarita - Vicente Chuli\xE1 Campos (2410)",
+    lineas: [
+      "8"
+    ],
+    lat: 39.43976460869754,
+    lon: -0.38254894031639736,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2433",
+    nombre: "Carretera d'Alba - Real de Madrid (2433)",
+    lineas: [
+      "59"
+    ],
+    lat: 39.4353701046151,
+    lon: -0.39132312609815534,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2440",
+    nombre: "Carretera d'Alba - Entrada al Barri Veter\xE0 (2440)",
+    lineas: [
+      "59"
+    ],
+    lat: 39.43529604581879,
+    lon: -0.39111994902359104,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2434",
+    nombre: "Carretera d'Alba (parell) - Cam\xED Saboner (2434)",
+    lineas: [
+      "59"
+    ],
+    lat: 39.435875290018444,
+    lon: -0.3949703901870932,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2439",
+    nombre: "Carretera d'Alba (imparell) - Cam\xED Saboner (2439)",
+    lineas: [
+      "59"
+    ],
+    lat: 39.43575306783851,
+    lon: -0.3945010031682886,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2157",
+    nombre: "Ausi\xE0s March - Pianista Mart\xEDnez Carrasco (2157)",
+    lineas: [
+      "6"
+    ],
+    lat: 39.44782328604056,
+    lon: -0.3697304058441986,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2158",
+    nombre: "Bulevard Sud (via de servici) - Hospital La Fe (2158)",
+    lineas: [
+      "6"
+    ],
+    lat: 39.44549262817184,
+    lon: -0.3735496163028442,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2161",
+    nombre: "Mercat de Benim\xE0met (2161)",
+    lineas: [
+      "62"
+    ],
+    lat: 39.49918353218777,
+    lon: -0.41763759869862865,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2182",
+    nombre: "Gavines - Entrada Paridera (2182)",
+    lineas: [
+      "25"
+    ],
+    lat: 39.29168933789484,
+    lon: -0.28581504609478225,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2213",
+    nombre: "Estadi de Mestalla (2213)",
+    lineas: [
+      "10",
+      "12",
+      "80",
+      "93"
+    ],
+    lat: 39.47538409500397,
+    lon: -0.35650129946418085,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2225",
+    nombre: "Cam\xED Nou de Paterna - Aldaia (2225)",
+    lineas: [
+      "62"
+    ],
+    lat: 39.4967547548721,
+    lon: -0.418449464865968,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2229",
+    nombre: "Estaci\xF3 del Cabanyal (2229)",
+    lineas: [
+      "31",
+      "98",
+      "99"
+    ],
+    lat: 39.4705552086265,
+    lon: -0.33464653820679835,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2232",
+    nombre: "Alboraia - Jaca (2232)",
+    lineas: [
+      "11"
+    ],
+    lat: 39.48408131774653,
+    lon: -0.36946603334638173,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2233",
+    nombre: "Almassora - Argenter Su\xE0rez (2233)",
+    lineas: [
+      "11"
+    ],
+    lat: 39.486138100503915,
+    lon: -0.37067433078133033,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2238",
+    nombre: "Actor Antonio Ferrandis (parell) - Font de Sant Llu\xEDs (2238)",
+    lineas: [
+      "99"
+    ],
+    lat: 39.44680099000067,
+    lon: -0.36779294178999694,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2099",
+    nombre: "Nou d'Octubre - Cid (2099)",
+    lineas: [
+      "99"
+    ],
+    lat: 39.46987515747994,
+    lon: -0.40609045944731204,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2278",
+    nombre: "Estaci\xF3 del Nord - Marqu\xE9s de Sotelo (2278)",
+    lineas: [
+      "40",
+      "81"
+    ],
+    lat: 39.46821330293352,
+    lon: -0.3768999255922593,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2320",
+    nombre: "Hospital Doctor Peset - Primer de Maig (2320)",
+    lineas: [
+      "18"
+    ],
+    lat: 39.450356166661116,
+    lon: -0.39401161295661397,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2294",
+    nombre: "Amado Granell Mesado (parell) - Antonio Sacramento (2294)",
+    lineas: [
+      "14"
+    ],
+    lat: 39.45262602145227,
+    lon: -0.360597484882995,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2296",
+    nombre: "Amado Granell Mesado (imparell) - Antonio Ferrandis (2296)",
+    lineas: [
+      "14"
+    ],
+    lat: 39.45116233213884,
+    lon: -0.35917894568275727,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2319",
+    nombre: "Pare Ferr\xEDs (parell) - Gregori Gea (2319)",
+    lineas: [
+      "28"
+    ],
+    lat: 39.48314825049265,
+    lon: -0.38480842230257517,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2325",
+    nombre: "Escultor Salzillo - Llu\xEDs Fenollet (2325)",
+    lineas: [
+      "73"
+    ],
+    lat: 39.465815689002866,
+    lon: -0.4091221148727143,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2339",
+    nombre: "Pa\xEDs Valenci\xE0 - Salvador Giner (2339)",
+    lineas: [
+      "9"
+    ],
+    lat: 39.42635840378567,
+    lon: -0.3809192627406945,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2342",
+    nombre: "Passeig Mar\xEDtim - Pescadors (2342)",
+    lineas: [
+      "32"
+    ],
+    lat: 39.470187850216895,
+    lon: -0.32465570660847104,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2044",
+    nombre: "Oceanogr\xE0fic (front) (2044)",
+    lineas: [
+      "23",
+      "95"
+    ],
+    lat: 39.45219912811946,
+    lon: -0.347969752176472,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2051",
+    nombre: "Oceanogr\xE0fic (2051)",
+    lineas: [
+      "23",
+      "95"
+    ],
+    lat: 39.45228248904228,
+    lon: -0.34796963300516914,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2041",
+    nombre: "Les Arts (2041)",
+    lineas: [
+      "13",
+      "23",
+      "24",
+      "25",
+      "95"
+    ],
+    lat: 39.456791309168395,
+    lon: -0.3566899019105519,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2042",
+    nombre: "Ciutat de la Just\xEDcia (2042)",
+    lineas: [
+      "23",
+      "24",
+      "25",
+      "35",
+      "95"
+    ],
+    lat: 39.45461725530147,
+    lon: -0.35434403801281883,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2054",
+    nombre: "Les Arts (riu) (2054)",
+    lineas: [
+      "13",
+      "23",
+      "24",
+      "25",
+      "95"
+    ],
+    lat: 39.45709033185761,
+    lon: -0.3561727476391912,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2050",
+    nombre: "Centre d'Investigaci\xF3 Pr\xEDncep Felip (2050)",
+    lineas: [
+      "23",
+      "95"
+    ],
+    lat: 39.452008571896606,
+    lon: -0.3466800528055373,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2078",
+    nombre: "Parc Central - Demetrio Ribes (2078)",
+    lineas: [
+      "8"
+    ],
+    lat: 39.45826813076036,
+    lon: -0.3770524399219759,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2093",
+    nombre: "Parc de Cap\xE7alera (2093)",
+    lineas: [
+      "95"
+    ],
+    lat: 39.47495127554644,
+    lon: -0.40430890051917695,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2160",
+    nombre: "Burjassot - Marxalenes (2160)",
+    lineas: [
+      "28",
+      "94"
+    ],
+    lat: 39.486383474299664,
+    lon: -0.3868926097463638,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2173",
+    nombre: "Vicent Baldov\xED - Pintor Mart\xED Girb\xE9s (2173)",
+    lineas: [
+      "24"
+    ],
+    lat: 39.31408599212034,
+    lon: -0.31753944410116147,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2174",
+    nombre: "Cementeri El Palmar (front) (2174)",
+    lineas: [
+      "24"
+    ],
+    lat: 39.321671067119034,
+    lon: -0.3178092448012048,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2170",
+    nombre: "Cementeri El Palmar (2170)",
+    lineas: [
+      "24"
+    ],
+    lat: 39.321620157822025,
+    lon: -0.31789813147062135,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2175",
+    nombre: "Carretera del Palmar - Pinars (2175)",
+    lineas: [
+      "24",
+      "25"
+    ],
+    lat: 39.340576345592396,
+    lon: -0.3191166304060271,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2195",
+    nombre: "C\xE0mping la Devesa (2195)",
+    lineas: [
+      "25"
+    ],
+    lat: 39.32312020447542,
+    lon: -0.3093378833011123,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2187",
+    nombre: "Gavines - Bit\xE0cora (2187)",
+    lineas: [
+      "25"
+    ],
+    lat: 39.281796902694346,
+    lon: -0.2799527151621057,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2185",
+    nombre: "Gavines - Entrada a la Baixada del Pant\xE0 (2185)",
+    lineas: [
+      "25"
+    ],
+    lat: 39.28178947794833,
+    lon: -0.2801268471392566,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2207",
+    nombre: "Carrera del Riu (parell) - Rotonda Autovia (2207)",
+    lineas: [
+      "24",
+      "25"
+    ],
+    lat: 39.430805019861396,
+    lon: -0.3421937989057035,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2343",
+    nombre: "Vicent Marco Miranda - Llu\xEDs Alcany\xEDs (2343)",
+    lineas: [
+      "6"
+    ],
+    lat: 39.44775394679757,
+    lon: -0.3738408068135624,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2245",
+    nombre: "Tres Creus - Mariano de Cavia (2245)",
+    lineas: [
+      "99"
+    ],
+    lat: 39.454838879568946,
+    lon: -0.40058812334452826,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2100",
+    nombre: "Tres Creus (parell) - Campos Crespo (2100)",
+    lineas: [
+      "99"
+    ],
+    lat: 39.453000757015936,
+    lon: -0.39938538389594697,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2267",
+    nombre: "Fra Jun\xEDper Serra - Tres Forques (2267)",
+    lineas: [
+      "73"
+    ],
+    lat: 39.463361941240336,
+    lon: -0.4007037688732126,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2273",
+    nombre: "Olt\xE0 - Joaqu\xEDn Benlloch (2273)",
+    lineas: [
+      "18",
+      "8"
+    ],
+    lat: 39.45254679136031,
+    lon: -0.37666751215827393,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2303",
+    nombre: "Andreu Alfaro - Louis Braille (2303)",
+    lineas: [
+      "12",
+      "28"
+    ],
+    lat: 39.49751250712938,
+    lon: -0.3949398474370588,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2280",
+    nombre: "Barques - Pla\xE7a de l'Ajuntament (2280)",
+    lineas: [
+      "10",
+      "31",
+      "71",
+      "81"
+    ],
+    lat: 39.47035344096193,
+    lon: -0.3754784023159589,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2222",
+    nombre: "Pla\xE7a de la Reina (2222)",
+    lineas: [
+      "11",
+      "31",
+      "32",
+      "4",
+      "70"
+    ],
+    lat: 39.47361052631086,
+    lon: -0.3758163668971253,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2237",
+    nombre: "Actor Antonio Ferrandis (parell) - En Corts (2237)",
+    lineas: [
+      "99"
+    ],
+    lat: 39.44900614538454,
+    lon: -0.36235280911323026,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  },
+  {
+    id: "2350",
+    nombre: "Jos\xE9 Roca Coll - M\xFAsic Gomis (2350)",
+    lineas: [
+      "73"
+    ],
+    lat: 39.45929152242264,
+    lon: -0.39858953880204734,
+    fetchedAt: "2026-10-02T00:35:57.578Z",
+    source: "geoportal-valencia-emt-paradas"
+  }
+];
+
+// src/server/emt-paradas.ts
+async function handler30() {
+  return new Response(JSON.stringify({ paradas: emt_paradas_default }), {
+    status: 200,
+    headers: {
+      "content-type": "application/json; charset=utf-8",
+      // Baja frecuencia de cambio (ver spec 055 §4) — cacheable de forma agresiva, igual que equipamientos críticos.
+      "cache-control": "public, max-age=3600, s-maxage=86400, stale-while-revalidate=86400"
+    }
+  });
+}
+
 // src/server/_shared/auth.ts
 var enc = new TextEncoder();
 var dec = new TextDecoder();
@@ -110420,7 +124316,7 @@ function json3(obj, status, extraHeaders) {
     headers: { "content-type": "application/json; charset=utf-8", "cache-control": "no-store", ...extraHeaders }
   });
 }
-async function handler29(req) {
+async function handler31(req) {
   if (req.method !== "POST") return json3({ ok: false }, 405);
   const secret = process.env.AUTH_SECRET;
   let users;
@@ -110463,7 +124359,7 @@ async function handler29(req) {
 }
 
 // src/server/auth-logout.ts
-async function handler30(req) {
+async function handler32(req) {
   const status = req.method === "POST" ? 200 : 405;
   return new Response(JSON.stringify({ ok: status === 200 }), {
     status,
@@ -110476,7 +124372,7 @@ async function handler30(req) {
 }
 
 // src/server/auth-estado.ts
-async function handler31(req) {
+async function handler33(req) {
   const secret = process.env.AUTH_SECRET;
   const sesion = secret ? await verificarSesion(leerCookie(req.headers.get("cookie"), COOKIE_NOMBRE), secret) : null;
   return new Response(
@@ -110514,10 +124410,12 @@ var RUTAS = {
   "emergencia/v1/avamet": handler26,
   "emergencia/v1/zas": handler27,
   "emergencia/v1/equipamientos-criticos": handler28,
+  "transporte/v1/emt-buses": handler29,
+  "transporte/v1/emt-paradas": handler30,
   "decision/v1/sugerencias": handler23,
-  "auth/v1/login": handler29,
-  "auth/v1/logout": handler30,
-  "auth/v1/estado": handler31
+  "auth/v1/login": handler31,
+  "auth/v1/logout": handler32,
+  "auth/v1/estado": handler33
 };
 var BASE = "http://d.invalid";
 async function dispatch(req) {

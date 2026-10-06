@@ -41,6 +41,8 @@ import sintesisIaV2 from '../src/server/sintesis-ia-v2';
 import avametEstaciones from '../src/server/avamet-estaciones';
 import zas from '../src/server/zas';
 import equipamientosCriticos from '../src/server/equipamientos-criticos';
+import emtBusesEnVivo from '../src/server/emt-buses-en-vivo';
+import emtParadas from '../src/server/emt-paradas';
 import decisionSugerencias from '../src/server/decision-sugerencias';
 import authLogin from '../src/server/auth-login';
 import authLogout from '../src/server/auth-logout';
@@ -76,6 +78,8 @@ const RUTAS: Record<string, Handler> = {
   'emergencia/v1/avamet': avametEstaciones,
   'emergencia/v1/zas': zas,
   'emergencia/v1/equipamientos-criticos': equipamientosCriticos,
+  'transporte/v1/emt-buses': emtBusesEnVivo,
+  'transporte/v1/emt-paradas': emtParadas,
   'decision/v1/sugerencias': decisionSugerencias,
   'auth/v1/login': authLogin,
   'auth/v1/logout': authLogout,

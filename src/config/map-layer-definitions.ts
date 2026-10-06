@@ -226,6 +226,26 @@ export const LAYER_REGISTRY: Record<string, LayerDefinition> = {
     zoomMinimo: 0,
     agregacion: 'punto',
   },
+  emtBusesEnVivo: {
+    key: 'emtBusesEnVivo',
+    specId: '055',
+    // 'primaria': posición GPS real de los autobuses en circulación ahora
+    // mismo, mismo criterio que tráfico — no es una capa de referencia fija.
+    grupo: 'primaria',
+    renderers: ['deck'],
+    zoomMinimo: 0,
+    agregacion: 'punto',
+  },
+  emtParadas: {
+    key: 'emtParadas',
+    specId: '055',
+    // 'contexto': referencia geográfica fija (las paradas no cambian de un
+    // día para otro), mismo criterio que Valenbisi/equipamientos críticos.
+    grupo: 'contexto',
+    renderers: ['deck'],
+    zoomMinimo: 0,
+    agregacion: 'punto',
+  },
   //
   // No añadas entradas aquí sin que exista antes la spec correspondiente
   // en specs/, con su contrato de capa ya congelado (sección 5 de la spec).

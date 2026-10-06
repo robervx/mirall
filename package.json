@@ -20,6 +20,7 @@
     "seed:imbornales": "tsx scripts/seed-imbornales-distrito.ts",
     "seed:zonas-zas": "tsx scripts/seed-zonas-zas.ts",
     "seed:equipamientos-criticos": "tsx scripts/seed-equipamientos-criticos.ts",
+    "seed:emt-paradas": "tsx scripts/seed-emt-paradas.ts",
     "snapshot:trafico-historico": "tsx scripts/snapshot-trafico-historico.ts",
     "snapshot:pulso-sombra": "tsx scripts/snapshot-pulso-sombra.ts",
     "verificar:reconciliacion-trafico-grafo": "tsx scripts/verificar-reconciliacion-trafico-grafo.ts",

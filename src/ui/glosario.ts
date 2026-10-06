@@ -168,6 +168,18 @@ const META_CAPAS: Record<string, MetaCapa> = {
     frecuencia: 'Dato fijo (seed único) — los equipamientos municipales no cambian de un día para otro',
     fuente: 'Geoportal del Ajuntament de València (Equipamientos municipales)',
   },
+  emtBusesEnVivo: {
+    nombre: 'Autobuses EMT en vivo',
+    mide: 'Posición GPS real de cada autobús de la EMT en circulación ahora mismo, con línea y trayecto — todas las líneas a la vez',
+    frecuencia: 'Caché refrescada cada 20 s — cadencia medida en vivo contra la fuente (cada bus actualiza su posición cada 15-20 s)',
+    fuente: 'Geoportal del Ajuntament de València (Seguimiento EMT)',
+  },
+  emtParadas: {
+    nombre: 'Paradas de EMT',
+    mide: 'Ubicación de las paradas de autobús de la EMT, con las líneas que pasan por cada una',
+    frecuencia: 'Dato fijo (seed único) — las paradas no cambian de un día para otro',
+    fuente: 'Geoportal del Ajuntament de València (EMT)',
+  },
 };
 
 /** Claves de `LAYER_REGISTRY` sin entrada en `META_CAPAS` — debe ser [] siempre. */
