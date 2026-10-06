@@ -84,6 +84,12 @@ body.pagina-publica {
   color: var(--tinta);
 }
 
+/* Hamburguesa — solo existe (la crea `nav-publica.ts`) y se ve en móvil;
+   en escritorio los enlaces ya van en línea en la cabecera. */
+.nav-publica__hamburguesa {
+  display: none;
+}
+
 /* ---------- botones ---------- */
 
 .btn {
@@ -373,19 +379,55 @@ section.seccion h2 {
 
 @media (max-width: 640px) {
   .nav-publica {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
-    padding: 14px 16px;
+    position: relative;
+    padding: 12px 16px;
   }
 
+  .nav-publica__hamburguesa {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    border: 1px solid var(--borde);
+    background: transparent;
+    color: var(--tinta);
+    font-size: 19px;
+    line-height: 1;
+    cursor: pointer;
+  }
+
+  /* Panel desplegable, oculto hasta que `nav-publica.ts` añade `.is-abierto`
+     (bug real corregido: antes el CTA "Abrir el mapa" iba con `display:none`
+     fijo, sin ninguna forma de llegar a /mapa desde la cabecera en móvil). */
   .nav-publica__enlaces {
-    width: 100%;
-    gap: 14px 18px;
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 2px;
+    padding: 8px 16px 16px;
+    background: var(--navy);
+    border-bottom: 1px solid var(--borde);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+  }
+
+  .nav-publica__enlaces.is-abierto {
+    display: flex;
+  }
+
+  .nav-publica__enlaces a {
+    padding: 12px 4px;
   }
 
   .nav-publica__enlaces .btn {
-    display: none;
+    display: inline-flex;
+    justify-content: center;
+    margin-top: 8px;
   }
 
   .hero__contenido,

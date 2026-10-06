@@ -146,10 +146,19 @@
         cursor: default;
       }
 
-      /* Banner persistente de alerta oficial ROJA en la cabecera (petición
-         explícita del usuario, 2026-10-01) — vive en #app-header__status,
-         misma altura que el resto (no cambia --header-h ni el layout). */
+      /* Banner persistente de alerta oficial (ROJA o NARANJA) en la cabecera
+         (petición explícita del usuario, 2026-10-01) — vive en
+         #app-header__status, misma altura que el resto (no cambia
+         --header-h ni el layout). El texto visible es una etiqueta corta y
+         fija ("Aviso rojo vigente"), nunca el titular completo de origen —
+         ese va en el `title` (tooltip nativo) y en el panel de insights al
+         pulsar. `max-width`/ellipsis quedan solo como red de seguridad, no
+         como mecanismo normal de recorte (bug real detectado 2026-10-02: el
+         titular completo desbordaba y se veía cortado a media palabra).
+         Color por `data-nivel` — rojo por defecto, naranja si no hay rojo
+         vigente (ver setAlertaCriticaHeader en chasis.ts). */
       #app-header__alerta-critica {
+        --alerta-rgb: 193, 18, 31;
         display: flex;
         align-items: center;
         gap: 6px;
@@ -158,16 +167,21 @@
         letter-spacing: 0.04em;
         text-transform: uppercase;
         color: #fff;
-        background: #c1121f;
+        background: rgb(var(--alerta-rgb));
         border: 1px solid #ff6b6b;
         border-radius: 999px;
         padding: 4px 10px;
         cursor: pointer;
         animation: alerta-critica-pulso 1.8s ease-in-out infinite;
-        max-width: 220px;
+        max-width: 260px;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
+      }
+
+      #app-header__alerta-critica[data-nivel='naranja'] {
+        --alerta-rgb: 194, 65, 12;
+        border-color: #fdba74;
       }
 
       #app-header__alerta-critica::before {
@@ -182,10 +196,10 @@
       @keyframes alerta-critica-pulso {
         0%,
         100% {
-          box-shadow: 0 0 0 0 rgba(193, 18, 31, 0.55);
+          box-shadow: 0 0 0 0 rgba(var(--alerta-rgb), 0.55);
         }
         50% {
-          box-shadow: 0 0 0 6px rgba(193, 18, 31, 0);
+          box-shadow: 0 0 0 6px rgba(var(--alerta-rgb), 0);
         }
       }
 

@@ -99,6 +99,7 @@ import { montarRecomendacionesPanel } from './ui/recomendaciones-actuacion-panel
 import { buildProtocolosContent } from './ui/protocolos-panel';
 import { onPeticionCentrarMapa } from './ui/centrar-mapa';
 import { escapeHtml, metaFrescura, formatoFechaHora, formatoFecha, buildInfoPanel, startPolling } from './ui/panel-utils';
+import { esVersionPublica } from './config/version-despliegue';
 import { marcadoresSentido, type MarcadorSentido } from './services/flechas-sentido';
 import { puntosFlujoParaTramo } from './services/flujo-animado';
 import type { Coordenada } from './services/proximidad';
@@ -413,11 +414,18 @@ function renderInsightsPanel(root: HTMLDivElement, panel: PanelInsights, fresh: 
   });
 
   // Banner persistente de cabecera (petición explícita del usuario,
-  // 2026-10-01): mientras exista un aviso oficial ROJO vigente, visible en
-  // /mapa y /inteligencia por igual — desaparece solo cuando deja de estar
-  // en `panel.insights` (spec 001, ventana de 48h), nunca por un "cerrar".
+  // 2026-10-01): mientras exista un aviso oficial ROJO o NARANJA vigente,
+  // visible en /mapa y /inteligencia por igual — desaparece solo cuando deja
+  // de estar en `panel.insights` (spec 001, ventana de 48h), nunca por un
+  // "cerrar". Rojo gana sobre naranja si coinciden ambos.
   const avisoRojo = panel.insights.find((i) => i.nivelAvisoOficial === 'rojo');
-  setAlertaCriticaHeader(avisoRojo !== undefined, avisoRojo ? `Aviso rojo — ${avisoRojo.titulo.replace(/^Aviso oficial rojo — /, '')}` : '', irAPanelInsights);
+  const avisoNaranja = panel.insights.find((i) => i.nivelAvisoOficial === 'naranja');
+  const avisoBanner = avisoRojo ?? avisoNaranja;
+  setAlertaCriticaHeader(
+    avisoBanner ? (avisoBanner.nivelAvisoOficial as 'rojo' | 'naranja') : null,
+    avisoBanner?.titulo ?? '',
+    irAPanelInsights,
+  );
 
   if (panel.insights.length === 0) {
     root.innerHTML = `
@@ -3445,31 +3453,35 @@ async function main(): Promise<void> {
     if (pulsoDistritos.length > 0) renderPulsoLeyenda(pulsoLeyendaRoot, pulsoDistritos, true);
   });
 
-  const tendenciaPanel = buildTendenciaPanel();
-  let tendenciaPollingIniciado = false;
-  let ventanaTendenciaActual: 'hora' | 'dia' = 'hora';
-  async function refreshTendencia(): Promise<void> {
-    try {
-      const { panel: ventana, fresh } = await fetchTendenciaActual(ventanaTendenciaActual);
-      renderTendenciaPanel(tendenciaPanel, ventana, fresh);
-    } catch (err) {
-      tendenciaPanel.list.textContent = 'Términos en tendencia no disponibles';
-      console.error('Fallo al cargar términos en tendencia:', err);
-    }
+  // "Términos en tendencia" se oculta en la versión pública — petición
+  // explícita del usuario, ver ADR-008. En master/interno se ve siempre.
+  if (!esVersionPublica()) {
+    const tendenciaPanel = buildTendenciaPanel();
+    let tendenciaPollingIniciado = false;
+    let ventanaTendenciaActual: 'hora' | 'dia' = 'hora';
+    const refreshTendencia = async (): Promise<void> => {
+      try {
+        const { panel: ventana, fresh } = await fetchTendenciaActual(ventanaTendenciaActual);
+        renderTendenciaPanel(tendenciaPanel, ventana, fresh);
+      } catch (err) {
+        tendenciaPanel.list.textContent = 'Términos en tendencia no disponibles';
+        console.error('Fallo al cargar términos en tendencia:', err);
+      }
+    };
+
+    tendenciaPanel.ventanaSelect.addEventListener('change', () => {
+      ventanaTendenciaActual = tendenciaPanel.ventanaSelect.value === 'dia' ? 'dia' : 'hora';
+      void refreshTendencia();
+    });
+
+    panel.tendenciaToggle.addEventListener('change', () => {
+      tendenciaPanel.root.hidden = !panel.tendenciaToggle.checked;
+      if (panel.tendenciaToggle.checked && !tendenciaPollingIniciado) {
+        tendenciaPollingIniciado = true;
+        startPolling(refreshTendencia, 15 * 60 * 1000); // igual TTL que la caché del endpoint, spec 025 §4
+      }
+    });
   }
-
-  tendenciaPanel.ventanaSelect.addEventListener('change', () => {
-    ventanaTendenciaActual = tendenciaPanel.ventanaSelect.value === 'dia' ? 'dia' : 'hora';
-    void refreshTendencia();
-  });
-
-  panel.tendenciaToggle.addEventListener('change', () => {
-    tendenciaPanel.root.hidden = !panel.tendenciaToggle.checked;
-    if (panel.tendenciaToggle.checked && !tendenciaPollingIniciado) {
-      tendenciaPollingIniciado = true;
-      startPolling(refreshTendencia, 15 * 60 * 1000); // igual TTL que la caché del endpoint, spec 025 §4
-    }
-  });
 
   const agendaPanel = buildAgendaPanel();
   let agendaPollingIniciado = false;
@@ -3550,7 +3562,9 @@ async function main(): Promise<void> {
     renderLayers();
   });
 
-  montarCamarasPanel(panel.camarasToggle);
+  // "Cámaras en vivo" se oculta en la versión pública — petición explícita
+  // del usuario, ver ADR-008. En master/interno se ve siempre.
+  if (!esVersionPublica()) montarCamarasPanel(panel.camarasToggle);
 
   // spec 040 — "Actualidad institucional" (039) se muda del sidebar a un panel
   // propio de /inteligencia; `buildActualidadRedesContent()` es exactamente el
@@ -3564,14 +3578,22 @@ async function main(): Promise<void> {
   // spec 041 — panel de apoyo a decisión, dentro de /inteligencia. "Ver en el
   // mapa" pide centrar la única instancia de MapLibre (no crea una segunda) y
   // cambia a /mapa — nunca dispara ninguna acción por sí mismo (§0).
-  montarApoyoDecisionPanel();
-  montarCamarasDgtPanel();
+  // "Apoyo a la decisión operativa", "cámaras DGT", "señales" y
+  // "recomendaciones de actuación" se ocultan en la versión pública —
+  // petición explícita del usuario, ver ADR-008. En master/interno se ven
+  // siempre.
+  if (!esVersionPublica()) {
+    montarApoyoDecisionPanel();
+    montarCamarasDgtPanel();
+  }
   montarAltimetriaPanel();
   montarLluviaVientoDistritoPanel();
   montarTemperaturaZonaPanel();
   montarRiesgoEscorrentiaPanel();
-  montarSenalesPanel();
-  montarRecomendacionesPanel();
+  if (!esVersionPublica()) {
+    montarSenalesPanel();
+    montarRecomendacionesPanel();
+  }
   onPeticionCentrarMapa(({ coordenadas, zoom }) => {
     map.flyTo({ center: coordenadas, zoom: zoom ?? map.getZoom() });
   });

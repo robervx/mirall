@@ -34,6 +34,7 @@ import {
 } from './modo-simulacion-cortes';
 import { buildGlosarioContent } from './glosario';
 import { escapeHtml } from './panel-utils';
+import { esVersionPublica } from '../config/version-despliegue';
 
 export interface SidebarSectionDefinition {
   key: string;
@@ -570,17 +571,27 @@ let alertaCriticaTextoRef: HTMLSpanElement | null = null;
 let alertaCriticaOnClick: (() => void) | null = null;
 
 /**
- * Activa/desactiva el banner persistente de alerta oficial ROJA de la
- * cabecera — llamar en cada refresco de insights con el aviso vigente más
- * severo (o `activo:false` si ya no hay ninguno rojo). `onClick` se invoca
- * al pulsar el banner (main.ts decide qué hacer — normalmente ir a /mapa y
- * resaltar el panel de insights).
+ * Activa/desactiva el banner persistente de alerta oficial (ROJA o NARANJA)
+ * de la cabecera — llamar en cada refresco de insights con el nivel más
+ * severo vigente (o `nivel:null` si ya no hay ninguno). El texto visible es
+ * una etiqueta corta y fija (nunca se trunca, sea cual sea la longitud del
+ * titular de origen) — el titular completo va en `title` (tooltip nativo) y
+ * en el propio panel de insights, que es donde se pulsa para ver el detalle.
+ * `onClick` lo decide main.ts (normalmente ir a /mapa y resaltar ese panel).
  */
-export function setAlertaCriticaHeader(activo: boolean, texto: string, onClick: () => void): void {
+export function setAlertaCriticaHeader(
+  nivel: 'rojo' | 'naranja' | null,
+  tituloCompleto: string,
+  onClick: () => void,
+): void {
   alertaCriticaOnClick = onClick;
   if (!alertaCriticaBtnRef || !alertaCriticaTextoRef) return;
-  alertaCriticaBtnRef.hidden = !activo;
-  if (activo) alertaCriticaTextoRef.textContent = texto;
+  alertaCriticaBtnRef.hidden = nivel === null;
+  if (nivel !== null) {
+    alertaCriticaBtnRef.dataset.nivel = nivel;
+    alertaCriticaBtnRef.title = tituloCompleto;
+    alertaCriticaTextoRef.textContent = `Aviso ${nivel} vigente`;
+  }
 }
 
 function buildHeader(): HTMLElement {
@@ -635,15 +646,16 @@ function buildHeader(): HTMLElement {
   const status = document.createElement('div');
   status.id = 'app-header__status';
 
-  // Banner persistente de alerta oficial ROJA (petición explícita del
-  // usuario, 2026-10-01): "debe ser una alerta permanente durante el tiempo
-  // que dure el aviso... tiene que salir de alguna forma especial". Vive en
-  // la cabecera fija (visible en /mapa Y /inteligencia, a diferencia de la
-  // barra de KPIs que solo se ve en /mapa) para que sea imposible no verla
-  // mientras el aviso siga vigente — lo activa/desactiva main.ts vía
+  // Banner persistente de alerta oficial ROJA o NARANJA (petición explícita
+  // del usuario, 2026-10-01): "debe ser una alerta permanente durante el
+  // tiempo que dure el aviso... tiene que salir de alguna forma especial".
+  // Vive en la cabecera fija (visible en /mapa Y /inteligencia, a diferencia
+  // de la barra de KPIs que solo se ve en /mapa) para que sea imposible no
+  // verla mientras el aviso siga vigente — lo activa/desactiva main.ts vía
   // `setAlertaCriticaHeader()` en cada refresco de insights, nunca un
   // "cerrar y no volver a ver": desaparece sola cuando el aviso deja de
   // estar en la lista de insights vigentes (spec 001 — ventana de 48h).
+  // Si hay rojo y naranja a la vez, gana el rojo (más severo).
   const alertaCritica = document.createElement('button');
   alertaCritica.type = 'button';
   alertaCritica.id = 'app-header__alerta-critica';
@@ -731,7 +743,7 @@ function buildHeader(): HTMLElement {
   return header;
 }
 
-function buildSidebarSection(def: SidebarSectionDefinition): HTMLElement {
+function buildSidebarSection(def: SidebarSectionDefinition): { wrap: HTMLElement; cerrar: () => void } {
   const wrap = document.createElement('div');
   wrap.className = 'sidebar-section-wrap';
 
@@ -752,13 +764,17 @@ function buildSidebarSection(def: SidebarSectionDefinition): HTMLElement {
 
   const content = def.render();
   content.hidden = true;
+  const cerrar = (): void => {
+    content.hidden = true;
+    el.classList.remove('is-open');
+  };
   el.addEventListener('click', () => {
     content.hidden = !content.hidden;
     el.classList.toggle('is-open', !content.hidden);
   });
   wrap.appendChild(content);
 
-  return wrap;
+  return { wrap, cerrar };
 }
 
 function buildSidebar(): void {
@@ -797,8 +813,14 @@ function buildSidebar(): void {
   fab.textContent = '☰';
 
   let focoPrevio: HTMLElement | null = null;
+  // Bug real reportado por el usuario (2026-10-06): al cerrar el menú, una
+  // sección abierta (p.ej. "Cordón de incidente" o "Glosario") se quedaba
+  // expandida por dentro — la próxima vez que se abría el menú, aparecía ya
+  // desplegada. Se cierran todas al cerrar el menú para que arranque limpio.
+  const cerrarSecciones: (() => void)[] = [];
 
   function setExpandido(expanded: boolean): void {
+    if (!expanded) cerrarSecciones.forEach((cerrar) => cerrar());
     sidebar.classList.toggle('is-expanded', expanded);
     toggle.textContent = expanded ? '⟨' : '☰';
     toggle.setAttribute('aria-expanded', String(expanded));
@@ -909,7 +931,17 @@ function buildSidebar(): void {
 
   const sections = document.createElement('div');
   sections.id = 'app-sidebar__sections';
-  SIDEBAR_REGISTRY.forEach((def) => sections.appendChild(buildSidebarSection(def)));
+  // "Gemelo digital" (simulador de cortes, spec 022) se oculta en la versión
+  // pública — todavía no está terminado y puede confundir (petición explícita
+  // del usuario, ver ADR-008). En master/interno se ve siempre.
+  const seccionesVisibles = esVersionPublica()
+    ? SIDEBAR_REGISTRY.filter((def) => def.key !== 'gemelo-digital')
+    : SIDEBAR_REGISTRY;
+  seccionesVisibles.forEach((def) => {
+    const { wrap, cerrar } = buildSidebarSection(def);
+    sections.appendChild(wrap);
+    cerrarSecciones.push(cerrar);
+  });
 
   const footer = document.createElement('div');
   footer.id = 'app-footer-attrib';
