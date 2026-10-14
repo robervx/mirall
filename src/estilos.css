@@ -1229,9 +1229,9 @@
       .pulso-leyenda__foco {
         font-size: 12px;
         font-weight: 600;
-        color: #0b1f33;
-        background: #fef9e7;
-        border-left: 3px solid #f2c744;
+        color: var(--accent);
+        background: color-mix(in srgb, var(--accent) 12%, transparent);
+        border-left: 3px solid var(--accent);
         padding: 3px 8px;
         margin-bottom: 4px;
         border-radius: 3px;
@@ -1592,16 +1592,25 @@
         overflow-y: auto;
       }
 
+      /* Restyle a oscuro — spec 056, hallazgo real post-Fase 5 (2026-10-14):
+         los 5 paneles fijos de /mapa y las ~15 leyendas de capa (todas
+         construidas sobre esta clase compartida, `buildInfoPanel` en
+         panel-utils.ts) se habían quedado con la tarjeta clara original —
+         nunca entraron en ninguna de las 5 fases del rediseño, pese a ser la
+         vista más usada de la app. Tokens de Mirall v2, mismo patrón que el
+         resto de tarjetas (`.mv2-card`) sin reescribir su estructura/JS. */
       .info-panel {
-        background: rgba(255, 255, 255, 0.95);
-        border-radius: 6px;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--mv2-radius-lg);
         padding: 10px 12px;
-        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
         font-size: 14px;
         width: 280px;
         max-height: 280px;
         overflow-y: auto;
         box-sizing: border-box;
+        color: var(--text-primary);
       }
 
       /* spec 035 §5.2 (v2): las leyendas de capa arrancan colapsadas a su
@@ -1626,7 +1635,7 @@
 
       .info-panel--colapsable > :first-child::after {
         content: ' ▾';
-        color: #94a3b8;
+        color: var(--text-muted);
         font-size: 11px;
       }
 
@@ -1674,7 +1683,7 @@
 
       .info-panel__desc {
         font-size: 13px;
-        color: #333;
+        color: var(--text-secondary);
         margin-top: 2px;
       }
 
@@ -1683,7 +1692,7 @@
         align-items: center;
         gap: 6px;
         font-size: 12px;
-        color: #444;
+        color: var(--text-secondary);
         margin-top: 4px;
       }
 
@@ -1696,12 +1705,12 @@
 
       .info-panel__meta {
         font-size: 11px;
-        color: #777;
+        color: var(--text-muted);
         margin-top: 6px;
       }
 
       .info-panel__stale {
-        color: #b45309;
+        color: var(--warning);
         font-weight: 600;
         margin-left: 4px;
       }
@@ -1710,7 +1719,7 @@
          no la duración real del corte; debe verse, no ir en letra pequeña
          (CLAUDE.md §4), de ahí el color y el peso frente a .info-panel__meta normal. */
       .info-panel__meta--aviso {
-        color: #92400e;
+        color: var(--warning);
         font-weight: 600;
       }
 
@@ -1731,7 +1740,7 @@
 
       .prediccion-panel__hora {
         font-size: 11px;
-        color: #666;
+        color: var(--text-muted);
       }
 
       .prediccion-panel__icon {
@@ -1746,7 +1755,7 @@
 
       .prediccion-panel__lluvia {
         font-size: 11px;
-        color: #0369a1;
+        color: var(--info);
       }
 
       #insights-panel {
@@ -1763,30 +1772,30 @@
       .insight-card {
         border-radius: 4px;
         padding: 6px 8px;
-        border-left: 4px solid #b45309;
-        background: #fffbeb;
+        border-left: 4px solid var(--warning);
+        background: color-mix(in srgb, var(--warning) 12%, var(--surface-2));
       }
 
       .insight-card--urgente {
-        border-left-color: #dc2626;
-        background: #fef2f2;
+        border-left-color: var(--danger);
+        background: color-mix(in srgb, var(--danger) 12%, var(--surface-2));
       }
 
       .insight-card__titulo {
         font-size: 12px;
         font-weight: 700;
-        color: #333;
+        color: var(--text-primary);
       }
 
       .insight-card__desc {
         font-size: 11px;
-        color: #555;
+        color: var(--text-secondary);
         margin-top: 2px;
       }
 
       .insight-card__momento {
         font-size: 10px;
-        color: #94a3b8;
+        color: var(--text-muted);
         margin-top: 4px;
       }
 
@@ -1795,13 +1804,14 @@
         font-size: 11px;
         padding: 3px 8px;
         border-radius: 4px;
-        border: 1px solid #999;
-        background: #fff;
+        border: 1px solid var(--border);
+        background: var(--surface-2);
+        color: var(--text-primary);
         cursor: pointer;
       }
 
       .insight-card__copiar:hover {
-        background: #f0f0f0;
+        background: var(--border);
       }
 
       /* spec 024 §5 — un chip por fuenteSpec, para ver de un vistazo qué señales se cruzaron sin leer la descripción completa. */
@@ -1814,8 +1824,8 @@
       .insight-card__fuente-chip {
         font-size: 10px;
         font-weight: 600;
-        color: #666;
-        background: rgba(0, 0, 0, 0.06);
+        color: var(--text-secondary);
+        background: var(--surface);
         border-radius: 3px;
         padding: 1px 5px;
       }
@@ -1832,7 +1842,7 @@
         align-items: center;
         gap: 6px;
         font-size: 12px;
-        color: #333;
+        color: var(--text-primary);
         margin-top: 3px;
       }
 
@@ -1860,7 +1870,7 @@
         display: flex;
         justify-content: space-between;
         font-size: 10px;
-        color: #777;
+        color: var(--text-muted);
         margin-top: 2px;
       }
 
@@ -2257,112 +2267,6 @@
       .sugerencia-operativa__fuentes {
         display: flex;
         gap: 4px;
-      }
-
-      /* Spec 044 — panel de emergencia meteorológica avanzada */
-      .emergencia-meteo__bloque {
-        padding: 8px;
-        border-top: 1px solid #eee;
-      }
-
-      .emergencia-meteo__subtitulo {
-        font-size: 12px;
-        font-weight: 600;
-        color: #444;
-        margin-bottom: 6px;
-      }
-
-      .altimetria-fila,
-      .meteo-zona-fila,
-      .pluviometro-fila,
-      .escorrentia-fila {
-        display: flex;
-        align-items: center;
-        gap: 6px;
-        font-size: 11px;
-        padding: 3px 0;
-        border-bottom: 1px solid #f2f2f2;
-      }
-
-      .altimetria-fila__nombre,
-      .meteo-zona-fila__nombre,
-      .escorrentia-fila__nombre {
-        flex: 0 0 84px;
-        font-weight: 600;
-        color: #333;
-      }
-
-      .altimetria-fila__barra,
-      .escorrentia-fila__barra {
-        flex: 1;
-        height: 8px;
-        background: #eef2f5;
-        border-radius: 4px;
-        overflow: hidden;
-      }
-
-      .altimetria-fila__barra > span {
-        display: block;
-        height: 100%;
-        background: linear-gradient(90deg, #8bc34a, #d4a017, #b45f4d);
-      }
-
-      /* Azul (agua), no el verde-ámbar-marrón de altimetría — distinto concepto, mismo layout. */
-      .escorrentia-fila__barra > span {
-        display: block;
-        height: 100%;
-        background: linear-gradient(90deg, #90caf9, #1e88e5, #0d47a1);
-      }
-
-      .altimetria-fila__valor,
-      .escorrentia-fila__valor {
-        flex: 0 0 48px;
-        text-align: right;
-        color: #555;
-      }
-
-      .meteo-zona-fila__dato {
-        color: #555;
-      }
-
-      .pluviometro-fila {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 2px;
-      }
-
-      .pluviometro-fila__nombre {
-        font-weight: 600;
-        color: #333;
-      }
-
-      .pluviometro-fila__nombre small {
-        font-weight: 400;
-        color: #888;
-      }
-
-      .pluviometro-fila__acumulados {
-        color: #555;
-      }
-
-      .avamet-fila {
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        gap: 6px;
-        font-size: 11px;
-        padding: 3px 0;
-        border-bottom: 1px solid #f2f2f2;
-      }
-
-      .avamet-fila__nombre {
-        flex: 1 1 100%;
-        font-weight: 600;
-        color: #333;
-      }
-
-      .avamet-fila__dato {
-        color: #555;
       }
 
       /* Protocolos de actuación — spec 042 */

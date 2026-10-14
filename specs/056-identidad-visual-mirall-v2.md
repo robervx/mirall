@@ -7,7 +7,7 @@ estado: Implemented
 tipo: fundacional
 depende_de: [019, 040, 053]
 propietario: usuario
-version: 9
+version: 10
 ```
 
 ## 1. Problema / motivación
@@ -356,6 +356,40 @@ una vez — mismo criterio que partió la Fase 3. Esta sesión cierra la fila 1,
 - [x] `npm run typecheck`, `npm run build` y `npm run test` (525/525) verdes en cada paso.
 - [x] Verificado en navegador: Configuración (escritorio, SideMenu) con las 4 cifras reales; Capas (móvil) a pantalla completa con Restablecer funcionando; Barrios (móvil) con 19 filas reales, pestaña Cerca de mí, navegación a `/mapa` con foco real al tocar una fila; `#/capas`/`#/barrios` en escritorio se comportan como `mapa`; contraste de `--text-muted` confirmado visualmente tras el cambio (sin aspecto "demasiado brillante" ni pérdida de jerarquía).
 
+## 6.9 Hallazgo post-Fase 5 — `.info-panel` (paneles fijos y leyendas de /mapa)
+
+Al revisar el sitio publicado en producción tras la Fase 5, se encontró que **los 5 paneles fijos de
+`/mapa`** (Meteorología actual, Predicción, Calidad del aire, Insights, Histórico de tráfico) **y las ~15
+leyendas de capa** (una por cada checkbox de `#controls` — tráfico, riesgo de agua, ZAS, altimetría,
+Pulso de Distrito, vía pública, EMT, Fallas, Valenbisi, aparcamiento, etc.) **nunca entraron en ninguna de
+las 5 fases** del rediseño — ninguna las mencionaba. Seguían con la tarjeta clara original
+(`rgba(255,255,255,0.95)`) flotando sobre el mapa ya oscuro, en la vista más usada de la app (modo
+kiosco, uso diario).
+
+- [x] `.info-panel` (clase base compartida por los 5 paneles + todas las leyendas, `buildInfoPanel` en
+      `panel-utils.ts`) y sus submodificadores (`__main/__icon/__value/__badge/__desc/__viento/__meta/
+      __stale/__meta--aviso`, `--colapsable`) pasados a los tokens de Mirall v2 — mismo patrón que el
+      resto de tarjetas, sin tocar su estructura/lógica JS.
+- [x] Componentes directamente anidados dentro de esos paneles, también recoloreados: `.prediccion-panel__*`
+      (predicción 4h), `.insight-card`/`--urgente` + sub-clases (tarjetas de alerta dentro de Insights,
+      fondo ámbar/rojo con `color-mix` sobre `--surface-2` en vez de los tonos pastel claros originales),
+      `.trafico-leyenda__row`, `.leyenda-gradiente__extremos` (leyendas con rampa continua, spec 052/046),
+      `.media-panel__foco`/`.pulso-leyenda__foco` (chip "Foco: distrito", antes amarillo pálido con texto
+      marino — rompía dentro de una `.mv2-card` ya oscura desde la Fase 4). El SVG del sparkline de
+      histórico de tráfico pasa de marrón (`#b45309`) a `var(--accent)`.
+- [x] **Limpieza de paso**: bloque CSS de `.emergencia-meteo__bloque`/`.altimetria-fila`/`.meteo-zona-fila`/
+      `.pluviometro-fila`/`.escorrentia-fila`/`.avamet-fila` (spec 044) eliminado — confirmado por `grep`
+      que ninguna clase se usa ya en ningún `.ts` del proyecto, código muerto desde que
+      `emergencia-meteo-panel.ts` se reescribió en la Fase 4 fila 2 a `.mv2-card`/`.meteo-zona-tabla*`.
+- [x] **Fuera de esta pasada, encontrado pero no corregido todavía**: `#alert-modal` (modal bloqueante de
+      alertas críticas, spec 013 v5) sigue con fondo blanco — es un componente aparte, poco visible (solo
+      durante una alerta activa de verdad) y no era lo que se le enseñó al usuario al pedir este fix;
+      queda anotado aquí para una próxima pasada.
+- [x] `npm run typecheck`, `npm run build` y `npm run test` (525/525) verdes.
+- [x] Verificado en navegador, escritorio y móvil: los 5 paneles fijos y varias leyendas (tráfico, riesgo
+      de acumulación de agua, altimetría) con datos reales, tarjeta oscura consistente con el resto de la
+      app, gradientes/barras de leyenda legibles sobre fondo oscuro, sin errores de consola.
+
 ## 7. Riesgos
 
 - Verificación visual en este entorno ya documentada como punto débil en otras specs (bug de render
@@ -385,3 +419,4 @@ expulsara a mano, lo que bloqueaba la copia hasta volver a montarlo. Ya no depen
 | 7 | 2026-10-09 | Fase 4, fila 3 "Movilidad y actividad" implementada — ver §6.6. Cámaras en vías de acceso (DGT+Ciudad fusionadas en pestañas, specs 038+043) + Ruido en Russafa ZAS (barras con umbral, spec 049) + Agenda de eventos (spec 027), como `DataCard`. Bug real corregido fuera de estas 3 tarjetas: el orden del bottom sheet móvil no seguía la prioridad por filas de escritorio — ahora sí, para las filas 1-3. Queda la fila 4 "Contexto" (4 tarjetas más) |
 | 8 | 2026-10-14 | Fase 4, fila 4 "Contexto" implementada — ver §6.7. Actualidad institucional (spec 039) + Contexto mediático (spec 009) + Términos en tendencia (spec 025, selector real de 2 ventanas en vez de las 3 del documento) + Protocolos de actuación (spec 042, sin pill de estado inventada), como `DataCard`. **Fase 4 completa** (las 4 filas de Inteligencia). Queda la Fase 5 (Configuración de ciudad, pantallas móviles nuevas, accesibilidad) |
 | 9 | 2026-10-14 | **Fase 5 implementada — ver §6.8. Rediseño completo del documento, cerrado.** Configuración de ciudad (4 cifras reales, no las 5 fabricadas del documento); `TabBar` a 5 pestañas con las pantallas móviles nuevas "Capas" (mismo `#controls` real, pantalla completa por CSS) y "Barrios" (ranking honesto de los 19 distritos por Pulso/Altimetría/Riesgo de agua real, sin la puntuación de bienestar inventada del documento — decisión explícita del usuario); pase de accesibilidad WCAG 2.2 AA (2 nombres accesibles corregidos + hallazgo real: el token `--text-muted` de Fase 1 no pasaba 4.5:1 en ningún fondo, aclarado de `#5c635e` a `#7f867f` en los ~48 sitios que lo usan). `estado` pasa a `Implemented` |
+| 10 | 2026-10-14 | **Hallazgo post-Fase 5, ver §6.9**: revisando el sitio publicado se vio que los 5 paneles fijos de `/mapa` y las ~15 leyendas de capa (`.info-panel`, nunca mencionados en ninguna fase) seguían con la tarjeta clara original sobre el mapa ya oscuro — la vista más usada de la app. Restyle a los tokens de Mirall v2 sin tocar estructura/lógica; limpieza de paso de un bloque CSS muerto (spec 044, huérfano desde la Fase 4). `#alert-modal` queda anotado como pendiente, fuera de esta pasada |

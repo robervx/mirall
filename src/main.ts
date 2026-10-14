@@ -645,7 +645,7 @@ function renderTraficoHistoricoPanel(root: HTMLDivElement, historico: HistoricoT
   root.innerHTML = `
     <div class="info-panel__desc">Congestión de ciudad — últimas 24h</div>
     <svg class="trafico-historico__spark" viewBox="0 0 ${SPARK_WIDTH} ${SPARK_HEIGHT}" preserveAspectRatio="none">
-      <polyline points="${puntosSvg}" fill="none" stroke="#b45309" stroke-width="2" />
+      <polyline points="${puntosSvg}" fill="none" stroke="var(--accent)" stroke-width="2" />
     </svg>
     <div class="info-panel__value info-panel__value--small">${ultimo}% ahora</div>
     <div class="info-panel__meta">${metaFrescura('Mirall (histórico)', historico.fetchedAt, fresh)}</div>
