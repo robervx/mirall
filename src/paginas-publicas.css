@@ -1,16 +1,12 @@
-/* Landing (`/`) y página de proceso (`/proceso`) — spec 053. Hoja separada de
-   `estilos.css` (la de la herramienta en `/mapa`): son documentos estáticos,
-   sin mapa ni deck.gl, no tiene sentido cargar ni acoplarse a esos estilos. */
+/* Landing (`/`) y página de proceso (`/proceso`) — spec 053, reskin a la
+   identidad Mirall v2 (spec 056 Fase 2). Hoja separada de `estilos.css` (la
+   de la herramienta en `/mapa`): son documentos estáticos, sin mapa ni
+   deck.gl. Los tokens de color/tipografía/espaciado vienen de
+   `mirall-v2.css` (cargada antes que esta en las 2 páginas públicas). */
 
 :root {
-  --navy: #0b1f33;
-  --navy-light: #14304f;
-  --tinta: #eef2f7;
-  --tinta-tenue: rgba(238, 242, 247, 0.66);
-  --tinta-mas-tenue: rgba(238, 242, 247, 0.4);
-  --acento: #33d6c0;
-  --borde: rgba(238, 242, 247, 0.14);
   --ancho-contenido: 880px;
+  --ancho-contenido-ancho: 1312px; /* landing: hero/comparación/métricas van más anchos que proceso */
 }
 
 * {
@@ -24,10 +20,9 @@ body {
 }
 
 body.pagina-publica {
-  background: var(--navy);
-  background-image: radial-gradient(ellipse 900px 600px at 50% -10%, var(--navy-light) 0%, var(--navy) 60%);
-  color: var(--tinta);
-  font-family: system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text-primary);
+  font-family: var(--mv2-font-body);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
 }
@@ -37,12 +32,56 @@ body.pagina-publica {
 }
 
 .pagina-publica h1,
-.pagina-publica h2,
-.wordmark {
-  font-family: 'Space Grotesk', system-ui, sans-serif;
+.pagina-publica h2 {
+  font-family: var(--mv2-font-display);
+  font-weight: 700;
 }
 
-/* ---------- navegación superior ---------- */
+/* ---------- lockup de marca (§2.1) ---------- */
+
+.marca {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+.marca__simbolo {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background: var(--accent);
+  color: var(--accent-ink);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.marca__texto {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+
+.marca__nombre {
+  font-family: var(--mv2-font-display);
+  font-weight: 700;
+  font-size: 18px;
+  letter-spacing: -0.3px;
+}
+
+.marca__descriptor {
+  font-family: var(--mv2-font-mono);
+  font-size: 9px;
+  letter-spacing: 1.1px;
+  color: var(--text-secondary);
+  margin-top: 1px;
+  white-space: nowrap;
+}
+
+/* ---------- navegación superior (§8.1) ---------- */
 
 .nav-publica {
   position: sticky;
@@ -52,83 +91,59 @@ body.pagina-publica {
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  padding: 16px 24px;
-  background: rgba(11, 31, 51, 0.72);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid var(--borde);
-}
-
-.nav-publica__marca {
-  font-weight: 700;
-  font-size: 20px;
-  letter-spacing: 0.01em;
-  text-decoration: none;
+  padding: 20px 64px;
+  background: #0a0c0b66;
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
 }
 
 .nav-publica__enlaces {
   display: flex;
   align-items: center;
-  gap: 24px;
-  flex-wrap: wrap;
+  gap: 2px;
+  padding: 4px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--mv2-radius-pill);
 }
 
 .nav-publica__enlaces a {
   text-decoration: none;
   font-size: 14px;
-  color: var(--tinta-tenue);
+  font-weight: 500;
+  color: var(--text-secondary);
   white-space: nowrap;
-  padding: 10px 0;
+  padding: 8px 16px;
+  border-radius: var(--mv2-radius-pill);
+  transition: background-color var(--mv2-dur-fast) var(--mv2-ease), color var(--mv2-dur-fast) var(--mv2-ease);
 }
 
-.nav-publica__enlaces a:hover {
-  color: var(--tinta);
+.nav-publica__enlaces a:hover,
+.nav-publica__enlaces a.is-activo {
+  background: var(--surface-2);
+  color: var(--text-primary);
 }
 
-/* Hamburguesa — solo existe (la crea `nav-publica.ts`) y se ve en móvil;
-   en escritorio los enlaces ya van en línea en la cabecera. */
+/* Hamburguesa — oculta en escritorio (CSS), visible en tablet/móvil */
 .nav-publica__hamburguesa {
   display: none;
-}
-
-/* ---------- botones ---------- */
-
-.btn {
-  display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 12px 22px;
-  border-radius: 100px;
-  font-size: 15px;
-  font-weight: 600;
-  text-decoration: none;
-  border: 1px solid transparent;
-  white-space: nowrap;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text-primary);
+  cursor: pointer;
+  flex-shrink: 0;
 }
 
-.btn--primario {
-  background: var(--acento);
-  color: #062017;
+.nav-publica__hamburguesa:hover {
+  background: var(--surface-2);
 }
 
-.btn--primario:hover {
-  background: #58e2d1;
-}
-
-.btn--secundario {
-  border-color: var(--borde);
-  color: var(--tinta);
-}
-
-.btn--secundario:hover {
-  border-color: var(--tinta-tenue);
-}
-
-.btn--pequeno {
-  padding: 8px 16px;
-  font-size: 13px;
-}
-
-/* ---------- hero ---------- */
+/* ---------- hero (§8.1, §8.2) ---------- */
 
 .hero {
   position: relative;
@@ -149,95 +164,505 @@ body.pagina-publica {
   height: 100%;
 }
 
-/* Difumina la ciudad 3D hacia el fondo sólido según se acerca al resto de la
-   página, para que el texto del hero y la sección siguiente no compitan con
-   ella. */
+/* Capa de legibilidad de dos degradados sobre el hero 3D (§8.1). */
 .hero__fondo::after {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(11, 31, 51, 0.25) 0%, rgba(11, 31, 51, 0.35) 55%, var(--navy) 100%);
+  background: radial-gradient(ellipse 115% 100% at 50% 47%, #0a0c0bf2 0%, #0a0c0bb3 50%, transparent 100%),
+    linear-gradient(180deg, #0a0c0bb3 0%, transparent 18%, transparent 70%, var(--bg) 100%);
 }
 
 .hero__contenido {
   position: relative;
   z-index: 1;
-  max-width: var(--ancho-contenido);
+  max-width: var(--ancho-contenido-ancho);
   margin: 0 auto;
-  padding: 96px 24px 64px;
+  padding: 150px 64px 72px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
 }
 
-.hero__eyebrow {
-  margin: 0 0 20px;
-  font-size: 13px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--tinta-mas-tenue);
+.hero__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  padding: 6px 14px;
+  border-radius: var(--mv2-radius-pill);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  font: 400 13px / 1 var(--mv2-font-mono);
+  color: var(--text-secondary);
+}
+
+.hero__badge-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  flex-shrink: 0;
 }
 
 .hero__titulo {
   margin: 0;
-  font-size: clamp(64px, 14vw, 132px);
-  font-weight: 700;
-  line-height: 1;
-  letter-spacing: -0.02em;
+  font: 700 clamp(44px, 6.3vw, 76px) / 1.05 var(--mv2-font-display);
+  letter-spacing: -2.5px;
+}
+
+.hero__accent {
+  color: var(--accent);
 }
 
 .hero__subtitulo {
-  margin: 10px 0 0;
-  font-size: clamp(16px, 3vw, 22px);
-  letter-spacing: 0.32em;
-  text-transform: lowercase;
-  color: var(--tinta-tenue);
-}
-
-.hero__tagline {
-  margin: 28px auto 0;
-  max-width: 46ch;
-  font-size: 17px;
-  color: var(--tinta-tenue);
+  margin: 0;
+  max-width: 680px;
+  font: 400 19px / 1.55 var(--mv2-font-body);
+  color: var(--text-secondary);
 }
 
 .hero__cta {
-  margin-top: 40px;
+  margin-top: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 14px;
+  gap: 12px;
   flex-wrap: wrap;
 }
 
-/* ---------- secciones generales ---------- */
+/* ---------- comparación "Dos modelos de ciudad" (§8.1) ---------- */
 
-section.seccion {
+.comparacion {
+  max-width: var(--ancho-contenido-ancho);
+  margin: 0 auto;
+  padding: 24px 160px 72px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.comparacion__eyebrow {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  font: 400 12px / 1 var(--mv2-font-mono);
+  letter-spacing: 1.5px;
+  color: var(--text-muted);
+}
+
+.comparacion__regla {
+  width: 40px;
+  height: 1px;
+  background: var(--border);
+}
+
+.comparacion__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.comparacion__tarjeta {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--mv2-radius-3xl);
+  padding: 32px;
+}
+
+.comparacion__tarjeta--destacada {
+  border-color: #c8f03c55;
+}
+
+.comparacion__cabecera {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  margin-bottom: 8px;
+}
+
+.comparacion__cabecera h2 {
+  margin: 0 0 4px;
+}
+
+.comparacion__cabecera p {
+  margin: 0;
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+.comparacion__icono {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--mv2-radius-lg);
+  background: var(--surface-2);
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.comparacion__icono--acento {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+
+.comparacion__lista {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--border);
+}
+
+.comparacion__lista li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 15px;
+}
+
+.comparacion__lista--goliat li {
+  color: var(--text-secondary);
+}
+
+.comparacion__lista--goliat svg {
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+
+.comparacion__lista--mirall li {
+  color: var(--text-primary);
+}
+
+.comparacion__lista--mirall svg {
+  color: var(--accent);
+  flex-shrink: 0;
+}
+
+/* ---------- métricas (§8.1) ---------- */
+
+.metricas {
+  max-width: var(--ancho-contenido-ancho);
+  margin: 0 auto;
+  padding: 40px 64px 56px;
+  border-top: 1px solid var(--border);
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+}
+
+.metricas__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 0 16px;
+  border-right: 1px solid var(--border);
+  text-align: center;
+}
+
+.metricas__item:last-child {
+  border-right: none;
+}
+
+.metricas__cifra {
+  margin: 0;
+  color: var(--text-primary);
+}
+
+.metricas__cifra--acento {
+  color: var(--accent);
+}
+
+.metricas__etiqueta {
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+/* ---------- pie (§8.1) ---------- */
+
+.pie-publico {
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+}
+
+.pie-publico__top {
+  max-width: var(--ancho-contenido-ancho);
+  margin: 0 auto;
+  padding: 56px 64px 32px;
+  display: flex;
+  gap: 40px;
+  justify-content: space-between;
+}
+
+.pie-publico__marca {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  max-width: 340px;
+}
+
+.pie-publico__marca p {
+  margin: 0;
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+.pie-publico__columnas {
+  display: flex;
+  gap: 48px;
+}
+
+.pie-publico__columna {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.pie-publico__columna h3 {
+  margin: 0;
+  font: 400 11px / 1 var(--mv2-font-mono);
+  letter-spacing: 1.2px;
+  color: var(--text-muted);
+}
+
+.pie-publico__columna a {
+  text-decoration: none;
+  font-size: 14px;
+  color: var(--text-primary);
+}
+
+.pie-publico__columna a:hover {
+  color: var(--accent);
+}
+
+.pie-publico__bottom {
+  max-width: var(--ancho-contenido-ancho);
+  margin: 0 auto;
+  padding: 20px 64px 32px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.pie-publico__iconos {
+  display: flex;
+  gap: 16px;
+}
+
+.pie-publico__iconos a {
+  color: var(--text-secondary);
+  display: inline-flex;
+}
+
+.pie-publico__iconos a:hover {
+  color: var(--text-primary);
+}
+
+/* Pie simple de /proceso (sin columnas) — mismo patrón de spec 053. */
+.pie-publico--simple {
   max-width: var(--ancho-contenido);
   margin: 0 auto;
-  padding: 64px 24px;
-  border-top: 1px solid var(--borde);
+  padding: 40px 24px 56px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 24px;
+  justify-content: space-between;
+  font-size: 13px;
+  color: var(--text-muted);
+  border-top: 1px solid var(--border);
+  background: none;
 }
 
-section.seccion h2 {
-  margin: 0 0 28px;
-  font-size: 28px;
+.pie-publico--simple a {
+  text-decoration: none;
+  color: var(--text-secondary);
 }
 
-/* ---------- manifiesto ---------- */
-
-.manifiesto blockquote {
-  margin: 0 0 28px;
-  padding: 0 0 0 20px;
-  border-left: 3px solid var(--acento);
-  font-size: 22px;
-  line-height: 1.5;
-  color: var(--tinta);
+.pie-publico--simple a:hover {
+  color: var(--text-primary);
 }
 
-.manifiesto p {
-  color: var(--tinta-tenue);
+.pie-publico--simple .pie-publico__enlaces {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+/* ---------- menú a pantalla completa (tablet + móvil, §8.3) ---------- */
+
+.menu-movil {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+  transition: opacity var(--mv2-dur-slow) var(--mv2-ease);
+}
+
+.menu-movil.is-abierto {
+  opacity: 1;
+}
+
+.menu-movil__cabecera {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border);
+}
+
+.menu-movil__cerrar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  background: var(--surface-2);
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.menu-movil__enlaces {
+  padding: 16px 20px 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.menu-movil__enlace {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--border);
+  text-decoration: none;
+  color: var(--text-primary);
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity var(--mv2-dur-slow) var(--mv2-ease), transform var(--mv2-dur-slow) var(--mv2-ease);
+}
+
+.menu-movil.is-abierto .menu-movil__enlace {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.menu-movil.is-abierto .menu-movil__enlace:nth-child(1) {
+  transition-delay: 0ms;
+}
+.menu-movil.is-abierto .menu-movil__enlace:nth-child(2) {
+  transition-delay: 40ms;
+}
+.menu-movil.is-abierto .menu-movil__enlace:nth-child(3) {
+  transition-delay: 80ms;
+}
+.menu-movil.is-abierto .menu-movil__enlace:nth-child(4) {
+  transition-delay: 120ms;
+}
+
+.menu-movil__indice {
+  font: 400 11px / 1 var(--mv2-font-mono);
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+
+.menu-movil__etiqueta {
+  flex: 1;
+  font: 600 26px / 1 var(--mv2-font-display);
+  letter-spacing: -0.5px;
+}
+
+.menu-movil__enlace svg {
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+
+.menu-movil__pie {
+  margin-top: auto;
+  padding: 0 20px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.menu-movil__estado {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font: 400 11px / 1 var(--mv2-font-mono);
+  color: var(--text-secondary);
+}
+
+.menu-movil__estado-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+.menu-movil__cta {
+  width: 100%;
+}
+
+.menu-movil__contacto {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.menu-movil__contacto a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.menu-movil__contacto svg {
+  color: var(--text-secondary);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .menu-movil,
+  .menu-movil__enlace {
+    transition: none;
+  }
+}
+
+/* ---------- página de proceso ---------- */
+
+.proceso {
+  max-width: var(--ancho-contenido);
+  margin: 0 auto;
+  padding: 72px 24px 32px;
+}
+
+.proceso__titulo {
+  font-size: clamp(36px, 6vw, 52px);
+  letter-spacing: -0.8px;
+  margin: 0 0 12px;
+}
+
+.proceso__intro {
+  color: var(--text-secondary);
   max-width: 68ch;
+  font-size: 17px;
 }
 
-/* ---------- stack tecnológico ---------- */
+/* ---------- "Tecnología" (stack), movida desde la landing a /proceso ---------- */
 
 .stack__grid {
   display: grid;
@@ -251,85 +676,56 @@ section.seccion h2 {
   align-items: center;
   gap: 10px;
   padding: 20px 12px;
-  border: 1px solid var(--borde);
-  border-radius: 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--mv2-radius-2xl);
   text-align: center;
 }
 
 .stack__monograma {
   width: 44px;
   height: 44px;
-  border-radius: 12px;
-  background: var(--navy-light);
-  border: 1px solid var(--borde);
+  border-radius: var(--mv2-radius-lg);
+  background: var(--surface-2);
+  border: 1px solid var(--border);
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: 700;
   font-size: 14px;
   letter-spacing: -0.02em;
-  color: var(--acento);
+  color: var(--accent);
 }
 
 .stack__nombre {
   font-size: 13px;
-  color: var(--tinta-tenue);
+  color: var(--text-secondary);
 }
 
-/* ---------- contacto ---------- */
-
-.contacto p {
-  color: var(--tinta-tenue);
-  max-width: 60ch;
-}
-
-/* ---------- pie ---------- */
-
-.pie-publico {
+section.seccion {
   max-width: var(--ancho-contenido);
   margin: 0 auto;
-  padding: 40px 24px 56px;
-  border-top: 1px solid var(--borde);
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px 24px;
-  justify-content: space-between;
-  font-size: 13px;
-  color: var(--tinta-mas-tenue);
+  padding: 64px 24px;
+  border-top: 1px solid var(--border);
 }
 
-.pie-publico a {
-  text-decoration: none;
-  color: var(--tinta-tenue);
+section.seccion h2 {
+  margin: 0 0 28px;
+  font-size: 28px;
+  letter-spacing: -0.5px;
 }
 
-.pie-publico a:hover {
-  color: var(--tinta);
+section.seccion blockquote {
+  margin: 0 0 20px;
+  padding: 0 0 0 20px;
+  border-left: 3px solid var(--accent);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--text-primary);
 }
 
-.pie-publico__enlaces {
-  display: flex;
-  gap: 20px;
-  flex-wrap: wrap;
-}
-
-/* ---------- página de proceso ---------- */
-
-.proceso {
-  max-width: var(--ancho-contenido);
-  margin: 0 auto;
-  padding: 72px 24px 32px;
-}
-
-.proceso__titulo {
-  font-size: clamp(36px, 6vw, 52px);
-  margin: 0 0 12px;
-}
-
-.proceso__intro {
-  color: var(--tinta-tenue);
+section.seccion p {
+  color: var(--text-secondary);
   max-width: 68ch;
-  font-size: 17px;
 }
 
 .linea-tiempo {
@@ -343,7 +739,7 @@ section.seccion h2 {
 
 .linea-tiempo__hito {
   padding-left: 24px;
-  border-left: 2px solid var(--borde);
+  border-left: 2px solid var(--border);
   position: relative;
 }
 
@@ -355,86 +751,167 @@ section.seccion h2 {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: var(--acento);
+  background: var(--accent);
 }
 
 .linea-tiempo__fase {
-  font-size: 12px;
-  letter-spacing: 0.08em;
+  font: 400 12px / 1 var(--mv2-font-mono);
+  letter-spacing: 1.2px;
   text-transform: uppercase;
-  color: var(--acento);
+  color: var(--accent);
   margin: 0 0 6px;
 }
 
 .linea-tiempo__hito h3 {
   margin: 0 0 8px;
   font-size: 19px;
+  font-family: var(--mv2-font-display);
 }
 
 .linea-tiempo__hito p {
   margin: 0;
-  color: var(--tinta-tenue);
+  color: var(--text-secondary);
   max-width: 68ch;
 }
 
-@media (max-width: 640px) {
-  .nav-publica {
-    position: relative;
-    padding: 12px 16px;
+/* ============================================================
+   RESPONSIVE — §8.3, §8.4 del documento de diseño
+   ============================================================ */
+
+/* Tablet (768-1279): cápsula de enlaces oculta, CTA + hamburguesa visibles */
+@media (max-width: 1279px) {
+  .nav-publica__enlaces {
+    display: none;
   }
 
   .nav-publica__hamburguesa {
     display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 40px;
-    height: 40px;
-    border-radius: 10px;
-    border: 1px solid var(--borde);
-    background: transparent;
-    color: var(--tinta);
-    font-size: 19px;
-    line-height: 1;
-    cursor: pointer;
   }
 
-  /* Panel desplegable, oculto hasta que `nav-publica.ts` añade `.is-abierto`
-     (bug real corregido: antes el CTA "Abrir el mapa" iba con `display:none`
-     fijo, sin ninguna forma de llegar a /mapa desde la cabecera en móvil). */
-  .nav-publica__enlaces {
+  .hero__contenido {
+    padding: 128px 40px 64px;
+    gap: 24px;
+  }
+
+  .hero__titulo {
+    letter-spacing: -2px;
+  }
+
+  .comparacion {
+    padding: 16px 40px 56px;
+  }
+
+  .comparacion__grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .metricas {
+    padding: 32px 40px 48px;
+  }
+
+  .metricas__cifra {
+    font-size: 34px;
+  }
+
+  .pie-publico__top {
+    flex-direction: column;
+    gap: 32px;
+    padding: 48px 40px 28px;
+  }
+
+  .pie-publico__bottom {
+    padding: 20px 40px 28px;
+  }
+}
+
+/* Móvil (<768): CTA de la cabecera se oculta (vive en el hero), nav solo
+   lockup + hamburguesa; métricas pasan a lista */
+@media (max-width: 767px) {
+  .nav-publica {
+    padding: 14px 20px;
+  }
+
+  .nav-publica__cta {
     display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
+  }
+
+  .hero__contenido {
+    padding: 88px 24px 56px;
+    gap: 22px;
+  }
+
+  .hero__titulo {
+    font-size: 44px;
+    letter-spacing: -1.3px;
+  }
+
+  .hero__subtitulo {
+    font-size: 16px;
+  }
+
+  .hero__cta {
     flex-direction: column;
     align-items: stretch;
-    gap: 2px;
-    padding: 8px 16px 16px;
-    background: var(--navy);
-    border-bottom: 1px solid var(--borde);
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+    width: 100%;
   }
 
-  .nav-publica__enlaces.is-abierto {
-    display: flex;
-  }
-
-  .nav-publica__enlaces a {
-    padding: 12px 4px;
-  }
-
-  .nav-publica__enlaces .btn {
-    display: inline-flex;
+  .hero__cta .mv2-btn {
     justify-content: center;
-    margin-top: 8px;
+    width: 100%;
   }
 
-  .hero__contenido,
-  section.seccion,
+  .hero__fondo::after {
+    background: linear-gradient(180deg, #0a0c0ba6 0%, #0a0c0bdd 30%, #0a0c0bd1 72%, var(--bg) 100%);
+  }
+
+  .comparacion {
+    padding: 8px 20px 48px;
+  }
+
+  .comparacion__tarjeta {
+    padding: 22px;
+  }
+
+  .metricas {
+    grid-template-columns: 1fr;
+    padding: 0;
+    border-top: none;
+  }
+
+  .metricas__item {
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: space-between;
+    text-align: left;
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+    padding: 18px 20px;
+  }
+
+  .metricas__cifra {
+    font-size: 30px;
+  }
+
+  .pie-publico__top {
+    padding: 40px 20px 28px;
+  }
+
+  .pie-publico__columnas {
+    flex-direction: column;
+    gap: 28px;
+  }
+
+  .pie-publico__bottom {
+    padding: 20px 20px 28px;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
   .proceso,
+  section.seccion,
   .linea-tiempo,
-  .pie-publico {
+  .pie-publico--simple {
     padding-left: 18px;
     padding-right: 18px;
   }

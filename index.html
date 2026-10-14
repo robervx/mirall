@@ -9,96 +9,195 @@
       content="Mirall transforma información pública dispersa en una representación coherente de la ciudad que permite comprender qué está ocurriendo y tomar decisiones. Un mapa en tiempo real de València construido con datos abiertos."
     />
 
-    <meta name="theme-color" content="#0b1f33" />
+    <meta name="theme-color" content="#0a0c0b" />
     <link rel="icon" type="image/png" href="/icons/favicon-32.png" />
     <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet" />
+    <!-- Tipografías de la identidad visual Mirall v2 (spec 056, Fase 2):
+         Inter Tight (titulares), Inter (texto), JetBrains Mono (etiquetas). -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
 
+    <link rel="stylesheet" href="/src/mirall-v2.css" />
     <link rel="stylesheet" href="/src/paginas-publicas.css" />
   </head>
   <body class="pagina-publica">
     <header class="nav-publica">
-      <a class="nav-publica__marca" href="/">Mirall</a>
+      <a class="marca" href="/">
+        <span class="marca__simbolo">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M3 7V5a2 2 0 0 1 2-2h2" />
+            <path d="M17 3h2a2 2 0 0 1 2 2v2" />
+            <path d="M21 17v2a2 2 0 0 1-2 2h-2" />
+            <path d="M7 21H5a2 2 0 0 1-2-2v-2" />
+            <circle cx="12" cy="12" r="1" />
+            <path d="M18.944 12.33a1 1 0 0 0 0-.66 7.5 7.5 0 0 0-13.888 0 1 1 0 0 0 0 .66 7.5 7.5 0 0 0 13.888 0" />
+          </svg>
+        </span>
+        <span class="marca__texto">
+          <span class="marca__nombre">Mirall</span>
+          <span class="marca__descriptor">URBAN INTELLIGENCE PLATFORM</span>
+        </span>
+      </a>
       <nav class="nav-publica__enlaces">
         <a href="#manifiesto">Manifiesto</a>
-        <a href="#stack">Tecnología</a>
-        <a href="#contacto">Contacto</a>
+        <a href="/proceso#tecnologia">Tecnología</a>
         <a href="/proceso">Cómo se ha construido</a>
-        <a class="btn btn--primario btn--pequeno" href="/mapa">Abrir el mapa</a>
+        <a href="#contacto">Contacto</a>
       </nav>
+      <a class="mv2-btn mv2-btn--primary mv2-btn--nav nav-publica__cta" href="/mapa">Abrir el mapa</a>
     </header>
 
     <main>
       <section class="hero">
         <div class="hero__fondo"><canvas id="hero-ciudad-3d" aria-hidden="true"></canvas></div>
         <div class="hero__contenido">
-          <p class="hero__eyebrow">València · datos abiertos en tiempo real</p>
-          <h1 class="hero__titulo">Mirall</h1>
-          <p class="hero__subtitulo">urban intelligence</p>
-          <p class="hero__tagline">
-            La ciudad reflejada en tiempo real: movilidad, meteorología, calidad del aire, eventos e incidencias, en
-            un único panel.
+          <p class="hero__badge"><span class="hero__badge-dot"></span>València · datos abiertos en tiempo real</p>
+          <h1 class="hero__titulo">
+            La ciudad no necesita otro Goliat.<br />
+            Necesita un <span class="hero__accent">espejo.</span>
+          </h1>
+          <p class="hero__subtitulo">
+            Mirall reúne los datos que tu ciudad ya produce —ruido, aire, tráfico, obras, presupuesto— y te los
+            devuelve en un mapa vivo que pertenece a los vecinos, no a una plataforma.
           </p>
           <div class="hero__cta">
-            <a class="btn btn--primario" href="/mapa">Ver el mapa en directo →</a>
-            <a class="btn btn--secundario" href="/proceso">Cómo se ha construido</a>
+            <a class="mv2-btn mv2-btn--primary" href="/mapa">
+              Ver el mapa en directo
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
+            </a>
+            <a class="mv2-btn mv2-btn--secondary" href="#manifiesto">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z" /><path d="M14 2v5a1 1 0 0 0 1 1h5" /><path d="M10 9H8" /><path d="M16 13H8" /><path d="M16 17H8" /></svg>
+              Leer el manifiesto
+            </a>
           </div>
         </div>
       </section>
 
-      <section id="manifiesto" class="seccion manifiesto">
-        <h2>Manifiesto</h2>
-        <blockquote>
-          Mirall transforma información pública dispersa en una representación coherente de la ciudad que permite
-          comprender qué está ocurriendo y tomar decisiones.
-        </blockquote>
-        <p>
-          Cada día, una ciudad genera decenas de fuentes de datos abiertos — tráfico, bici compartida, meteorología,
-          calidad del aire, obras, incidencias, prensa local — que viven dispersas, en formatos distintos, sin relación
-          entre sí. Mirall las agrega en un único mapa vivo, cada capa con su fuente y su frescura visibles, para que
-          comprender qué está pasando ahora mismo en la ciudad no dependa de abrir quince pestañas.
-        </p>
-      </section>
+      <section id="manifiesto" class="comparacion">
+        <p class="comparacion__eyebrow"><span class="comparacion__regla"></span>DOS MODELOS DE CIUDAD<span class="comparacion__regla"></span></p>
+        <div class="comparacion__grid">
+          <article class="comparacion__tarjeta">
+            <header class="comparacion__cabecera">
+              <span class="comparacion__icono">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 12h4" /><path d="M10 8h4" /><path d="M14 21v-3a2 2 0 0 0-4 0v3" /><path d="M6 10H4a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-2" /><path d="M6 21V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v16" /></svg>
+              </span>
+              <div>
+                <h2 class="mv2-title-s">El modelo Goliat</h2>
+                <p>Una gran plataforma decide qué se mide y quién lo ve.</p>
+              </div>
+            </header>
+            <ul class="comparacion__lista comparacion__lista--goliat">
+              <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg>Datos cerrados tras contratos privados</li>
+              <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg>Paneles para el ayuntamiento, no para ti</li>
+              <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg>Licencias que se pagan cada año</li>
+              <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg>Tus datos, convertidos en producto</li>
+            </ul>
+          </article>
 
-      <section id="stack" class="seccion stack">
-        <h2>Construido con</h2>
-        <div class="stack__grid">
-          <div class="stack__item"><div class="stack__monograma">TS</div><div class="stack__nombre">TypeScript</div></div>
-          <div class="stack__item"><div class="stack__monograma">⚡</div><div class="stack__nombre">Vite</div></div>
-          <div class="stack__item"><div class="stack__monograma">GL</div><div class="stack__nombre">MapLibre GL</div></div>
-          <div class="stack__item"><div class="stack__monograma">DG</div><div class="stack__nombre">deck.gl</div></div>
-          <div class="stack__item"><div class="stack__monograma">3D</div><div class="stack__nombre">Three.js</div></div>
-          <div class="stack__item"><div class="stack__monograma">Rd</div><div class="stack__nombre">Redis (Upstash)</div></div>
-          <div class="stack__item"><div class="stack__monograma">Pg</div><div class="stack__nombre">Postgres (Neon)</div></div>
-          <div class="stack__item"><div class="stack__monograma">▲</div><div class="stack__nombre">Vercel</div></div>
-          <div class="stack__item"><div class="stack__monograma">OSM</div><div class="stack__nombre">OpenStreetMap</div></div>
+          <article class="comparacion__tarjeta comparacion__tarjeta--destacada">
+            <header class="comparacion__cabecera">
+              <span class="comparacion__icono comparacion__icono--acento">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M3 7V5a2 2 0 0 1 2-2h2" /><path d="M17 3h2a2 2 0 0 1 2 2v2" /><path d="M21 17v2a2 2 0 0 1-2 2h-2" /><path d="M7 21H5a2 2 0 0 1-2-2v-2" /><circle cx="12" cy="12" r="1" /><path d="M18.944 12.33a1 1 0 0 0 0-.66 7.5 7.5 0 0 0-13.888 0 1 1 0 0 0 0 .66 7.5 7.5 0 0 0 13.888 0" />
+                </svg>
+              </span>
+              <div>
+                <h2 class="mv2-title-s">El modelo Mirall</h2>
+                <p>La ciudad se mira a sí misma, con herramientas de todos.</p>
+              </div>
+            </header>
+            <ul class="comparacion__lista comparacion__lista--mirall">
+              <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5" /></svg>Datos abiertos y verificables, en tiempo real</li>
+              <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5" /></svg>Cada barrio ve y comenta su propio pulso</li>
+              <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5" /></svg>Código libre, sin coste de licencias</li>
+              <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5" /></svg>Nada se vende: la información es común</li>
+            </ul>
+          </article>
         </div>
       </section>
 
-      <section id="contacto" class="seccion contacto">
-        <h2>Colabora</h2>
-        <p>
-          Mirall es un proyecto abierto (MIT), sin empresa ni organismo detrás. Si estás construyendo algo parecido
-          para otra ciudad, tienes una fuente de datos que debería estar aquí, o simplemente quieres hablar del
-          proyecto, escribe.
-        </p>
-        <a class="btn btn--primario" href="mailto:mirall.urbanintelligence@gmail.com"
-          >mirall.urbanintelligence@gmail.com</a
-        >
+      <!-- Métricas reales, no de ejemplo — ver specs/056-identidad-visual-mirall-v2.md
+           §2 Fase 2 (historial): "9.147 vecinos conectados" y "16 barrios con
+           sensor propio" de la captura original eran cifras de plantilla sin
+           respaldo (Mirall no trackea usuarios, CLAUDE.md §3). Sustituidas por
+           hechos verificables; "capas de datos abiertos" se calcula en vivo
+           desde LAYER_REGISTRY (ver src/paginas/metricas-landing.ts). -->
+      <section class="metricas" aria-label="Datos del proyecto">
+        <div class="metricas__item">
+          <span class="metricas__cifra metricas__cifra--acento mv2-display-m" data-contador="19">0</span>
+          <span class="metricas__etiqueta">distritos de València</span>
+        </div>
+        <div class="metricas__item">
+          <span class="metricas__cifra mv2-display-m" id="metrica-capas" data-contador="0">0</span>
+          <span class="metricas__etiqueta">capas de datos abiertos</span>
+        </div>
+        <div class="metricas__item">
+          <span class="metricas__cifra mv2-display-m" data-contador="100" data-sufijo="%">0%</span>
+          <span class="metricas__etiqueta">fuentes públicas, sin datos de pago</span>
+        </div>
+        <div class="metricas__item">
+          <span class="metricas__cifra metricas__cifra--acento mv2-display-m">0&nbsp;€</span>
+          <span class="metricas__etiqueta">en licencias</span>
+        </div>
+        <div class="metricas__item">
+          <span class="metricas__cifra mv2-display-m">0</span>
+          <span class="metricas__etiqueta">datos vendidos</span>
+        </div>
       </section>
     </main>
 
-    <footer class="pie-publico">
-      <span>Proyecto de datos abiertos · sin relación con ningún organismo oficial</span>
-      <span class="pie-publico__enlaces">
-        <a href="https://github.com/robervx/mirall" target="_blank" rel="noopener">Código en GitHub</a>
-        <a href="/proceso">Proceso</a>
-        <a href="/mapa">Mapa en vivo</a>
-        <a href="/LICENSE">Licencia MIT</a>
-      </span>
+    <footer id="contacto" class="pie-publico">
+      <div class="pie-publico__top">
+        <div class="pie-publico__marca">
+          <a class="marca" href="/">
+            <span class="marca__simbolo">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M3 7V5a2 2 0 0 1 2-2h2" /><path d="M17 3h2a2 2 0 0 1 2 2v2" /><path d="M21 17v2a2 2 0 0 1-2 2h-2" /><path d="M7 21H5a2 2 0 0 1-2-2v-2" /><circle cx="12" cy="12" r="1" /><path d="M18.944 12.33a1 1 0 0 0 0-.66 7.5 7.5 0 0 0-13.888 0 1 1 0 0 0 0 .66 7.5 7.5 0 0 0 13.888 0" />
+              </svg>
+            </span>
+            <span class="marca__texto">
+              <span class="marca__nombre">Mirall</span>
+              <span class="marca__descriptor">URBAN INTELLIGENCE PLATFORM</span>
+            </span>
+          </a>
+          <p>Urban intelligence para València. Información pública dispersa, convertida en una representación coherente de la ciudad.</p>
+        </div>
+        <div class="pie-publico__columnas">
+          <div class="pie-publico__columna">
+            <h3>PRODUCTO</h3>
+            <a href="/mapa">Mapa en directo</a>
+            <a href="/mapa#/inteligencia">Inteligencia</a>
+            <a href="/proceso">Cómo se ha construido</a>
+          </div>
+          <div class="pie-publico__columna">
+            <h3>PROYECTO</h3>
+            <a href="#manifiesto">Manifiesto</a>
+            <a href="/proceso#tecnologia">Tecnología</a>
+            <a href="https://github.com/robervx/mirall" target="_blank" rel="noopener">Código en GitHub</a>
+          </div>
+          <div class="pie-publico__columna">
+            <h3>CONTACTO</h3>
+            <a href="mailto:mirall.urbanintelligence@gmail.com">mirall.urbanintelligence@gmail.com</a>
+            <a href="/LICENSE">Licencia abierta</a>
+          </div>
+        </div>
+      </div>
+      <div class="pie-publico__bottom">
+        <span>© 2026 Mirall · Hecho con datos abiertos de València</span>
+        <span class="pie-publico__iconos">
+          <a href="https://github.com/robervx/mirall" target="_blank" rel="noopener" aria-label="Código en GitHub">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="none" aria-hidden="true"><path d="M12 .5C5.73.5.5 5.73.5 12c0 5.08 3.29 9.38 7.86 10.9.57.1.78-.25.78-.55v-2.17c-3.2.7-3.88-1.35-3.88-1.35-.53-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.7 1.25 3.36.95.1-.75.4-1.26.73-1.55-2.55-.29-5.23-1.28-5.23-5.68 0-1.25.45-2.28 1.18-3.08-.12-.29-.51-1.46.11-3.04 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.78 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.58.24 2.75.12 3.04.74.8 1.18 1.83 1.18 3.08 0 4.41-2.69 5.39-5.25 5.67.41.36.78 1.07.78 2.16v3.2c0 .3.2.65.79.55A11.5 11.5 0 0 0 23.5 12C23.5 5.73 18.27.5 12 .5Z"/></svg>
+          </a>
+          <a href="mailto:mirall.urbanintelligence@gmail.com" aria-label="Escribir por email">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7" /><rect x="2" y="4" width="20" height="16" rx="2" /></svg>
+          </a>
+        </span>
+      </div>
     </footer>
 
     <script type="module" src="/src/paginas/landing-entrada.ts"></script>

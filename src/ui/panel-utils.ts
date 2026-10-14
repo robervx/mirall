@@ -70,6 +70,17 @@ export function metaFrescura(fuente: string, fetchedAt: string, fresh: boolean):
   return `${fuente} · actualizado ${formatoFrescura(fetchedAt)} (${formatoFechaHora(fetchedAt)}) ${aviso}`;
 }
 
+/** Versión compacta de `metaFrescura` para la cabecera de un `mv2-card`
+ * (spec 056 Fase 4, §7.5: "fuente · antigüedad", p. ej. "AVAMET · hace 3
+ * min") — la fecha absoluta entre paréntesis de `metaFrescura` no cabe ahí,
+ * queda para los pies de panel que todavía usan el formato largo. Si el dato
+ * lleva más de 3× su cadencia esperada sin refrescar, el llamante debería
+ * pasar `fresh:false` para que el DataCard pinte el meta en naranja
+ * (`.mv2-card__meta--stale`, ver sección 10 del documento de diseño). */
+export function metaFrescuraCorta(fuente: string, fetchedAt: string): string {
+  return `${fuente} · ${formatoFrescura(fetchedAt)}`;
+}
+
 export function buildInfoPanel(id: string, opciones?: { colapsable?: boolean }): HTMLDivElement {
   let container = document.getElementById('info-panels') as HTMLDivElement | null;
   if (!container) {

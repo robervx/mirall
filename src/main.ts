@@ -56,7 +56,7 @@ import type { EquipamientoCritico, CategoriaEquipamientoCritico } from './servic
 import type { BusEmt } from './services/emt-buses';
 import type { ParadaEmt } from './services/emt-paradas';
 import { rejillaInterpolada, featureCollectionInterpolada, PASO_LAT_INTERPOLACION, PASO_LON_INTERPOLACION, DISTANCIA_MAXIMA_INTERPOLACION_M } from './services/interpolacion-meteo';
-import { mountChasis, setAlertaCriticaHeader } from './ui/chasis';
+import { mountChasis, setAlertaCriticaHeader, setCampanaOnClick } from './ui/chasis';
 import { applyPanelVisibility, PANEL_PREFERENCES_REGISTRY } from './ui/panel-preferences';
 import { registrarFrescura } from './ui/estado-frescura';
 import { montarDashboardKpis, registrarKpi } from './ui/dashboard-kpis';
@@ -83,22 +83,18 @@ import {
   getEstadoModoSimulacion,
 } from './ui/modo-simulacion-cortes';
 import { cargarGrafoViario } from './services/grafo-viario-cliente';
-import { montarCamarasPanel, montarCamarasDgtPanel } from './ui/camaras-panel';
+import { montarCamarasAccesoPanel } from './ui/camaras-panel';
 import { montarMeteoActualPanel, montarPrediccionPanel } from './ui/meteo-panel';
 import { buildActualidadRedesContent } from './ui/actualidad-redes';
+import { montarInteligenciaCabecera } from './ui/inteligencia-cabecera';
 import { initRouter, irAVista } from './ui/router';
-import { montarApoyoDecisionPanel } from './ui/apoyo-decision-panel';
-import {
-  montarAltimetriaPanel,
-  montarLluviaVientoDistritoPanel,
-  montarTemperaturaZonaPanel,
-  montarRiesgoEscorrentiaPanel,
-} from './ui/emergencia-meteo-panel';
+import { montarAltimetriaPanel, montarMeteorologiaZonaPanel, montarRiesgoEscorrentiaPanel } from './ui/emergencia-meteo-panel';
 import { montarSenalesPanel } from './ui/senales-ia-panel';
 import { montarRecomendacionesPanel } from './ui/recomendaciones-actuacion-panel';
 import { buildProtocolosContent } from './ui/protocolos-panel';
 import { onPeticionCentrarMapa } from './ui/centrar-mapa';
-import { escapeHtml, metaFrescura, formatoFechaHora, formatoFecha, buildInfoPanel, startPolling } from './ui/panel-utils';
+import { escapeHtml, metaFrescura, metaFrescuraCorta, formatoFechaHora, formatoFecha, buildInfoPanel, startPolling } from './ui/panel-utils';
+import { iconoSvg } from './ui/iconos';
 import { esVersionPublica } from './config/version-despliegue';
 import { marcadoresSentido, type MarcadorSentido } from './services/flechas-sentido';
 import { puntosFlujoParaTramo } from './services/flujo-animado';
@@ -129,7 +125,38 @@ if (!Object.getOwnPropertyDescriptor(maplibregl.Map.prototype, 'transform')) {
   });
 }
 
-const OPENFREEMAP_STYLE = 'https://tiles.openfreemap.org/styles/liberty';
+// Estilo oscuro — spec 056 Fase 3b (identidad Mirall v2). Mismo proveedor
+// (OpenFreeMap, sin key, CLAUDE.md §5), misma fuente de tiles `openmaptiles`
+// que el estilo `liberty` anterior — solo cambia el *style* de pintado, no
+// la fuente. Verificado con llamada real (2026-10-08): fondo `rgb(12,12,12)`
+// (≈ nuestro --bg), sin capa de POI (cumple "sin etiquetas POI" del diseño
+// sin tocar nada), misma paleta de 47 capas que `aplicarPaletaMirall` afina
+// hacia los tokens de marca tras el `load`.
+const OPENFREEMAP_STYLE = 'https://tiles.openfreemap.org/styles/dark';
+/**
+ * Afina el estilo `dark` de OpenFreeMap hacia los tokens de Mirall v2 — no
+ * se reescriben las 47 capas, solo las 3 que más se notan a simple vista
+ * (agua, parques, fondo), para que el mapa no quede en gris puro. El resto
+ * de la paleta (calles/edificios/fronteras) ya encaja bien tal cual viene.
+ */
+function aplicarPaletaMirall(map: maplibregl.Map): void {
+  try {
+    map.setPaintProperty('background', 'background-color', '#0a0c0b');
+    map.setPaintProperty('water', 'fill-color', '#0a0c0b');
+    map.setPaintProperty('landuse_park', 'fill-color', '#13201a');
+    map.setPaintProperty('landcover_wood', 'fill-color', '#13201a');
+    // `landcover_wood` trae de serie un `fill-pattern: 'wood-pattern'` que
+    // gana al fill-color — el sprite no carga ("Image wood-pattern could
+    // not be loaded", quirk propio del estilo `dark` de OpenFreeMap, no de
+    // este código) y sin quitarlo el tinte de arriba no se ve.
+    map.setPaintProperty('landcover_wood', 'fill-pattern', undefined);
+  } catch (err) {
+    // Si OpenFreeMap cambia de nombre alguna capa, el mapa se queda con la
+    // paleta de serie (gris) en vez de romperse — no es crítico.
+    console.warn('aplicarPaletaMirall: no se pudo repintar alguna capa base:', err);
+  }
+}
+
 const VALENCIA_CENTER: [number, number] = [-0.3763, 39.4699];
 const DEFAULT_ZOOM = 12;
 // Duración del ciclo del efecto de flujo animado de la capa de tráfico real
@@ -1069,29 +1096,54 @@ async function fetchPanelZasActual(): Promise<PanelZas & { fresh: boolean }> {
   return (await res.json()) as PanelZas & { fresh: boolean };
 }
 
-function renderSonometrosRuzafaPanel(root: HTMLDivElement, sonometros: SonometroRuzafa[], fresh: boolean): void {
+// spec 056 Fase 4, §8.5.7: barra 50-70dBA con línea de umbral a 65dBA, valor
+// en rojo por encima del umbral. El color del punto/barra sigue usando las 6
+// bandas oficiales reales (`colorBandaRuido`) en vez de colapsar a los 3
+// tramos simplificados de la leyenda del documento — más preciso, mismo
+// criterio que el resto del rediseño (dato real por delante del pixel).
+const ZAS_ESCALA_MIN_DBA = 50;
+const ZAS_ESCALA_MAX_DBA = 70;
+const ZAS_UMBRAL_DBA = 65;
+
+function renderSonometrosRuzafaPanel(root: HTMLElement, sonometros: SonometroRuzafa[], fresh: boolean): void {
   if (sonometros.length === 0) {
     root.innerHTML = `
-      <div class="media-panel__header">Ruido en Russafa (ZAS)</div>
-      <div class="tendencia-panel__insuficiente">Sonómetros no disponibles ahora mismo.</div>
+      <header class="mv2-card__header">
+        <span class="mv2-card__header-icon">${iconoSvg('audio-lines', 16)}</span>
+        <h3 class="mv2-card__title">Ruido en Russafa (ZAS)</h3>
+      </header>
+      <div class="mv2-card__body"><div class="mv2-card__estado">Sonómetros no disponibles ahora mismo.</div></div>
     `;
     return;
   }
+  const umbralPct = ((ZAS_UMBRAL_DBA - ZAS_ESCALA_MIN_DBA) / (ZAS_ESCALA_MAX_DBA - ZAS_ESCALA_MIN_DBA)) * 100;
   const filas = [...sonometros]
     .sort((a, b) => b.laeqDb - a.laeqDb)
-    .map(
-      (s) => `
-        <div class="trafico-leyenda__row">
-          <span class="trafico-leyenda__dot" style="background:rgb(${colorBandaRuido(s.laeqDb).slice(0, 3).join(',')})"></span>
-          ${escapeHtml(s.direccion)} — ${s.laeqDb.toFixed(1)} dBA
-        </div>`,
-    )
+    .map((s) => {
+      const pct = Math.max(0, Math.min(100, ((s.laeqDb - ZAS_ESCALA_MIN_DBA) / (ZAS_ESCALA_MAX_DBA - ZAS_ESCALA_MIN_DBA)) * 100));
+      const color = `rgb(${colorBandaRuido(s.laeqDb).slice(0, 3).join(',')})`;
+      return `
+        <div class="mv2-bar-row">
+          <span class="mv2-bar-row__label">${escapeHtml(s.direccion)}</span>
+          <span class="mv2-bar-track">
+            <span class="mv2-bar-fill" style="right:${100 - pct}%;background:${color}"></span>
+            <span class="mv2-bar-threshold" style="left:${umbralPct}%"></span>
+          </span>
+          <span class="mv2-bar-row__valor mv2-tabular" style="color:${s.laeqDb > ZAS_UMBRAL_DBA ? 'var(--danger)' : 'var(--text-secondary)'}">${s.laeqDb.toFixed(1)}</span>
+        </div>`;
+    })
     .join('');
   root.innerHTML = `
-    <div class="media-panel__header">Ruido en Russafa (ZAS) — ${sonometros.length} sonómetros</div>
-    <div class="agenda-panel__aviso">Nivel medio diario (LAeq) del día anterior completo, no instantáneo. Sin coordenadas verificadas para pintarlos en el mapa — ver spec 049 §7.</div>
-    <div class="media-panel__list">${filas}</div>
-    <div class="info-panel__meta">${metaFrescura('Ajuntament de València (VLCi)', sonometros[0]?.fetchedAt ?? new Date().toISOString(), fresh)}</div>
+    <header class="mv2-card__header">
+      <span class="mv2-card__header-icon">${iconoSvg('audio-lines', 16)}</span>
+      <h3 class="mv2-card__title">Ruido en Russafa (ZAS)</h3>
+      <span class="mv2-card__meta${fresh ? '' : ' mv2-card__meta--stale'}">${sonometros.length} sonómetros</span>
+    </header>
+    <div class="mv2-card__body">
+      <p class="mv2-body-s" style="color:var(--text-muted);margin:0">Nivel medio diario (LAeq) del día anterior completo, no instantáneo — línea vertical: umbral nocturno de la ZAS, 65 dBA.</p>
+      <div style="display:flex;flex-direction:column;gap:2px">${filas}</div>
+      <p class="mv2-card__fuente">${metaFrescuraCorta('Ajuntament de València (VLCi)', sonometros[0]?.fetchedAt ?? new Date().toISOString())}</p>
+    </div>
   `;
 }
 
@@ -1553,12 +1605,20 @@ interface AgendaPanel {
 function buildAgendaPanel(): AgendaPanel {
   const root = document.createElement('div');
   root.id = 'agenda-panel';
+  root.className = 'mv2-card';
+  root.dataset.vistaInteligenciaCard = '';
+  root.dataset.categoria = 'eventos';
   root.hidden = true;
   root.innerHTML = `
-    <div class="media-panel__header">Agenda de eventos</div>
-    <div class="agenda-panel__aviso">Contenido extraído por scraping de fuentes públicas (valencia.es, Valencia CF, Levante UD, Roig Arena, Fundación Deportiva Municipal) — no es una API ni un dataset oficial.</div>
-    <div class="media-panel__list" id="agenda-panel-list"></div>
-    <div class="info-panel__meta" id="agenda-panel-meta"></div>
+    <header class="mv2-card__header">
+      <span class="mv2-card__header-icon">${iconoSvg('calendar-days', 16)}</span>
+      <h3 class="mv2-card__title">Agenda de eventos</h3>
+      <span class="mv2-card__meta" id="agenda-panel-meta"></span>
+    </header>
+    <div class="mv2-card__body">
+      <div id="agenda-panel-list"></div>
+      <p class="mv2-card__fuente">Scraping de fuentes públicas (valencia.es, Valencia CF, Levante UD, Roig Arena, Fundación Deportiva Municipal) — no es una API ni un dataset oficial.</p>
+    </div>
   `;
   document.body.appendChild(root);
   return { root, list: root.querySelector('#agenda-panel-list')! };
@@ -1575,14 +1635,16 @@ function formatoFechaEvento(fechaInicio: string, fechaFin: string): string {
 
 function renderItemAgenda(evento: EventoAgenda): string {
   const chips = evento.distritosMencionados
-    .map((m) => `<span class="media-panel__chip">${escapeHtml(m.distritoNombre)}</span>`)
+    .map((m) => `<span class="mv2-pill mv2-pill--info">${escapeHtml(m.distritoNombre)}</span>`)
     .join('');
-  const chipImpacto = evento.impactoViaPublica ? '<span class="media-panel__chip media-panel__chip--impacto">⚠ Impacto en vía pública</span>' : '';
+  const chipImpacto = evento.impactoViaPublica
+    ? `<span class="mv2-pill mv2-pill--danger">${iconoSvg('triangle-alert', 11)}<span>Impacto en vía pública</span></span>`
+    : '';
   return `
-    <a class="media-panel__item" href="${escapeHtml(evento.url)}" target="_blank" rel="noopener noreferrer">
-      <div class="media-panel__item-titulo">${escapeHtml(evento.titulo)}</div>
-      <div class="media-panel__item-meta">${escapeHtml(evento.categoria || 'Sin categoría')} · ${formatoFechaEvento(evento.fechaInicio, evento.fechaFin)}</div>
-      ${chipImpacto || chips ? `<div class="media-panel__chips">${chipImpacto}${chips}</div>` : ''}
+    <a class="agenda-item" href="${escapeHtml(evento.url)}" target="_blank" rel="noopener noreferrer">
+      <div class="agenda-item__titulo">${escapeHtml(evento.titulo)}</div>
+      <div class="agenda-item__meta">${escapeHtml(evento.categoria || 'Sin categoría')} · ${formatoFechaEvento(evento.fechaInicio, evento.fechaFin)}</div>
+      ${chipImpacto || chips ? `<div class="agenda-item__chips">${chipImpacto}${chips}</div>` : ''}
     </a>
   `;
 }
@@ -1590,14 +1652,14 @@ function renderItemAgenda(evento: EventoAgenda): string {
 function renderGrupoAgenda(titulo: string, eventos: EventoAgenda[]): string {
   if (eventos.length === 0) return '';
   return `
-    <div class="media-panel__grupo-titulo">${escapeHtml(titulo)}</div>
+    <div class="sidemenu__grupo-titulo" style="padding:0;margin:4px 0">${escapeHtml(titulo)}</div>
     ${eventos.map(renderItemAgenda).join('')}
   `;
 }
 
 function renderAgendaPanel(panel: AgendaPanel, snapshot: SnapshotAgenda): void {
   const avisoSospechoso = snapshot.estructuraSospechosa
-    ? '<div class="tendencia-panel__insuficiente">⚠ Agenda posiblemente desactualizada — la fuente parece haber cambiado de estructura, revisar el scraper. Mostrando el último dato bueno conocido.</div>'
+    ? `<p class="mv2-card__estado--error">${iconoSvg('triangle-alert', 14)}<span>Agenda posiblemente desactualizada — la fuente parece haber cambiado de estructura. Mostrando el último dato bueno conocido.</span></p>`
     : '';
 
   // spec 027 v4 §9 — sección propia con los eventos que generan afluencia/tráfico/
@@ -1629,13 +1691,12 @@ function renderAgendaPanel(panel: AgendaPanel, snapshot: SnapshotAgenda): void {
     .join('');
 
   const listaHtml = [seccionImpacto, gruposDistrito, renderGrupoAgenda('València (general)', generales)].join('');
-  const vacio = '<div class="tendencia-panel__insuficiente">Sin eventos en la agenda ahora mismo.</div>';
+  const vacio = '<div class="mv2-card__estado">Sin eventos en la agenda ahora mismo.</div>';
   panel.list.innerHTML = avisoSospechoso + (listaHtml || (avisoSospechoso ? '' : vacio));
 
   const meta = panel.root.querySelector('#agenda-panel-meta')!;
-  meta.innerHTML =
-    metaFrescura('valencia.es (scraping)', snapshot.fetchedAt, !snapshot.estructuraSospechosa) +
-    ` · ${snapshot.eventos.length} eventos`;
+  meta.textContent = `${metaFrescuraCorta('valencia.es', snapshot.fetchedAt)} · ${snapshot.eventos.length} eventos`;
+  meta.classList.toggle('mv2-card__meta--stale', snapshot.estructuraSospechosa);
 }
 
 async function fetchAgendaEventosActual(): Promise<SnapshotAgenda> {
@@ -1738,7 +1799,6 @@ interface ControlPanel {
   movilidadToggle: HTMLInputElement;
   zasRuidoToggle: HTMLInputElement;
   viaPublicaToggle: HTMLInputElement;
-  camarasToggle: HTMLInputElement;
   equipamientosCriticosToggle: HTMLInputElement;
   emtBusesToggle: HTMLInputElement;
   emtParadasToggle: HTMLInputElement;
@@ -1886,16 +1946,15 @@ function buildControlPanel(): ControlPanel {
     // del selector (se mudan a la vista /inteligencia, siempre visibles ahí, no
     // capas de mapa que se enciendan/apaguen). Se crean como checkboxes
     // "toggle" desconectados del DOM, siempre marcados, solo para que el
-    // cableado interno de cada panel (`panel.mediaToggle.addEventListener(...)`,
-    // `montarCamarasPanel(toggle)`) siga funcionando sin tocar su lógica
-    // (`docs/02_DEFINITION_OF_DONE_V1.md`, spec 040 §2: "reubicación, no
-    // reimplementación") — `main()` dispara su `change` una vez tras cablear.
+    // cableado interno de cada panel (`panel.mediaToggle.addEventListener(...)`)
+    // siga funcionando sin tocar su lógica (`docs/02_DEFINITION_OF_DONE_V1.md`,
+    // spec 040 §2: "reubicación, no reimplementación") — `main()` dispara su
+    // `change` una vez tras cablear.
     mediaToggle: toggleSiempreActivo(),
     tendenciaToggle: toggleSiempreActivo(),
     agendaToggle: toggleSiempreActivo(),
     movilidadToggle: toggleSiempreActivo(),
     zasRuidoToggle: toggleSiempreActivo(),
-    camarasToggle: toggleSiempreActivo(),
     viaPublicaToggle: panel.querySelector('#toggle-via-publica')!,
     equipamientosCriticosToggle: panel.querySelector('#toggle-equipamientos-criticos')!,
     emtBusesToggle: panel.querySelector('#toggle-emt-buses')!,
@@ -1917,6 +1976,7 @@ async function main(): Promise<void> {
   initPwa();
   initDeteccionDispositivo();
   mountChasis();
+  setCampanaOnClick(irAPanelInsights);
 
   const initialState = readStateFromUrl();
 
@@ -1927,7 +1987,9 @@ async function main(): Promise<void> {
     center: initialState.center,
     zoom: initialState.zoom,
   });
-  map.addControl(new maplibregl.NavigationControl(), 'top-right');
+  // Sin compás (spec 056 Fase 3b, §7.14: solo plus/minus en la tarjeta de
+  // zoom) — el mapa no rota, mantenerlo solo añadía un tercer botón sin uso.
+  map.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'top-right');
 
   // Condición de carrera real (investigada 2026-09-25, ver memoria de
   // proyecto): `renderLayers()` se dispara desde ~30 sitios independientes
@@ -3529,8 +3591,11 @@ async function main(): Promise<void> {
   // /inteligencia. El mismo fetch alimenta también `zonasZas` (los polígonos
   // ya declarados), que sí es una capa de mapa — su checkbox propio
   // (`zonasZasToggle`) solo decide si se pintan, sin volver a pedir el dato.
-  const zasRuidoPanelRoot = document.createElement('div');
+  const zasRuidoPanelRoot = document.createElement('section');
   zasRuidoPanelRoot.id = 'zas-ruido-panel';
+  zasRuidoPanelRoot.className = 'mv2-card';
+  zasRuidoPanelRoot.dataset.vistaInteligenciaCard = '';
+  zasRuidoPanelRoot.dataset.categoria = 'ruido';
   zasRuidoPanelRoot.hidden = true;
   document.body.appendChild(zasRuidoPanelRoot);
   const zonasZasLeyendaRoot = buildInfoPanel('zonas-zas-leyenda', { colapsable: true });
@@ -3562,10 +3627,6 @@ async function main(): Promise<void> {
     renderLayers();
   });
 
-  // "Cámaras en vivo" se oculta en la versión pública — petición explícita
-  // del usuario, ver ADR-008. En master/interno se ve siempre.
-  if (!esVersionPublica()) montarCamarasPanel(panel.camarasToggle);
-
   // spec 040 — "Actualidad institucional" (039) se muda del sidebar a un panel
   // propio de /inteligencia; `buildActualidadRedesContent()` es exactamente el
   // mismo contenido que ya usaba el sidebar (sin reescribir su lógica interna).
@@ -3575,20 +3636,25 @@ async function main(): Promise<void> {
   actualidadRedesPanel.appendChild(buildActualidadRedesContent());
   document.body.appendChild(actualidadRedesPanel);
 
-  // spec 041 — panel de apoyo a decisión, dentro de /inteligencia. "Ver en el
-  // mapa" pide centrar la única instancia de MapLibre (no crea una segunda) y
+  // spec 056 Fase 4 — cabecera de página de /inteligencia (eyebrow, título,
+  // subtítulo con fecha/frescura real, chips de filtro). Monta siempre, no
+  // solo en master — es el marco de la página, no una herramienta interna.
+  montarInteligenciaCabecera();
+
+  // spec 041 — apoyo a decisión operativa: desde spec 056 Fase 4 ya no es su
+  // propia tarjeta, vive como pestaña dentro de "Recomendaciones de
+  // actuación" (montarRecomendacionesPanel, más abajo). "Ver en el mapa"
+  // pide centrar la única instancia de MapLibre (no crea una segunda) y
   // cambia a /mapa — nunca dispara ninguna acción por sí mismo (§0).
-  // "Apoyo a la decisión operativa", "cámaras DGT", "señales" y
-  // "recomendaciones de actuación" se ocultan en la versión pública —
-  // petición explícita del usuario, ver ADR-008. En master/interno se ven
-  // siempre.
+  // "Cámaras en vías de acceso" (DGT+Ciudad fusionadas, spec 056 Fase 4),
+  // "señales" y "recomendaciones de actuación" (con apoyo a decisión dentro)
+  // se ocultan en la versión pública — petición explícita del usuario, ver
+  // ADR-008. En master/interno se ven siempre.
   if (!esVersionPublica()) {
-    montarApoyoDecisionPanel();
-    montarCamarasDgtPanel();
+    montarCamarasAccesoPanel();
   }
   montarAltimetriaPanel();
-  montarLluviaVientoDistritoPanel();
-  montarTemperaturaZonaPanel();
+  montarMeteorologiaZonaPanel();
   montarRiesgoEscorrentiaPanel();
   if (!esVersionPublica()) {
     montarSenalesPanel();
@@ -3612,12 +3678,12 @@ async function main(): Promise<void> {
     panel.agendaToggle,
     panel.movilidadToggle,
     panel.zasRuidoToggle,
-    panel.camarasToggle,
   ]) {
     t.dispatchEvent(new Event('change'));
   }
 
   map.on('load', () => {
+    aplicarPaletaMirall(map);
     mapaListo = true;
     renderLayers();
     if (initialState.distrito) {
@@ -3736,16 +3802,13 @@ async function main(): Promise<void> {
   const idsInteligencia = [
     'media-panel',
     'tendencia-panel',
-    'camaras-panel',
-    'camaras-dgt-panel',
+    'camaras-acceso-panel',
     'agenda-panel',
     'movilidad-avisos-panel',
     'zas-ruido-panel',
     'actualidad-redes-panel',
-    'apoyo-decision-panel',
     'altimetria-panel',
-    'lluvia-viento-distrito-panel',
-    'temperatura-zona-panel',
+    'meteorologia-zona-panel',
     'riesgo-escorrentia-panel',
     'senales-ia-panel',
     'recomendaciones-ia-panel',

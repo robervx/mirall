@@ -1,10 +1,16 @@
-// Panel de apoyo a decisión operativa — spec 041, dentro de /inteligencia
-// (spec 040). Cruza señales ya calculadas por otras specs (§2) y muestra una
-// sugerencia de texto en condicional — nunca una acción ejecutable (§0,
-// CLAUDE.md §4): no hay botón "enviar" ni "despachar", solo "Ver en el mapa"
-// (navega a /mapa y centra en el punto, no dispara nada por sí mismo).
+// Apoyo a decisión operativa — spec 041. Cruza señales ya calculadas por
+// otras specs (§2) y muestra una sugerencia de texto en condicional — nunca
+// una acción ejecutable (§0, CLAUDE.md §4): no hay botón "enviar" ni
+// "despachar", solo "Ver en el mapa" (navega a /mapa y centra en el punto,
+// no dispara nada por sí mismo).
+//
+// Spec 056 Fase 4: ya no monta su propia tarjeta en /inteligencia — el
+// documento de diseño la funde como pestaña dentro de "Recomendaciones de
+// actuación" (§8.5, nota de tarjetas sin diseño propio). `iniciarApoyoDecision`
+// expone solo el refresco de datos para que `recomendaciones-actuacion-panel.ts`
+// monte el marcado dentro de su propia tarjeta.
 import type { SugerenciaOperativa } from '../services/apoyo-decision';
-import { escapeHtml, metaFrescura, startPolling } from './panel-utils';
+import { escapeHtml, metaFrescuraCorta, startPolling } from './panel-utils';
 import { pedirCentrarMapa } from './centrar-mapa';
 import { irAVista } from './router';
 
@@ -15,8 +21,8 @@ async function fetchSugerenciasActuales(): Promise<{ sugerencias: SugerenciaOper
 }
 
 function renderSugerencia(s: SugerenciaOperativa, i: number): string {
-  const chips = s.señalesCombinadas.map((señal) => `<span class="sugerencia-operativa__chip">${escapeHtml(señal)}</span>`).join('');
-  const fuentes = s.fuenteSpec.map((spec) => `<span class="insight-card__fuente-chip">${escapeHtml(spec)}</span>`).join('');
+  const chips = s.señalesCombinadas.map((señal) => `<span class="mv2-pill mv2-pill--neutral">${escapeHtml(señal)}</span>`).join('');
+  const fuentes = s.fuenteSpec.map((spec) => `<span class="mv2-pill mv2-pill--neutral">${escapeHtml(spec)}</span>`).join('');
   const donde = s.calle ? `${escapeHtml(s.calle)} · ${escapeHtml(s.distrito ?? '')}` : escapeHtml(s.distrito ?? 'Valencia');
   return `
     <div class="sugerencia-operativa sugerencia-operativa--${s.severidad}">
@@ -28,32 +34,19 @@ function renderSugerencia(s: SugerenciaOperativa, i: number): string {
       <div class="sugerencia-operativa__resumen">${escapeHtml(s.resumen)}</div>
       <div class="sugerencia-operativa__texto">${escapeHtml(s.sugerenciaTexto)}</div>
       <div class="sugerencia-operativa__pie">
-        <button type="button" class="sugerencia-operativa__ver-mapa" data-sugerencia-index="${i}">Ver en el mapa</button>
+        <button type="button" class="mv2-btn mv2-btn--pill-small sugerencia-operativa__ver-mapa" data-sugerencia-index="${i}">Ver en el mapa ↗</button>
         <span class="sugerencia-operativa__fuentes">${fuentes}</span>
       </div>
     </div>
   `;
 }
 
-export function buildApoyoDecisionContent(): { root: HTMLDivElement; list: HTMLDivElement } {
-  const root = document.createElement('div');
-  root.id = 'apoyo-decision-panel';
-  root.innerHTML = `
-    <div class="media-panel__header">Apoyo a decisión operativa</div>
-    <p class="cordon-intro">Cruce de señales ya existentes (Pulso de Distrito, tráfico, incidencias, lluvia) — nunca una acción ejecutable, solo un texto para que lo valore una persona.</p>
-    <div class="media-panel__list" id="apoyo-decision-list"></div>
-    <div class="info-panel__meta" id="apoyo-decision-meta"></div>
-  `;
-  return { root, list: root.querySelector('#apoyo-decision-list')! };
-}
-
-export function montarApoyoDecisionPanel(): void {
-  const panel = buildApoyoDecisionContent();
-  document.body.appendChild(panel.root);
-
+/** Conecta el refresco de datos a un `list`/`meta` ya existentes en el DOM
+ * (la tarjeta la monta el llamante — ver `recomendaciones-actuacion-panel.ts`). */
+export function iniciarApoyoDecision(list: HTMLDivElement, meta: HTMLElement): void {
   let ultimasSugerencias: SugerenciaOperativa[] = [];
 
-  panel.list.addEventListener('click', (ev) => {
+  list.addEventListener('click', (ev) => {
     const boton = (ev.target as HTMLElement).closest<HTMLButtonElement>('button[data-sugerencia-index]');
     if (!boton) return;
     const sugerencia = ultimasSugerencias[Number(boton.dataset.sugerenciaIndex)];
@@ -67,14 +60,14 @@ export function montarApoyoDecisionPanel(): void {
       const { sugerencias, fresh } = await fetchSugerenciasActuales();
       ultimasSugerencias = sugerencias;
       if (sugerencias.length === 0) {
-        panel.list.innerHTML = '<div class="info-panel__desc">Sin conjunción de señales activa ahora mismo.</div>';
+        list.innerHTML = '<div class="mv2-card__estado">Sin conjunción de señales activa ahora mismo.</div>';
       } else {
-        panel.list.innerHTML = sugerencias.map(renderSugerencia).join('');
+        list.innerHTML = sugerencias.map(renderSugerencia).join('');
       }
-      const meta = panel.root.querySelector('#apoyo-decision-meta')!;
-      meta.innerHTML = metaFrescura('Mirall (apoyo a decisión)', new Date().toISOString(), fresh);
+      meta.textContent = metaFrescuraCorta('Mirall (apoyo a decisión)', new Date().toISOString());
+      meta.classList.toggle('mv2-card__meta--stale', !fresh);
     } catch (err) {
-      panel.list.textContent = 'Apoyo a decisión no disponible';
+      list.textContent = 'Apoyo a decisión no disponible';
       console.error('Fallo al cargar sugerencias de apoyo a decisión:', err);
     }
   }

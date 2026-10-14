@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Guía de estilos — Mirall v2</title>
+    <meta name="robots" content="noindex, nofollow" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="/src/mirall-v2.css" />
+    <style>
+      /* Solo para esta página interna de verificación — no forma parte del
+         catálogo de componentes (spec 056), es el andamiaje de la propia guía. */
+      body {
+        background: var(--bg);
+        color: var(--text-primary);
+        font-family: var(--mv2-font-body);
+        margin: 0;
+        padding: 40px;
+      }
+      .ge-seccion {
+        max-width: 1100px;
+        margin: 0 auto 56px;
+      }
+      .ge-seccion h2 {
+        font-family: var(--mv2-font-mono);
+        font-size: 12px;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        color: var(--text-muted);
+        border-bottom: 1px solid var(--border);
+        padding-bottom: 12px;
+        margin-bottom: 20px;
+      }
+      .ge-fila {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+        align-items: center;
+        margin-bottom: 12px;
+      }
+      .ge-swatch {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-family: var(--mv2-font-mono);
+        font-size: 12px;
+      }
+      .ge-swatch-color {
+        width: 28px;
+        height: 28px;
+        border-radius: 6px;
+        border: 1px solid var(--border);
+      }
+      .ge-cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 16px;
+      }
+      .ge-cards .mv2-card {
+        height: 220px;
+      }
+      .ge-icons {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+        gap: 12px;
+      }
+      .ge-icon-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 6px;
+        padding: 10px;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        font-family: var(--mv2-font-mono);
+        font-size: 10px;
+        color: var(--text-secondary);
+      }
+    </style>
+  </head>
+  <body>
+    <h1 class="mv2-display-m" style="margin: 0 0 8px">Guía de estilos — Mirall v2</h1>
+    <p class="mv2-body" style="color: var(--text-secondary); margin-bottom: 48px">
+      Verificación interna de la Fase 1 (spec 056) — tokens + catálogo de componentes base. Comparar contra
+      <code>03-componentes-png/</code> y la sección 5/7 del documento de diseño. No forma parte del producto público.
+    </p>
+
+    <section class="ge-seccion" id="ge-color"><h2>Color</h2></section>
+    <section class="ge-seccion" id="ge-tipografia"><h2>Tipografía</h2></section>
+    <section class="ge-seccion" id="ge-botones"><h2>Botones</h2></section>
+    <section class="ge-seccion" id="ge-chips"><h2>Chips + segmentado</h2></section>
+    <section class="ge-seccion" id="ge-toggles"><h2>Interruptores</h2></section>
+    <section class="ge-seccion" id="ge-kpis"><h2>KPI</h2></section>
+    <section class="ge-seccion" id="ge-barras"><h2>Barras</h2></section>
+    <section class="ge-seccion" id="ge-filas"><h2>Filas de señal</h2></section>
+    <section class="ge-seccion" id="ge-pills"><h2>Pills</h2></section>
+    <section class="ge-seccion" id="ge-cards"><h2>DataCard — estados</h2></section>
+    <section class="ge-seccion" id="ge-iconos"><h2>Iconografía</h2></section>
+
+    <script type="module" src="/src/paginas/guia-estilos.ts"></script>
+  </body>
+</html>

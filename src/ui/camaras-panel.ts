@@ -1,39 +1,76 @@
-// Panel de cámaras urbanas en vivo — spec 038 (Valencia ciudad) y spec 043
-// (red viaria externa, DGT). Dos cajas separadas a partir de la
-// reestructuración pedida por el usuario el 2026-09-17 — antes vivían juntas
-// en un único `#camaras-panel`, pero son de naturaleza muy distinta (vídeo en
-// directo con reproducción manual vs. imagen JPEG que se refresca sola) y
-// las de la DGT no se pueden ver a tamaño grande como las de ciudad.
+// Tarjeta "Cámaras en vías de acceso" — spec 038 (Valencia ciudad, personal)
+// + spec 043 (red viaria externa, DGT, pública), fusionadas como pestañas
+// "Accesos (DGT)" | "Ciudad" dentro de una única `DataCard` (spec 056 Fase 4,
+// fila 3 "Movilidad y actividad", §8.5 — nota explícita del documento:
+// "fusionada con 'Cámaras en vías de acceso' mediante pestañas").
 //
-// Sin backend ni polling: son embeds/imágenes de terceros mostrados directo
-// en el navegador de quien mira, nunca grabados ni rehosteados por nosotros
-// (spec 038 §1). Diseño en tarjetas "clic para reproducir" (como el panel de
-// referencia de World Monitor): nada de vídeo se carga hasta que se pulsa su
-// tarjeta — así ninguna tarjeta se queda a medio cargar mostrando el título y
-// la interfaz de YouTube por encima en vez de la imagen.
-//
-// Primer panel extraído de `main.ts` a `src/ui/` como demostración del
-// patrón antes de aplicarlo al resto (ver spec 038 historial v6): cada panel
-// vive en su propio módulo con una única función `montar*` que construye su
-// DOM, lo cablea y no expone nada más — `main.ts` solo la llama.
-
+// Sin backend ni polling propio para el vídeo: son embeds/imágenes de
+// terceros mostrados directo en el navegador de quien mira, nunca grabados
+// ni rehosteados por nosotros (spec 038 §1). Diseño "clic para reproducir"
+// en la pestaña Ciudad: nada de vídeo se carga hasta que se pulsa su
+// tarjeta. La pestaña DGT es imagen JPEG que se refresca sola cada ~2 min.
 import { camarasVisibles, type CamaraUrbana } from '../config/camaras-urbanas';
 import { agruparPorCarretera, type CamaraExternaDgt } from '../services/camaras-dgt';
 import camarasDgtValencia from '../../data/camaras-dgt-valencia.json' with { type: 'json' };
+import { escapeHtml } from './panel-utils';
+import { iconoSvg } from './iconos';
 
-function buildCamarasPanel(): { root: HTMLDivElement; grid: HTMLDivElement } {
-  const root = document.createElement('div');
-  root.id = 'camaras-panel';
-  root.hidden = true;
+const REFRESCO_CAMARAS_DGT_MS = 120_000;
+
+// ---------------------------------------------------------------------------
+// Pestaña "Accesos (DGT)" — spec 043
+// ---------------------------------------------------------------------------
+
+function renderCamarasExternasDgt(root: HTMLElement, camaras: CamaraExternaDgt[]): void {
+  if (camaras.length === 0) {
+    root.innerHTML = '<div class="mv2-card__estado">Sin cámaras disponibles.</div>';
+    return;
+  }
+  const grupos = agruparPorCarretera(camaras);
   root.innerHTML = `
-    <div class="media-panel__header">Cámaras en vivo — Valencia ciudad</div>
-    <div class="camaras-grid" id="camaras-panel-grid"></div>
+    <p class="mv2-body-s" style="color:var(--text-muted);margin:0 0 12px">Imágenes en directo de la Dirección General de Tráfico (dataset "Cámaras DGT DATEX2 v3.7", licencia Creative Commons Attribution) — se actualizan cada ~2 min.</p>
+    ${grupos
+      .map(
+        (g, i) => `
+          <details class="camaras-dgt-carretera" ${i === 0 ? 'open' : ''}>
+            <summary>${escapeHtml(g.carretera)} <span class="mv2-meta-mono">(${g.camaras.length})</span></summary>
+            <div class="camaras-dgt-grid" data-carretera="${escapeHtml(g.carretera)}"></div>
+          </details>
+        `,
+      )
+      .join('')}
   `;
-  document.body.appendChild(root);
-  return { root, grid: root.querySelector('#camaras-panel-grid')! };
+  root.querySelectorAll<HTMLDivElement>('.camaras-dgt-grid').forEach((contenedor) => {
+    const carretera = contenedor.dataset.carretera;
+    const grupo = grupos.find((g) => g.carretera === carretera);
+    if (!grupo) return;
+    contenedor.innerHTML = grupo.camaras
+      .map(
+        (c) => `
+          <figure class="camara-dgt-tile">
+            <span class="mv2-pill mv2-pill--live camara-dgt-tile__live"><span class="mv2-pill__dot"></span>LIVE</span>
+            <img class="camara-dgt-tile__img" loading="lazy" data-src="${escapeHtml(c.imagenUrl)}" alt="Cámara ${escapeHtml(c.carretera)} PK ${escapeHtml(c.pk)}" />
+            <figcaption>PK ${escapeHtml(c.pk)} · sentido ${escapeHtml(c.sentido)}</figcaption>
+          </figure>
+        `,
+      )
+      .join('');
+  });
+
+  function refrescarImagenes(): void {
+    root.querySelectorAll<HTMLImageElement>('.camara-dgt-tile__img').forEach((img) => {
+      const base = img.dataset.src;
+      if (base) img.src = `${base}?t=${Date.now()}`;
+    });
+  }
+  refrescarImagenes();
+  setInterval(refrescarImagenes, REFRESCO_CAMARAS_DGT_MS);
 }
 
-/** Parámetros que minimizan la interfaz propia de YouTube (título, sugerencias, marca). */
+// ---------------------------------------------------------------------------
+// Pestaña "Ciudad" — spec 038
+// ---------------------------------------------------------------------------
+
 function iframeYoutubeCanal(channelId: string, nombre: string): HTMLIFrameElement {
   const src =
     `https://www.youtube.com/embed/live_stream?channel=${encodeURIComponent(channelId)}` +
@@ -102,24 +139,26 @@ function reproducirCamara(stage: HTMLElement, camara: CamaraUrbana): void {
   }
 }
 
-function renderCamarasPanel(panel: { grid: HTMLDivElement }, camaras: CamaraUrbana[]): void {
-  // El nombre vive fuera del "stage" (a diferencia de v3) para que se siga
-  // viendo una vez reproduciendo — antes se borraba junto al placeholder.
-  panel.grid.innerHTML = camaras
+function renderCamarasCiudad(root: HTMLElement, camaras: CamaraUrbana[]): void {
+  if (camaras.length === 0) {
+    root.innerHTML = '<div class="mv2-card__estado">No hay cámaras disponibles en esta build.</div>';
+    return;
+  }
+  root.innerHTML = `<div class="camaras-grid">${camaras
     .map(
-      (_, i) => `
+      () => `
         <div class="camara-tile">
           <div class="camara-tile__nombre"></div>
-          <div class="camara-tile__stage" data-camara-index="${i}">
-            <button type="button" class="camara-tile__play">▶</button>
+          <div class="camara-tile__stage">
+            <button type="button" class="camara-tile__play">${iconoSvg('arrow-right', 16)}</button>
           </div>
           <a class="camara-tile__atribucion" target="_blank" rel="noopener noreferrer"></a>
         </div>
       `,
     )
-    .join('');
+    .join('')}</div>`;
 
-  panel.grid.querySelectorAll<HTMLDivElement>('.camara-tile').forEach((tile, i) => {
+  root.querySelectorAll<HTMLDivElement>('.camara-tile').forEach((tile, i) => {
     const camara = camaras[i];
     if (!camara) return;
     const stage = tile.querySelector<HTMLDivElement>('.camara-tile__stage')!;
@@ -127,117 +166,51 @@ function renderCamarasPanel(panel: { grid: HTMLDivElement }, camaras: CamaraUrba
     const atribucion = tile.querySelector<HTMLAnchorElement>('.camara-tile__atribucion')!;
     atribucion.href = camara.fuenteUrl;
     atribucion.textContent = `${camara.atribucion} ↗`;
-    stage.querySelector('.camara-tile__play')!.addEventListener(
-      'click',
-      () => reproducirCamara(stage, camara),
-      { once: true },
-    );
-  });
-}
-
-/**
- * Monta `#camaras-panel` (Valencia ciudad, spec 038) y lo cablea al checkbox
- * `toggle`. Sin backend ni polling: las tarjetas se construyen la primera
- * vez que se activa el panel, pero ningún vídeo se reproduce hasta que se
- * pulsa "Reproducir" en su tarjeta.
- */
-export function montarCamarasPanel(toggle: HTMLInputElement): void {
-  const camarasPanel = buildCamarasPanel();
-  let camarasCargadas = false;
-  toggle.addEventListener('change', () => {
-    camarasPanel.root.hidden = !toggle.checked;
-    if (toggle.checked && !camarasCargadas) {
-      camarasCargadas = true;
-      const camaras = camarasVisibles();
-      if (camaras.length > 0) {
-        renderCamarasPanel(camarasPanel, camaras);
-      } else {
-        camarasPanel.grid.textContent = 'No hay cámaras disponibles en esta build.';
-      }
-    }
+    stage.querySelector('.camara-tile__play')!.addEventListener('click', () => reproducirCamara(stage, camara), { once: true });
   });
 }
 
 // ---------------------------------------------------------------------------
-// spec 043 — cámaras urbanas EXTERNAS (red viaria que rodea Valencia: rondas,
-// autovías de acceso), caja propia separada de las internas de arriba.
-// Fuente: DGT, dataset "Cámaras DGT DATEX2 v3.7" (licencia Creative Commons
-// Attribution — pública por defecto, sin gating de ADR-003, a diferencia de
-// las internas). Imagen JPEG estática que se refresca sola cada ~2 min en
-// origen (no un vídeo en directo — no se pueden ver a tamaño grande como las
-// de ciudad) — aquí se fuerza un refresco periódico del lado del cliente con
-// un parámetro de caché (`?t=timestamp`).
+// Tarjeta combinada
 // ---------------------------------------------------------------------------
-const REFRESCO_CAMARAS_DGT_MS = 120_000;
 
-function buildCamarasDgtPanel(): HTMLDivElement {
-  const root = document.createElement('div');
-  root.id = 'camaras-dgt-panel';
-  root.hidden = true;
-  document.body.appendChild(root);
-  return root;
-}
-
-function escapeHtmlLocal(s: string): string {
-  const div = document.createElement('div');
-  div.textContent = s;
-  return div.innerHTML;
-}
-
-function renderCamarasExternasDgt(root: HTMLDivElement, camaras: CamaraExternaDgt[]): void {
-  if (camaras.length === 0) {
-    root.innerHTML = '<div class="media-panel__header">Cámaras en vías de acceso (DGT)</div><div class="info-panel__desc">Sin cámaras disponibles.</div>';
-    return;
-  }
-  const grupos = agruparPorCarretera(camaras);
+export function montarCamarasAccesoPanel(): void {
+  const root = document.createElement('section');
+  root.id = 'camaras-acceso-panel';
+  root.className = 'mv2-card';
+  root.dataset.vistaInteligenciaCard = '';
+  root.dataset.categoria = 'movilidad';
   root.innerHTML = `
-    <div class="media-panel__header">Cámaras en vías de acceso (DGT)</div>
-    <div class="agenda-panel__aviso">Imágenes en directo de la Dirección General de Tráfico (dataset "Cámaras DGT DATEX2 v3.7", licencia Creative Commons Attribution) — se actualizan cada ~2 min.</div>
-    ${grupos
-      .map(
-        (g) => `
-          <details class="camaras-dgt-carretera">
-            <summary>${escapeHtmlLocal(g.carretera)} (${g.camaras.length})</summary>
-            <div class="camaras-dgt-grid" data-carretera="${escapeHtmlLocal(g.carretera)}"></div>
-          </details>
-        `,
-      )
-      .join('')}
+    <header class="mv2-card__header">
+      <span class="mv2-card__header-icon">${iconoSvg('cctv', 16)}</span>
+      <h3 class="mv2-card__title">Cámaras en vías de acceso</h3>
+      <span class="mv2-card__meta">DGT · cada ~2 min</span>
+    </header>
+    <div class="mv2-segmented mv2-segmented--inset camaras-acceso__tabs" role="tablist" style="margin:12px 18px 0">
+      <button type="button" class="mv2-segmented__tab is-active" role="tab" aria-selected="true" data-tab="dgt">Accesos (DGT)</button>
+      <button type="button" class="mv2-segmented__tab" role="tab" aria-selected="false" data-tab="ciudad">Ciudad</button>
+    </div>
+    <div class="mv2-card__body">
+      <div data-tabpanel="dgt" id="camaras-acceso-dgt-body"></div>
+      <div data-tabpanel="ciudad" id="camaras-acceso-ciudad-body" hidden></div>
+    </div>
   `;
-  const detalles = root.querySelectorAll<HTMLDivElement>('.camaras-dgt-grid');
-  detalles.forEach((contenedor) => {
-    const carretera = contenedor.dataset.carretera;
-    const grupo = grupos.find((g) => g.carretera === carretera);
-    if (!grupo) return;
-    contenedor.innerHTML = grupo.camaras
-      .map(
-        (c) => `
-          <figure class="camara-dgt-tile">
-            <img class="camara-dgt-tile__img" loading="lazy" data-src="${escapeHtmlLocal(c.imagenUrl)}" alt="Cámara ${escapeHtmlLocal(c.carretera)} PK ${escapeHtmlLocal(c.pk)}" />
-            <figcaption>PK ${escapeHtmlLocal(c.pk)} · sentido ${escapeHtmlLocal(c.sentido)}</figcaption>
-          </figure>
-        `,
-      )
-      .join('');
+  document.body.appendChild(root);
+
+  const tabs = Array.from(root.querySelectorAll<HTMLButtonElement>('.camaras-acceso__tabs .mv2-segmented__tab'));
+  const paneles = Array.from(root.querySelectorAll<HTMLElement>('[data-tabpanel]'));
+  tabs.forEach((tab) => {
+    tab.addEventListener('click', () => {
+      tabs.forEach((t) => {
+        t.classList.toggle('is-active', t === tab);
+        t.setAttribute('aria-selected', String(t === tab));
+      });
+      paneles.forEach((p) => {
+        p.hidden = p.dataset.tabpanel !== tab.dataset.tab;
+      });
+    });
   });
 
-  function refrescarImagenes(): void {
-    root.querySelectorAll<HTMLImageElement>('.camara-dgt-tile__img').forEach((img) => {
-      const base = img.dataset.src;
-      if (base) img.src = `${base}?t=${Date.now()}`;
-    });
-  }
-  refrescarImagenes();
-  setInterval(refrescarImagenes, REFRESCO_CAMARAS_DGT_MS);
-}
-
-/**
- * Monta `#camaras-dgt-panel` (accesos, spec 043). Visibilidad por vista
- * gestionada por el router (`idsInteligencia` en `main.ts`), no por un
- * toggle propio — el contenido es estático (JSON local) y se renderiza de
- * una vez al montar.
- */
-export function montarCamarasDgtPanel(): void {
-  const root = buildCamarasDgtPanel();
-  renderCamarasExternasDgt(root, camarasDgtValencia as CamaraExternaDgt[]);
+  renderCamarasExternasDgt(root.querySelector('#camaras-acceso-dgt-body')!, camarasDgtValencia as CamaraExternaDgt[]);
+  renderCamarasCiudad(root.querySelector('#camaras-acceso-ciudad-body')!, camarasVisibles());
 }

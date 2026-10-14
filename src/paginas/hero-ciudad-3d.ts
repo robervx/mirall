@@ -1,4 +1,5 @@
-// Fondo animado del hero de la landing — spec 053 v2.
+// Fondo animado del hero de la landing — spec 053 v2, recoloreado a la
+// identidad Mirall v2 (spec 056 Fase 2, sección 8.2 del documento de diseño).
 //
 // Ciudad procedural en Three.js: bloques extruidos aleatorios + partículas +
 // "tráfico" que cruza la escena, con la cámara reaccionando sutilmente al
@@ -6,16 +7,17 @@
 // (ciudad procedural + niebla + parallax de cámara, un patrón muy extendido
 // en demos del motor); aquí está reescrita en TypeScript, sin la librería de
 // tweening del original (todas las animaciones son un `requestAnimationFrame`
-// con interpolación propia) y con la paleta de marca — navy/teal — en vez del
-// rojo/magenta del original, que no tenía ningún significado semántico.
+// con interpolación propia) y con la paleta de marca — antes navy/teal (spec
+// 053), ahora fondo `#0A0C0B` + acento lima `#C8F03C` (spec 056) —, en vez
+// del rojo/magenta del original, que no tenía ningún significado semántico.
 //
 // Respeta `prefers-reduced-motion`: si está activo, se pinta un único frame
 // estático y no se anima nada.
 import * as THREE from 'three';
 
-const NAVY = 0x0b1f33;
-const NAVY_CLARO = 0x14304f;
-const ACENTO = 0x33d6c0;
+const BG = 0x0a0c0b;
+const SURFACE_2 = 0x1a1e1b;
+const ACENTO = 0xc8f03c;
 
 const NUM_EDIFICIOS = 90;
 const NUM_PARTICULAS = 140;
@@ -42,8 +44,8 @@ export function iniciarHeroCiudad3D(canvas: HTMLCanvasElement): void {
   camera.position.set(0, ALTURA_BASE, DISTANCIA_BASE);
 
   const scene = new THREE.Scene();
-  scene.background = new THREE.Color(NAVY);
-  const niebla = new THREE.Fog(NAVY, FOG_CERCA_BASE, FOG_LEJOS_BASE);
+  scene.background = new THREE.Color(BG);
+  const niebla = new THREE.Fog(BG, FOG_CERCA_BASE, FOG_LEJOS_BASE);
   scene.fog = niebla;
 
   const ciudad = new THREE.Object3D();
@@ -54,11 +56,14 @@ export function iniciarHeroCiudad3D(canvas: HTMLCanvasElement): void {
 
   // ---------- edificios ----------
   for (let i = 0; i < NUM_EDIFICIOS; i++) {
+    const esLima = i % 8 === 0; // 1 de cada 8, sección 8.2 del documento de diseño
     const geometria = new THREE.BoxGeometry(1, 1, 1);
     const material = new THREE.MeshStandardMaterial({
-      color: i % 8 === 0 ? ACENTO : NAVY_CLARO,
+      color: esLima ? ACENTO : SURFACE_2,
       roughness: 0.85,
       metalness: 0.1,
+      emissive: esLima ? ACENTO : 0x000000,
+      emissiveIntensity: esLima ? 0.35 : 0,
     });
     const wireframe = new THREE.LineSegments(
       new THREE.EdgesGeometry(geometria),
@@ -82,20 +87,20 @@ export function iniciarHeroCiudad3D(canvas: HTMLCanvasElement): void {
 
   const suelo = new THREE.Mesh(
     new THREE.PlaneGeometry(60, 60),
-    new THREE.MeshStandardMaterial({ color: NAVY, roughness: 1 }),
+    new THREE.MeshStandardMaterial({ color: BG, roughness: 1 }),
   );
   suelo.rotation.x = -Math.PI / 2;
   suelo.position.y = -0.01;
   suelo.receiveShadow = true;
   ciudad.add(suelo);
 
-  const rejilla = new THREE.GridHelper(60, 60, ACENTO, NAVY_CLARO);
+  const rejilla = new THREE.GridHelper(60, 60, ACENTO, SURFACE_2);
   (rejilla.material as THREE.Material).transparent = true;
   (rejilla.material as THREE.Material).opacity = 0.25;
   ciudad.add(rejilla);
 
-  // ---------- partículas ----------
-  const geometriaParticula = new THREE.CircleGeometry(0.012, 6);
+  // ---------- partículas (octaedros, sección 8.2) ----------
+  const geometriaParticula = new THREE.OctahedronGeometry(0.012);
   const materialParticula = new THREE.MeshBasicMaterial({ color: ACENTO, transparent: true, opacity: 0.5 });
   for (let i = 0; i < NUM_PARTICULAS; i++) {
     const particula = new THREE.Mesh(geometriaParticula, materialParticula);
@@ -136,7 +141,7 @@ export function iniciarHeroCiudad3D(canvas: HTMLCanvasElement): void {
 
   // ---------- luces ----------
   scene.add(new THREE.AmbientLight(0xffffff, 2.2));
-  const focoPrincipal = new THREE.SpotLight(0xffffff, pantallaPequena ? 8 : 16, 12);
+  const focoPrincipal = new THREE.PointLight(0xffffff, pantallaPequena ? 8 : 16, 12);
   focoPrincipal.position.set(4, 5, 4);
   focoPrincipal.castShadow = !pantallaPequena;
   ciudad.add(focoPrincipal);

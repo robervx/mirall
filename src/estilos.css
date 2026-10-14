@@ -4,9 +4,13 @@
       }
 
       :root {
-        --header-h: 56px;
-        --sidebar-w-collapsed: 52px;
-        --sidebar-w-expanded: 280px;
+        /* TopBar/NavRail/SideMenu — spec 056 Fase 3a (antes 56/52/280,
+           spec 019). El resto de la hoja posiciona legendas, tooltips y
+           paneles flotantes con `calc(var(--header-h) + Npx)` — cambiar
+           estos tres valores recoloca todo eso sin tocar cada regla. */
+        --header-h: 60px;
+        --sidebar-w-collapsed: 72px;
+        --sidebar-w-expanded: 300px;
         --mirall-navy: #0b1f33;
         --mirall-navy-light: #14304f;
         /* Acento de marca — spec 053. Mismo valor que el hero de la landing
@@ -23,8 +27,11 @@
         margin: 0;
       }
 
+      /* Mirall v2 (spec 056 Fase 3b): el acento único de marca pasa a lima
+         en todos los controles neutros de la app (antes --mirall-acento
+         teal, spec 053) — coherente con la landing y el nuevo chasis. */
       input[type='checkbox'] {
-        accent-color: var(--mirall-acento);
+        accent-color: var(--accent);
       }
 
       body {
@@ -51,7 +58,52 @@
         inset: 0;
       }
 
-      /* Cabecera institucional — spec 019 */
+      /* Controles de zoom — spec 056 Fase 3b, §7.14: tarjeta oscura radio 8.
+         Los iconos nativos de MapLibre son SVG oscuros pensados para fondo
+         claro; se invierten para que se vean sobre --surface. */
+      .maplibregl-ctrl-group {
+        background: var(--surface) !important;
+        border: 1px solid var(--border) !important;
+        border-radius: var(--mv2-radius-md) !important;
+        box-shadow: none !important;
+        overflow: hidden;
+      }
+
+      .maplibregl-ctrl-group button {
+        background: transparent !important;
+        width: 36px !important;
+        height: 36px !important;
+      }
+
+      .maplibregl-ctrl-group button + button {
+        border-top: 1px solid var(--border) !important;
+      }
+
+      .maplibregl-ctrl-group button:hover {
+        background: var(--surface-2) !important;
+      }
+
+      .maplibregl-ctrl-group .maplibregl-ctrl-icon {
+        filter: invert(1) brightness(1.6);
+      }
+
+      .maplibregl-ctrl-group button:disabled .maplibregl-ctrl-icon {
+        opacity: 0.35;
+      }
+
+      .maplibregl-ctrl-attrib {
+        background: transparent !important;
+        color: var(--text-muted) !important;
+      }
+
+      .maplibregl-ctrl-attrib a {
+        color: var(--text-secondary) !important;
+      }
+
+      /* TopBar — spec 019, rediseño Mirall v2 (spec 056 Fase 3a, §7.10). Usa
+         los tokens/componentes de mirall-v2.css (--bg/--surface/--accent,
+         .mv2-segmented, .mv2-pill, .mv2-btn) en vez de los colores sueltos
+         de spec 019. */
       #app-header {
         position: fixed;
         top: 0;
@@ -59,118 +111,113 @@
         right: 0;
         height: var(--header-h);
         z-index: 200;
-        background: var(--mirall-navy);
-        color: #fff;
+        background: var(--bg);
+        border-bottom: 1px solid var(--border);
+        color: var(--text-primary);
         display: flex;
         align-items: center;
+        justify-content: space-between;
         gap: 12px;
-        padding: 0 16px;
-        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
+        padding: 0 20px;
         box-sizing: border-box;
       }
 
-      #app-header__logo {
-        height: 36px;
-        width: 36px;
-        object-fit: contain;
-        flex-shrink: 0;
-      }
-
-      #app-header__brand {
-        display: flex;
-        flex-direction: column;
-        line-height: 1.2;
-        min-width: 0;
-      }
-
-      #app-header__name {
-        font-family: 'Space Grotesk', system-ui, sans-serif;
-        font-size: 20px;
-        font-weight: 700;
-        letter-spacing: -0.01em;
-      }
-
-      #app-header__tagline {
-        font-size: 11px;
-        color: #b9c6d6;
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-      }
-
-      /* Nav de dos vistas — spec 040. */
-      #app-header__nav {
-        display: flex;
-        gap: 4px;
-        margin-left: 20px;
-      }
-
-      .app-header__nav-link {
-        appearance: none;
-        border: none;
-        background: transparent;
-        color: #b9c6d6;
-        font-size: 13px;
-        font-weight: 600;
-        padding: 6px 12px;
-        border-radius: 5px;
-        cursor: pointer;
-      }
-
-      .app-header__nav-link:hover {
-        background: rgba(255, 255, 255, 0.08);
-        color: #fff;
-      }
-
-      .app-header__nav-link[aria-current='page'] {
-        background: rgba(255, 255, 255, 0.14);
-        color: #fff;
-      }
-
-      #app-header__status {
-        margin-left: auto;
+      #app-header__izquierda,
+      #app-header__derecha {
         display: flex;
         align-items: center;
         gap: 14px;
+        min-width: 0;
+      }
+
+      #app-header .marca__simbolo {
+        background: var(--accent);
+        color: var(--accent-ink);
+        display: flex;
+        align-items: center;
+        justify-content: center;
         flex-shrink: 0;
       }
 
-      #app-header__live {
+      #app-header .marca__texto {
+        display: flex;
+        flex-direction: column;
+        line-height: 1.1;
+        min-width: 0;
+      }
+
+      #app-header .marca__nombre {
+        font-family: var(--mv2-font-display);
+        font-weight: 700;
+        font-size: 16px;
+        letter-spacing: -0.2px;
+        color: var(--text-primary);
+      }
+
+      #app-header .marca__descriptor {
+        font-family: var(--mv2-font-mono);
+        font-size: 8px;
+        letter-spacing: 1px;
+        color: var(--text-secondary);
+        white-space: nowrap;
+      }
+
+      #app-header__divider {
+        width: 1px;
+        height: 20px;
+        background: var(--border);
+        flex-shrink: 0;
+      }
+
+      /* Nav de dos vistas — spec 040, ahora como segmentado Mirall v2. */
+      .app-header__nav-link {
+        color: var(--text-secondary);
+      }
+
+      .app-header__nav-link.is-active {
+        background: var(--surface-2);
+        color: var(--text-primary);
+      }
+
+      .app-header__nav-link.is-active svg {
+        color: var(--accent);
+      }
+
+      #app-header__ciudad {
         display: flex;
         align-items: center;
         gap: 6px;
-        font-size: 10.5px;
-        font-weight: 700;
-        letter-spacing: 0.08em;
-        color: #86efac;
-        text-transform: uppercase;
-        cursor: default;
+        font-size: 13px;
+        color: var(--text-secondary);
+        white-space: nowrap;
+      }
+
+      #app-header__ciudad svg {
+        color: var(--text-muted);
+        flex-shrink: 0;
       }
 
       /* Banner persistente de alerta oficial (ROJA o NARANJA) en la cabecera
-         (petición explícita del usuario, 2026-10-01) — vive en
-         #app-header__status, misma altura que el resto (no cambia
-         --header-h ni el layout). El texto visible es una etiqueta corta y
-         fija ("Aviso rojo vigente"), nunca el titular completo de origen —
-         ese va en el `title` (tooltip nativo) y en el panel de insights al
-         pulsar. `max-width`/ellipsis quedan solo como red de seguridad, no
-         como mecanismo normal de recorte (bug real detectado 2026-10-02: el
-         titular completo desbordaba y se veía cortado a media palabra).
-         Color por `data-nivel` — rojo por defecto, naranja si no hay rojo
-         vigente (ver setAlertaCriticaHeader en chasis.ts). */
+         (petición explícita del usuario, 2026-10-01) — el diseño del
+         pendrive no lo contempla, se mantiene porque es una función de
+         seguridad real, no decorativa (ver chasis.ts). Texto fijo y corto
+         ("Aviso rojo vigente"), nunca el titular completo — ese va en
+         `title` y en el panel de insights al pulsar. Color sobre los
+         tokens semánticos nuevos (`--danger`/`--warning`) en vez de los
+         rojos/naranjas sueltos de spec 019. */
       #app-header__alerta-critica {
-        --alerta-rgb: 193, 18, 31;
+        --alerta-color: var(--danger);
         display: flex;
         align-items: center;
         gap: 6px;
-        font-size: 10.5px;
-        font-weight: 800;
+        font: 800 10.5px / 1 var(--mv2-font-body);
         letter-spacing: 0.04em;
         text-transform: uppercase;
-        color: #fff;
-        background: rgb(var(--alerta-rgb));
-        border: 1px solid #ff6b6b;
-        border-radius: 999px;
-        padding: 4px 10px;
+        color: var(--accent-ink);
+        background: var(--alerta-color);
+        border: none;
+        border-radius: var(--mv2-radius-pill);
+        padding: 6px 12px;
         cursor: pointer;
         animation: alerta-critica-pulso 1.8s ease-in-out infinite;
         max-width: 260px;
@@ -179,14 +226,12 @@
         text-overflow: ellipsis;
       }
 
-      #app-header__alerta-critica[data-nivel='naranja'] {
-        --alerta-rgb: 194, 65, 12;
-        border-color: #fdba74;
+      #app-header__alerta-critica svg {
+        flex-shrink: 0;
       }
 
-      #app-header__alerta-critica::before {
-        content: '⚠';
-        font-size: 12px;
+      #app-header__alerta-critica[data-nivel='naranja'] {
+        --alerta-color: var(--warning);
       }
 
       #app-header__alerta-critica[hidden] {
@@ -196,10 +241,10 @@
       @keyframes alerta-critica-pulso {
         0%,
         100% {
-          box-shadow: 0 0 0 0 rgba(var(--alerta-rgb), 0.55);
+          box-shadow: 0 0 0 0 color-mix(in srgb, var(--alerta-color) 55%, transparent);
         }
         50% {
-          box-shadow: 0 0 0 6px rgba(var(--alerta-rgb), 0);
+          box-shadow: 0 0 0 6px color-mix(in srgb, var(--alerta-color) 0%, transparent);
         }
       }
 
@@ -209,79 +254,47 @@
         }
       }
 
-      /* spec 034b — el color de "EN VIVO" y del punto resume la frescura global. */
+      /* spec 034b — el color del pill "En vivo" resume la frescura global. */
       #app-header__live[data-frescura='retraso'] {
-        color: #fbbf24;
-      }
-
-      #app-header__live[data-frescura='cargando'] {
-        color: #94a3b8;
-      }
-
-      #app-header__frescura {
-        font-weight: 500;
-        letter-spacing: 0.02em;
-        text-transform: none;
-        opacity: 0.75;
-      }
-
-      #app-header__status-dot {
-        width: 7px;
-        height: 7px;
-        border-radius: 50%;
-        background: #22c55e;
-        animation: mirall-pulse 2s infinite;
+        color: var(--warning);
       }
 
       #app-header__live[data-frescura='retraso'] #app-header__status-dot {
-        background: #fbbf24;
+        background: var(--warning);
+      }
+
+      #app-header__live[data-frescura='cargando'] {
+        color: var(--text-muted);
       }
 
       #app-header__live[data-frescura='cargando'] #app-header__status-dot {
-        background: #94a3b8;
+        background: var(--text-muted);
         animation: none;
       }
 
-      #app-header__divider {
-        width: 1px;
-        height: 28px;
-        background: rgba(255, 255, 255, 0.15);
-      }
-
-      #app-header__datetime {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-end;
-        line-height: 1.3;
-      }
-
-      #app-header__clock {
-        font-family: ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
-        font-size: 17px;
-        font-weight: 600;
-        font-variant-numeric: tabular-nums;
-        letter-spacing: 0.02em;
-        color: #fff;
-      }
-
-      #app-header__date {
-        font-size: 11px;
-        color: #9db3c9;
+      #app-header__status-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--accent);
+        animation: mirall-pulse 2s infinite;
       }
 
       @keyframes mirall-pulse {
         0% {
-          box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.5);
+          box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 50%, transparent);
         }
         70% {
-          box-shadow: 0 0 0 6px rgba(34, 197, 94, 0);
+          box-shadow: 0 0 0 6px color-mix(in srgb, var(--accent) 0%, transparent);
         }
         100% {
-          box-shadow: 0 0 0 0 rgba(34, 197, 94, 0);
+          box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 0%, transparent);
         }
       }
 
-      /* Sidebar plegable — spec 019 */
+      /* NavRail (plegado, 72px) / SideMenu (desplegado, 300px) — spec 019,
+         rediseño Mirall v2 (spec 056 Fase 3a, §7.11-7.12). Mismo elemento en
+         sus dos estados visuales, igual que ya funcionaba spec 019. */
       #app-sidebar {
         position: fixed;
         top: var(--header-h);
@@ -289,49 +302,198 @@
         bottom: 0;
         width: var(--sidebar-w-collapsed);
         z-index: 150;
-        background: var(--mirall-navy-light);
+        background: var(--surface);
+        border-right: 1px solid var(--border);
         overflow: hidden;
-        transition: width 0.18s ease;
+        transition: width var(--mv2-dur-slow) var(--mv2-ease);
         display: flex;
         flex-direction: column;
-        box-shadow: 2px 0 6px rgba(0, 0, 0, 0.25);
       }
 
       #app-sidebar.is-expanded {
         width: var(--sidebar-w-expanded);
       }
 
+      /* Cabecera (lockup + plegar) — solo cabe expandido. */
+      #app-sidebar__cabecera {
+        display: none;
+        align-items: center;
+        justify-content: space-between;
+        padding: 20px 16px 20px 20px;
+        border-bottom: 1px solid var(--border);
+        flex-shrink: 0;
+      }
+
+      #app-sidebar.is-expanded #app-sidebar__cabecera {
+        display: flex;
+      }
+
+      #app-sidebar .marca__simbolo {
+        background: var(--accent);
+        color: var(--accent-ink);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+
+      #app-sidebar .marca__texto {
+        display: flex;
+        flex-direction: column;
+        line-height: 1.1;
+      }
+
+      #app-sidebar .marca__nombre {
+        font-family: var(--mv2-font-display);
+        font-weight: 700;
+        font-size: 18px;
+        color: var(--text-primary);
+      }
+
+      #app-sidebar .marca__descriptor {
+        font-family: var(--mv2-font-mono);
+        font-size: 9px;
+        letter-spacing: 1px;
+        color: var(--text-secondary);
+      }
+
       #app-sidebar__toggle {
-        height: 44px;
-        width: 100%;
+        width: 32px;
+        height: 32px;
+        border-radius: var(--mv2-radius-md);
+        border: 1px solid var(--border);
+        background: transparent;
+        color: var(--text-secondary);
         display: flex;
         align-items: center;
         justify-content: center;
         cursor: pointer;
-        color: #fff;
-        border: none;
-        background: transparent;
-        font-size: 18px;
         flex-shrink: 0;
       }
 
       #app-sidebar__toggle:hover {
-        background: rgba(255, 255, 255, 0.08);
+        background: var(--surface-2);
+        color: var(--text-primary);
+      }
+
+      /* Botón "abrir menú" — primer icono del NavRail, solo visible plegado. */
+      #app-sidebar__abrir-rail {
+        width: 44px;
+        height: 44px;
+        margin: 20px auto 6px;
+        border-radius: var(--mv2-radius-lg);
+        border: none;
+        background: transparent;
+        color: var(--text-secondary);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        flex-shrink: 0;
+      }
+
+      #app-sidebar__abrir-rail:hover {
+        background: var(--surface-2);
+        color: var(--text-primary);
+      }
+
+      #app-sidebar.is-expanded #app-sidebar__abrir-rail {
+        display: none;
+      }
+
+      /* Selector de ciudad — etiqueta estática (ver chasis.ts: Mirall es
+         mono-ciudad, sin desplegable funcional). Solo expandido. */
+      #app-sidebar__ciudad {
+        display: none;
+        align-items: center;
+        gap: 8px;
+        margin: 16px;
+        padding: 10px 12px;
+        border-radius: var(--mv2-radius-lg);
+        background: var(--surface-2);
+        font-size: 14px;
+        color: var(--text-primary);
+      }
+
+      #app-sidebar.is-expanded #app-sidebar__ciudad {
+        display: flex;
+      }
+
+      #app-sidebar__ciudad svg {
+        color: var(--accent);
+        flex-shrink: 0;
+      }
+
+      .sidemenu__grupo {
+        display: none;
+        flex-direction: column;
+        padding: 0 12px;
+        margin-bottom: 20px;
+      }
+
+      #app-sidebar.is-expanded .sidemenu__grupo {
+        display: flex;
+      }
+
+      .sidemenu__grupo-titulo {
+        font: 400 11px / 1 var(--mv2-font-mono);
+        letter-spacing: 1.2px;
+        color: var(--text-muted);
+        padding: 8px 12px;
+      }
+
+      .sidemenu__item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 12px;
+        border-radius: var(--mv2-radius-md);
+        border: none;
+        background: transparent;
+        color: var(--text-secondary);
+        font: 500 14px / 1 var(--mv2-font-body);
+        cursor: pointer;
+        text-align: left;
+      }
+
+      .sidemenu__item:hover {
+        background: var(--surface-2);
+      }
+
+      .sidemenu__item.is-active {
+        background: var(--surface-2);
+        color: var(--text-primary);
+      }
+
+      .sidemenu__item.is-active svg {
+        color: var(--accent);
       }
 
       #app-sidebar__sections {
         flex: 1;
         overflow-y: auto;
+        overflow-x: hidden;
+        padding: 0 12px;
+      }
+
+      #app-sidebar:not(.is-expanded) #app-sidebar__sections {
+        padding: 0 6px;
       }
 
       .sidebar-section {
         display: flex;
         align-items: center;
-        gap: 12px;
-        padding: 10px 15px;
-        color: #e2e8f0;
-        font-size: 13px;
+        gap: 10px;
+        padding: 10px 12px;
+        border-radius: var(--mv2-radius-md);
+        color: var(--text-secondary);
+        font: 500 14px / 1 var(--mv2-font-body);
         white-space: nowrap;
+      }
+
+      #app-sidebar:not(.is-expanded) .sidebar-section {
+        justify-content: center;
+        padding: 10px;
       }
 
       .sidebar-section--interactive {
@@ -339,12 +501,16 @@
       }
 
       .sidebar-section--interactive:hover {
-        background: rgba(255, 255, 255, 0.06);
+        background: var(--surface-2);
       }
 
       .sidebar-section--interactive.is-open {
-        background: rgba(255, 255, 255, 0.08);
-        border-left-color: #f2c744;
+        background: var(--surface-2);
+        color: var(--text-primary);
+      }
+
+      .sidebar-section--interactive.is-open .sidebar-section__icon {
+        color: var(--accent);
       }
 
       .sidebar-panel-content {
@@ -789,21 +955,25 @@
       }
 
       .sidebar-section__icon {
-        font-size: 18px;
-        width: 20px;
-        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 18px;
         flex-shrink: 0;
+        color: var(--text-secondary);
       }
 
       .sidebar-section__label {
         overflow: hidden;
         text-overflow: ellipsis;
-        transition: opacity 0.12s ease;
+        transition: opacity var(--mv2-dur-fast) var(--mv2-ease);
       }
 
-      /* Sidebar colapsado en escritorio: solo iconos, sin slivers de texto
-         asomando por el borde (spec 019 v5). */
+      /* NavRail plegado: solo iconos, sin slivers de texto asomando por el
+         borde (spec 019 v5), y sin los grupos/cabecera que solo caben
+         expandido (spec 056 Fase 3a). */
       :root:not([data-layout='movil']) #app-sidebar:not(.is-expanded) .sidebar-section__label,
+      :root:not([data-layout='movil']) #app-sidebar:not(.is-expanded) .sidemenu__grupo-titulo,
       :root:not([data-layout='movil']) #app-sidebar:not(.is-expanded) #app-footer-attrib,
       :root:not([data-layout='movil']) #app-sidebar:not(.is-expanded) #app-sidebar__sesion {
         opacity: 0;
@@ -811,13 +981,62 @@
       }
 
       #app-footer-attrib {
-        border-top: 1px solid rgba(255, 255, 255, 0.08);
+        border-top: 1px solid var(--border);
         overflow: hidden;
+        flex-shrink: 0;
+      }
+
+      #app-sidebar__estado {
+        padding: 12px 15px 4px;
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+      }
+
+      #app-sidebar__estado-live {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font: 400 11px / 1 var(--mv2-font-mono);
+        color: var(--accent);
+        white-space: nowrap;
+      }
+
+      #app-sidebar__estado-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--accent);
+        animation: mirall-pulse 2s infinite;
+        flex-shrink: 0;
+      }
+
+      #app-sidebar__estado-live[data-frescura='retraso'] {
+        color: var(--warning);
+      }
+
+      #app-sidebar__estado-live[data-frescura='retraso'] #app-sidebar__estado-dot {
+        background: var(--warning);
+      }
+
+      #app-sidebar__estado-live[data-frescura='cargando'] {
+        color: var(--text-muted);
+      }
+
+      #app-sidebar__estado-live[data-frescura='cargando'] #app-sidebar__estado-dot {
+        background: var(--text-muted);
+        animation: none;
+      }
+
+      #app-sidebar__reloj {
+        font: 400 11px / 1.3 var(--mv2-font-mono);
+        color: var(--text-muted);
+        white-space: nowrap;
       }
 
       #app-footer-attrib__text {
         font-size: 10px;
-        color: #7d90a6;
+        color: var(--text-muted);
         padding: 8px 15px;
         white-space: nowrap;
         overflow: hidden;
@@ -830,7 +1049,7 @@
         gap: 8px;
         padding: 8px 15px;
         font-size: 11px;
-        color: #c7d4e1;
+        color: var(--text-secondary);
         white-space: nowrap;
         overflow: hidden;
       }
@@ -844,15 +1063,15 @@
         flex-shrink: 0;
         font-size: 11px;
         padding: 4px 8px;
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        border-radius: 5px;
+        border: 1px solid var(--border);
+        border-radius: var(--mv2-radius-md);
         background: transparent;
-        color: #eef3f8;
+        color: var(--text-primary);
         cursor: pointer;
       }
 
       #app-sidebar__logout:hover {
-        background: rgba(255, 255, 255, 0.1);
+        background: var(--surface-2);
       }
 
       #app-sidebar__logout:disabled {
@@ -886,16 +1105,22 @@
         display: none;
       }
 
+      /* Barra de cifras — spec 056 Fase 3b, §7.14/§8.4. Reutiliza las
+         cifras reales del dashboard (spec 034: Aire/Tráfico/Pulso/Alertas)
+         en vez de las del diseño ("carril bici km", "árboles plantados"),
+         que no tienen fuente de datos real detrás — mismo criterio que las
+         métricas de la landing (Fase 2). */
       .kpi-chip {
         display: flex;
         flex-direction: column;
         align-items: flex-start;
         gap: 1px;
-        padding: 5px 10px;
-        border-radius: 6px;
-        background: rgba(255, 255, 255, 0.96);
-        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.28);
-        border-left: 3px solid #cbd5e1;
+        padding: 6px 12px;
+        border-radius: var(--mv2-radius-lg);
+        background: #121513e6;
+        backdrop-filter: blur(16px);
+        border: 1px solid var(--border);
+        border-left: 3px solid var(--border);
         font: inherit;
         text-align: left;
         white-space: nowrap;
@@ -907,33 +1132,32 @@
       }
 
       button.kpi-chip:hover {
-        background: #fff;
+        background: var(--surface-2);
       }
 
       .kpi-chip--ok {
-        border-left-color: #4caf50;
+        border-left-color: var(--accent);
       }
 
       .kpi-chip--aviso {
-        border-left-color: #f2c744;
+        border-left-color: var(--warning);
       }
 
       .kpi-chip--urgente {
-        border-left-color: #d64545;
+        border-left-color: var(--danger);
       }
 
       .kpi-chip__etiqueta {
-        font-size: 9px;
-        font-weight: 700;
-        letter-spacing: 0.04em;
+        font: 400 9px / 1 var(--mv2-font-mono);
+        letter-spacing: 0.06em;
         text-transform: uppercase;
-        color: #94a3b8;
+        color: var(--text-muted);
       }
 
       .kpi-chip__valor {
-        font-size: 13px;
-        font-weight: 600;
-        color: #1e293b;
+        font: 600 13px / 1.3 var(--mv2-font-body);
+        font-variant-numeric: tabular-nums;
+        color: var(--text-primary);
       }
 
       :root[data-layout='movil'] #dashboard-kpis {
@@ -952,17 +1176,17 @@
         gap: 6px;
         padding: 3px 4px 3px 10px;
         border-radius: 999px;
-        background: #0b1f33;
-        color: #eef3f8;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        color: var(--text-primary);
         font-size: 12px;
         font-weight: 600;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
       }
 
       #foco-distrito-chip button {
         border: 0;
-        background: rgba(255, 255, 255, 0.14);
-        color: #eef3f8;
+        background: var(--surface-2);
+        color: var(--text-primary);
         border-radius: 999px;
         width: 18px;
         height: 18px;
@@ -1143,17 +1367,22 @@
         padding: 6px 8px;
       }
 
+      /* Panel de capas — spec 056 Fase 3b, recolor sobre tokens Mirall v2
+         (no se rediseña su estructura/iconos, eso queda para una fase
+         posterior si hace falta — aquí solo deja de verse un recuadro claro
+         sobre un mapa oscuro). */
       #controls {
         position: absolute;
         top: calc(var(--header-h) + 12px);
         left: calc(var(--sidebar-w-collapsed) + 12px);
         z-index: 1;
-        background: rgba(255, 255, 255, 0.96);
-        border-radius: 6px;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--mv2-radius-lg);
         padding: 8px 12px 10px;
-        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
         font-size: 14px;
         min-width: 210px;
+        color: var(--text-primary);
       }
 
       .controls__head {
@@ -1162,7 +1391,7 @@
         justify-content: space-between;
         gap: 8px;
         padding-bottom: 6px;
-        border-bottom: 1px solid #e2e8f0;
+        border-bottom: 1px solid var(--border);
         margin-bottom: 6px;
       }
 
@@ -1171,13 +1400,13 @@
         font-weight: 600;
         letter-spacing: 0.04em;
         text-transform: uppercase;
-        color: #64748b;
+        color: var(--text-secondary);
       }
 
       .controls__preset {
-        border: 1px solid #cbd5e1;
-        background: #f8fafc;
-        color: #1e293b;
+        border: 1px solid var(--border);
+        background: var(--surface-2);
+        color: var(--text-primary);
         font-size: 11px;
         font-weight: 600;
         padding: 3px 8px;
@@ -1186,8 +1415,9 @@
       }
 
       .controls__preset:hover {
-        background: #f2c744;
-        border-color: #f2c744;
+        background: var(--accent);
+        border-color: var(--accent);
+        color: var(--accent-ink);
       }
 
       .controls__group-head {
@@ -1195,12 +1425,12 @@
         font-weight: 700;
         letter-spacing: 0.05em;
         text-transform: uppercase;
-        color: #94a3b8;
+        color: var(--text-muted);
         margin: 4px 0 3px;
       }
 
       .controls__group--primaria {
-        border-left: 3px solid #f2c744;
+        border-left: 3px solid var(--accent);
         padding-left: 8px;
         margin-left: -3px;
       }
@@ -1228,7 +1458,7 @@
       .controls__group--contexto > summary::before {
         content: '▸';
         font-size: 9px;
-        color: #94a3b8;
+        color: var(--text-muted);
         transition: transform 0.12s ease;
       }
 
@@ -1243,13 +1473,13 @@
       .controls__badge {
         font-size: 10px;
         font-weight: 600;
-        color: #94a3b8;
+        color: var(--text-muted);
         letter-spacing: 0;
         text-transform: none;
       }
 
       .controls__badge.is-active {
-        color: #1e293b;
+        color: var(--accent);
       }
 
       .controls__row {
@@ -1625,34 +1855,6 @@
         display: none;
       }
 
-      /* Cámaras en vivo — spec 038 v4. Tarjetas "clic para reproducir" (patrón
-         del panel de referencia de World Monitor): nada de vídeo se carga
-         hasta pulsar la tarjeta. Columna única a 16:9 real (las cámaras de
-         Turisme CV son 1920×1080) — con un recuadro 4:3 salía recortada. */
-      #camaras-panel {
-        position: absolute;
-        top: calc(var(--header-h) + 12px);
-        right: 664px;
-        z-index: 1;
-        width: 300px;
-        max-height: 70vh;
-        display: flex;
-        flex-direction: column;
-        background: rgba(255, 255, 255, 0.97);
-        border-radius: 6px;
-        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
-        font-size: 14px;
-        /* spec 043 — el bloque de cámaras externas (DGT) puede crecer bastante
-           más que las 4 tarjetas de spec 038; con scroll interno en vez de
-           `overflow: hidden` no se recorta contenido invisible sin aviso
-           (mismo bug real que #insights-panel en spec 013 v8). */
-        overflow: hidden auto;
-      }
-
-      #camaras-panel[hidden] {
-        display: none;
-      }
-
       /* Vista /inteligencia — spec 040. En vez de flotar ancladas al mapa
          (posición absoluta de arriba), cámaras/prensa/tendencia pasan a fluir
          como tarjetas normales dentro de la página; agenda y actualidad
@@ -1671,7 +1873,6 @@
         min-height: 100vh;
       }
 
-      :root[data-vista='inteligencia']:not([data-layout='movil']) #camaras-panel,
       :root[data-vista='inteligencia']:not([data-layout='movil']) #media-panel,
       :root[data-vista='inteligencia']:not([data-layout='movil']) #tendencia-panel {
         position: static;
@@ -1680,17 +1881,12 @@
         width: 320px;
       }
 
-      #agenda-panel,
+      /* Solo `#actualidad-redes-panel`/`#protocolos-panel` siguen en este
+         grupo claro de serie (fila 4 "Contexto", todavía sin convertir).
+         Todo lo demás que pasó por aquí ya usa `.mv2-card` — ver sus propios
+         bloques de tamaño (filas 1-3, spec 056 Fase 4). */
       #actualidad-redes-panel,
-      #apoyo-decision-panel,
-      #protocolos-panel,
-      #camaras-dgt-panel,
-      #altimetria-panel,
-      #lluvia-viento-distrito-panel,
-      #temperatura-zona-panel,
-      #riesgo-escorrentia-panel,
-      #senales-ia-panel,
-      #recomendaciones-ia-panel {
+      #protocolos-panel {
         width: 320px;
         max-height: 70vh;
         display: flex;
@@ -1702,181 +1898,369 @@
         overflow: hidden auto;
       }
 
-      #agenda-panel[hidden],
       #actualidad-redes-panel[hidden],
-      #apoyo-decision-panel[hidden],
-      #protocolos-panel[hidden],
-      #camaras-dgt-panel[hidden],
-      #altimetria-panel[hidden],
-      #lluvia-viento-distrito-panel[hidden],
-      #temperatura-zona-panel[hidden],
-      #riesgo-escorrentia-panel[hidden],
-      #senales-ia-panel[hidden],
-      #recomendaciones-ia-panel[hidden] {
+      #protocolos-panel[hidden] {
         display: none;
       }
 
-      /* Orden de los bloques dentro de /inteligencia. Reordenado por última
-         vez el 2026-10-01 (petición explícita del usuario): en el despliegue
-         público (Vercel) no hay cámaras personales de Turisme CV (`#camaras-panel`,
-         ADR-003, gateada tras `VITE_PERSONAL_CAMARA_TURISME_CV` — vacía ahí),
-         así que la prioridad visual pasa a las cajas con datos reales que
-         antes vivían más abajo o agrupadas: altimetría, lluvia/viento por
-         distrito, temperatura por zona, riesgo de acumulación de agua y
-         sonometría de ZAS, todas justo después de las cámaras DGT (esas sí
-         públicas, spec 043). Señales+recomendaciones IA conservan su
-         prioridad histórica (2026-09-17: "esa tarjeta la vamos a poner la
-         primera arriba, al lado de las cámaras"). Las cámaras personales
-         bajan de posición (siguen funcionando igual si alguien despliega su
-         propia instancia con la variable activa) — contexto mediático y
-         tendencia siguen relegados al final (mismo pedido de siempre). Solo
-         afecta al orden visual dentro del flex de /inteligencia — el orden
-         de montaje en `main.ts` no cambia. */
-      :root[data-vista='inteligencia']:not([data-layout='movil']) #camaras-dgt-panel {
+      /* Fila 3 "Movilidad y actividad" — spec 056 Fase 4, §8.5: Cámaras en
+         vías de acceso (flex) + Ruido en Russafa ZAS (flex) + Agenda de
+         eventos (400px). */
+      :root[data-vista='inteligencia']:not([data-layout='movil']) #camaras-acceso-panel,
+      :root[data-vista='inteligencia']:not([data-layout='movil']) #zas-ruido-panel {
+        flex: 1 1 420px;
+        max-height: 70vh;
+      }
+      :root[data-vista='inteligencia']:not([data-layout='movil']) #agenda-panel {
+        flex: 0 0 400px;
+        max-height: 70vh;
+      }
+      #camaras-acceso-panel .mv2-card__body,
+      #zas-ruido-panel .mv2-card__body,
+      #agenda-panel .mv2-card__body {
+        overflow-y: auto;
+      }
+
+      .agenda-item {
+        display: block;
+        padding: 10px 0;
+        border-bottom: 1px solid var(--border);
+        text-decoration: none;
+        color: inherit;
+      }
+      .agenda-item:last-child {
+        border-bottom: none;
+      }
+      .agenda-item__titulo {
+        font: 500 14px / 1.3 var(--mv2-font-body);
+        color: var(--text-primary);
+      }
+      .agenda-item__meta {
+        font: 400 11px / 1 var(--mv2-font-mono);
+        color: var(--text-muted);
+        margin-top: 3px;
+      }
+      .agenda-item__chips {
+        display: flex;
+        gap: 4px;
+        flex-wrap: wrap;
+        margin-top: 6px;
+      }
+
+      /* Fila 2 "Clima y terreno" — spec 056 Fase 4, §8.5: Meteorología por
+         zona (flex) + Altimetría (flex) + Riesgo de acumulación de agua
+         (360px). */
+      :root[data-vista='inteligencia']:not([data-layout='movil']) #meteorologia-zona-panel,
+      :root[data-vista='inteligencia']:not([data-layout='movil']) #altimetria-panel {
+        flex: 1 1 400px;
+        max-height: 70vh;
+      }
+      :root[data-vista='inteligencia']:not([data-layout='movil']) #riesgo-escorrentia-panel {
+        flex: 0 0 360px;
+        max-height: 70vh;
+      }
+      #meteorologia-zona-panel .mv2-card__body,
+      #altimetria-panel .mv2-card__body,
+      #riesgo-escorrentia-panel .mv2-card__body {
+        overflow-y: auto;
+      }
+
+      .meteo-zona-tabla {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 13px;
+      }
+      .meteo-zona-tabla th {
+        font: 400 10px / 1 var(--mv2-font-mono);
+        letter-spacing: 1px;
+        color: var(--text-muted);
+        text-align: left;
+        padding-bottom: 8px;
+        border-bottom: 1px solid var(--border);
+      }
+      .meteo-zona-tabla td {
+        padding: 6px 8px 6px 0;
+        border-bottom: 1px solid var(--border);
+        color: var(--text-primary);
+        white-space: nowrap;
+      }
+      .meteo-zona-tabla__estacion {
+        width: 100%;
+        white-space: normal !important;
+      }
+      .meteo-zona-tabla__temp {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .meteo-zona-tabla__viento,
+      .meteo-zona-tabla__lluvia {
+        color: var(--text-secondary);
+        text-align: right;
+      }
+
+      .riesgo-escorrentia__bloque {
+        background: #c8f03c0f;
+        border: 1px solid #c8f03c33;
+        border-radius: var(--mv2-radius-lg);
+        padding: 14px 16px;
+      }
+      .riesgo-escorrentia__etiqueta {
+        display: block;
+        font: 400 10px / 1 var(--mv2-font-mono);
+        letter-spacing: 1.2px;
+        color: var(--text-muted);
+        margin-bottom: 6px;
+      }
+      .riesgo-escorrentia__valor {
+        font: 700 36px / 1 var(--mv2-font-display);
+        font-variant-numeric: tabular-nums;
+      }
+      .riesgo-escorrentia__valor--ok {
+        color: var(--accent);
+        font-size: 22px;
+      }
+      .riesgo-escorrentia__valor--watch {
+        color: var(--warning);
+      }
+      .riesgo-escorrentia__sobre100 {
+        font-size: 16px;
+        color: var(--text-muted);
+      }
+
+      /* Fila 1 "Prioridad" — spec 056 Fase 4, §8.5: Recomendaciones (flex,
+         destacada) + Señales (440px), DataCard sobre tokens Mirall v2. */
+      :root[data-vista='inteligencia']:not([data-layout='movil']) #recomendaciones-ia-panel {
+        flex: 1 1 540px;
+        max-height: 70vh;
+      }
+      :root[data-vista='inteligencia']:not([data-layout='movil']) #senales-ia-panel {
+        flex: 0 0 440px;
+        max-height: 70vh;
+      }
+      #recomendaciones-ia-panel .mv2-card__body,
+      #senales-ia-panel .mv2-card__body {
+        overflow-y: auto;
+      }
+      .recomendaciones-ia__tabs {
+        margin: 12px 18px 0;
+      }
+
+      /* Orden de los bloques dentro de /inteligencia, por fila — spec 056
+         Fase 4. La cabecera de página no lleva `order` explícito (su valor
+         por defecto, 0, ya la deja delante de cualquier tarjeta con
+         `order` ≥ 1). Fila 1 "Prioridad" (1-2), fila 2 "Clima y terreno"
+         (3-5), fila 3 "Movilidad y actividad" (6-8); contexto mediático y
+         tendencia siguen relegados al final (fila 4, todavía sin convertir).
+         `#apoyo-decision-panel`/`#camaras-panel`/`#camaras-dgt-panel` ya no
+         existen como paneles propios (fusionados). */
+      :root[data-vista='inteligencia']:not([data-layout='movil']) #recomendaciones-ia-panel {
         order: 1;
       }
-      :root[data-vista='inteligencia']:not([data-layout='movil']) #altimetria-panel {
+      :root[data-vista='inteligencia']:not([data-layout='movil']) #senales-ia-panel {
         order: 2;
       }
-      :root[data-vista='inteligencia']:not([data-layout='movil']) #lluvia-viento-distrito-panel {
+      :root[data-vista='inteligencia']:not([data-layout='movil']) #meteorologia-zona-panel {
         order: 3;
       }
-      :root[data-vista='inteligencia']:not([data-layout='movil']) #temperatura-zona-panel {
+      :root[data-vista='inteligencia']:not([data-layout='movil']) #altimetria-panel {
         order: 4;
       }
       :root[data-vista='inteligencia']:not([data-layout='movil']) #riesgo-escorrentia-panel {
         order: 5;
       }
-      /* Spec 049 — sonometría de ZAS (sonómetros de Russafa, sin geometría
-         verificada, no es una capa de mapa — spec 049 §7). Antes relegada al
-         final junto con movilidad-avisos-panel; promovida aquí el
-         2026-10-01 (petición explícita del usuario). */
-      :root[data-vista='inteligencia']:not([data-layout='movil']) #zas-ruido-panel {
+      :root[data-vista='inteligencia']:not([data-layout='movil']) #camaras-acceso-panel {
         order: 6;
       }
-      :root[data-vista='inteligencia']:not([data-layout='movil']) #senales-ia-panel {
+      :root[data-vista='inteligencia']:not([data-layout='movil']) #zas-ruido-panel {
         order: 7;
       }
-      :root[data-vista='inteligencia']:not([data-layout='movil']) #recomendaciones-ia-panel {
+      :root[data-vista='inteligencia']:not([data-layout='movil']) #agenda-panel {
         order: 8;
       }
-      :root[data-vista='inteligencia']:not([data-layout='movil']) #camaras-panel {
+      :root[data-vista='inteligencia']:not([data-layout='movil']) #actualidad-redes-panel {
         order: 9;
       }
-      :root[data-vista='inteligencia']:not([data-layout='movil']) #agenda-panel {
+      :root[data-vista='inteligencia']:not([data-layout='movil']) #media-panel {
         order: 10;
       }
-      :root[data-vista='inteligencia']:not([data-layout='movil']) #actualidad-redes-panel {
+      :root[data-vista='inteligencia']:not([data-layout='movil']) #protocolos-panel {
         order: 11;
       }
-      :root[data-vista='inteligencia']:not([data-layout='movil']) #apoyo-decision-panel {
+      :root[data-vista='inteligencia']:not([data-layout='movil']) #tendencia-panel {
         order: 12;
       }
-      :root[data-vista='inteligencia']:not([data-layout='movil']) #media-panel {
+      :root[data-vista='inteligencia']:not([data-layout='movil']) #movilidad-avisos-panel {
         order: 13;
       }
-      :root[data-vista='inteligencia']:not([data-layout='movil']) #protocolos-panel {
-        order: 14;
+
+      /* Cabecera de página de /inteligencia — spec 056 Fase 4, §8.5. */
+      #inteligencia-cabecera {
+        display: none;
+        width: 100%;
+        flex: 1 1 100%;
+        align-items: flex-end;
+        justify-content: space-between;
+        gap: 20px;
+        flex-wrap: wrap;
+        margin-bottom: 4px;
       }
-      :root[data-vista='inteligencia']:not([data-layout='movil']) #tendencia-panel {
-        order: 15;
+      :root[data-vista='inteligencia']:not([data-layout='movil']) #inteligencia-cabecera {
+        display: flex;
       }
-      /* #movilidad-avisos-panel (spec 048) se añadió sin entrada aquí — bug
-         real: sin `order` explícito caía en el 0 por defecto de flex y se
-         colaba EL PRIMERO, por delante incluso de las cámaras. Pedido del
-         usuario (2026-09-24): que quede en un segundo plano, no como
-         principal — se manda al final. */
-      :root[data-vista='inteligencia']:not([data-layout='movil']) #movilidad-avisos-panel {
-        order: 16;
+      .inteligencia-cabecera__eyebrow {
+        color: var(--accent);
+        margin: 0 0 6px;
+      }
+      .inteligencia-cabecera__titulo {
+        margin: 0 0 6px;
+        color: var(--text-primary);
+      }
+      .inteligencia-cabecera__subtitulo {
+        margin: 0;
+        color: var(--text-secondary);
+      }
+      .inteligencia-card--filtrada {
+        display: none !important;
       }
 
       /* Spec 045/047 — advertencia de IA, compartida por síntesis v1 y por
          la caja de recomendaciones v2 (mismo principio: nunca en letra
-         pequeña, CLAUDE.md §4). */
+         pequeña, CLAUDE.md §4). §8.5: fondo warning 8%, icono+texto warning. */
       .sintesis-ia__advertencia {
-        margin: 8px;
-        padding: 6px 8px;
-        font-size: 11px;
-        font-weight: 600;
-        color: #7d3c00;
-        background: #fdebd0;
-        border-radius: 4px;
+        margin: 0;
+        padding: 8px 10px;
+        border-radius: var(--mv2-radius-md);
+        background: #ffa63d14;
+        color: var(--warning);
+        font-size: 12px;
+        line-height: 1.4;
+      }
+      .sintesis-ia__advertencia svg {
+        color: var(--warning);
       }
 
       /* Spec 047 — caja "Señales" (correlación determinista, sin IA). */
-      .senales-ia__vacio {
-        margin: 8px;
-        font-size: 12px;
-        color: #666;
-      }
-
-      .senales-ia__item {
-        margin: 8px 8px 6px;
-        padding: 6px;
-        border-left: 3px solid #ccc;
-        background: #fafafa;
-        font-size: 12px;
-      }
-
-      .senales-ia__item--aviso {
-        border-left-color: #d4a017;
-      }
-
-      .senales-ia__item--urgente {
-        border-left-color: #b03a2e;
-      }
-
-      .senales-ia__tipo {
-        display: inline-block;
-        font-size: 9px;
-        font-weight: 700;
-        text-transform: uppercase;
-        color: #888;
-        margin-right: 6px;
-      }
-
-      .senales-ia__texto {
-        display: block;
-        color: #333;
-      }
-
       .senales-ia__fuentes {
-        display: block;
-        margin-top: 4px;
+        display: flex;
+        gap: 4px;
+        flex-wrap: wrap;
+        margin-top: 2px;
       }
 
-      /* Spec 047 — caja "Recomendaciones de actuación" (IA, condicional). */
-      .recomendaciones-ia__vacio {
-        margin: 8px;
-        font-size: 12px;
-        color: #666;
-      }
-
+      /* Spec 047 — caja "Recomendaciones de actuación" (IA, condicional).
+         Borde izquierdo 3px del color de prioridad — §8.5. */
       .recomendaciones-ia__item {
-        margin: 0 8px 8px;
-        padding: 6px;
-        border-left: 3px solid var(--mirall-acento);
-        background: #f0f5ff;
-        font-size: 12px;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        padding: 16px;
+        border-left: 3px solid var(--border);
+        border-bottom: 1px solid var(--border);
       }
-
+      .recomendaciones-ia__item:last-child {
+        border-bottom: none;
+      }
+      .recomendaciones-ia__item--alert {
+        border-left-color: var(--danger);
+      }
+      .recomendaciones-ia__item--watch {
+        border-left-color: var(--warning);
+      }
+      .recomendaciones-ia__item--ok {
+        border-left-color: var(--accent);
+      }
+      .recomendaciones-ia__prioridad {
+        font: 400 10px / 1 var(--mv2-font-mono);
+        letter-spacing: 1.2px;
+      }
+      .recomendaciones-ia__prioridad--alert {
+        color: var(--danger);
+      }
+      .recomendaciones-ia__prioridad--watch {
+        color: var(--warning);
+      }
+      .recomendaciones-ia__prioridad--ok {
+        color: var(--accent);
+      }
       .recomendaciones-ia__zona {
         display: block;
-        font-size: 9px;
-        font-weight: 700;
-        text-transform: uppercase;
-        color: var(--mirall-acento);
-        margin-bottom: 2px;
+        color: var(--text-primary);
       }
-
       .recomendaciones-ia__texto {
         display: block;
-        color: #333;
+        color: var(--text-secondary);
+        font-size: 14px;
+        line-height: 1.5;
+      }
+      .recomendaciones-ia__fuentes {
+        display: flex;
+        gap: 4px;
+        flex-wrap: wrap;
+        margin-top: 2px;
       }
 
-      .recomendaciones-ia__fuentes {
-        display: block;
-        margin-top: 4px;
+      /* Apoyo a decisión operativa — pestaña dentro de Recomendaciones. */
+      .sugerencia-operativa {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        padding: 12px 0;
+        border-bottom: 1px solid var(--border);
+      }
+      .sugerencia-operativa:last-child {
+        border-bottom: none;
+      }
+      .sugerencia-operativa__cabecera {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+      }
+      .sugerencia-operativa__lugar {
+        font: 600 13px / 1.3 var(--mv2-font-body);
+        color: var(--text-primary);
+      }
+      .sugerencia-operativa__severidad {
+        font: 400 10px / 1 var(--mv2-font-mono);
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        color: var(--text-muted);
+      }
+      .sugerencia-operativa--prioritario .sugerencia-operativa__severidad {
+        color: var(--danger);
+      }
+      .sugerencia-operativa__chips {
+        display: flex;
+        gap: 4px;
+        flex-wrap: wrap;
+      }
+      .sugerencia-operativa__chip {
+        font: 400 11px / 1.3 var(--mv2-font-mono);
+        color: var(--text-secondary);
+        background: var(--surface-2);
+        border-radius: var(--mv2-radius-pill);
+        padding: 2px 8px;
+      }
+      .sugerencia-operativa__resumen {
+        font-size: 13px;
+        color: var(--text-secondary);
+      }
+      .sugerencia-operativa__texto {
+        font-size: 13px;
+        color: var(--text-primary);
+        line-height: 1.5;
+      }
+      .sugerencia-operativa__pie {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+        margin-top: 2px;
+      }
+      .sugerencia-operativa__fuentes {
+        display: flex;
+        gap: 4px;
       }
 
       /* Spec 044 — panel de emergencia meteorológica avanzada */
@@ -2067,126 +2451,33 @@
         overflow-y: auto;
       }
 
-      /* Apoyo a decisión operativa — spec 041 */
+      /* Apoyo a decisión operativa — spec 041. Desde spec 056 Fase 4 es una
+         pestaña de #recomendaciones-ia-panel (.mv2-card) — estilos de
+         `.sugerencia-operativa*` en el bloque de esa tarjeta, más arriba. */
       #apoyo-decision-list {
         display: flex;
         flex-direction: column;
-        gap: 8px;
-        padding: 8px;
-        overflow-y: auto;
-      }
-
-      .sugerencia-operativa {
-        border: 1px solid #e2e8f0;
-        border-left: 4px solid #94a3b8;
-        border-radius: 4px;
-        padding: 8px 10px;
-      }
-
-      .sugerencia-operativa--prioritario {
-        border-left-color: #dc2626;
-        background: #fef2f2;
-      }
-
-      .sugerencia-operativa--seguimiento {
-        border-left-color: #d97706;
-        background: #fffbeb;
-      }
-
-      .sugerencia-operativa__cabecera {
-        display: flex;
-        justify-content: space-between;
-        align-items: baseline;
-        gap: 8px;
-        font-weight: 600;
-        font-size: 12.5px;
-        color: #1e293b;
-      }
-
-      .sugerencia-operativa__severidad {
-        font-size: 10px;
-        text-transform: uppercase;
-        letter-spacing: 0.04em;
-        color: #64748b;
-        flex-shrink: 0;
-      }
-
-      .sugerencia-operativa__chips {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 4px;
-        margin: 4px 0;
-      }
-
-      .sugerencia-operativa__chip {
-        font-size: 10px;
-        background: rgba(0, 0, 0, 0.06);
-        border-radius: 3px;
-        padding: 1px 5px;
-        color: #475569;
-      }
-
-      .sugerencia-operativa__resumen {
-        font-size: 12px;
-        color: #475569;
-        margin-bottom: 4px;
-      }
-
-      .sugerencia-operativa__texto {
-        font-size: 12.5px;
-        font-style: italic;
-        color: #1e293b;
-        margin-bottom: 6px;
-      }
-
-      .sugerencia-operativa__pie {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        gap: 8px;
-      }
-
-      .sugerencia-operativa__ver-mapa {
-        appearance: none;
-        border: 1px solid #94a3b8;
-        background: #fff;
-        border-radius: 4px;
-        padding: 3px 8px;
-        font-size: 11px;
-        cursor: pointer;
-        color: #1e293b;
-      }
-
-      .sugerencia-operativa__ver-mapa:hover {
-        background: #f1f5f9;
-      }
-
-      .sugerencia-operativa__fuentes {
-        display: flex;
         gap: 4px;
       }
 
       .camaras-grid {
-        display: flex;
-        flex-direction: column;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
         gap: 10px;
-        padding: 8px;
-        overflow-y: auto;
       }
 
       .camara-tile__nombre {
-        font-size: 12px;
-        font-weight: 600;
-        color: #222;
-        margin-bottom: 4px;
+        font: 600 13px / 1.3 var(--mv2-font-body);
+        color: var(--text-primary);
+        margin-top: 6px;
       }
 
       .camara-tile__stage {
         position: relative;
         aspect-ratio: 16 / 9;
-        border-radius: 5px;
+        border-radius: var(--mv2-radius-lg);
         overflow: hidden;
-        background: linear-gradient(160deg, #2a3b52, #16202e);
+        background: var(--surface-2);
         display: flex;
         align-items: center;
         justify-content: center;
@@ -2196,19 +2487,17 @@
         width: 40px;
         height: 40px;
         border-radius: 50%;
-        border: 1px solid rgba(255, 255, 255, 0.5);
-        background: rgba(255, 255, 255, 0.15);
-        color: #fff;
-        font-size: 15px;
+        border: 1px solid var(--border);
+        background: var(--surface);
+        color: var(--text-primary);
         cursor: pointer;
         display: flex;
         align-items: center;
         justify-content: center;
-        padding-left: 2px;
       }
 
       .camara-tile__play:hover {
-        background: rgba(255, 255, 255, 0.3);
+        background: var(--surface-2);
       }
 
       .camara-tile__player {
@@ -2221,63 +2510,71 @@
 
       .camara-tile__error {
         font-size: 11px;
-        color: #cbd5e1;
+        color: var(--text-secondary);
         text-align: center;
         padding: 0 8px;
       }
 
       .camara-tile__atribucion {
         display: block;
-        margin-top: 4px;
-        font-size: 10px;
-        color: #888;
+        margin-top: 3px;
+        font: 400 10px / 1 var(--mv2-font-mono);
+        color: var(--text-muted);
         text-decoration: none;
       }
 
       .camara-tile__atribucion:hover {
-        text-decoration: underline;
+        color: var(--text-secondary);
       }
 
-      /* Spec 043 — cámaras externas DGT, bloque separado de las internas de
-         arriba (imagen JPEG estática que se refresca, no vídeo en directo). */
+      /* Spec 043 — cámaras externas DGT, pestaña separada de las internas de
+         arriba (imagen JPEG estática que se refresca, no vídeo en directo).
+         §8.5.6: rejilla 2×2 de miniaturas con pill "LIVE" + hora. */
       .camaras-dgt-carretera {
-        margin: 0 8px 6px;
-        border-radius: 6px;
-        background: rgba(255, 255, 255, 0.04);
+        margin: 0 0 10px;
+        border-radius: var(--mv2-radius-lg);
+        background: var(--surface-2);
       }
 
       .camaras-dgt-carretera > summary {
         cursor: pointer;
-        padding: 6px 8px;
-        font-size: 12px;
-        font-weight: 600;
-        color: #cbd5e1;
+        padding: 8px 10px;
+        font: 600 13px / 1.3 var(--mv2-font-body);
+        color: var(--text-primary);
       }
 
       .camaras-dgt-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
         gap: 8px;
-        padding: 0 8px 8px;
+        padding: 0 10px 10px;
       }
 
       .camara-dgt-tile {
         margin: 0;
+        position: relative;
+      }
+
+      .camara-dgt-tile__live {
+        position: absolute;
+        top: 6px;
+        left: 6px;
+        z-index: 1;
       }
 
       .camara-dgt-tile__img {
         width: 100%;
         aspect-ratio: 16 / 9;
         object-fit: cover;
-        border-radius: 4px;
-        background: #16202e;
+        border-radius: var(--mv2-radius-md);
+        background: var(--bg);
         display: block;
       }
 
       .camara-dgt-tile figcaption {
-        font-size: 10px;
-        color: #888;
-        margin-top: 2px;
+        font: 400 10px / 1 var(--mv2-font-mono);
+        color: var(--text-muted);
+        margin-top: 4px;
         text-align: center;
       }
 
@@ -2421,18 +2718,21 @@
       /* Spec 026 — tooltip mínimo específico de esta capa (ver comentario en
          buildViaPublicaTooltip, src/main.ts). Posicionado en coordenadas de
          pantalla junto al cursor, nunca intercepta clics (pointer-events: none). */
+      /* Tooltips bespoke de marcador — spec 056 Fase 3b, §7.14: tarjeta
+         --surface, borde, radio 10. */
       #via-publica-tooltip {
         position: fixed;
         z-index: 20;
         pointer-events: none;
-        background: rgba(20, 20, 20, 0.92);
-        color: #fff;
-        padding: 6px 10px;
-        border-radius: 6px;
-        font-size: 11px;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        color: var(--text-primary);
+        padding: 10px 12px;
+        border-radius: var(--mv2-radius-lg);
+        font-size: 12px;
         line-height: 1.4;
         max-width: 220px;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        box-shadow: 0 8px 24px #00000080;
       }
 
       .via-publica-tooltip__tipo {
@@ -2440,7 +2740,7 @@
         text-transform: uppercase;
         font-size: 10px;
         letter-spacing: 0.02em;
-        opacity: 0.85;
+        color: var(--text-secondary);
       }
 
       .via-publica-tooltip__calle {
@@ -2459,21 +2759,22 @@
         position: fixed;
         z-index: 20;
         pointer-events: none;
-        background: rgba(20, 20, 20, 0.92);
-        color: #fff;
-        padding: 6px 10px;
-        border-radius: 6px;
-        font-size: 11px;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        color: var(--text-primary);
+        padding: 10px 12px;
+        border-radius: var(--mv2-radius-lg);
+        font-size: 12px;
         line-height: 1.4;
         max-width: 220px;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        box-shadow: 0 8px 24px #00000080;
       }
 
       .emt-bus-tooltip__linea {
         font-weight: 700;
         font-size: 10px;
         letter-spacing: 0.02em;
-        opacity: 0.85;
+        color: var(--text-secondary);
         text-transform: uppercase;
       }
 
@@ -2500,25 +2801,27 @@
 
       :root[data-layout='movil'] {
         --header-h: 52px;
+        --tabbar-h: 56px;
       }
 
-      /* Cabecera: safe-area arriba, reloj compacto, sin fecha. */
+      /* TopBar: safe-area arriba, se compacta a solo lockup + interruptor +
+         en-vivo (ciudad/campana/ajustes se ocultan — caben en el SideMenu). */
       :root[data-layout='movil'] #app-header {
         height: calc(var(--header-h) + env(safe-area-inset-top));
         padding-top: env(safe-area-inset-top);
         padding-left: max(12px, env(safe-area-inset-left));
         gap: 8px;
       }
-      :root[data-layout='movil'] #app-header__tagline,
-      :root[data-layout='movil'] #app-header__date,
-      :root[data-layout='movil'] #app-header__frescura,
-      :root[data-layout='movil'] #app-header__divider {
+      :root[data-layout='movil'] #app-header .marca__descriptor,
+      :root[data-layout='movil'] #app-header__divider,
+      :root[data-layout='movil'] #app-header__ciudad,
+      :root[data-layout='movil'] #app-header__ajustes {
         display: none;
       }
-      :root[data-layout='movil'] #app-header__name {
+      :root[data-layout='movil'] #app-header .marca__nombre {
         font-size: 14px;
       }
-      :root[data-layout='movil'] #app-header__status {
+      :root[data-layout='movil'] #app-header__derecha {
         gap: 8px;
       }
       /* Móvil: sin sitio para el texto completo — solo el icono, sigue
@@ -2530,13 +2833,15 @@
       :root[data-layout='movil'] #app-header__alerta-critica-texto {
         display: none;
       }
-      :root[data-layout='movil'] #app-header__clock {
-        font-size: 14px;
+      :root[data-layout='movil'] #app-header__live-label {
+        display: none;
       }
 
-      /* El mapa arranca bajo la cabecera (con safe-area). */
+      /* El mapa arranca bajo la cabecera (con safe-area) y termina antes del
+         TabBar inferior. */
       :root[data-layout='movil'] #map {
         top: calc(var(--header-h) + env(safe-area-inset-top));
+        bottom: calc(var(--tabbar-h) + env(safe-area-inset-bottom));
       }
 
       /* Sidebar: hoja a pantalla completa que entra deslizando desde la
@@ -2545,6 +2850,9 @@
          afecta). */
       :root[data-layout='movil'] #app-sidebar {
         top: calc(var(--header-h) + env(safe-area-inset-top));
+        /* Dejar hueco para el TabBar fijo de abajo — si no, su pie (EN VIVO,
+           reloj, "Ver versión de escritorio") queda tapado (bug real). */
+        bottom: var(--tabbar-h);
         width: 100%;
         max-width: 30rem;
         transform: translateX(-100%);
@@ -2556,51 +2864,67 @@
       :root[data-layout='movil'] #app-sidebar.is-expanded {
         transform: translateX(0);
       }
-      /* El toggle del raíl (⟨/☰) no se usa en móvil; abre el FAB de abajo. */
-      :root[data-layout='movil'] #app-sidebar__toggle {
-        display: none;
-      }
-      /* Botón flotante para abrir la hoja. */
-      #app-sidebar__fab {
-        display: none;
-      }
-      :root[data-layout='movil'] #app-sidebar__fab {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        position: fixed;
-        top: calc(var(--header-h) + env(safe-area-inset-top) + 10px);
-        left: 10px;
-        width: 44px;
-        height: 44px;
-        border: none;
-        border-radius: 10px;
-        background: var(--mirall-navy);
-        color: #fff;
-        font-size: 18px;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
-        z-index: 151;
-        cursor: pointer;
-      }
-      :root[data-layout='movil'] #app-sidebar.is-expanded ~ #app-sidebar__fab {
+      /* El toggle del raíl no se usa en móvil; el SideMenu se abre desde la
+         pestaña "Más" del TabBar (sustituye al FAB flotante legado). */
+      :root[data-layout='movil'] #app-sidebar__toggle,
+      :root[data-layout='movil'] #app-sidebar__abrir-rail {
         display: none;
       }
       :root[data-layout='movil'] #app-sidebar__cerrar {
         display: flex;
         align-items: center;
         justify-content: center;
-        width: 44px;
-        height: 44px;
-        margin: 4px 4px 0 auto;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        margin: 4px 16px 0 auto;
         border: none;
-        background: transparent;
-        color: #fff;
-        font-size: 20px;
+        background: var(--surface-2);
+        color: var(--text-primary);
         cursor: pointer;
         flex-shrink: 0;
       }
       :root[data-layout='movil'] #app-sidebar:not(.is-expanded) #app-sidebar__cerrar {
         display: none;
+      }
+
+      /* TabBar — spec 019, nuevo en Mirall v2 (spec 056 Fase 3a, §7.13).
+         Solo móvil/tablet estrecha; 3 pestañas funcionales por ahora
+         (Mapa/Inteligencia/Más) — "Barrios"/"Capas" del diseño original son
+         pantallas que no existen todavía, llegan en la Fase 5. */
+      #app-tabbar {
+        display: none;
+      }
+      :root[data-layout='movil'] #app-tabbar {
+        display: flex;
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: calc(var(--tabbar-h) + env(safe-area-inset-bottom));
+        padding-bottom: env(safe-area-inset-bottom);
+        background: var(--surface);
+        border-top: 1px solid var(--border);
+        z-index: 200;
+      }
+      .app-tabbar__item {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 2px;
+        border: none;
+        background: transparent;
+        color: var(--text-muted);
+        font: 500 11px / 1 var(--mv2-font-body);
+        cursor: pointer;
+      }
+      .app-tabbar__item.is-active {
+        color: var(--text-primary);
+      }
+      .app-tabbar__item.is-active svg {
+        color: var(--accent);
       }
       :root[data-layout='movil'] #app-sidebar__backdrop {
         position: fixed;
@@ -2719,14 +3043,12 @@
       :root[data-layout='movil'] #info-panels > #controls,
       :root[data-layout='movil'] #info-panels > #media-panel,
       :root[data-layout='movil'] #info-panels > #tendencia-panel,
-      :root[data-layout='movil'] #info-panels > #camaras-panel,
-      :root[data-layout='movil'] #info-panels > #camaras-dgt-panel,
+      :root[data-layout='movil'] #info-panels > #camaras-acceso-panel,
+      :root[data-layout='movil'] #info-panels > #zas-ruido-panel,
       :root[data-layout='movil'] #info-panels > #agenda-panel,
       :root[data-layout='movil'] #info-panels > #actualidad-redes-panel,
-      :root[data-layout='movil'] #info-panels > #apoyo-decision-panel,
       :root[data-layout='movil'] #info-panels > #altimetria-panel,
-      :root[data-layout='movil'] #info-panels > #lluvia-viento-distrito-panel,
-      :root[data-layout='movil'] #info-panels > #temperatura-zona-panel,
+      :root[data-layout='movil'] #info-panels > #meteorologia-zona-panel,
       :root[data-layout='movil'] #info-panels > #riesgo-escorrentia-panel,
       :root[data-layout='movil'] #info-panels > #senales-ia-panel,
       :root[data-layout='movil'] #info-panels > #recomendaciones-ia-panel,
@@ -2742,14 +3064,12 @@
       }
       :root[data-layout='movil'] #info-panels > #media-panel,
       :root[data-layout='movil'] #info-panels > #tendencia-panel,
-      :root[data-layout='movil'] #info-panels > #camaras-panel,
-      :root[data-layout='movil'] #info-panels > #camaras-dgt-panel,
+      :root[data-layout='movil'] #info-panels > #camaras-acceso-panel,
+      :root[data-layout='movil'] #info-panels > #zas-ruido-panel,
       :root[data-layout='movil'] #info-panels > #agenda-panel,
       :root[data-layout='movil'] #info-panels > #actualidad-redes-panel,
-      :root[data-layout='movil'] #info-panels > #apoyo-decision-panel,
       :root[data-layout='movil'] #info-panels > #altimetria-panel,
-      :root[data-layout='movil'] #info-panels > #lluvia-viento-distrito-panel,
-      :root[data-layout='movil'] #info-panels > #temperatura-zona-panel,
+      :root[data-layout='movil'] #info-panels > #meteorologia-zona-panel,
       :root[data-layout='movil'] #info-panels > #riesgo-escorrentia-panel,
       :root[data-layout='movil'] #info-panels > #senales-ia-panel,
       :root[data-layout='movil'] #info-panels > #recomendaciones-ia-panel,
@@ -2758,14 +3078,12 @@
       }
       :root[data-layout='movil'] #info-panels > #media-panel[hidden],
       :root[data-layout='movil'] #info-panels > #tendencia-panel[hidden],
-      :root[data-layout='movil'] #info-panels > #camaras-panel[hidden],
-      :root[data-layout='movil'] #info-panels > #camaras-dgt-panel[hidden],
+      :root[data-layout='movil'] #info-panels > #camaras-acceso-panel[hidden],
+      :root[data-layout='movil'] #info-panels > #zas-ruido-panel[hidden],
       :root[data-layout='movil'] #info-panels > #agenda-panel[hidden],
       :root[data-layout='movil'] #info-panels > #actualidad-redes-panel[hidden],
-      :root[data-layout='movil'] #info-panels > #apoyo-decision-panel[hidden],
       :root[data-layout='movil'] #info-panels > #altimetria-panel[hidden],
-      :root[data-layout='movil'] #info-panels > #lluvia-viento-distrito-panel[hidden],
-      :root[data-layout='movil'] #info-panels > #temperatura-zona-panel[hidden],
+      :root[data-layout='movil'] #info-panels > #meteorologia-zona-panel[hidden],
       :root[data-layout='movil'] #info-panels > #riesgo-escorrentia-panel[hidden],
       :root[data-layout='movil'] #info-panels > #senales-ia-panel[hidden],
       :root[data-layout='movil'] #info-panels > #recomendaciones-ia-panel[hidden],

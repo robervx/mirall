@@ -106,3 +106,4 @@ No aplica — no es una capa de mapa.
 |---|---|---|
 | 1 | 2026-09-30 | Creación e implementación: landing en `/`, mapa movido a `/mapa`, página de proceso en `/proceso` |
 | 2 | 2026-09-30 | Fondo 3D (Three.js, `src/paginas/hero-ciudad-3d.ts`) en el hero + acento de marca extendido a botones/enlaces no semánticos de `/mapa` (toast PWA, checkboxes, login), sin tocar colores de alerta/MOCK |
+| 3 | 2026-10-08 | Reskin completo a la identidad Mirall v2 (spec `056` Fase 2): tema oscuro `#0A0C0B`/acento lima `#C8F03C` (sustituye navy/teal de v2), tipografías Inter Tight/Inter/JetBrains Mono, hero recoloreado con emissive en edificios lima, nueva sección "Dos modelos de ciudad" y bloque de métricas (con cifras reales, no de plantilla), menú móvil/tablet a pantalla completa. El stack tecnológico se muda de la landing a `/proceso#tecnologia`. `/mapa` sin cambios visuales todavía (fase 3). Detalle completo en `specs/056-identidad-visual-mirall-v2.md` §6.1 |

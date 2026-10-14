@@ -17,6 +17,13 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700&display=swap" rel="stylesheet" />
+    <!-- Tipografías de la identidad visual Mirall v2 (spec 056). Cargadas ya
+         desde Fase 1, sin uso todavía — el chasis/mapa se repintan en la
+         Fase 3. -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
 
     <!-- Layout escritorio/móvil — spec 029. Se fija antes del primer pintado
          para que no haya parpadeo; deteccion-dispositivo.ts lo mantiene en
@@ -36,6 +43,10 @@
         }
       })();
     </script>
+    <!-- Tokens + componentes de Mirall v2 (spec 056), compartidos con la
+         landing/proceso. Cargada antes de estilos.css para que esta pueda
+         (cuando le toque su fase) seguir referenciando sus variables. -->
+    <link rel="stylesheet" href="/src/mirall-v2.css" />
     <link rel="stylesheet" href="/src/estilos.css" />
   </head>
   <body>

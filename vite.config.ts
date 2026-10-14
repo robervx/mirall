@@ -250,6 +250,9 @@ export default defineConfig(({ mode }) => {
           landing: path.join(rootDir, 'index.html'),
           mapa: path.join(rootDir, 'mapa/index.html'),
           proceso: path.join(rootDir, 'proceso/index.html'),
+          // Guía de estilos interna (spec 056) — no es producto público,
+          // verificación visual de los tokens/componentes de Mirall v2.
+          guiaEstilos: path.join(rootDir, 'guia-estilos/index.html'),
         },
       },
     },

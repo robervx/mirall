@@ -1,13 +1,23 @@
-// Cabecera institucional + sidebar plegable — spec 019.
+// TopBar + NavRail/SideMenu + TabBar — spec 019, rediseño Mirall v2 (spec 056
+// Fase 3a: identidad.chasis.ts).
 // Chasis de aplicación: no contiene lógica de datos, solo monta el marco
 // sobre el que se apoyan el mapa y los paneles ya existentes (que siguen
 // apareciendo vía document.body.appendChild sin cambios).
+//
+// NavRail (72px, menú plegado) y SideMenu (300px, menú desplegado) son el
+// MISMO elemento (`#app-sidebar`) en sus dos estados visuales — igual que ya
+// funcionaba el sidebar legado (spec 019), solo cambia su aspecto y su
+// contenido interno. Las funciones de contenido de cada herramienta
+// (`buildProximidadContent`, `buildCordonIncidenteContent`,
+// `buildGemeloDigitalContent`, `buildConfiguracionContent`) NO se tocan.
 import { PANEL_PREFERENCES_REGISTRY, isPanelVisible, setPanelVisible } from './panel-preferences';
 import { limpiarCacheDatos } from '../pwa';
 import { onCambioFrescura } from './estado-frescura';
 import { MARCA } from '../config/marca';
 import { esMovil, getLayoutForzado, setLayoutForzado, onCambioLayout } from './deteccion-dispositivo';
 import { irAVista, vistaActual, type Vista } from './router';
+import { getFocoDistrito, onCambioFoco } from './foco-distrito';
+import { iconoSvg } from './iconos';
 import { calcularCercania, formatoDistancia, type ResultadoCercania } from '../services/proximidad';
 import { getCapasActivas } from '../services/capas-activas-store';
 import {
@@ -39,7 +49,8 @@ import { esVersionPublica } from '../config/version-despliegue';
 export interface SidebarSectionDefinition {
   key: string;
   label: string;
-  icono: string;
+  /** Nombre de icono Lucide (src/ui/iconos.ts) — antes era un emoji suelto. */
+  icono: Parameters<typeof iconoSvg>[0];
   specId?: string;
   /** Contenido desplegable bajo la fila. */
   render: () => HTMLElement;
@@ -530,35 +541,35 @@ export const SIDEBAR_REGISTRY: SidebarSectionDefinition[] = [
   {
     key: 'cerca-de-mi',
     label: 'Cerca de mí',
-    icono: '📍',
+    icono: 'locate',
     specId: '012',
     render: buildProximidadContent,
   },
   {
     key: 'cordon-incidente',
     label: 'Cordón de incidente',
-    icono: '🔥',
+    icono: 'flame',
     specId: '021',
     render: buildCordonIncidenteContent,
   },
   {
     key: 'gemelo-digital',
     label: 'Gemelo digital',
-    icono: '🗺️',
+    icono: 'box',
     specId: '022',
     render: buildGemeloDigitalContent,
   },
   {
     key: 'glosario',
     label: 'Glosario',
-    icono: '📖',
+    icono: 'book-open',
     specId: '037',
     render: buildGlosarioContent,
   },
   {
     key: 'configuracion',
     label: 'Configuración',
-    icono: '⚙️',
+    icono: 'settings',
     specId: '019',
     render: buildConfiguracionContent,
   },
@@ -594,153 +605,162 @@ export function setAlertaCriticaHeader(
   }
 }
 
-function buildHeader(): HTMLElement {
+let campanaOnClick: (() => void) | null = null;
+
+/** El botón de campana del `TopBar` llama aquí — lo decide main.ts (ir a
+ * /inteligencia y/o resaltar el panel de señales), mismo patrón que
+ * `setAlertaCriticaHeader`. */
+export function setCampanaOnClick(onClick: () => void): void {
+  campanaOnClick = onClick;
+}
+
+let abrirMenuCb: (() => void) | null = null;
+let abrirSeccionSidebarCb: ((key: string) => void) | null = null;
+
+function marcaHtml(tamañoSimbolo: number): string {
+  return `
+    <span class="marca__simbolo" style="width:${tamañoSimbolo}px;height:${tamañoSimbolo}px;border-radius:${Math.round(tamañoSimbolo * 0.28)}px">${iconoSvg('scan-eye', Math.round(tamañoSimbolo * 0.57))}</span>
+    <span class="marca__texto">
+      <span class="marca__nombre">${escapeHtml(MARCA.nombre)}</span>
+      <span class="marca__descriptor">${escapeHtml(MARCA.descriptor)}</span>
+    </span>
+  `;
+}
+
+function buildTopBar(): HTMLElement {
   const header = document.createElement('header');
   header.id = 'app-header';
 
-  const logo = document.createElement('img');
-  logo.id = 'app-header__logo';
-  logo.src = '/assets/logo.png';
-  logo.alt = '';
-  logo.onerror = () => {
-    logo.style.visibility = 'hidden';
-  };
+  // ---- Izquierda: lockup · divisor · interruptor Mapa/Inteligencia · ciudad ----
+  const izquierda = document.createElement('div');
+  izquierda.id = 'app-header__izquierda';
 
-  const brand = document.createElement('div');
-  brand.id = 'app-header__brand';
+  const marca = document.createElement('a');
+  marca.id = 'app-header__marca';
+  marca.className = 'marca';
+  marca.href = '/';
+  marca.innerHTML = marcaHtml(26);
 
-  const name = document.createElement('span');
-  name.id = 'app-header__name';
-  name.textContent = MARCA.nombre;
-
-  const tagline = document.createElement('span');
-  tagline.id = 'app-header__tagline';
-  tagline.textContent = MARCA.descriptor;
-
-  brand.append(name, tagline);
+  const divider = document.createElement('span');
+  divider.id = 'app-header__divider';
 
   // spec 040 — nav de dos vistas (mapa operativo / hub de inteligencia),
   // routing por hash. `data-vista` en <html> (aplicado por initRouter) pinta
   // el enlace activo por CSS — este nav solo dispara la navegación.
-  const nav = document.createElement('nav');
+  const nav = document.createElement('div');
   nav.id = 'app-header__nav';
-  const enlaceVista = (vista: Vista, label: string): HTMLButtonElement => {
+  nav.className = 'mv2-segmented';
+  const enlacesVista: HTMLButtonElement[] = [];
+  const enlaceVista = (vista: Vista, label: string, icono: Parameters<typeof iconoSvg>[0]): HTMLButtonElement => {
     const btn = document.createElement('button');
     btn.type = 'button';
-    btn.className = 'app-header__nav-link';
+    btn.className = 'app-header__nav-link mv2-segmented__tab';
     btn.dataset.vista = vista;
-    btn.textContent = label;
+    btn.innerHTML = `${iconoSvg(icono, 14)}<span>${escapeHtml(label)}</span>`;
+    btn.classList.toggle('is-active', vistaActual() === vista);
     btn.setAttribute('aria-current', vistaActual() === vista ? 'page' : 'false');
     btn.addEventListener('click', () => irAVista(vista));
+    enlacesVista.push(btn);
     return btn;
   };
-  const linkMapa = enlaceVista('mapa', 'Mapa');
-  const linkInteligencia = enlaceVista('inteligencia', 'Inteligencia');
-  nav.append(linkMapa, linkInteligencia);
+  nav.append(enlaceVista('mapa', 'Mapa', 'map'), enlaceVista('inteligencia', 'Inteligencia', 'brain-circuit'));
   window.addEventListener('hashchange', () => {
     const actual = vistaActual();
-    linkMapa.setAttribute('aria-current', actual === 'mapa' ? 'page' : 'false');
-    linkInteligencia.setAttribute('aria-current', actual === 'inteligencia' ? 'page' : 'false');
+    for (const btn of enlacesVista) {
+      const activo = btn.dataset.vista === actual;
+      btn.classList.toggle('is-active', activo);
+      btn.setAttribute('aria-current', activo ? 'page' : 'false');
+    }
   });
 
-  const status = document.createElement('div');
-  status.id = 'app-header__status';
+  // Etiqueta de ciudad/distrito — ESTÁTICA a propósito (Mirall es
+  // mono-ciudad; un desplegable que no despliega nada sería una función
+  // falsa). Refleja el foco de distrito real si lo hay (spec 036).
+  const ciudad = document.createElement('span');
+  ciudad.id = 'app-header__ciudad';
+  const pintarCiudad = (): void => {
+    const foco = getFocoDistrito();
+    ciudad.innerHTML = `${iconoSvg('map-pin', 14)}<span>València${foco ? ` · ${escapeHtml(foco.nombre)}` : ''}</span>`;
+  };
+  pintarCiudad();
+  onCambioFoco(pintarCiudad);
+
+  izquierda.append(marca, divider, nav, ciudad);
+
+  // ---- Derecha: alerta crítica · en vivo · campana · ajustes ----
+  const derecha = document.createElement('div');
+  derecha.id = 'app-header__derecha';
 
   // Banner persistente de alerta oficial ROJA o NARANJA (petición explícita
   // del usuario, 2026-10-01): "debe ser una alerta permanente durante el
   // tiempo que dure el aviso... tiene que salir de alguna forma especial".
-  // Vive en la cabecera fija (visible en /mapa Y /inteligencia, a diferencia
-  // de la barra de KPIs que solo se ve en /mapa) para que sea imposible no
-  // verla mientras el aviso siga vigente — lo activa/desactiva main.ts vía
+  // El diseño del pendrive no contempla esta pieza — se mantiene porque es
+  // una función de seguridad real ya pedida explícitamente, no decorativa.
+  // Visible en /mapa Y /inteligencia; se activa/desactiva vía
   // `setAlertaCriticaHeader()` en cada refresco de insights, nunca un
-  // "cerrar y no volver a ver": desaparece sola cuando el aviso deja de
-  // estar en la lista de insights vigentes (spec 001 — ventana de 48h).
-  // Si hay rojo y naranja a la vez, gana el rojo (más severo).
+  // "cerrar y no volver a ver". Si hay rojo y naranja a la vez, gana el rojo.
   const alertaCritica = document.createElement('button');
   alertaCritica.type = 'button';
   alertaCritica.id = 'app-header__alerta-critica';
   alertaCritica.hidden = true;
   const alertaCriticaTexto = document.createElement('span');
   alertaCriticaTexto.id = 'app-header__alerta-critica-texto';
-  alertaCritica.appendChild(alertaCriticaTexto);
+  alertaCritica.append(iconoElementoInline('triangle-alert', 14), alertaCriticaTexto);
   alertaCritica.addEventListener('click', () => alertaCriticaOnClick?.());
   alertaCriticaBtnRef = alertaCritica;
   alertaCriticaTextoRef = alertaCriticaTexto;
 
+  // Pill "En vivo" — el detalle "N fuentes · hace N min" vive en el pie del
+  // SideMenu (coincide con el diseño, §7.12); aquí solo el color (verde/
+  // ámbar) refleja el rollup de frescura en tiempo real.
   const live = document.createElement('span');
   live.id = 'app-header__live';
+  live.className = 'mv2-pill';
   const dot = document.createElement('span');
   dot.id = 'app-header__status-dot';
   const liveLabel = document.createElement('span');
   liveLabel.id = 'app-header__live-label';
-  liveLabel.textContent = 'EN VIVO';
-  const frescura = document.createElement('span');
-  frescura.id = 'app-header__frescura';
-  live.append(dot, liveLabel, frescura);
-
-  // spec 034b — rollup de frescura: la cabecera resume el estado de todas las
-  // fuentes en un vistazo (verde/ámbar) sin tener que leer panel por panel.
+  liveLabel.textContent = 'En vivo';
+  live.append(dot, liveLabel);
   onCambioFrescura((r) => {
     live.dataset.frescura = r.estado;
-    if (r.estado === 'cargando') {
-      frescura.textContent = '';
-      live.title = 'Cargando datos…';
-      return;
-    }
-    const edadMin =
-      r.masReciente != null ? Math.max(0, Math.round((Date.now() - Date.parse(r.masReciente)) / 60000)) : null;
-    frescura.textContent =
-      r.conRetraso === 0
-        ? edadMin != null
-          ? `· ${r.total} fuentes · hace ${edadMin} min`
-          : `· ${r.total} fuentes`
-        : `· ${r.conRetraso}/${r.total} con retraso`;
     live.title =
-      r.conRetraso === 0
-        ? `${r.total} fuentes al día`
-        : `${r.alDia} al día · ${r.conRetraso} sirviendo datos no en vivo`;
+      r.estado === 'cargando'
+        ? 'Cargando datos…'
+        : r.conRetraso === 0
+          ? `${r.total} fuentes al día`
+          : `${r.alDia} al día · ${r.conRetraso} sirviendo datos no en vivo`;
   });
 
-  const divider = document.createElement('span');
-  divider.id = 'app-header__divider';
+  // Campana — el diseño asume notificaciones push (que no existen); se
+  // mapea a las recomendaciones de actuación activas (dato real), igual que
+  // ya hace el banner de alerta crítica con `irAPanelInsights`.
+  const campana = document.createElement('button');
+  campana.type = 'button';
+  campana.id = 'app-header__campana';
+  campana.className = 'mv2-btn mv2-btn--icon';
+  campana.setAttribute('aria-label', 'Ver alertas y recomendaciones');
+  campana.innerHTML = iconoSvg('bell', 18);
+  campana.addEventListener('click', () => campanaOnClick?.());
 
-  const datetime = document.createElement('div');
-  datetime.id = 'app-header__datetime';
-  const clock = document.createElement('span');
-  clock.id = 'app-header__clock';
-  const date = document.createElement('span');
-  date.id = 'app-header__date';
-  datetime.append(clock, date);
+  const ajustes = document.createElement('button');
+  ajustes.type = 'button';
+  ajustes.id = 'app-header__ajustes';
+  ajustes.className = 'mv2-btn mv2-btn--icon';
+  ajustes.setAttribute('aria-label', 'Configuración');
+  ajustes.innerHTML = iconoSvg('settings', 18);
+  ajustes.addEventListener('click', () => abrirSeccionSidebarCb?.('configuracion'));
 
-  status.append(alertaCritica, live, divider, datetime);
-  header.append(logo, brand, nav, status);
-
-  const capitalizar = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
-
-  const updateClock = () => {
-    const now = new Date();
-    // En móvil el reloj se compacta a HH:MM (spec 029 §3); la fecha completa
-    // se oculta por CSS.
-    clock.textContent = now.toLocaleTimeString('es-ES', {
-      hour: '2-digit',
-      minute: '2-digit',
-      ...(esMovil() ? {} : { second: '2-digit' }),
-      timeZone: 'Europe/Madrid',
-    });
-    date.textContent = capitalizar(
-      now.toLocaleDateString('es-ES', {
-        weekday: 'long',
-        day: '2-digit',
-        month: 'long',
-        year: 'numeric',
-        timeZone: 'Europe/Madrid',
-      }),
-    );
-  };
-  updateClock();
-  setInterval(updateClock, 1000);
+  derecha.append(alertaCritica, live, campana, ajustes);
+  header.append(izquierda, derecha);
 
   return header;
+}
+
+function iconoElementoInline(nombre: Parameters<typeof iconoSvg>[0], tamaño: number): HTMLSpanElement {
+  const span = document.createElement('span');
+  span.innerHTML = iconoSvg(nombre, tamaño);
+  return span;
 }
 
 function buildSidebarSection(def: SidebarSectionDefinition): { wrap: HTMLElement; cerrar: () => void } {
@@ -753,7 +773,7 @@ function buildSidebarSection(def: SidebarSectionDefinition): { wrap: HTMLElement
 
   const icon = document.createElement('span');
   icon.className = 'sidebar-section__icon';
-  icon.textContent = def.icono;
+  icon.innerHTML = iconoSvg(def.icono, 17);
 
   const label = document.createElement('span');
   label.className = 'sidebar-section__label';
@@ -777,6 +797,20 @@ function buildSidebarSection(def: SidebarSectionDefinition): { wrap: HTMLElement
   return { wrap, cerrar };
 }
 
+/** Fila "Mapa en directo"/"Inteligencia" del grupo VISTAS del SideMenu — solo
+ * visible expandido (el interruptor compacto del TopBar cubre lo mismo en
+ * NavRail). */
+function buildFilaVista(vista: Vista, label: string, icono: Parameters<typeof iconoSvg>[0]): HTMLButtonElement {
+  const btn = document.createElement('button');
+  btn.type = 'button';
+  btn.className = 'sidemenu__item';
+  btn.dataset.vista = vista;
+  btn.innerHTML = `${iconoSvg(icono, 17)}<span>${escapeHtml(label)}</span>`;
+  btn.classList.toggle('is-active', vistaActual() === vista);
+  btn.addEventListener('click', () => irAVista(vista));
+  return btn;
+}
+
 function buildSidebar(): void {
   const sidebar = document.createElement('aside');
   sidebar.id = 'app-sidebar';
@@ -786,11 +820,39 @@ function buildSidebar(): void {
   const expandedInicial = !esMovil() && localStorage.getItem(SIDEBAR_EXPANDED_KEY) === '1';
   if (expandedInicial) sidebar.classList.add('is-expanded');
 
-  const toggle = document.createElement('button');
-  toggle.id = 'app-sidebar__toggle';
-  toggle.type = 'button';
-  toggle.setAttribute('aria-label', 'Mostrar/ocultar barra lateral');
-  toggle.textContent = expandedInicial ? '⟨' : '☰';
+  // Cabecera del SideMenu (lockup + botón de plegar) — solo visible
+  // expandido; en el NavRail plegado no cabe el lockup (72px).
+  const cabecera = document.createElement('div');
+  cabecera.id = 'app-sidebar__cabecera';
+  const marcaMenu = document.createElement('div');
+  marcaMenu.className = 'marca';
+  marcaMenu.innerHTML = marcaHtml(36);
+  const plegar = document.createElement('button');
+  plegar.id = 'app-sidebar__toggle';
+  plegar.type = 'button';
+  plegar.setAttribute('aria-label', 'Plegar menú');
+  plegar.innerHTML = iconoSvg('panel-left-close', 18);
+  cabecera.append(marcaMenu, plegar);
+
+  // Botón que abre el menú desde el NavRail plegado — primer icono del
+  // rail (§7.11). Es el mismo toggle, solo cambia qué botón se ve según el
+  // estado (CSS, igual que ya ocultaba las etiquetas de texto).
+  const abrirDesdeRail = document.createElement('button');
+  abrirDesdeRail.id = 'app-sidebar__abrir-rail';
+  abrirDesdeRail.type = 'button';
+  abrirDesdeRail.setAttribute('aria-label', 'Abrir menú');
+  abrirDesdeRail.innerHTML = iconoSvg('menu', 19);
+
+  // Selector de ciudad — misma etiqueta estática que el TopBar, repetida
+  // aquí porque el diseño la pide también dentro del SideMenu (§7.12).
+  const ciudadMenu = document.createElement('div');
+  ciudadMenu.id = 'app-sidebar__ciudad';
+  const pintarCiudadMenu = (): void => {
+    const foco = getFocoDistrito();
+    ciudadMenu.innerHTML = `${iconoSvg('map-pin', 15)}<span>València${foco ? ` · ${escapeHtml(foco.nombre)}` : ''}</span>`;
+  };
+  pintarCiudadMenu();
+  onCambioFoco(pintarCiudadMenu);
 
   // Backdrop — solo se ve en móvil (CSS), cierra la hoja al tocar fuera.
   const backdrop = document.createElement('div');
@@ -802,15 +864,7 @@ function buildSidebar(): void {
   cerrar.id = 'app-sidebar__cerrar';
   cerrar.type = 'button';
   cerrar.setAttribute('aria-label', 'Cerrar');
-  cerrar.textContent = '✕';
-
-  // Botón flotante para abrir la hoja en móvil (vive fuera del sidebar para
-  // que el `transform` del panel no lo arrastre). Solo visible en móvil (CSS).
-  const fab = document.createElement('button');
-  fab.id = 'app-sidebar__fab';
-  fab.type = 'button';
-  fab.setAttribute('aria-label', 'Abrir menú');
-  fab.textContent = '☰';
+  cerrar.innerHTML = iconoSvg('x', 18);
 
   let focoPrevio: HTMLElement | null = null;
   // Bug real reportado por el usuario (2026-10-06): al cerrar el menú, una
@@ -822,8 +876,8 @@ function buildSidebar(): void {
   function setExpandido(expanded: boolean): void {
     if (!expanded) cerrarSecciones.forEach((cerrar) => cerrar());
     sidebar.classList.toggle('is-expanded', expanded);
-    toggle.textContent = expanded ? '⟨' : '☰';
-    toggle.setAttribute('aria-expanded', String(expanded));
+    plegar.setAttribute('aria-expanded', String(expanded));
+    abrirDesdeRail.setAttribute('aria-expanded', String(expanded));
     backdrop.hidden = !(expanded && esMovil());
     localStorage.setItem(SIDEBAR_EXPANDED_KEY, expanded ? '1' : '0');
 
@@ -880,10 +934,16 @@ function buildSidebar(): void {
     }
   }
 
-  toggle.addEventListener('click', () => setExpandido(!sidebar.classList.contains('is-expanded')));
-  fab.addEventListener('click', () => setExpandido(true));
+  plegar.addEventListener('click', () => setExpandido(false));
+  abrirDesdeRail.addEventListener('click', () => setExpandido(true));
   cerrar.addEventListener('click', () => setExpandido(false));
   backdrop.addEventListener('click', () => setExpandido(false));
+  abrirMenuCb = () => setExpandido(true);
+  abrirSeccionSidebarCb = (key) => {
+    setExpandido(true);
+    const fila = sidebar.querySelector<HTMLElement>(`[data-section-key="${key}"]`);
+    if (fila && !fila.classList.contains('is-open')) fila.click();
+  };
 
   // Swipe a la izquierda para cerrar la hoja (solo móvil).
   let xTouch = 0;
@@ -929,8 +989,30 @@ function buildSidebar(): void {
     }
   });
 
+  // Grupo VISTAS — Mapa/Inteligencia, solo visible expandido (el interruptor
+  // compacto del TopBar cubre lo mismo en NavRail/móvil).
+  const vistas = document.createElement('div');
+  vistas.id = 'app-sidebar__vistas';
+  vistas.className = 'sidemenu__grupo';
+  const vistasTitulo = document.createElement('div');
+  vistasTitulo.className = 'sidemenu__grupo-titulo';
+  vistasTitulo.textContent = 'VISTAS';
+  const filaMapa = buildFilaVista('mapa', 'Mapa en directo', 'map');
+  const filaInteligencia = buildFilaVista('inteligencia', 'Inteligencia', 'brain-circuit');
+  vistas.append(vistasTitulo, filaMapa, filaInteligencia);
+  window.addEventListener('hashchange', () => {
+    const actual = vistaActual();
+    filaMapa.classList.toggle('is-active', actual === 'mapa');
+    filaInteligencia.classList.toggle('is-active', actual === 'inteligencia');
+  });
+
+  const herramientasTitulo = document.createElement('div');
+  herramientasTitulo.className = 'sidemenu__grupo-titulo';
+  herramientasTitulo.textContent = 'HERRAMIENTAS';
+
   const sections = document.createElement('div');
   sections.id = 'app-sidebar__sections';
+  sections.prepend(herramientasTitulo);
   // "Gemelo digital" (simulador de cortes, spec 022) se oculta en la versión
   // pública — todavía no está terminado y puede confundir (petición explícita
   // del usuario, ver ADR-008). En master/interno se ve siempre.
@@ -945,6 +1027,43 @@ function buildSidebar(): void {
 
   const footer = document.createElement('div');
   footer.id = 'app-footer-attrib';
+
+  // "EN VIVO · N fuentes" + reloj — vivían en el TopBar legado; el diseño
+  // los pide en el pie del SideMenu (§7.12), así que se mudan aquí tal
+  // cual, sin perder nada (misma fuente de datos, `onCambioFrescura`).
+  const estadoPie = document.createElement('div');
+  estadoPie.id = 'app-sidebar__estado';
+  const estadoLive = document.createElement('span');
+  estadoLive.id = 'app-sidebar__estado-live';
+  estadoLive.innerHTML = `<span id="app-sidebar__estado-dot"></span><span id="app-sidebar__estado-texto"></span>`;
+  const estadoTexto = estadoLive.querySelector('#app-sidebar__estado-texto')!;
+  onCambioFrescura((r) => {
+    estadoLive.dataset.frescura = r.estado;
+    if (r.estado === 'cargando') {
+      estadoTexto.textContent = 'Cargando…';
+      return;
+    }
+    const edadMin =
+      r.masReciente != null ? Math.max(0, Math.round((Date.now() - Date.parse(r.masReciente)) / 60000)) : null;
+    estadoTexto.textContent =
+      r.conRetraso === 0
+        ? edadMin != null
+          ? `EN VIVO · ${r.total} fuentes · hace ${edadMin} min`
+          : `EN VIVO · ${r.total} fuentes`
+        : `${r.conRetraso}/${r.total} fuentes con retraso`;
+  });
+  const reloj = document.createElement('div');
+  reloj.id = 'app-sidebar__reloj';
+  const capitalizar = (s: string): string => s.charAt(0).toUpperCase() + s.slice(1);
+  const pintarReloj = (): void => {
+    const ahora = new Date();
+    reloj.textContent = capitalizar(
+      ahora.toLocaleDateString('es-ES', { weekday: 'long', day: '2-digit', month: 'short', timeZone: 'Europe/Madrid' }),
+    ) + ' · ' + ahora.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit', second: '2-digit', timeZone: 'Europe/Madrid' });
+  };
+  pintarReloj();
+  setInterval(pintarReloj, 1000);
+  estadoPie.append(estadoLive, reloj);
 
   // Sesión (spec 018) — solo se muestra si el gate de acceso está activo.
   // Si /api/auth/v1/estado no responde o no hay sesión (p.ej. `npm run dev`
@@ -1000,16 +1119,60 @@ function buildSidebar(): void {
   const attrib = document.createElement('div');
   attrib.id = 'app-footer-attrib__text';
   attrib.textContent = MARCA.pie;
-  footer.append(sesionBox, layoutBox, attrib);
+  footer.append(estadoPie, sesionBox, layoutBox, attrib);
 
-  sidebar.append(cerrar, toggle, sections, footer);
-  // Orden en el DOM: backdrop, sidebar, fab (el selector `~` del CSS que oculta
-  // el fab con la hoja abierta necesita que el fab vaya después del sidebar).
-  document.body.append(backdrop, sidebar, fab);
+  sidebar.append(cerrar, cabecera, abrirDesdeRail, ciudadMenu, vistas, sections, footer);
+  document.body.append(backdrop, sidebar);
 }
 
-/** Monta cabecera + sidebar. Llamar una vez, al inicio de main(). */
+/** Pestañas Mapa/Inteligencia/Más — solo visibles en móvil (CSS). "Más" abre
+ * el `SideMenu` como drawer, sustituyendo al FAB flotante legado. "Barrios"
+ * y "Capas" del diseño original no se incluyen todavía: son pantallas
+ * nuevas que no existen — llegan en la Fase 5 junto con sus pantallas, para
+ * no tener pestañas que no llevan a ningún sitio (ver spec 056 §2). */
+function buildTabBar(): HTMLElement {
+  const tabbar = document.createElement('nav');
+  tabbar.id = 'app-tabbar';
+  tabbar.setAttribute('aria-label', 'Navegación principal');
+
+  const pestañas: HTMLButtonElement[] = [];
+  const crearPestaña = (
+    label: string,
+    icono: Parameters<typeof iconoSvg>[0],
+    onClick: () => void,
+    vista?: Vista,
+  ): HTMLButtonElement => {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'app-tabbar__item';
+    if (vista) btn.dataset.vista = vista;
+    btn.innerHTML = `${iconoSvg(icono, 20)}<span>${escapeHtml(label)}</span>`;
+    btn.addEventListener('click', onClick);
+    pestañas.push(btn);
+    return btn;
+  };
+
+  const pintarActiva = (): void => {
+    const actual = vistaActual();
+    for (const btn of pestañas) {
+      btn.classList.toggle('is-active', btn.dataset.vista === actual);
+    }
+  };
+
+  tabbar.append(
+    crearPestaña('Mapa', 'map', () => irAVista('mapa'), 'mapa'),
+    crearPestaña('Inteligencia', 'brain-circuit', () => irAVista('inteligencia'), 'inteligencia'),
+    crearPestaña('Más', 'menu', () => abrirMenuCb?.()),
+  );
+  window.addEventListener('hashchange', pintarActiva);
+  pintarActiva();
+
+  return tabbar;
+}
+
+/** Monta TopBar + NavRail/SideMenu + TabBar. Llamar una vez, al inicio de main(). */
 export function mountChasis(): void {
-  document.body.appendChild(buildHeader());
+  document.body.appendChild(buildTopBar());
   buildSidebar();
+  document.body.appendChild(buildTabBar());
 }

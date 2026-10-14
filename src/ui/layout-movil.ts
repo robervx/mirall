@@ -2,16 +2,20 @@
 //
 // En móvil (`<html data-layout="movil">`, ver deteccion-dispositivo.ts):
 //   - `#info-panels` pasa a ser un bottom sheet arrastrable de 3 estados;
-//   - `#controls` (capas), `#media-panel`, `#tendencia-panel`, `#camaras-panel`,
-//     `#camaras-dgt-panel` (spec 043), `#agenda-panel`,
-//     `#actualidad-redes-panel` (spec 040), `#apoyo-decision-panel` (spec 041),
-//     `#altimetria-panel`/`#lluvia-viento-distrito-panel`/
-//     `#temperatura-zona-panel`/`#riesgo-escorrentia-panel` (spec 044, cuatro
-//     cajas separadas desde 2026-10-01), `#senales-ia-panel`/
+//   - `#controls` (capas), `#media-panel`, `#tendencia-panel`,
+//     `#camaras-acceso-panel` (specs 038+043, Ciudad+DGT fusionadas en
+//     pestañas, spec 056 Fase 4), `#agenda-panel`,
+//     `#actualidad-redes-panel` (spec 040),
+//     `#altimetria-panel`/`#meteorologia-zona-panel`/`#riesgo-escorrentia-panel`
+//     (spec 044; `#meteorologia-zona-panel` fusiona AVAMET + Open-Meteo
+//     distritos + SAIH, antes 2 cajas separadas, spec 056 Fase 4),
+//     `#senales-ia-panel`/
 //     `#recomendaciones-ia-panel` (spec 047, sustituye a `#sintesis-ia-panel`
 //     de spec 045), `#protocolos-panel` (spec 042), `#movilidad-avisos-panel`
 //     (spec 048) y `#zas-ruido-panel` (spec 049) se reparentan dentro del
-//     sheet para que todo quede en un único sitio con scroll —
+//     sheet para que todo quede en un único sitio con scroll, en el mismo
+//     orden de prioridad por filas que rige en escritorio vía `order`
+//     (spec 056 Fase 4 — ver el comentario de `IDS_REPARENTABLES` más abajo) —
 //     la vista activa (`:root[data-vista]`, ver `router.ts`) decide cuáles de
 //     ellos son visibles, independientemente de dónde vivan en el DOM;
 //   - al volver a escritorio se deshace todo (los paneles vuelven a <body>).
@@ -29,24 +33,28 @@ import {
 
 const CLAVE_ESTADO = 'mirall:bottomsheet-estado';
 const ALTURA_TIRADOR_PX = 44;
+// Orden de aparición en el bottom sheet — calcado del orden de prioridad por
+// filas que ya rige en escritorio vía `order` en estilos.css (spec 056 Fase
+// 4): fila 1 "Prioridad" > fila 2 "Clima y terreno" > fila 3 "Movilidad y
+// actividad" > fila 4 "Contexto" (todavía sin convertir del todo). En móvil
+// no hay flex `order` disponible (el sheet no usa ese layout), así que el
+// orden real es el de inserción en el DOM — debe mantenerse sincronizado a
+// mano con el bloque `order` de escritorio si ese vuelve a cambiar.
 const IDS_REPARENTABLES = [
   'controls',
-  'media-panel',
-  'tendencia-panel',
-  'camaras-panel',
-  'camaras-dgt-panel',
+  'recomendaciones-ia-panel',
+  'senales-ia-panel',
+  'meteorologia-zona-panel',
+  'altimetria-panel',
+  'riesgo-escorrentia-panel',
+  'camaras-acceso-panel',
+  'zas-ruido-panel',
   'agenda-panel',
   'actualidad-redes-panel',
-  'apoyo-decision-panel',
-  'altimetria-panel',
-  'lluvia-viento-distrito-panel',
-  'temperatura-zona-panel',
-  'riesgo-escorrentia-panel',
-  'senales-ia-panel',
-  'recomendaciones-ia-panel',
+  'media-panel',
   'protocolos-panel',
+  'tendencia-panel',
   'movilidad-avisos-panel',
-  'zas-ruido-panel',
 ] as const;
 
 let sheet: HTMLElement | null = null;

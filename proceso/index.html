@@ -9,25 +9,41 @@
       content="El proceso de construcción de Mirall: del boceto inicial al proceso spec-driven, fase a fase, con el límite ético/legal como parte del diseño desde el principio."
     />
 
-    <meta name="theme-color" content="#0b1f33" />
+    <meta name="theme-color" content="#0a0c0b" />
     <link rel="icon" type="image/png" href="/icons/favicon-32.png" />
     <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet" />
+    <!-- Ver index.html — tipografías de Mirall v2 (spec 056, Fase 2). -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
 
+    <link rel="stylesheet" href="/src/mirall-v2.css" />
     <link rel="stylesheet" href="/src/paginas-publicas.css" />
   </head>
   <body class="pagina-publica">
     <header class="nav-publica">
-      <a class="nav-publica__marca" href="/">Mirall</a>
+      <a class="marca" href="/">
+        <span class="marca__simbolo">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M3 7V5a2 2 0 0 1 2-2h2" /><path d="M17 3h2a2 2 0 0 1 2 2v2" /><path d="M21 17v2a2 2 0 0 1-2 2h-2" /><path d="M7 21H5a2 2 0 0 1-2-2v-2" /><circle cx="12" cy="12" r="1" /><path d="M18.944 12.33a1 1 0 0 0 0-.66 7.5 7.5 0 0 0-13.888 0 1 1 0 0 0 0 .66 7.5 7.5 0 0 0 13.888 0" />
+          </svg>
+        </span>
+        <span class="marca__texto">
+          <span class="marca__nombre">Mirall</span>
+          <span class="marca__descriptor">URBAN INTELLIGENCE PLATFORM</span>
+        </span>
+      </a>
       <nav class="nav-publica__enlaces">
         <a href="/#manifiesto">Manifiesto</a>
-        <a href="/#stack">Tecnología</a>
+        <a href="#tecnologia">Tecnología</a>
+        <a href="/proceso">Cómo se ha construido</a>
         <a href="/#contacto">Contacto</a>
-        <a class="btn btn--primario btn--pequeno" href="/mapa">Abrir el mapa</a>
       </nav>
+      <a class="mv2-btn mv2-btn--primary mv2-btn--nav nav-publica__cta" href="/mapa">Abrir el mapa</a>
     </header>
 
     <main>
@@ -41,6 +57,21 @@
           monitor global de código abierto, pero reducida a escala de ciudad: sin globo 3D, sin app de escritorio,
           sin multi-tenant — solo lo que hace falta para responder "¿qué está pasando en València ahora mismo?".
         </p>
+      </section>
+
+      <section id="tecnologia" class="seccion">
+        <h2>Construido con</h2>
+        <div class="stack__grid">
+          <div class="stack__item"><div class="stack__monograma">TS</div><div class="stack__nombre">TypeScript</div></div>
+          <div class="stack__item"><div class="stack__monograma">⚡</div><div class="stack__nombre">Vite</div></div>
+          <div class="stack__item"><div class="stack__monograma">GL</div><div class="stack__nombre">MapLibre GL</div></div>
+          <div class="stack__item"><div class="stack__monograma">DG</div><div class="stack__nombre">deck.gl</div></div>
+          <div class="stack__item"><div class="stack__monograma">3D</div><div class="stack__nombre">Three.js</div></div>
+          <div class="stack__item"><div class="stack__monograma">Rd</div><div class="stack__nombre">Redis (Upstash)</div></div>
+          <div class="stack__item"><div class="stack__monograma">Pg</div><div class="stack__nombre">Postgres (Neon)</div></div>
+          <div class="stack__item"><div class="stack__monograma">▲</div><div class="stack__nombre">Vercel</div></div>
+          <div class="stack__item"><div class="stack__monograma">OSM</div><div class="stack__nombre">OpenStreetMap</div></div>
+        </div>
       </section>
 
       <section class="seccion">
@@ -153,7 +184,7 @@
       </section>
     </main>
 
-    <footer class="pie-publico">
+    <footer class="pie-publico pie-publico--simple">
       <span>Proyecto de datos abiertos · sin relación con ningún organismo oficial</span>
       <span class="pie-publico__enlaces">
         <a href="https://github.com/robervx/mirall" target="_blank" rel="noopener">Código en GitHub</a>

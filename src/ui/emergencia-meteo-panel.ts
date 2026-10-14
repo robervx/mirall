@@ -1,17 +1,22 @@
-// Panel de emergencia meteorológica avanzada — spec 044, dentro de
-// /inteligencia (spec 040). Empezó como un único panel, se dividió en dos el
-// 2026-09-17 (altimetría aparte de lluvia/viento+pluviómetros) y de nuevo en
-// cuatro el 2026-10-01 (petición explícita del usuario: "sacar las
-// temperaturas por zona y el riesgo de acumulación de agua para que tengan
-// su propia área") — cada caja tira de su propio endpoint y hace su propio
-// polling, nunca comparten estado entre sí:
+// Fila 2 "Clima y terreno" de /inteligencia — spec 044/046, rediseñada a
+// DataCard (spec 056 Fase 4, §8.5). Cada caja tira de su propio endpoint y
+// hace su propio polling, nunca comparten estado entre sí:
 //   1. Altimetría (estática, IGN) — `montarAltimetriaPanel`.
-//   2. Lluvia/viento por distrito (modelo Open-Meteo) + pluviómetros reales
-//      (SAIH Júcar, medido) — comparten caja porque comparten tema ("cuánta
-//      agua está cayendo ahora mismo") — `montarLluviaVientoDistritoPanel`.
-//   3. Temperatura y lluvia por zona, estaciones AVAMET reales —
-//      `montarTemperaturaZonaPanel`.
-//   4. Riesgo de acumulación de agua (spec 046) — `montarRiesgoEscorrentiaPanel`.
+//   2. Meteorología por zona — fusiona AVAMET (estaciones reales),
+//      Open-Meteo por distrito (modelo) y pluviómetros SAIH (reales) como
+//      pestañas de una misma tarjeta — `montarMeteorologiaZonaPanel`. El
+//      documento de diseño solo pide 2 pestañas (Estaciones reales |
+//      Distritos modelo); se añade una tercera ("Pluviómetros SAIH") en vez
+//      de meter los pluviómetros reales dentro de la pestaña "modelo" —
+//      etiquetarlos como modelo cuando son dato medido sería inexacto.
+//   3. Riesgo de acumulación de agua (spec 046) — `montarRiesgoEscorrentiaPanel`.
+//      El diseño pide un badge único "NIVEL ACTUAL: Bajo/Medio/Alto", pero el
+//      modelo real es deliberadamente un ranking ordinal sin bandas fijas
+//      (ver comentario de `renderRiesgoEscorrentia`, decisión ya tomada con
+//      el asesor de ciencia de datos, spec 046 §3: con 19 distritos, cortes
+//      fijos son arbitrarios y se confunden con niveles oficiales de
+//      Protección Civil/AEMET) — se adapta el bloque destacado a ese modelo
+//      real en vez de inventar una banda que la propia spec 046 rechazó.
 // "Capacidad de absorción" queda fuera — sin fuente oficial identificada, no
 // se inventa una heurística (§7, mismo criterio que EMT en spec 007 o Waze
 // en spec 015).
@@ -20,7 +25,8 @@ import type { LluviaVientoDistrito } from '../services/meteo-zona';
 import type { PluviometroSaih } from '../services/pluviometros-saih';
 import type { EstacionAvamet } from '../services/avamet-estaciones';
 import { ADVERTENCIA_RIESGO_ESCORRENTIA, type RiesgoEscorrentiaDistrito } from '../services/riesgo-escorrentia';
-import { escapeHtml, metaFrescura, startPolling } from './panel-utils';
+import { escapeHtml, metaFrescuraCorta, startPolling } from './panel-utils';
+import { iconoSvg } from './iconos';
 
 async function fetchAltimetria(): Promise<ResumenAltimetriaDistrito[]> {
   const res = await fetch('/api/emergencia/v1/altimetria');
@@ -53,107 +59,46 @@ async function fetchRiesgoEscorrentia(): Promise<{ distritos: RiesgoEscorrentiaD
   return (await res.json()) as { distritos: RiesgoEscorrentiaDistrito[]; fresh: boolean };
 }
 
+// ---------------------------------------------------------------------------
+// Caja 1 — Altimetría (estática, IGN) — §8.5.4
+// ---------------------------------------------------------------------------
+
 function renderAltimetria(distritos: ResumenAltimetriaDistrito[]): string {
-  if (distritos.length === 0) return '<div class="info-panel__desc">Sin datos de altimetría.</div>';
-  const max = Math.max(...distritos.map((d) => d.elevacionMediaM));
-  return distritos
+  if (distritos.length === 0) return '<div class="mv2-card__estado">Sin datos de altimetría.</div>';
+  const ordenado = [...distritos].sort((a, b) => b.elevacionMediaM - a.elevacionMediaM);
+  const max = Math.max(...ordenado.map((d) => d.elevacionMediaM));
+  return ordenado
     .map((d) => {
       const pct = max > 0 ? Math.round((d.elevacionMediaM / max) * 100) : 0;
+      const baja = d.elevacionMediaM < 8;
       return `
-        <div class="altimetria-fila">
-          <span class="altimetria-fila__nombre">${escapeHtml(d.distritoNombre)}</span>
-          <span class="altimetria-fila__barra"><span style="width:${pct}%"></span></span>
-          <span class="altimetria-fila__valor">${d.elevacionMediaM.toFixed(1)} m</span>
+        <div class="mv2-bar-row">
+          <span class="mv2-bar-row__label">${escapeHtml(d.distritoNombre)}</span>
+          <span class="mv2-bar-track"><span class="mv2-bar-fill${baja ? ' mv2-bar-fill--info' : ''}" style="right:${100 - pct}%"></span></span>
+          <span class="mv2-bar-row__valor mv2-tabular">${d.elevacionMediaM.toFixed(1)} m</span>
         </div>
       `;
     })
     .join('');
 }
 
-function renderMeteoZona(distritos: LluviaVientoDistrito[]): string {
-  if (distritos.length === 0) return '<div class="info-panel__desc">Sin datos de lluvia/viento por distrito.</div>';
-  const ordenado = [...distritos].sort((a, b) => b.precipitacionMm - a.precipitacionMm || b.rachaKmh - a.rachaKmh);
-  return ordenado
-    .map(
-      (d) => `
-        <div class="meteo-zona-fila">
-          <span class="meteo-zona-fila__nombre">${escapeHtml(d.distritoNombre)}</span>
-          <span class="meteo-zona-fila__dato">🌧 ${d.precipitacionMm.toFixed(1)} mm</span>
-          <span class="meteo-zona-fila__dato">💨 ${d.vientoKmh.toFixed(0)} km/h (ráfaga ${d.rachaKmh.toFixed(0)})</span>
-        </div>
-      `,
-    )
-    .join('');
-}
-
-function renderAvamet(estaciones: EstacionAvamet[]): string {
-  if (estaciones.length === 0) return '<div class="info-panel__desc">Sin estaciones AVAMET disponibles ahora mismo.</div>';
-  const ordenado = [...estaciones].sort((a, b) => b.temperaturaC - a.temperaturaC);
-  return ordenado
-    .map(
-      (e) => `
-        <div class="avamet-fila">
-          <span class="avamet-fila__nombre">${escapeHtml(e.nombre)}</span>
-          <span class="avamet-fila__dato">🌡 ${e.temperaturaC.toFixed(1)}°C</span>
-          <span class="avamet-fila__dato">💨 ${e.vientoKmh.toFixed(0)} km/h (${escapeHtml(e.vientoDireccion)})</span>
-          <span class="avamet-fila__dato">🌧 ${e.precipitacionDiaMm.toFixed(1)} mm/día</span>
-        </div>
-      `,
-    )
-    .join('');
-}
-
-function renderPluviometros(estaciones: PluviometroSaih[]): string {
-  if (estaciones.length === 0) return '<div class="info-panel__desc">Sin pluviómetros con dato cerca de Valencia ahora mismo.</div>';
-  return estaciones
-    .map(
-      (e) => `
-        <div class="pluviometro-fila">
-          <span class="pluviometro-fila__nombre">${escapeHtml(e.nombre)} <small>(${escapeHtml(e.poblacion)})</small></span>
-          <span class="pluviometro-fila__acumulados">1h: ${e.litrosM2_1h.toFixed(1)} · 4h: ${e.litrosM2_4h.toFixed(1)} · 12h: ${e.litrosM2_12h.toFixed(1)} · 24h: <strong>${e.litrosM2_24h.toFixed(1)}</strong> l/m²</span>
-        </div>
-      `,
-    )
-    .join('');
-}
-
-// Ranking ordinal (no bandas "alto/medio/bajo": con solo 19 distritos, cortes
-// fijos son arbitrarios y se confunden con niveles oficiales de Protección
-// Civil/AEMET — spec 046 §3). Solo lista distritos `activo` (lluvia por
-// encima del umbral); si ninguno lo está, el estado es "sin lluvia" — nunca
-// un índice en reposo que invite a leerse como "riesgo bajo pero presente".
-function renderRiesgoEscorrentia(distritos: RiesgoEscorrentiaDistrito[]): string {
-  if (distritos.length === 0) return '<div class="info-panel__desc">Sin datos de riesgo de escorrentía.</div>';
-  const activos = distritos.filter((d) => d.activo);
-  if (activos.length === 0) {
-    return '<div class="info-panel__desc">Sin lluvia registrada ahora mismo — el indicador solo se activa con lluvia en curso.</div>';
-  }
-  const ordenado = [...activos].sort((a, b) => b.indiceRelativo - a.indiceRelativo);
-  return ordenado
-    .map(
-      (d) => `
-        <div class="escorrentia-fila">
-          <span class="escorrentia-fila__nombre">${escapeHtml(d.distritoNombre)}</span>
-          <span class="escorrentia-fila__barra"><span style="width:${d.indiceRelativo}%"></span></span>
-          <span class="escorrentia-fila__valor">${d.indiceRelativo}</span>
-        </div>
-      `,
-    )
-    .join('');
-}
-
-// ---------------------------------------------------------------------------
-// Caja 1 — Altimetría (estática, IGN)
-// ---------------------------------------------------------------------------
-
 export function montarAltimetriaPanel(): void {
-  const root = document.createElement('div');
+  const root = document.createElement('section');
   root.id = 'altimetria-panel';
+  root.className = 'mv2-card';
+  root.dataset.vistaInteligenciaCard = '';
+  root.dataset.categoria = 'clima';
   root.hidden = true;
   root.innerHTML = `
-    <div class="media-panel__header">Altimetría por distrito</div>
-    <p class="cordon-intro">Más alto → más bajo. Dato estático (IGN) — no cambia con el tiempo, sirve para anticipar dónde se acumula el agua por gravedad.</p>
-    <div id="altimetria-list"></div>
+    <header class="mv2-card__header">
+      <span class="mv2-card__header-icon">${iconoSvg('mountain', 16)}</span>
+      <h3 class="mv2-card__title">Altimetría por distrito</h3>
+      <span class="mv2-card__meta">IGN · estático</span>
+    </header>
+    <div class="mv2-card__body">
+      <p class="mv2-body-s" style="color:var(--text-secondary);margin:0">De más alto a más bajo. Anticipa dónde se acumula el agua por gravedad.</p>
+      <div id="altimetria-list" style="display:flex;flex-direction:column;gap:8px"></div>
+    </div>
   `;
   document.body.appendChild(root);
   const list = root.querySelector('#altimetria-list')!;
@@ -163,120 +108,237 @@ export function montarAltimetriaPanel(): void {
       list.innerHTML = renderAltimetria(distritos);
     })
     .catch((err: unknown) => {
-      list.textContent = 'Altimetría no disponible';
+      list.innerHTML = `<p class="mv2-card__estado--error">${iconoSvg('triangle-alert', 16)}<span>Altimetría no disponible.</span></p>`;
       console.error('Fallo al cargar altimetría:', err);
     });
 }
 
 // ---------------------------------------------------------------------------
-// Cajas 2-5 — antes vivían juntas en #meteo-zona-panel (una sola caja con 4
-// bloques internos). Separadas en cajas propias a petición explícita del
-// usuario (2026-10-01): "sacar las temperaturas por zona y el riesgo de
-// acumulación de agua para que tengan su propia área" — mismo criterio que
-// ya se aplicó una vez a altimetría (ver cabecera del fichero, 2026-09-17).
-// Lluvia/viento por distrito y pluviómetros comparten tema ("cuánta agua
-// cae ahora") y se mantienen juntos; temperatura (AVAMET) y riesgo de
-// escorrentía pasan a caja propia cada una.
+// Caja 2 — Meteorología por zona (AVAMET real | Open-Meteo modelo |
+// pluviómetros SAIH reales), tres pestañas — §8.5.3
 // ---------------------------------------------------------------------------
 
-export function montarLluviaVientoDistritoPanel(): void {
-  const root = document.createElement('div');
-  root.id = 'lluvia-viento-distrito-panel';
-  root.hidden = true;
-  root.innerHTML = `
-    <div class="media-panel__header">Lluvia y viento por distrito</div>
-    <p class="cordon-intro">Por distrito es un modelo (Open-Meteo), no una estación real — los pluviómetros SAIH de abajo sí son dato medido.</p>
-    <div class="emergencia-meteo__bloque">
-      <div id="emergencia-meteo-zona-list"></div>
-      <div class="info-panel__meta" id="emergencia-meteo-zona-meta"></div>
-    </div>
-    <div class="emergencia-meteo__bloque">
-      <div class="emergencia-meteo__subtitulo">Pluviómetros reales cerca de Valencia (SAIH Júcar)</div>
-      <div id="emergencia-pluviometros-list"></div>
-      <div class="info-panel__meta" id="emergencia-pluviometros-meta"></div>
-    </div>
-  `;
-  document.body.appendChild(root);
-
-  const meteoZonaList = root.querySelector('#emergencia-meteo-zona-list')!;
-  const pluviometrosList = root.querySelector('#emergencia-pluviometros-list')!;
-
-  async function refrescarMeteoZona(): Promise<void> {
-    try {
-      const { distritos, fresh } = await fetchMeteoZona();
-      meteoZonaList.innerHTML = renderMeteoZona(distritos);
-      root.querySelector('#emergencia-meteo-zona-meta')!.innerHTML = metaFrescura('Open-Meteo (modelo)', new Date().toISOString(), fresh);
-    } catch (err) {
-      meteoZonaList.textContent = 'Lluvia/viento por distrito no disponible';
-      console.error('Fallo al cargar lluvia/viento por distrito:', err);
-    }
-  }
-
-  async function refrescarPluviometros(): Promise<void> {
-    try {
-      const { estaciones, fresh } = await fetchPluviometros();
-      pluviometrosList.innerHTML = renderPluviometros(estaciones);
-      root.querySelector('#emergencia-pluviometros-meta')!.innerHTML = metaFrescura('SAIH Júcar (medido)', new Date().toISOString(), fresh);
-    } catch (err) {
-      pluviometrosList.textContent = 'Pluviómetros no disponibles';
-      console.error('Fallo al cargar pluviómetros:', err);
-    }
-  }
-
-  startPolling(refrescarMeteoZona, 15 * 60 * 1000);
-  startPolling(refrescarPluviometros, 15 * 60 * 1000);
+function colorTemp(c: number): string {
+  return c >= 28.5 ? 'var(--warning)' : 'var(--text-primary)';
 }
 
-export function montarTemperaturaZonaPanel(): void {
-  const root = document.createElement('div');
-  root.id = 'temperatura-zona-panel';
+function renderAvametTabla(estaciones: EstacionAvamet[]): string {
+  if (estaciones.length === 0) return '<div class="mv2-card__estado">Sin estaciones AVAMET disponibles ahora mismo.</div>';
+  const max = Math.max(...estaciones.map((e) => e.temperaturaC), 1);
+  const ordenado = [...estaciones].sort((a, b) => b.temperaturaC - a.temperaturaC);
+  const filas = ordenado
+    .map((e) => {
+      const pct = Math.max(0, Math.min(100, Math.round((e.temperaturaC / max) * 100)));
+      return `
+        <tr>
+          <td class="meteo-zona-tabla__estacion">${escapeHtml(e.nombre)}</td>
+          <td class="meteo-zona-tabla__temp">
+            <span class="mv2-bar-track" style="width:56px"><span class="mv2-bar-fill" style="right:${100 - pct}%;background:${colorTemp(e.temperaturaC)}"></span></span>
+            <span class="mv2-tabular" style="color:${colorTemp(e.temperaturaC)}">${e.temperaturaC.toFixed(1)}°</span>
+          </td>
+          <td class="mv2-tabular meteo-zona-tabla__viento">${e.vientoKmh.toFixed(0)} ${escapeHtml(e.vientoDireccion)}</td>
+          <td class="mv2-tabular meteo-zona-tabla__lluvia">${e.precipitacionDiaMm.toFixed(1)}</td>
+        </tr>
+      `;
+    })
+    .join('');
+  return `
+    <table class="meteo-zona-tabla">
+      <thead><tr><th>ESTACIÓN</th><th>TEMP.</th><th>VIENTO</th><th>LLUVIA</th></tr></thead>
+      <tbody>${filas}</tbody>
+    </table>
+  `;
+}
+
+function renderMeteoZonaDistritos(distritos: LluviaVientoDistrito[]): string {
+  if (distritos.length === 0) return '<div class="mv2-card__estado">Sin datos de lluvia/viento por distrito.</div>';
+  const ordenado = [...distritos].sort((a, b) => b.precipitacionMm - a.precipitacionMm || b.rachaKmh - a.rachaKmh);
+  return `
+    <p class="mv2-body-s" style="color:var(--warning);margin:0 0 10px">Por distrito es un modelo (Open-Meteo), no una estación real.</p>
+    ${ordenado
+      .map(
+        (d) => `
+      <div class="mv2-row">
+        <span class="mv2-row__contenido">
+          <span class="mv2-row__cabecera"><span class="mv2-row__tipo" style="color:var(--text-secondary)">${escapeHtml(d.distritoNombre)}</span></span>
+          <span class="mv2-row__cuerpo mv2-tabular">${d.precipitacionMm.toFixed(1)} mm · ${d.vientoKmh.toFixed(0)} km/h (ráfaga ${d.rachaKmh.toFixed(0)})</span>
+        </span>
+      </div>`,
+      )
+      .join('')}
+  `;
+}
+
+function renderPluviometros(estaciones: PluviometroSaih[]): string {
+  if (estaciones.length === 0) return '<div class="mv2-card__estado">Sin pluviómetros con dato cerca de Valencia ahora mismo.</div>';
+  return estaciones
+    .map(
+      (e) => `
+      <div class="mv2-row">
+        <span class="mv2-row__contenido">
+          <span class="mv2-row__cabecera"><span class="mv2-row__tipo" style="color:var(--text-secondary)">${escapeHtml(e.nombre)} · ${escapeHtml(e.poblacion)}</span></span>
+          <span class="mv2-row__cuerpo mv2-tabular">1h: ${e.litrosM2_1h.toFixed(1)} · 4h: ${e.litrosM2_4h.toFixed(1)} · 12h: ${e.litrosM2_12h.toFixed(1)} · 24h: <strong>${e.litrosM2_24h.toFixed(1)}</strong> l/m²</span>
+        </span>
+      </div>`,
+    )
+    .join('');
+}
+
+export function montarMeteorologiaZonaPanel(): void {
+  const root = document.createElement('section');
+  root.id = 'meteorologia-zona-panel';
+  root.className = 'mv2-card';
+  root.dataset.vistaInteligenciaCard = '';
+  root.dataset.categoria = 'clima';
   root.hidden = true;
   root.innerHTML = `
-    <div class="media-panel__header">Temperatura y lluvia por zona — estaciones reales (AVAMET)</div>
-    <div id="emergencia-avamet-list"></div>
-    <div class="info-panel__meta" id="emergencia-avamet-meta"></div>
+    <header class="mv2-card__header">
+      <span class="mv2-card__header-icon">${iconoSvg('thermometer', 16)}</span>
+      <h3 class="mv2-card__title">Meteorología por zona</h3>
+      <span class="mv2-card__meta" id="meteorologia-zona-meta"></span>
+    </header>
+    <div class="mv2-segmented mv2-segmented--inset meteorologia-zona__tabs" role="tablist" style="margin:12px 18px 0">
+      <button type="button" class="mv2-segmented__tab is-active" role="tab" aria-selected="true" data-tab="avamet">Estaciones reales</button>
+      <button type="button" class="mv2-segmented__tab" role="tab" aria-selected="false" data-tab="distritos">Distritos (modelo)</button>
+      <button type="button" class="mv2-segmented__tab" role="tab" aria-selected="false" data-tab="saih">Pluviómetros (SAIH)</button>
+    </div>
+    <div class="mv2-card__body">
+      <div data-tabpanel="avamet" id="meteorologia-avamet-body"></div>
+      <div data-tabpanel="distritos" id="meteorologia-distritos-body" hidden></div>
+      <div data-tabpanel="saih" id="meteorologia-saih-body" hidden></div>
+    </div>
   `;
   document.body.appendChild(root);
-  const avametList = root.querySelector('#emergencia-avamet-list')!;
+
+  const tabs = Array.from(root.querySelectorAll<HTMLButtonElement>('.meteorologia-zona__tabs .mv2-segmented__tab'));
+  const paneles = Array.from(root.querySelectorAll<HTMLElement>('[data-tabpanel]'));
+  tabs.forEach((tab) => {
+    tab.addEventListener('click', () => {
+      tabs.forEach((t) => {
+        t.classList.toggle('is-active', t === tab);
+        t.setAttribute('aria-selected', String(t === tab));
+      });
+      paneles.forEach((p) => {
+        p.hidden = p.dataset.tabpanel !== tab.dataset.tab;
+      });
+    });
+  });
+
+  const meta = root.querySelector<HTMLElement>('#meteorologia-zona-meta')!;
+  const avametBody = root.querySelector<HTMLElement>('#meteorologia-avamet-body')!;
+  const distritosBody = root.querySelector<HTMLElement>('#meteorologia-distritos-body')!;
+  const saihBody = root.querySelector<HTMLElement>('#meteorologia-saih-body')!;
 
   async function refrescarAvamet(): Promise<void> {
     try {
       const { estaciones, fresh } = await fetchAvamet();
-      avametList.innerHTML = renderAvamet(estaciones);
-      root.querySelector('#emergencia-avamet-meta')!.innerHTML = metaFrescura('AVAMET (medido)', new Date().toISOString(), fresh);
+      avametBody.innerHTML = renderAvametTabla(estaciones);
+      meta.textContent = metaFrescuraCorta('AVAMET', new Date().toISOString());
+      meta.classList.toggle('mv2-card__meta--stale', !fresh);
     } catch (err) {
-      avametList.textContent = 'Estaciones AVAMET no disponibles';
+      avametBody.textContent = 'Estaciones AVAMET no disponibles';
       console.error('Fallo al cargar estaciones AVAMET:', err);
     }
   }
 
+  async function refrescarDistritos(): Promise<void> {
+    try {
+      const { distritos } = await fetchMeteoZona();
+      distritosBody.innerHTML = renderMeteoZonaDistritos(distritos);
+    } catch (err) {
+      distritosBody.textContent = 'Lluvia/viento por distrito no disponible';
+      console.error('Fallo al cargar lluvia/viento por distrito:', err);
+    }
+  }
+
+  async function refrescarSaih(): Promise<void> {
+    try {
+      const { estaciones } = await fetchPluviometros();
+      saihBody.innerHTML = renderPluviometros(estaciones);
+    } catch (err) {
+      saihBody.textContent = 'Pluviómetros no disponibles';
+      console.error('Fallo al cargar pluviómetros:', err);
+    }
+  }
+
   startPolling(refrescarAvamet, 15 * 60 * 1000);
+  startPolling(refrescarDistritos, 15 * 60 * 1000);
+  startPolling(refrescarSaih, 15 * 60 * 1000);
+}
+
+// ---------------------------------------------------------------------------
+// Caja 3 — Riesgo de acumulación de agua (spec 046) — §8.5.5
+// ---------------------------------------------------------------------------
+
+function renderRiesgoEscorrentia(distritos: RiesgoEscorrentiaDistrito[]): { nivelHtml: string; listaHtml: string } {
+  const activos = distritos.filter((d) => d.activo);
+  if (activos.length === 0) {
+    return {
+      nivelHtml: `
+        <span class="riesgo-escorrentia__etiqueta">NIVEL ACTUAL</span>
+        <span class="riesgo-escorrentia__valor riesgo-escorrentia__valor--ok">Sin lluvia activa</span>
+        <p class="mv2-body-s" style="color:var(--text-secondary);margin:8px 0 0">0,0 mm registrados en todas las estaciones. El indicador solo se activa con lluvia en curso.</p>
+      `,
+      listaHtml: '',
+    };
+  }
+  const ordenado = [...activos].sort((a, b) => b.indiceRelativo - a.indiceRelativo);
+  const max = ordenado[0]!.indiceRelativo;
+  const nivelHtml = `
+    <span class="riesgo-escorrentia__etiqueta">NIVEL ACTUAL</span>
+    <span class="riesgo-escorrentia__valor riesgo-escorrentia__valor--watch">${max}<span class="riesgo-escorrentia__sobre100">/100</span></span>
+    <p class="mv2-body-s" style="color:var(--text-secondary);margin:8px 0 0">Lluvia en curso — ranking relativo por distrito, no una banda fija (19 distritos no admiten cortes "bajo/medio/alto" sin ser arbitrarios).</p>
+  `;
+  const listaHtml = `
+    <p class="mv2-label-mono" style="color:var(--text-muted);margin:16px 0 8px">ZONAS MÁS EXPUESTAS AHORA</p>
+    ${ordenado
+      .slice(0, 6)
+      .map(
+        (d) => `
+      <div class="mv2-row">
+        <span class="mv2-row__punto" style="background:var(--warning);margin-top:7px"></span>
+        <span class="mv2-row__contenido">
+          <span class="mv2-row__cuerpo">${escapeHtml(d.distritoNombre)}</span>
+        </span>
+        <span class="mv2-tabular" style="color:var(--text-secondary);align-self:center">${d.indiceRelativo}</span>
+      </div>`,
+      )
+      .join('')}
+  `;
+  return { nivelHtml, listaHtml };
 }
 
 export function montarRiesgoEscorrentiaPanel(): void {
-  const root = document.createElement('div');
+  const root = document.createElement('section');
   root.id = 'riesgo-escorrentia-panel';
+  root.className = 'mv2-card';
+  root.dataset.vistaInteligenciaCard = '';
+  root.dataset.categoria = 'clima';
   root.hidden = true;
   root.innerHTML = `
-    <div class="media-panel__header">Riesgo de acumulación de agua (imbornales × lluvia) — spec 046</div>
-    <p class="cordon-intro">${escapeHtml(ADVERTENCIA_RIESGO_ESCORRENTIA)}</p>
-    <div id="emergencia-escorrentia-list"></div>
-    <div class="info-panel__meta" id="emergencia-escorrentia-meta"></div>
+    <header class="mv2-card__header">
+      <span class="mv2-card__header-icon">${iconoSvg('droplets', 16)}</span>
+      <h3 class="mv2-card__title">Riesgo de acumulación de agua</h3>
+      <span class="mv2-card__meta">spec 046</span>
+    </header>
+    <div class="mv2-card__body">
+      <div class="riesgo-escorrentia__bloque" id="riesgo-escorrentia-nivel"></div>
+      <div id="riesgo-escorrentia-lista"></div>
+      <p class="mv2-body-s" style="color:var(--text-muted);margin:12px 0 0">${escapeHtml(ADVERTENCIA_RIESGO_ESCORRENTIA)}</p>
+    </div>
   `;
   document.body.appendChild(root);
-  const escorrentiaList = root.querySelector('#emergencia-escorrentia-list')!;
+  const nivelEl = root.querySelector<HTMLElement>('#riesgo-escorrentia-nivel')!;
+  const listaEl = root.querySelector<HTMLElement>('#riesgo-escorrentia-lista')!;
 
   async function refrescarEscorrentia(): Promise<void> {
     try {
-      const { distritos, fresh } = await fetchRiesgoEscorrentia();
-      escorrentiaList.innerHTML = renderRiesgoEscorrentia(distritos);
-      root.querySelector('#emergencia-escorrentia-meta')!.innerHTML = metaFrescura(
-        'Geoportal (imbornales) + Open-Meteo (lluvia)',
-        new Date().toISOString(),
-        fresh,
-      );
+      const { distritos } = await fetchRiesgoEscorrentia();
+      const { nivelHtml, listaHtml } = renderRiesgoEscorrentia(distritos);
+      nivelEl.innerHTML = nivelHtml;
+      listaEl.innerHTML = listaHtml;
     } catch (err) {
-      escorrentiaList.textContent = 'Riesgo de acumulación de agua no disponible';
+      nivelEl.innerHTML = `<p class="mv2-card__estado--error">${iconoSvg('triangle-alert', 16)}<span>Riesgo de acumulación de agua no disponible.</span></p>`;
       console.error('Fallo al cargar riesgo de escorrentía:', err);
     }
   }
