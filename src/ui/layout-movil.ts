@@ -36,10 +36,12 @@ const ALTURA_TIRADOR_PX = 44;
 // Orden de aparición en el bottom sheet — calcado del orden de prioridad por
 // filas que ya rige en escritorio vía `order` en estilos.css (spec 056 Fase
 // 4): fila 1 "Prioridad" > fila 2 "Clima y terreno" > fila 3 "Movilidad y
-// actividad" > fila 4 "Contexto" (todavía sin convertir del todo). En móvil
-// no hay flex `order` disponible (el sheet no usa ese layout), así que el
-// orden real es el de inserción en el DOM — debe mantenerse sincronizado a
-// mano con el bloque `order` de escritorio si ese vuelve a cambiar.
+// actividad" > fila 4 "Contexto". En móvil no hay flex `order` disponible (el
+// sheet no usa ese layout), así que el orden real es el de inserción en el
+// DOM — debe mantenerse sincronizado a mano con el bloque `order` de
+// escritorio si ese vuelve a cambiar. `movilidad-avisos-panel` queda fuera de
+// las 4 filas del documento de diseño (no aparece en su tabla 8.5), se deja
+// al final sin asignarle fila.
 const IDS_REPARENTABLES = [
   'controls',
   'recomendaciones-ia-panel',
@@ -52,8 +54,8 @@ const IDS_REPARENTABLES = [
   'agenda-panel',
   'actualidad-redes-panel',
   'media-panel',
-  'protocolos-panel',
   'tendencia-panel',
+  'protocolos-panel',
   'movilidad-avisos-panel',
 ] as const;
 

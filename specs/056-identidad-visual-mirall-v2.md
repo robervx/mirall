@@ -7,7 +7,7 @@ estado: Draft
 tipo: fundacional
 depende_de: [019, 040, 053]
 propietario: usuario
-version: 7
+version: 8
 ```
 
 ## 1. Problema / motivación
@@ -44,7 +44,7 @@ proyecto) — no specs nuevas por cada pantalla repintada.
 | **2** | Landing pública (nav, hero recolor lima/oscuro, comparación "Dos modelos de ciudad", métricas, footer, menú móvil) | `053` | **Implemented** |
 | **3a** | Chasis de la app (`TopBar`/`NavRail`/`SideMenu`/`TabBar`) sustituyendo cabecera+sidebar actuales. El mapa en sí (estilo, capas, leyendas, controles de zoom) no se toca | `019`, `029` | **Implemented** |
 | **3b** | Estilo oscuro del mapa (MapLibre, mismo proveedor OpenFreeMap — solo cambia el *style* de pintado); panel de capas, barra de cifras, tooltips y controles de zoom recoloreados | `000`, `026`, `033`, `034`, `036`, `055` | **Implemented** |
-| **4** | Vista Inteligencia — rejilla de 12 tipos de tarjeta con el `DataCard` de la Fase 1 + estados (cargando/vacío/error/desactualizado). Se hace fila por fila (§8.5): **filas 1 "Prioridad", 2 "Clima y terreno" y 3 "Movilidad y actividad" implementadas**; fila 4 "Contexto" (4 tarjetas más) pendiente | `047` (fila 1), `044`/`046` (fila 2), `038`/`043`/`049`/`027` (fila 3); resto de specs de paneles de `/inteligencia`, una a una | **En curso** |
+| **4** | Vista Inteligencia — rejilla de 12 tipos de tarjeta con el `DataCard` de la Fase 1 + estados (cargando/vacío/error/desactualizado). Se hace fila por fila (§8.5): **las 4 filas implementadas** — Prioridad, Clima y terreno, Movilidad y actividad, Contexto | `047` (fila 1), `044`/`046` (fila 2), `038`/`043`/`049`/`027` (fila 3), `009`/`025`/`039`/`042` (fila 4) | **Implemented** |
 | **5** | Configuración de ciudad + pantallas móviles nuevas "Barrios"/"Capas" (funcionalidad nueva, no solo reskin) + pase de accesibilidad WCAG 2.2 AA transversal | `019` (Configuración) + spec nueva para Barrios/Capas | Planned |
 
 ## 3. Tokens de diseño (contrato — Fase 1)
@@ -304,6 +304,43 @@ una vez — mismo criterio que partió la Fase 3. Esta sesión cierra la fila 1,
       — y en móvil (viewport 375×812): las 3 tarjetas se reparentan al bottom sheet en el orden correcto de
       prioridad junto con el resto de filas 1-2.
 
+## 6.7 Criterios de aceptación — Fase 4, fila 4 "Contexto" (última fila)
+
+- [x] "Actualidad institucional" (`src/ui/actualidad-redes.ts`, sin cambios internos) envuelta en `DataCard`
+      (`#actualidad-redes-panel`, spec `039`) — meta "{N} cuentas" en la cabecera, contenido (fichas en
+      acordeón, carga diferida de los SDK de Facebook/X) intacto.
+- [x] "Contexto mediático" (`buildMediaPanel`/`renderMediaticoPanel`, spec `009`) rediseñada: meta corta
+      (`metaFrescuraCorta`) en la cabecera, "próxima actualización"/fuentes fallidas movidas a un pie opcional
+      (`.mv2-card__fuente`, solo se muestra si hay algo que decir) para no desbordar la cabecera.
+- [x] "Términos en tendencia" (`buildTendenciaPanel`/`renderTendenciaPanel`, spec `025`) rediseñada — **el
+      documento pide un selector de 3 rangos ("Última hora / Hoy / 7 días"), pero `VentanaTiempo` (spec 025)
+      solo calcula 2 ventanas reales** (`hora`/`dia`); se mantiene el selector real de 2 opciones en vez de
+      ofrecer una ventana de 7 días que el servicio no soporta, documentado en el propio código.
+- [x] "Protocolos de actuación" (`src/ui/protocolos-panel.ts`, spec `042`) rediseñada — **el documento pide una
+      pill de estado por protocolo (Activo/Vigilancia/En reposo), pero `ProtocoloActuacion` no modela ningún
+      estado**: es contenido de referencia estático versionado en el repo, no un protocolo con seguimiento en
+      vivo que alguien active/desactive desde la app. Inventar la pill fingiría una monitorización que no
+      existe — se omite; la fecha de "última revisión" (ya presente desde spec 042) sigue siendo la señal real
+      de vigencia del contenido.
+- [x] Las 4 tarjetas comparten flex-basis igual (`flex: 1 1 320px`, `max-height: 70vh`) — "4 iguales" según el
+      documento §8.5. Orden de fila 4 en escritorio y en el bottom sheet móvil: Actualidad institucional →
+      Contexto mediático → Términos en tendencia → Protocolos de actuación, igual que el documento.
+- [x] Bloques CSS muertos retirados: posicionamiento absoluto heredado de `#media-panel`/`#tendencia-panel`
+      (cuando flotaban sobre `/mapa`, antes de spec 040) y el grupo de tarjeta clara de serie que compartían
+      `#actualidad-redes-panel`/`#protocolos-panel`. `.media-panel__*` (item/chip/grupo-título) y
+      `.red-entidad*`/`.protocolo*` restyleados a los tokens oscuros de Mirall v2 — se mantienen esas clases
+      (no se duplican como `.agenda-item*` en la fila 3) porque `#movilidad-avisos-panel` (spec 048, fuera de
+      la tabla 8.5 del documento, no asignada a ninguna fila) las sigue usando sin wrapper `.mv2-card`.
+- [x] `npm run typecheck`, `npm run build` y `npm run test` (525/525) verdes.
+- [x] Verificado en navegador (`npm run dev`, `/mapa`, pestaña "Inteligencia") en escritorio: las 4 tarjetas
+      con datos/contenido reales — Actualidad institucional con las 13 fichas de entidad, Contexto mediático
+      con titulares agrupados por distrito, Términos en tendencia con el selector hora/día funcionando,
+      Protocolos con el acordeón "Lluvias intensas" — y en móvil (viewport 375×812): las 4 se reparentan al
+      bottom sheet en el orden correcto, detrás de las filas 1-3.
+- [x] Con esta fila, **Fase 4 completa** (las 4 filas de la rejilla de Inteligencia implementadas). Queda la
+      Fase 5 (Configuración de ciudad + pantallas móviles nuevas "Barrios"/"Capas" + pase de accesibilidad
+      WCAG 2.2 AA) para que la spec 056 pase a `Implemented` por completo.
+
 ## 7. Riesgos
 
 - Verificación visual en este entorno ya documentada como punto débil en otras specs (bug de render
@@ -331,3 +368,4 @@ expulsara a mano, lo que bloqueaba la copia hasta volver a montarlo. Ya no depen
 | 5 | 2026-10-09 | Fase 4, fila 1 "Prioridad" implementada — ver §6.4. Cabecera de página nueva + Recomendaciones de actuación (con Apoyo a decisión fusionado como pestaña) + Señales, como `DataCard`. Bug real corregido en el componente base de la Fase 1 (`.mv2-card__meta` no se encogía). Quedan las filas 2-4 (10 tarjetas más) |
 | 6 | 2026-10-09 | Fase 4, fila 2 "Clima y terreno" implementada — ver §6.5. Meteorología por zona (AVAMET + Open-Meteo + SAIH fusionados, 3 pestañas) + Altimetría (ordenada, tinte azul <8m) + Riesgo de acumulación de agua, como `DataCard`. El badge de nivel único del documento se adapta al ranking ordinal real (spec 046 §3 ya había rechazado las bandas fijas). Quedan las filas 3-4 (7 tarjetas más) |
 | 7 | 2026-10-09 | Fase 4, fila 3 "Movilidad y actividad" implementada — ver §6.6. Cámaras en vías de acceso (DGT+Ciudad fusionadas en pestañas, specs 038+043) + Ruido en Russafa ZAS (barras con umbral, spec 049) + Agenda de eventos (spec 027), como `DataCard`. Bug real corregido fuera de estas 3 tarjetas: el orden del bottom sheet móvil no seguía la prioridad por filas de escritorio — ahora sí, para las filas 1-3. Queda la fila 4 "Contexto" (4 tarjetas más) |
+| 8 | 2026-10-14 | Fase 4, fila 4 "Contexto" implementada — ver §6.7. Actualidad institucional (spec 039) + Contexto mediático (spec 009) + Términos en tendencia (spec 025, selector real de 2 ventanas en vez de las 3 del documento) + Protocolos de actuación (spec 042, sin pill de estado inventada), como `DataCard`. **Fase 4 completa** (las 4 filas de Inteligencia). Queda la Fase 5 (Configuración de ciudad, pantallas móviles nuevas, accesibilidad) |

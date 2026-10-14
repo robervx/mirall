@@ -86,6 +86,7 @@ import { cargarGrafoViario } from './services/grafo-viario-cliente';
 import { montarCamarasAccesoPanel } from './ui/camaras-panel';
 import { montarMeteoActualPanel, montarPrediccionPanel } from './ui/meteo-panel';
 import { buildActualidadRedesContent } from './ui/actualidad-redes';
+import { ENTIDADES_REDES } from './config/entidades-redes';
 import { montarInteligenciaCabecera } from './ui/inteligencia-cabecera';
 import { initRouter, irAVista } from './ui/router';
 import { montarAltimetriaPanel, montarMeteorologiaZonaPanel, montarRiesgoEscorrentiaPanel } from './ui/emergencia-meteo-panel';
@@ -1409,11 +1410,20 @@ interface MediaPanel {
 function buildMediaPanel(): MediaPanel {
   const root = document.createElement('div');
   root.id = 'media-panel';
+  root.className = 'mv2-card';
+  root.dataset.vistaInteligenciaCard = '';
+  root.dataset.categoria = 'institucional';
   root.hidden = true;
   root.innerHTML = `
-    <div class="media-panel__header">Contexto mediático</div>
-    <div class="media-panel__list" id="media-panel-list"></div>
-    <div class="info-panel__meta" id="media-panel-meta"></div>
+    <header class="mv2-card__header">
+      <span class="mv2-card__header-icon">${iconoSvg('newspaper', 16)}</span>
+      <h3 class="mv2-card__title">Contexto mediático</h3>
+      <span class="mv2-card__meta" id="media-panel-meta"></span>
+    </header>
+    <div class="mv2-card__body">
+      <div class="media-panel__list" id="media-panel-list"></div>
+      <p class="mv2-card__fuente" id="media-panel-pie" hidden></p>
+    </div>
   `;
   document.body.appendChild(root);
   return { root, list: root.querySelector('#media-panel-list')! };
@@ -1517,12 +1527,18 @@ function renderMediaticoPanel(
     : '<div class="tendencia-panel__insuficiente">Sin titulares de la ciudad de València ahora mismo.</div>';
   panel.list.innerHTML = (foco ? `<div class="media-panel__foco">Foco: ${foco.nombre}</div>` : '') + (partes.join('') || vacio);
 
-  const meta = panel.root.querySelector('#media-panel-meta')!;
   const fetchedAt = items[0]?.fetchedAt ?? new Date().toISOString();
+  const meta = panel.root.querySelector('#media-panel-meta')!;
+  meta.className = `mv2-card__meta${fresh ? '' : ' mv2-card__meta--stale'}`;
+  meta.innerHTML = metaFrescuraCorta('Prensa local', fetchedAt);
+
   const minutosParaProxima = Math.round((TTL_MEDIATICO_MS - (Date.now() - new Date(fetchedAt).getTime())) / 60000);
-  const proxima = fresh && minutosParaProxima > 0 ? ` · próxima actualización en ~${minutosParaProxima} min` : '';
-  const avisoFallidas = fuentesFallidas.length > 0 ? ` · sin ${fuentesFallidas.join(', ')}` : '';
-  meta.innerHTML = metaFrescura('Prensa local', fetchedAt, fresh) + proxima + avisoFallidas;
+  const proxima = fresh && minutosParaProxima > 0 ? `próxima actualización en ~${minutosParaProxima} min` : '';
+  const avisoFallidas = fuentesFallidas.length > 0 ? `sin ${fuentesFallidas.join(', ')}` : '';
+  const pie = panel.root.querySelector<HTMLElement>('#media-panel-pie')!;
+  const pieTexto = [proxima, avisoFallidas].filter(Boolean).join(' · ');
+  pie.hidden = pieTexto === '';
+  pie.textContent = pieTexto;
 }
 
 async function fetchItemsMediaticosActual(): Promise<{
@@ -1539,20 +1555,31 @@ async function fetchItemsMediaticosActual(): Promise<{
 // representativo; por debajo se avisa en vez de fingir precisión (§6 DoD).
 const MINIMO_ITEMS_TENDENCIA = 5;
 
+// DataCard rediseñada — spec 056 Fase 4, fila 4 "Contexto", §8.5.11. El
+// documento pide un selector de 3 rangos ("Última hora / Hoy / 7 días"), pero
+// `VentanaTiempo` (spec 025) solo calcula 2 ventanas reales (`hora`/`dia`) —
+// se mantiene el selector real de 2 opciones en vez de ofrecer un rango de 7
+// días que el servicio no soporta.
 function buildTendenciaPanel(): { root: HTMLDivElement; list: HTMLDivElement; ventanaSelect: HTMLSelectElement } {
   const root = document.createElement('div');
   root.id = 'tendencia-panel';
+  root.className = 'mv2-card';
+  root.dataset.vistaInteligenciaCard = '';
+  root.dataset.categoria = 'institucional';
   root.hidden = true;
   root.innerHTML = `
-    <div class="media-panel__header">
-      Términos en tendencia
+    <header class="mv2-card__header">
+      <span class="mv2-card__header-icon">${iconoSvg('trending-up', 16)}</span>
+      <h3 class="mv2-card__title">Términos en tendencia</h3>
       <select id="tendencia-ventana-select" class="tendencia-panel__select">
         <option value="hora">Última hora</option>
         <option value="dia">Último día</option>
       </select>
+    </header>
+    <div class="mv2-card__body">
+      <div class="media-panel__list" id="tendencia-panel-list"></div>
+      <p class="mv2-card__fuente" id="tendencia-panel-meta"></p>
     </div>
-    <div class="media-panel__list" id="tendencia-panel-list"></div>
-    <div class="info-panel__meta" id="tendencia-panel-meta"></div>
   `;
   document.body.appendChild(root);
   return {
@@ -1590,7 +1617,7 @@ function renderTendenciaPanel(
   }
 
   const meta = panel.root.querySelector('#tendencia-panel-meta')!;
-  meta.innerHTML = `${metaFrescura('Mirall (tendencia)', ventana.fetchedAt, fresh)} · ${ventana.totalItems} ítems considerados`;
+  meta.innerHTML = `${metaFrescuraCorta('Mirall (tendencia)', ventana.fetchedAt)}${fresh ? '' : ' · <span class="info-panel__stale" title="No se pudo refrescar, mostrando el último dato bueno">⚠ no actualizado</span>'} · ${ventana.totalItems} ítems considerados`;
 }
 
 // spec 027 — agenda general de eventos culturales, vía scraping resiliente de
@@ -3630,10 +3657,21 @@ async function main(): Promise<void> {
   // spec 040 — "Actualidad institucional" (039) se muda del sidebar a un panel
   // propio de /inteligencia; `buildActualidadRedesContent()` es exactamente el
   // mismo contenido que ya usaba el sidebar (sin reescribir su lógica interna).
+  // DataCard rediseñada en spec 056 Fase 4, fila 4, §8.5.9.
   const actualidadRedesPanel = document.createElement('div');
   actualidadRedesPanel.id = 'actualidad-redes-panel';
-  actualidadRedesPanel.innerHTML = '<div class="media-panel__header">Actualidad institucional</div>';
-  actualidadRedesPanel.appendChild(buildActualidadRedesContent());
+  actualidadRedesPanel.className = 'mv2-card';
+  actualidadRedesPanel.dataset.vistaInteligenciaCard = '';
+  actualidadRedesPanel.dataset.categoria = 'institucional';
+  actualidadRedesPanel.innerHTML = `
+    <header class="mv2-card__header">
+      <span class="mv2-card__header-icon">${iconoSvg('landmark', 16)}</span>
+      <h3 class="mv2-card__title">Actualidad institucional</h3>
+      <span class="mv2-card__meta">${ENTIDADES_REDES.length} cuentas</span>
+    </header>
+    <div class="mv2-card__body"></div>
+  `;
+  actualidadRedesPanel.querySelector('.mv2-card__body')!.appendChild(buildActualidadRedesContent());
   document.body.appendChild(actualidadRedesPanel);
 
   // spec 056 Fase 4 — cabecera de página de /inteligencia (eyebrow, título,

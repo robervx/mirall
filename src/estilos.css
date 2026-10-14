@@ -606,16 +606,17 @@
         vertical-align: middle;
       }
 
-      /* Actualidad institucional en redes — spec 039 */
+      /* Actualidad institucional en redes — spec 039. DataCard rediseñada en
+         spec 056 Fase 4, fila 4, §8.5.9 (mismo contenido que ya usaba el
+         sidebar antes de spec 040, solo tokens nuevos). */
       .red-entidad-selector {
-        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        border-bottom: 1px solid var(--border);
         margin-bottom: 4px;
       }
 
       .red-entidad-selector__titulo {
-        font-size: 12px;
-        font-weight: 600;
-        color: #dbe6f0;
+        font: 600 12px / 1.3 var(--mv2-font-body);
+        color: var(--text-primary);
         padding: 8px 0;
         cursor: pointer;
         list-style: none;
@@ -629,7 +630,7 @@
         content: '▸';
         display: inline-block;
         width: 1em;
-        color: #7d90a6;
+        color: var(--text-muted);
       }
 
       .red-entidad-selector[open] .red-entidad-selector__titulo::before {
@@ -639,16 +640,16 @@
       .red-entidad-selector .sidebar-panel-checkbox {
         padding-left: 1em;
         padding-bottom: 8px;
+        color: var(--text-secondary);
       }
 
       .red-entidad {
-        border-top: 1px solid rgba(255, 255, 255, 0.08);
+        border-top: 1px solid var(--border);
       }
 
       .red-entidad__titulo {
-        font-size: 12px;
-        font-weight: 600;
-        color: #dbe6f0;
+        font: 600 12px / 1.3 var(--mv2-font-body);
+        color: var(--text-primary);
         padding: 8px 0;
         cursor: pointer;
         list-style: none;
@@ -662,7 +663,7 @@
         content: '▸';
         display: inline-block;
         width: 1em;
-        color: #7d90a6;
+        color: var(--text-muted);
       }
 
       .red-entidad[open] .red-entidad__titulo::before {
@@ -680,21 +681,21 @@
         min-height: 60px;
         max-width: 100%;
         overflow: hidden;
-        border-radius: 4px;
+        border-radius: var(--mv2-radius-md);
       }
 
       .red-entidad__fallback {
         display: block;
         font-size: 12px;
         padding: 8px 10px;
-        border-radius: 4px;
-        background: rgba(255, 255, 255, 0.08);
-        color: #8bb8e8;
+        border-radius: var(--mv2-radius-md);
+        background: var(--surface-2);
+        color: var(--info);
         text-decoration: none;
       }
 
       .red-entidad__fallback:hover {
-        background: rgba(255, 255, 255, 0.14);
+        background: var(--border);
       }
 
       .proximidad-boton {
@@ -1813,48 +1814,6 @@
         margin-top: 2px;
       }
 
-      #media-panel {
-        position: absolute;
-        top: calc(var(--header-h) + 12px);
-        right: 60px;
-        z-index: 1;
-        width: 300px;
-        max-height: 70vh;
-        display: flex;
-        flex-direction: column;
-        background: rgba(255, 255, 255, 0.97);
-        border-radius: 6px;
-        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
-        font-size: 14px;
-        overflow: hidden;
-      }
-
-      #media-panel[hidden] {
-        display: none;
-      }
-
-      /* Spec 025 — panel "pequeño junto al de contexto mediático" (§5), a su
-         izquierda, mismo estilo visual que #media-panel. */
-      #tendencia-panel {
-        position: absolute;
-        top: calc(var(--header-h) + 12px);
-        right: 372px;
-        z-index: 1;
-        width: 240px;
-        max-height: 70vh;
-        display: flex;
-        flex-direction: column;
-        background: rgba(255, 255, 255, 0.97);
-        border-radius: 6px;
-        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
-        font-size: 14px;
-        overflow: hidden;
-      }
-
-      #tendencia-panel[hidden] {
-        display: none;
-      }
-
       /* Vista /inteligencia — spec 040. En vez de flotar ancladas al mapa
          (posición absoluta de arriba), cámaras/prensa/tendencia pasan a fluir
          como tarjetas normales dentro de la página; agenda y actualidad
@@ -1873,36 +1832,6 @@
         min-height: 100vh;
       }
 
-      :root[data-vista='inteligencia']:not([data-layout='movil']) #media-panel,
-      :root[data-vista='inteligencia']:not([data-layout='movil']) #tendencia-panel {
-        position: static;
-        top: auto;
-        right: auto;
-        width: 320px;
-      }
-
-      /* Solo `#actualidad-redes-panel`/`#protocolos-panel` siguen en este
-         grupo claro de serie (fila 4 "Contexto", todavía sin convertir).
-         Todo lo demás que pasó por aquí ya usa `.mv2-card` — ver sus propios
-         bloques de tamaño (filas 1-3, spec 056 Fase 4). */
-      #actualidad-redes-panel,
-      #protocolos-panel {
-        width: 320px;
-        max-height: 70vh;
-        display: flex;
-        flex-direction: column;
-        background: rgba(255, 255, 255, 0.97);
-        border-radius: 6px;
-        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
-        font-size: 14px;
-        overflow: hidden auto;
-      }
-
-      #actualidad-redes-panel[hidden],
-      #protocolos-panel[hidden] {
-        display: none;
-      }
-
       /* Fila 3 "Movilidad y actividad" — spec 056 Fase 4, §8.5: Cámaras en
          vías de acceso (flex) + Ruido en Russafa ZAS (flex) + Agenda de
          eventos (400px). */
@@ -1918,6 +1847,23 @@
       #camaras-acceso-panel .mv2-card__body,
       #zas-ruido-panel .mv2-card__body,
       #agenda-panel .mv2-card__body {
+        overflow-y: auto;
+      }
+
+      /* Fila 4 "Contexto" — spec 056 Fase 4, §8.5: Actualidad institucional +
+         Contexto mediático + Términos en tendencia + Protocolos de actuación,
+         "4 iguales" según el documento — mismo flex-basis para las 4. */
+      :root[data-vista='inteligencia']:not([data-layout='movil']) #actualidad-redes-panel,
+      :root[data-vista='inteligencia']:not([data-layout='movil']) #media-panel,
+      :root[data-vista='inteligencia']:not([data-layout='movil']) #tendencia-panel,
+      :root[data-vista='inteligencia']:not([data-layout='movil']) #protocolos-panel {
+        flex: 1 1 320px;
+        max-height: 70vh;
+      }
+      #actualidad-redes-panel .mv2-card__body,
+      #media-panel .mv2-card__body,
+      #tendencia-panel .mv2-card__body,
+      #protocolos-panel .mv2-card__body {
         overflow-y: auto;
       }
 
@@ -2084,10 +2030,10 @@
       :root[data-vista='inteligencia']:not([data-layout='movil']) #media-panel {
         order: 10;
       }
-      :root[data-vista='inteligencia']:not([data-layout='movil']) #protocolos-panel {
+      :root[data-vista='inteligencia']:not([data-layout='movil']) #tendencia-panel {
         order: 11;
       }
-      :root[data-vista='inteligencia']:not([data-layout='movil']) #tendencia-panel {
+      :root[data-vista='inteligencia']:not([data-layout='movil']) #protocolos-panel {
         order: 12;
       }
       :root[data-vista='inteligencia']:not([data-layout='movil']) #movilidad-avisos-panel {
@@ -2371,23 +2317,20 @@
 
       /* Protocolos de actuación — spec 042 */
       .protocolos-lista {
-        padding: 8px;
-        overflow-y: auto;
         display: flex;
         flex-direction: column;
-        gap: 6px;
+        gap: 8px;
       }
 
       .protocolo {
-        border: 1px solid #e2e8f0;
-        border-radius: 4px;
+        border: 1px solid var(--border);
+        border-radius: var(--mv2-radius-md);
       }
 
       .protocolo__titulo {
-        padding: 8px 10px;
-        font-size: 13px;
-        font-weight: 600;
-        color: #1e293b;
+        padding: 9px 10px;
+        font: 600 13px / 1.3 var(--mv2-font-body);
+        color: var(--text-primary);
         cursor: pointer;
         list-style: none;
       }
@@ -2405,19 +2348,18 @@
       }
 
       .protocolo__bloque-titulo {
-        font-size: 11px;
-        font-weight: 700;
+        font: 700 11px / 1 var(--mv2-font-mono);
         text-transform: uppercase;
         letter-spacing: 0.04em;
-        color: #64748b;
-        margin-bottom: 3px;
+        color: var(--text-muted);
+        margin-bottom: 4px;
       }
 
       .protocolo__cuerpo ul {
         margin: 0;
         padding-left: 18px;
         font-size: 12.5px;
-        color: #334155;
+        color: var(--text-secondary);
       }
 
       .protocolo__cuerpo li {
@@ -2431,23 +2373,22 @@
         gap: 8px;
         margin-top: 6px;
         padding-top: 6px;
-        border-top: 1px solid #e2e8f0;
+        border-top: 1px solid var(--border);
         font-size: 11px;
-        color: #64748b;
+        color: var(--text-muted);
       }
 
       .protocolo__fuente {
-        color: var(--mirall-acento);
+        color: var(--accent);
         text-decoration: none;
       }
 
       .protocolo__fuente--sin-citar {
-        color: #94a3b8;
+        color: var(--text-muted);
         font-style: italic;
       }
 
       #actualidad-redes-panel .actualidad-redes {
-        padding: 8px 12px 10px;
         overflow-y: auto;
       }
 
@@ -2578,41 +2519,58 @@
         text-align: center;
       }
 
+      /* Selector real de la tarjeta "Términos en tendencia" (spec 056 Fase 4,
+         fila 4, §8.5.11) — vive en la cabecera `.mv2-card__header`, que ya es
+         flex, así que no necesita flotar. */
       .tendencia-panel__select {
-        float: right;
-        font-size: 11px;
+        margin-left: auto;
+        font: 500 11px / 1 var(--mv2-font-body);
+        color: var(--text-secondary);
+        background: var(--surface-2);
+        border: 1px solid var(--border);
+        border-radius: var(--mv2-radius-md);
+        padding: 5px 8px;
       }
 
       .tendencia-panel__termino {
-        padding: 7px 12px;
-        border-bottom: 1px solid #f0f0f0;
+        padding: 9px 0;
+        border-bottom: 1px solid var(--border);
         display: flex;
         flex-direction: column;
         gap: 2px;
       }
 
+      .tendencia-panel__termino:last-child {
+        border-bottom: none;
+      }
+
       .tendencia-panel__palabra {
-        font-size: 13px;
-        font-weight: 600;
-        color: #222;
+        font: 500 13px / 1.3 var(--mv2-font-body);
+        color: var(--text-primary);
       }
 
       .tendencia-panel__frecuencia {
         font-size: 11px;
-        color: #888;
+        color: var(--text-muted);
       }
 
       .tendencia-panel__insuficiente {
-        padding: 12px;
+        padding: 12px 0;
         font-size: 12px;
-        color: #666;
+        color: var(--text-secondary);
         line-height: 1.4;
       }
 
+      /* `#movilidad-avisos-panel` (spec 048) es la única tarjeta que sigue
+         usando este encabezado/lista "a mano" — no está en la tabla 8.5 del
+         documento de diseño (no asignada a ninguna fila), así que se deja sin
+         convertir a `.mv2-card` por ahora; se restylea en tokens oscuros para
+         no desentonar dentro de /inteligencia. */
       .media-panel__header {
         padding: 10px 12px;
-        font-weight: 700;
-        border-bottom: 1px solid #eee;
+        font: 600 13px / 1.3 var(--mv2-font-body);
+        color: var(--text-primary);
+        border-bottom: 1px solid var(--border);
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -2638,25 +2596,28 @@
 
       .media-panel__item {
         display: block;
-        padding: 8px 12px;
-        border-bottom: 1px solid #f0f0f0;
+        padding: 9px 0;
+        border-bottom: 1px solid var(--border);
         text-decoration: none;
         color: inherit;
       }
 
+      .media-panel__item:last-child {
+        border-bottom: none;
+      }
+
       .media-panel__item:hover {
-        background: #f7f7f7;
+        background: var(--surface-2);
       }
 
       .media-panel__item-titulo {
-        font-size: 13px;
-        color: #222;
-        line-height: 1.35;
+        font: 400 13px / 1.35 var(--mv2-font-body);
+        color: var(--text-primary);
       }
 
       .media-panel__item-meta {
         font-size: 11px;
-        color: #888;
+        color: var(--text-muted);
         margin-top: 3px;
       }
 
@@ -2667,21 +2628,20 @@
       }
 
       .media-panel__caducado {
-        color: #b45309;
+        color: var(--warning);
         font-weight: 600;
       }
 
       .media-panel__grupo-titulo {
         position: sticky;
         top: 0;
-        padding: 6px 12px;
-        font-size: 11px;
-        font-weight: 600;
+        padding: 6px 0;
+        font: 600 11px / 1 var(--mv2-font-mono);
         text-transform: uppercase;
-        letter-spacing: 0.02em;
-        color: #555;
-        background: #f0f0f0;
-        border-bottom: 1px solid #e0e0e0;
+        letter-spacing: 0.04em;
+        color: var(--text-secondary);
+        background: var(--surface);
+        border-bottom: 1px solid var(--border);
       }
 
       .media-panel__chips {
@@ -2696,23 +2656,23 @@
         padding: 2px 7px;
         font-size: 10px;
         font-weight: 600;
-        color: #1a5276;
-        background: #eaf2f8;
-        border-radius: 10px;
+        color: var(--info);
+        background: color-mix(in srgb, var(--info) 14%, transparent);
+        border-radius: var(--mv2-radius-pill);
         line-height: 1.4;
       }
 
       .media-panel__chip--baja-confianza {
-        color: #7d6608;
-        background: #fef9e7;
+        color: var(--warning);
+        background: color-mix(in srgb, var(--warning) 14%, transparent);
       }
 
       /* Spec 027 v4 — eventos (fútbol/Roig Arena/carreras) que generan
          afluencia/tráfico/cortes reales en vía pública, distinguidos del
          resto de la agenda general. */
       .media-panel__chip--impacto {
-        color: #922b21;
-        background: #fdedec;
+        color: var(--danger);
+        background: color-mix(in srgb, var(--danger) 14%, transparent);
       }
 
       /* Spec 026 — tooltip mínimo específico de esta capa (ver comentario en
@@ -2788,11 +2748,6 @@
         opacity: 0.75;
       }
 
-      #media-panel .info-panel__meta {
-        padding: 8px 12px;
-        margin-top: 0;
-        border-top: 1px solid #eee;
-      }
 
       /* ================================================================
          Layout MÓVIL — spec 029. Activo cuando <html data-layout="movil">
