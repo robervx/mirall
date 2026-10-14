@@ -525,6 +525,35 @@
         margin-bottom: 6px;
       }
 
+      /* Configuración de ciudad — spec 056 Fase 5, §8.6 (adaptada, ver
+         comentario de `buildConfiguracionContent` en chasis.ts). */
+      .configuracion-ciudad__grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        margin: 2px 0 16px;
+      }
+
+      .configuracion-ciudad__tile {
+        position: relative;
+        padding: 10px 10px 10px 38px;
+        border: 1px solid var(--border);
+        border-radius: var(--mv2-radius-lg);
+        background: var(--surface-2);
+      }
+
+      .configuracion-ciudad__icono {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        width: 20px;
+        height: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--text-muted);
+      }
+
       /* Glosario — spec 037 */
       .glosario-entrada {
         border-top: 1px solid rgba(255, 255, 255, 0.08);
@@ -1419,6 +1448,27 @@
         background: var(--accent);
         border-color: var(--accent);
         color: var(--accent-ink);
+      }
+
+      /* Botón "Restablecer" — spec 056 Fase 5, §8.7 (pantalla móvil Capas,
+         también visible en el `#controls` de escritorio). */
+      .controls__icon-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 26px;
+        height: 26px;
+        border: 1px solid var(--border);
+        background: var(--surface-2);
+        color: var(--text-secondary);
+        border-radius: var(--mv2-radius-md);
+        cursor: pointer;
+        flex-shrink: 0;
+      }
+
+      .controls__icon-btn:hover {
+        color: var(--text-primary);
+        border-color: var(--text-muted);
       }
 
       .controls__group-head {
@@ -2843,10 +2893,9 @@
         display: none;
       }
 
-      /* TabBar — spec 019, nuevo en Mirall v2 (spec 056 Fase 3a, §7.13).
-         Solo móvil/tablet estrecha; 3 pestañas funcionales por ahora
-         (Mapa/Inteligencia/Más) — "Barrios"/"Capas" del diseño original son
-         pantallas que no existen todavía, llegan en la Fase 5. */
+      /* TabBar — spec 019, nuevo en Mirall v2 (spec 056 Fase 3a §7.13, 5
+         pestañas completas desde Fase 5 §8.7: Mapa/Inteligencia/Barrios/
+         Capas/Más). Solo móvil/tablet estrecha. */
       #app-tabbar {
         display: none;
       }
@@ -2920,6 +2969,131 @@
       :root[data-layout='movil'] .controls__row--hora,
       :root[data-layout='movil'] .controls__row--trafico {
         margin-top: 2px;
+      }
+
+      /* Pantalla móvil "Capas" — spec 056 Fase 5, §8.7. `#controls` sigue
+         siendo el mismo nodo real reparentado dentro del bottom sheet (spec
+         029, va justo bajo el tirador) — aquí no se mueve de sitio en el
+         DOM, solo se le da tratamiento de pantalla completa por encima de
+         todo lo demás mientras `data-vista='capas'`, sin tocar su lógica. */
+      :root[data-layout='movil'][data-vista='capas'] #info-panels > #controls {
+        /* `!important` para ganarle a la normalización genérica de paneles
+           reparentados de más arriba (`position: static !important` etc.) —
+           esta regla es más específica (2 atributos en `:root` + hijo
+           directo), pero sin `!important` las suyas seguirían ganando. */
+        position: fixed !important;
+        inset: calc(var(--header-h) + env(safe-area-inset-top)) 0 var(--tabbar-h) 0 !important;
+        z-index: 180;
+        max-width: none !important;
+        min-width: 0;
+        width: auto !important;
+        margin: 0 !important;
+        border: none;
+        border-radius: 0;
+        padding: 12px 16px calc(16px + env(safe-area-inset-bottom));
+        overflow-y: auto;
+      }
+
+      /* Pantalla móvil "Barrios" — spec 056 Fase 5, §8.7. Nodo propio
+         (`#barrios-screen`), no reparentado dentro del bottom sheet — solo
+         se muestra en móvil (`mostrarPantallaBarrios` nunca pasa `true` en
+         escritorio, ver el callback de `initRouter` en main.ts). */
+      #barrios-screen {
+        display: none;
+      }
+      :root[data-layout='movil'][data-vista='barrios'] #barrios-screen {
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        inset: calc(var(--header-h) + env(safe-area-inset-top)) 0 var(--tabbar-h) 0;
+        z-index: 180;
+        background: var(--bg);
+        padding: 16px 16px calc(16px + env(safe-area-inset-bottom));
+        overflow-y: auto;
+        gap: 12px;
+      }
+      .barrios-screen__header {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+      }
+      #barrios-screen__subtitulo {
+        color: var(--text-secondary);
+      }
+      .barrios-screen__tabs {
+        align-self: flex-start;
+      }
+      .barrios-screen__lista {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+      }
+      .barrios-screen__vacio {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+        padding: 24px 0;
+      }
+      .barrios-screen__cerca-nota {
+        font-size: 12px;
+        color: var(--text-secondary);
+      }
+      .barrios-screen__nota {
+        margin-top: auto;
+        padding-top: 8px;
+      }
+      .barrio-fila {
+        display: grid;
+        grid-template-columns: 10px 1fr auto auto;
+        align-items: center;
+        gap: 10px;
+        width: 100%;
+        min-height: 44px;
+        padding: 10px 6px;
+        border: none;
+        border-bottom: 1px solid var(--border);
+        background: transparent;
+        color: var(--text-primary);
+        text-align: left;
+        cursor: pointer;
+        font: 400 14px / 1.3 var(--mv2-font-body);
+      }
+      .barrio-fila:last-child {
+        border-bottom: none;
+      }
+      .barrio-fila:active {
+        background: var(--surface-2);
+      }
+      .barrio-fila__estado {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--text-muted);
+      }
+      .barrio-fila__estado--ok {
+        background: var(--text-muted);
+      }
+      .barrio-fila__estado--watch {
+        background: var(--warning);
+      }
+      .barrio-fila__estado--alert {
+        background: var(--danger);
+      }
+      .barrio-fila__nombre {
+        font-weight: 500;
+      }
+      .barrio-fila__meta {
+        display: flex;
+        gap: 10px;
+        font: 400 11px / 1 var(--mv2-font-mono);
+        color: var(--text-muted);
+      }
+      .barrio-fila__derecha {
+        font: 500 11px / 1 var(--mv2-font-mono);
+        color: var(--text-secondary);
+        min-width: 28px;
+        text-align: right;
       }
       :root[data-layout='movil'] #info-panels button,
       :root[data-layout='movil'] .insight-card__copiar,

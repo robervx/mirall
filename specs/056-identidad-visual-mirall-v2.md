@@ -3,11 +3,11 @@
 ```yaml
 id: 056
 titulo: "Identidad visual Mirall v2 — tema oscuro + acento lima"
-estado: Draft
+estado: Implemented
 tipo: fundacional
 depende_de: [019, 040, 053]
 propietario: usuario
-version: 8
+version: 9
 ```
 
 ## 1. Problema / motivación
@@ -45,7 +45,7 @@ proyecto) — no specs nuevas por cada pantalla repintada.
 | **3a** | Chasis de la app (`TopBar`/`NavRail`/`SideMenu`/`TabBar`) sustituyendo cabecera+sidebar actuales. El mapa en sí (estilo, capas, leyendas, controles de zoom) no se toca | `019`, `029` | **Implemented** |
 | **3b** | Estilo oscuro del mapa (MapLibre, mismo proveedor OpenFreeMap — solo cambia el *style* de pintado); panel de capas, barra de cifras, tooltips y controles de zoom recoloreados | `000`, `026`, `033`, `034`, `036`, `055` | **Implemented** |
 | **4** | Vista Inteligencia — rejilla de 12 tipos de tarjeta con el `DataCard` de la Fase 1 + estados (cargando/vacío/error/desactualizado). Se hace fila por fila (§8.5): **las 4 filas implementadas** — Prioridad, Clima y terreno, Movilidad y actividad, Contexto | `047` (fila 1), `044`/`046` (fila 2), `038`/`043`/`049`/`027` (fila 3), `009`/`025`/`039`/`042` (fila 4) | **Implemented** |
-| **5** | Configuración de ciudad + pantallas móviles nuevas "Barrios"/"Capas" (funcionalidad nueva, no solo reskin) + pase de accesibilidad WCAG 2.2 AA transversal | `019` (Configuración) + spec nueva para Barrios/Capas | Planned |
+| **5** | Configuración de ciudad + pantallas móviles nuevas "Barrios"/"Capas" (funcionalidad nueva, no solo reskin) + pase de accesibilidad WCAG 2.2 AA transversal | `019` (Configuración, `TabBar`), `029` (reparentado móvil), `040` (router, vistas nuevas) | **Implemented** |
 
 ## 3. Tokens de diseño (contrato — Fase 1)
 
@@ -341,6 +341,21 @@ una vez — mismo criterio que partió la Fase 3. Esta sesión cierra la fila 1,
       Fase 5 (Configuración de ciudad + pantallas móviles nuevas "Barrios"/"Capas" + pase de accesibilidad
       WCAG 2.2 AA) para que la spec 056 pase a `Implemented` por completo.
 
+## 6.8 Criterios de aceptación — Fase 5 (Configuración, Barrios, Capas, accesibilidad)
+
+Última fase de la spec — con esta, el rediseño completo del documento (§8.1-§8.7) queda implementado.
+
+- [x] **Configuración de ciudad** (sección "Configuración" del `SideMenu`, spec `019`) — 4 celdas de estadística real (no las 5 del documento): Fuentes de datos (`onCambioFrescura`, el mismo rollup del TopBar), Distritos con geometría, Capas activas N/M (en vivo, cuenta real de checkboxes de `#controls`), Anonimización. "Sensores conectados: 1.284" y "Frecuencia: 2 min" del documento no tienen respaldo real (no hay un contador de sensores ni una cadencia única — cada capa sondea a su propio intervalo) — se omiten en vez de inventarlos. Sin Guardar/Descartar: cada ajuste ya se aplica al instante, añadir un estado "borrador" sería fricción nueva sin beneficio real. Sigue viviendo como sección del `SideMenu`, no como módulo de página propia (consistencia con las otras 4 "herramientas" ya establecida en Fase 3a).
+- [x] **Pantalla móvil "Capas"** (`TabBar`, 4ª pestaña) — reutiliza el mismo `#controls` real (sin reescribir su lógica), con tratamiento de pantalla completa solo por CSS (`:root[data-layout='movil'][data-vista='capas'] #info-panels > #controls`, `position:fixed` por encima del mapa/hoja, bajo el `TabBar`) mientras esa pestaña está activa — nunca se reparenta ni se duplica el nodo. Botón real "Restablecer" nuevo (`rotate-ccw`): apaga todas las capas encendidas disparando el `change` real de cada una. En escritorio/tablet, `#/capas` no tiene pantalla dedicada (el documento no la prevé fuera de móvil) — se trata como alias de `mapa`.
+- [x] **Pantalla móvil "Barrios"** (`TabBar`, 3ª pestaña, `src/ui/barrios-panel.ts`) — **adaptación honesta decidida explícitamente con el usuario (2026-10-14)**: el documento pide un ranking por "puntuación de bienestar" 0-100 con desglose Aire/Ruido/Tráfico por barrio; no existe ese dato real — el aire es una única lectura de ciudad (spec `002`), el ruido solo cubre Russafa (16/19 zonas, spec `049`), y Pulso de Distrito (spec `010`) es un indicador de escenarios, no una puntuación continua. Se lista los 19 distritos reales con las 3 señales que sí son por distrito hoy — Pulso (nivel de escenario activo, color real), Altimetría (spec `052`) y Riesgo de acumulación de agua (spec `046`) — bajo el título honesto "ordenados por situación", no "por bienestar". Pestaña "Ranking" (por nivel de Pulso, luego alfabético) y "Cerca de mí" (geolocalización explícita y no persistida, mismo patrón que `buildProximidadContent`, spec `012`). Tocar un distrito fija el foco real (`setFocoDistrito`, spec `036`) y navega a `/mapa`. Pulso/Riesgo/Altimetría son, de serie, capas de mapa que solo se piden al marcar su casilla — la pantalla arranca su carga por el mismo cauce real (`startPolling`/flags "ya cargado") al entrar, sin marcar la casilla ni duplicar la petición si la capa ya estaba activa.
+- [x] **Pase de accesibilidad WCAG 2.2 AA** (transversal, todo lo construido en Fases 1-5):
+  - Auditoría de nombre accesible sobre every control interactivo visible, escritorio y móvil, en las 4 vistas + `SideMenu` + drawer móvil: 2 problemas reales encontrados y corregidos — el slider de hora de la capa mock (`#hora-slider`, sin `aria-label`) y los 4 botones "reproducir" de las cámaras de Valencia ciudad (icono solo, sin nombre por cámara). Verificado limpio tras el fix en las 4 vistas × escritorio/móvil.
+  - **Hallazgo real y corregido fuera del alcance original de la auditoría**: `--text-muted` (#5c635e, token de Fase 1, valor literal del documento de diseño) no pasaba 4.5:1 en ningún fondo real de la app (2.73-3.18:1 sobre `--bg`/`--surface`/`--surface-2`) — usado en ~48 sitios (metadatos de tarjeta, iconos tenues, pies de página) desde la Fase 1. Aclarado a `#7f867f` (4.51-5.25:1 en los 3 fondos), decisión confirmada con el usuario en vez de dejarlo así o acercarlo tanto a `--text-secondary` que perdiera distinción visual entre ambos niveles. Cambio de un único token, se propaga solo (nadie más define `--text-muted` con un valor propio).
+  - Resto de pares de color de la paleta (texto primario/secundario, acento, danger/warning/info sobre los 3 fondos) verificados por encima de 4.5:1 — sin más hallazgos.
+  - Pendiente, fuera de esta pasada (no bloqueante para cerrar la spec, pero no auditado): navegación completa solo-teclado de cada componente nuevo (segmentados, acordeones), lector de pantalla real (NVDA/VoiceOver) sobre las pantallas nuevas, y zoom de texto al 200%.
+- [x] `npm run typecheck`, `npm run build` y `npm run test` (525/525) verdes en cada paso.
+- [x] Verificado en navegador: Configuración (escritorio, SideMenu) con las 4 cifras reales; Capas (móvil) a pantalla completa con Restablecer funcionando; Barrios (móvil) con 19 filas reales, pestaña Cerca de mí, navegación a `/mapa` con foco real al tocar una fila; `#/capas`/`#/barrios` en escritorio se comportan como `mapa`; contraste de `--text-muted` confirmado visualmente tras el cambio (sin aspecto "demasiado brillante" ni pérdida de jerarquía).
+
 ## 7. Riesgos
 
 - Verificación visual en este entorno ya documentada como punto débil en otras specs (bug de render
@@ -369,3 +384,4 @@ expulsara a mano, lo que bloqueaba la copia hasta volver a montarlo. Ya no depen
 | 6 | 2026-10-09 | Fase 4, fila 2 "Clima y terreno" implementada — ver §6.5. Meteorología por zona (AVAMET + Open-Meteo + SAIH fusionados, 3 pestañas) + Altimetría (ordenada, tinte azul <8m) + Riesgo de acumulación de agua, como `DataCard`. El badge de nivel único del documento se adapta al ranking ordinal real (spec 046 §3 ya había rechazado las bandas fijas). Quedan las filas 3-4 (7 tarjetas más) |
 | 7 | 2026-10-09 | Fase 4, fila 3 "Movilidad y actividad" implementada — ver §6.6. Cámaras en vías de acceso (DGT+Ciudad fusionadas en pestañas, specs 038+043) + Ruido en Russafa ZAS (barras con umbral, spec 049) + Agenda de eventos (spec 027), como `DataCard`. Bug real corregido fuera de estas 3 tarjetas: el orden del bottom sheet móvil no seguía la prioridad por filas de escritorio — ahora sí, para las filas 1-3. Queda la fila 4 "Contexto" (4 tarjetas más) |
 | 8 | 2026-10-14 | Fase 4, fila 4 "Contexto" implementada — ver §6.7. Actualidad institucional (spec 039) + Contexto mediático (spec 009) + Términos en tendencia (spec 025, selector real de 2 ventanas en vez de las 3 del documento) + Protocolos de actuación (spec 042, sin pill de estado inventada), como `DataCard`. **Fase 4 completa** (las 4 filas de Inteligencia). Queda la Fase 5 (Configuración de ciudad, pantallas móviles nuevas, accesibilidad) |
+| 9 | 2026-10-14 | **Fase 5 implementada — ver §6.8. Rediseño completo del documento, cerrado.** Configuración de ciudad (4 cifras reales, no las 5 fabricadas del documento); `TabBar` a 5 pestañas con las pantallas móviles nuevas "Capas" (mismo `#controls` real, pantalla completa por CSS) y "Barrios" (ranking honesto de los 19 distritos por Pulso/Altimetría/Riesgo de agua real, sin la puntuación de bienestar inventada del documento — decisión explícita del usuario); pase de accesibilidad WCAG 2.2 AA (2 nombres accesibles corregidos + hallazgo real: el token `--text-muted` de Fase 1 no pasaba 4.5:1 en ningún fondo, aclarado de `#5c635e` a `#7f867f` en los ~48 sitios que lo usan). `estado` pasa a `Implemented` |

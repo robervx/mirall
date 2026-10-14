@@ -166,7 +166,9 @@ function renderCamarasCiudad(root: HTMLElement, camaras: CamaraUrbana[]): void {
     const atribucion = tile.querySelector<HTMLAnchorElement>('.camara-tile__atribucion')!;
     atribucion.href = camara.fuenteUrl;
     atribucion.textContent = `${camara.atribucion} ↗`;
-    stage.querySelector('.camara-tile__play')!.addEventListener('click', () => reproducirCamara(stage, camara), { once: true });
+    const boton = stage.querySelector<HTMLButtonElement>('.camara-tile__play')!;
+    boton.setAttribute('aria-label', `Reproducir cámara: ${camara.nombre}`);
+    boton.addEventListener('click', () => reproducirCamara(stage, camara), { once: true });
   });
 }
 

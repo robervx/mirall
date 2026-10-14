@@ -56,7 +56,7 @@ import type { EquipamientoCritico, CategoriaEquipamientoCritico } from './servic
 import type { BusEmt } from './services/emt-buses';
 import type { ParadaEmt } from './services/emt-paradas';
 import { rejillaInterpolada, featureCollectionInterpolada, PASO_LAT_INTERPOLACION, PASO_LON_INTERPOLACION, DISTANCIA_MAXIMA_INTERPOLACION_M } from './services/interpolacion-meteo';
-import { mountChasis, setAlertaCriticaHeader, setCampanaOnClick } from './ui/chasis';
+import { mountChasis, setAlertaCriticaHeader, setCampanaOnClick, actualizarResumenConfiguracionCiudad } from './ui/chasis';
 import { applyPanelVisibility, PANEL_PREFERENCES_REGISTRY } from './ui/panel-preferences';
 import { registrarFrescura } from './ui/estado-frescura';
 import { montarDashboardKpis, registrarKpi } from './ui/dashboard-kpis';
@@ -94,6 +94,7 @@ import { montarSenalesPanel } from './ui/senales-ia-panel';
 import { montarRecomendacionesPanel } from './ui/recomendaciones-actuacion-panel';
 import { buildProtocolosContent } from './ui/protocolos-panel';
 import { onPeticionCentrarMapa } from './ui/centrar-mapa';
+import { mostrarPantallaBarrios, actualizarDatosBarrios } from './ui/barrios-panel';
 import { escapeHtml, metaFrescura, metaFrescuraCorta, formatoFechaHora, formatoFecha, buildInfoPanel, startPolling } from './ui/panel-utils';
 import { iconoSvg } from './ui/iconos';
 import { esVersionPublica } from './config/version-despliegue';
@@ -1859,6 +1860,7 @@ function buildControlPanel(): ControlPanel {
   panel.innerHTML = `
     <div class="controls__head">
       <span class="controls__title">Capas</span>
+      <button type="button" id="controls-restablecer" class="controls__icon-btn" title="Restablecer — apaga todas las capas" aria-label="Restablecer capas">${iconoSvg('rotate-ccw', 15)}</button>
       <button type="button" id="preset-operativa" class="controls__preset" title="Enciende tráfico, Pulso de Distrito e incidencias de vía pública">Vista operativa</button>
     </div>
     <div class="controls__group controls__group--primaria">
@@ -1915,7 +1917,7 @@ function buildControlPanel(): ControlPanel {
         <span class="mock-badge" title="Datos sintéticos — spec 003, no representan actividad real">MOCK</span>
       </label>
       <div class="controls__row controls__row--hora" id="hora-control" hidden>
-        <input type="range" id="hora-slider" min="0" max="23" step="1" value="14" />
+        <input type="range" id="hora-slider" min="0" max="23" step="1" value="14" aria-label="Hora del día (densidad de personas simulada)" />
         <span id="hora-label">14:00</span>
       </div>
       <label class="controls__row">
@@ -2126,6 +2128,7 @@ async function main(): Promise<void> {
   map.addControl(overlay);
 
   const distritos = await preloadDistrictGeometry();
+  actualizarResumenConfiguracionCiudad({ distritos: distritos.length });
   const featureCollection: GeoJSON.FeatureCollection<GeoJSON.Geometry, DistritoProperties> = {
     type: 'FeatureCollection',
     features: distritos.map((d) => ({
@@ -3098,6 +3101,37 @@ async function main(): Promise<void> {
 
   actualizarContextoSelector();
 
+  // Elemento raíz `#controls` (el objeto `panel` de `main()` solo guarda
+  // referencias sueltas a sus casillas, no es el nodo del DOM) — lo usan
+  // tanto el botón "Restablecer" como el contador de "Capas activas" de
+  // abajo.
+  const controlsRoot = document.getElementById('controls')!;
+
+  // spec 056 Fase 5, §8.7 — botón "Restablecer" de la pantalla móvil "Capas":
+  // apaga todas las capas encendidas (dispara su `change` real en cada una,
+  // igual que el preset de arriba, así cada toggle persiste/desactiva su
+  // propia capa por su cauce normal en vez de tocar el DOM a mano).
+  document.getElementById('controls-restablecer')!.addEventListener('click', () => {
+    controlsRoot.querySelectorAll<HTMLInputElement>('input[type="checkbox"]:checked').forEach((t) => {
+      t.checked = false;
+      t.dispatchEvent(new Event('change'));
+    });
+  });
+
+  // spec 056 Fase 5, §8.6 — "Capas activas" en el módulo de Configuración de
+  // ciudad (SideMenu): cuenta real de todas las casillas de `#controls`
+  // (prioritarias + contexto e informativas), no solo el grupo de contexto
+  // del contador de arriba.
+  function actualizarCapasActivasConfiguracion(): void {
+    const casillas = controlsRoot.querySelectorAll<HTMLInputElement>('input[type="checkbox"]');
+    const activas = Array.from(casillas).filter((c) => c.checked).length;
+    actualizarResumenConfiguracionCiudad({ capasActivas: activas, capasTotal: casillas.length });
+  }
+  controlsRoot.addEventListener('change', (ev) => {
+    if ((ev.target as HTMLElement)?.matches('input[type="checkbox"]')) actualizarCapasActivasConfiguracion();
+  });
+  actualizarCapasActivasConfiguracion();
+
   // spec 034 — dashboard de KPIs: los paneles empujan sus cifras vía registrarKpi()
   // al renderizarse. Clic en un chip con capa relacionada → la activa y hace scroll
   // a su leyenda.
@@ -3236,6 +3270,7 @@ async function main(): Promise<void> {
       pulsoDistritos = datos;
       renderLayers();
       renderPulsoLeyenda(pulsoLeyendaRoot, datos, fresh);
+      actualizarDatosBarrios({ pulso: datos });
     } catch (err) {
       pulsoLeyendaRoot.textContent = 'Pulso de Distrito no disponible';
       console.error('Fallo al cargar Pulso de Distrito:', err);
@@ -3288,6 +3323,7 @@ async function main(): Promise<void> {
       riesgoEscorrentia = datos;
       renderLayers();
       renderEscorrentiaLeyenda(riesgoEscorrentiaLeyendaRoot, datos, fresh);
+      actualizarDatosBarrios({ riesgo: datos });
     } catch (err) {
       riesgoEscorrentiaLeyendaRoot.textContent = 'Riesgo de acumulación de agua no disponible';
       console.error('Fallo al cargar riesgo de escorrentía:', err);
@@ -3371,6 +3407,7 @@ async function main(): Promise<void> {
       altimetriaPuntos = puntos;
       renderLayers();
       renderAltimetriaLeyenda(altimetriaLeyendaRoot, distritos, puntos);
+      actualizarDatosBarrios({ altimetria: distritos });
     } catch (err) {
       altimetriaLeyendaRoot.textContent = 'Altimetría no disponible';
       console.error('Fallo al cargar altimetría:', err);
@@ -3854,24 +3891,36 @@ async function main(): Promise<void> {
   ];
 
   initRouter((vista) => {
-    const enMapa = vista === 'mapa';
     const movil = document.documentElement.dataset.layout === 'movil';
+    const enInteligencia = vista === 'inteligencia';
+    const enCapas = vista === 'capas';
+    const enBarrios = vista === 'barrios';
+    // spec 056 Fase 5 — `capas`/`barrios` son pantallas móviles propias
+    // (§8.7); en escritorio/tablet no existe una pantalla dedicada para
+    // ninguna de las dos (§9: el selector de capas ya es una columna fija de
+    // serie, y "Barrios" no aparece en absoluto en el responsive de
+    // escritorio) — fuera de layout móvil se tratan como el mapa normal.
+    const mostrarMapaOperativo = movil ? vista === 'mapa' : !enInteligencia;
 
     // En móvil el mapa se deja igual que hoy con cualquier panel abierto (de
     // fondo, detrás de la hoja) — no hace falta ocultarlo ni tiene coste; en
     // escritorio, en cambio, /inteligencia es una página propia sin mapa.
-    if (!movil) document.getElementById('map')!.hidden = !enMapa;
-    document.getElementById('controls')!.hidden = !enMapa;
-    document.getElementById('dashboard-kpis')!.hidden = !enMapa;
-    panel.banner.hidden = !(enMapa && panel.mockToggle.checked);
+    if (!movil) document.getElementById('map')!.hidden = !mostrarMapaOperativo;
+    // `#controls` se mantiene visible también en la pantalla móvil "Capas"
+    // (spec 056 Fase 5, §8.7) — ahí es precisamente su contenido, a pantalla
+    // completa en vez de dentro del bottom sheet (ver estilos.css,
+    // `:root[data-vista='capas'][data-layout='movil'] #controls`).
+    document.getElementById('controls')!.hidden = !(mostrarMapaOperativo || (movil && enCapas));
+    document.getElementById('dashboard-kpis')!.hidden = !mostrarMapaOperativo;
+    panel.banner.hidden = !(mostrarMapaOperativo && panel.mockToggle.checked);
 
     // `#info-panels` es un contenedor compartido en móvil (spec 029, bottom
     // sheet, también aloja los paneles de /inteligencia) — solo tiene sentido
     // ocultarlo entero en escritorio; en móvil se ocultan sus hijos "de mapa"
     // uno a uno más abajo, sin tocar el contenedor.
-    if (!movil) document.getElementById('info-panels')!.hidden = !enMapa;
+    if (!movil) document.getElementById('info-panels')!.hidden = !mostrarMapaOperativo;
 
-    if (enMapa) {
+    if (mostrarMapaOperativo) {
       applyPanelVisibility();
       for (const [id, toggle] of leyendasPorToggle) {
         const el = document.getElementById(id);
@@ -3887,7 +3936,26 @@ async function main(): Promise<void> {
 
     for (const id of idsInteligencia) {
       const el = document.getElementById(id);
-      if (el) el.hidden = enMapa;
+      if (el) el.hidden = !enInteligencia;
+    }
+
+    mostrarPantallaBarrios(movil && enBarrios);
+    // Pulso/Riesgo de acumulación de agua/Altimetría son, de serie, capas de
+    // mapa que solo se piden al marcar su casilla (spec 010/046/052) — la
+    // pantalla "Barrios" las necesita igual aunque esas casillas sigan sin
+    // marcar, así que al entrar se arranca su carga por el mismo cauce real
+    // (`startPolling`/flag "ya cargado"), sin tocar el estado visual de la
+    // casilla ni duplicar la petición si la capa ya estaba activa.
+    if (movil && enBarrios) {
+      if (!pulsoPollingIniciado) {
+        pulsoPollingIniciado = true;
+        startPolling(refreshPulso, 3 * 60 * 1000); // misma cadencia que su toggle, spec 010 §4
+      }
+      if (!riesgoEscorrentiaPollingIniciado) {
+        riesgoEscorrentiaPollingIniciado = true;
+        startPolling(refreshRiesgoEscorrentia, 15 * 60 * 1000); // misma cadencia que su toggle, spec 046 §4
+      }
+      void cargarAltimetriaSiHaceFalta();
     }
   });
 }

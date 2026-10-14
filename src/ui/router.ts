@@ -1,18 +1,26 @@
-// Router por hash — spec 040. Dos vistas, sin dependencia nueva (`CLAUDE.md`
-// §5, "sin framework"): `#/` (mapa operativo) y `#/inteligencia` (hub de
-// cámaras/prensa/redes/tendencia/agenda). El resto del estado en URL
+// Router por hash — spec 040 (mapa/inteligencia), ampliado en spec 056 Fase 5
+// con `barrios`/`capas` (pantallas móviles propias del `TabBar`, §8.7/§9 del
+// documento de diseño — en escritorio/tablet no existe una pantalla dedicada
+// para ninguna de las dos, así que `main.ts` las trata como alias de `mapa`
+// fuera de layout móvil, ver su callback de `initRouter`). Sin dependencia
+// nueva (`CLAUDE.md` §5, "sin framework"). El resto del estado en URL
 // (`?layers=&foco=`, spec 000) vive en la query string, independiente del
 // hash — cambiar de vista nunca lo toca ni recarga la página.
-export type Vista = 'mapa' | 'inteligencia';
+export type Vista = 'mapa' | 'inteligencia' | 'barrios' | 'capas';
 
-const HASH_INTELIGENCIA = '#/inteligencia';
+const HASH_POR_VISTA: Record<Exclude<Vista, 'mapa'>, string> = {
+  inteligencia: '#/inteligencia',
+  barrios: '#/barrios',
+  capas: '#/capas',
+};
 
 export function vistaActual(): Vista {
-  return location.hash === HASH_INTELIGENCIA ? 'inteligencia' : 'mapa';
+  const entrada = Object.entries(HASH_POR_VISTA).find(([, hash]) => hash === location.hash);
+  return (entrada?.[0] as Vista | undefined) ?? 'mapa';
 }
 
 export function irAVista(vista: Vista): void {
-  const hash = vista === 'inteligencia' ? HASH_INTELIGENCIA : '#/';
+  const hash = vista === 'mapa' ? '#/' : HASH_POR_VISTA[vista];
   if (location.hash !== hash) location.hash = hash;
 }
 

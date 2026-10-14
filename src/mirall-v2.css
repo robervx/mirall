@@ -34,7 +34,15 @@
   /* Texto */
   --text-primary: #f2f4ee;
   --text-secondary: #8c948e;
-  --text-muted: #5c635e;
+  /* Spec 056 Fase 5 — pase de accesibilidad WCAG 2.2 AA: el valor original
+     del documento de diseño (#5c635e) no pasaba 4.5:1 en ningún fondo real
+     de la app (2.73-3.18:1 sobre --bg/--surface/--surface-2), y es el tono
+     usado en metadatos de tarjeta, iconos tenues y pies de página en toda la
+     Fase 1-4. Aclarado al mínimo necesario para pasar AA en los 3 fondos
+     (4.51-5.25:1), decisión confirmada con el usuario el 2026-10-14 en vez
+     de dejarlo así o acercarlo tanto a --text-secondary que perdiera
+     distinción visual entre ambos niveles. */
+  --text-muted: #7f867f;
 
   /* Marca */
   --accent: #c8f03c;

@@ -18,6 +18,7 @@ import { esMovil, getLayoutForzado, setLayoutForzado, onCambioLayout } from './d
 import { irAVista, vistaActual, type Vista } from './router';
 import { getFocoDistrito, onCambioFoco } from './foco-distrito';
 import { iconoSvg } from './iconos';
+import { crearKpi } from './componentes-base';
 import { calcularCercania, formatoDistancia, type ResultadoCercania } from '../services/proximidad';
 import { getCapasActivas } from '../services/capas-activas-store';
 import {
@@ -506,9 +507,85 @@ function buildGemeloDigitalContent(): HTMLElement {
   return wrap;
 }
 
+// "Configuración de ciudad" — spec 056 Fase 5, §8.6. El documento la dibuja
+// como un módulo propio a pantalla completa con 5 celdas (Sensores
+// conectados/Barrios cubiertos/Capas activas/Frecuencia/Anonimización, con
+// Guardar/Descartar) — adaptación honesta, no reimplementación 1:1:
+//  - Sigue viviendo como sección del SideMenu (spec 019), no como una
+//    pantalla propia: ese es el patrón ya establecido en la Fase 3a para
+//    las 5 "herramientas" (Cerca de mí, Cordón, Gemelo digital, Glosario,
+//    Configuración); promover solo esta a página top-level rompería esa
+//    consistencia sin ganar nada real.
+//  - "Sensores conectados: 1.284" no tiene respaldo real — se sustituye por
+//    el recuento real de fuentes con frescura registrada (`onCambioFrescura`,
+//    el mismo rollup que ya alimenta "EN VIVO · N fuentes" en el TopBar).
+//  - "Frecuencia: 2 min" es falso — cada capa sondea a un intervalo real
+//    distinto (de 1 min a 2 h) — se omite en vez de inventar una cifra única.
+//  - "Capas activas"/"Distritos cubiertos" sí son reales y se calculan en
+//    vivo: capas = checkboxes marcados de `#controls` (construido después de
+//    montar el chasis, de ahí el setter `actualizarResumenConfiguracionCiudad`
+//    que main.ts llama cuando los datos existen); distritos = los realmente
+//    cargados (`getLoadedDistricts()`, llamado tras `preloadDistrictGeometry`).
+//  - "Anonimización: Activa" sí es un hecho real y estático (CLAUDE.md §4),
+//    no una variable que vaya a cambiar — se mantiene como texto, no toggle.
+//  - Sin Guardar/Descartar: cada ajuste real de esta sección (capas,
+//    paneles visibles) ya se aplica al instante; añadir un estado "borrador"
+//    sería fricción nueva sin beneficio real.
+let kpiDistritosValor: HTMLElement | null = null;
+let kpiCapasValor: HTMLElement | null = null;
+
+export function actualizarResumenConfiguracionCiudad(datos: { distritos?: number; capasActivas?: number; capasTotal?: number }): void {
+  if (datos.distritos !== undefined && kpiDistritosValor) {
+    kpiDistritosValor.textContent = String(datos.distritos);
+  }
+  if (datos.capasActivas !== undefined && datos.capasTotal !== undefined && kpiCapasValor) {
+    kpiCapasValor.textContent = `${datos.capasActivas} / ${datos.capasTotal}`;
+  }
+}
+
 function buildConfiguracionContent(): HTMLElement {
   const wrap = document.createElement('div');
-  wrap.className = 'sidebar-panel-content';
+  wrap.className = 'sidebar-panel-content configuracion-ciudad';
+
+  const intro = document.createElement('p');
+  intro.className = 'cordon-intro';
+  intro.textContent = `${MARCA.nombre} · qué mide tu espejo y cómo.`;
+  wrap.appendChild(intro);
+
+  const grid = document.createElement('div');
+  grid.className = 'configuracion-ciudad__grid';
+
+  const tileFuentes = crearKpi({ etiqueta: 'Fuentes de datos', valor: '—' });
+  tileFuentes.classList.add('configuracion-ciudad__tile');
+  const kpiFuentesValor = tileFuentes.querySelector<HTMLElement>('.mv2-kpi-m')!;
+  const kpiFuentesEstado = document.createElement('span');
+  tileFuentes.querySelector('.mv2-kpi__valor-fila')!.after(kpiFuentesEstado);
+  onCambioFrescura((r) => {
+    if (r.estado === 'cargando') return;
+    kpiFuentesValor.textContent = String(r.total);
+    const enVivo = r.total - r.conRetraso;
+    kpiFuentesEstado.className = `mv2-kpi__estado mv2-kpi__estado--${r.conRetraso === 0 ? 'ok' : 'watch'}`;
+    kpiFuentesEstado.innerHTML = `<span class="mv2-kpi__estado-dot"></span>${r.conRetraso === 0 ? `${enVivo} en vivo` : `${r.conRetraso} con retraso`}`;
+  });
+
+  const tileDistritos = crearKpi({ etiqueta: 'Distritos con geometría', valor: '—' });
+  tileDistritos.classList.add('configuracion-ciudad__tile');
+  kpiDistritosValor = tileDistritos.querySelector('.mv2-kpi-m');
+
+  const tileCapas = crearKpi({ etiqueta: 'Capas activas', valor: '—' });
+  tileCapas.classList.add('configuracion-ciudad__tile');
+  kpiCapasValor = tileCapas.querySelector('.mv2-kpi-m');
+
+  const tileAnonimizacion = crearKpi({ etiqueta: 'Anonimización', valor: 'Activa', severidad: 'ok', textoEstado: 'sin datos personales' });
+  tileAnonimizacion.classList.add('configuracion-ciudad__tile');
+
+  grid.append(
+    iconoEnvueltoKpi('radio', tileFuentes),
+    iconoEnvueltoKpi('map', tileDistritos),
+    iconoEnvueltoKpi('layers', tileCapas),
+    iconoEnvueltoKpi('shield-check', tileAnonimizacion),
+  );
+  wrap.appendChild(grid);
 
   const title = document.createElement('div');
   title.className = 'sidebar-panel-content__title';
@@ -532,6 +609,15 @@ function buildConfiguracionContent(): HTMLElement {
   });
 
   return wrap;
+}
+
+function iconoEnvueltoKpi(icono: Parameters<typeof iconoSvg>[0], kpi: HTMLElement): HTMLElement {
+  const box = document.createElement('div');
+  box.className = 'configuracion-ciudad__icono';
+  box.innerHTML = iconoSvg(icono, 16);
+  const tile = kpi;
+  tile.prepend(box);
+  return tile;
 }
 
 // Registro único — añadir una funcionalidad nueva al sidebar es una entrada
@@ -1162,6 +1248,11 @@ function buildTabBar(): HTMLElement {
   tabbar.append(
     crearPestaña('Mapa', 'map', () => irAVista('mapa'), 'mapa'),
     crearPestaña('Inteligencia', 'brain-circuit', () => irAVista('inteligencia'), 'inteligencia'),
+    // spec 056 Fase 5, §8.7 — "Barrios"/"Capas" completan las 5 pestañas del
+    // documento de diseño original (la Fase 3a había dejado solo 3, a
+    // propósito, hasta que estas dos pantallas existieran de verdad).
+    crearPestaña('Barrios', 'map-pin', () => irAVista('barrios'), 'barrios'),
+    crearPestaña('Capas', 'layers', () => irAVista('capas'), 'capas'),
     crearPestaña('Más', 'menu', () => abrirMenuCb?.()),
   );
   window.addEventListener('hashchange', pintarActiva);
