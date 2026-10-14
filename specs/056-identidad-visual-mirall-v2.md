@@ -7,7 +7,7 @@ estado: Implemented
 tipo: fundacional
 depende_de: [019, 040, 053]
 propietario: usuario
-version: 10
+version: 11
 ```
 
 ## 1. Problema / motivación
@@ -390,6 +390,47 @@ kiosco, uso diario).
       de acumulación de agua, altimetría) con datos reales, tarjeta oscura consistente con el resto de la
       app, gradientes/barras de leyenda legibles sobre fondo oscuro, sin errores de consola.
 
+## 6.10 Lote de bugs reales reportados por el usuario (2026-10-14, tras revisar producción)
+
+- [x] **SideMenu no reservaba su ancho real** — `#app-sidebar` es `position: fixed`; al expandirse a 300px
+      tapaba `#controls`/`#info-panels`/la página de Inteligencia, que seguían reservando solo los 72px del
+      NavRail colapsado. Nuevo atributo `data-sidebar-expandido` en `<html>` (`setExpandido()`, chasis.ts)
+      alimenta `--sidebar-w-activo` en estilos.css, que esas 3 reglas usan en vez del ancho fijo colapsado —
+      con transición, solo en escritorio.
+- [x] **Logo duplicado** — el SideMenu llevaba su propio lockup (`marcaHtml`) además del de la TopBar; con el
+      menú expandido se veían los dos a la vez. Retirado el del SideMenu (la TopBar es siempre visible
+      mientras el menú está abierto); su cabecera se queda solo con el botón de plegar.
+- [x] **Legibilidad del logo de la TopBar** — `.marca__descriptor` ("Urban Intelligence Platform") a 8px con
+      `line-height` heredado de 1.1 quedaba casi ilegible. 10px + `line-height` propio + separación del nombre.
+- [x] **Hueco muerto en la TopBar a resoluciones anchas** — el interruptor Mapa/Inteligencia y la etiqueta de
+      ciudad se quedaban pegados al logo. Por encima de 1100px se desplazan hacia la derecha aprovechando el
+      espacio libre; por debajo, nav pasa a solo icono y la etiqueta de ciudad se oculta (ya vive también en
+      el SideMenu) — bug real encontrado verificando el propio fix: sin este corte por ancho, `esMovil()`
+      (que exige `pointer: coarse`, no solo ancho) deja a cualquier ventana de escritorio estrecha con la
+      TopBar completa, que no cabe y se solapa.
+- [x] **Reloj solo visible con el SideMenu abierto** — petición explícita: hora y día tienen que verse
+      siempre. Nuevo reloj en la TopBar (`#app-header__reloj`), independiente del que ya vivía en el pie del
+      SideMenu (se mantiene ahí también). En móvil se oculta la fecha, queda solo la hora.
+- [x] **`#movilidad-avisos-panel` ilegible en Inteligencia** — mismo patrón que el hallazgo de §6.9: nunca
+      había recibido `.mv2-card` (ni ninguna fase del rediseño la tocó) — sin ningún color explícito, el
+      texto quedaba prácticamente invisible sobre el fondo ya oscuro de la página. Convertida a `.mv2-card`,
+      con fila propia a todo el ancho; `.agenda-panel__aviso` (el aviso de scraping, compartido con esta
+      tarjeta) pasa de amarillo pálido a los tokens oscuros.
+- [x] **Agenda de eventos mostraba eventos ya terminados** — petición explícita: quitar todo lo que ya ha
+      pasado. `renderAgendaPanel` filtra ahora por `fechaFin < ahora` antes de agrupar — verificado con datos
+      reales (93 eventos de la fuente, 91 vigentes tras el filtro).
+- [ ] **Pendiente, decisión explícita del usuario**: `#movilidad-avisos-panel` NO lleva el mismo filtro de
+      "ya ha pasado" — los avisos de movilidad solo tienen fecha de publicación (la fecha real del corte/obra
+      va en texto libre, formatos variables); se decidió no inventar una regla aproximada que pudiera ocultar
+      un aviso todavía válido.
+- [ ] **Pendiente, en borrador**: ampliar Protocolos de actuación con 4-5 protocolos nuevos (incendio urbano,
+      accidente de tráfico, orden público/aglomeraciones, persona desaparecida, corte de suministro) — mismo
+      patrón que "Lluvias intensas" (spec 042 §2): contenido de referencia general, no procedimiento interno
+      de ningún cuerpo, pendiente de confirmación explícita del usuario antes de integrarlo (mismo cauce que
+      el protocolo existente).
+- [x] `npm run typecheck`, `npm run build` y `npm run test` (525/525) verdes. Verificado en navegador a 6
+      anchos distintos (375/768/1050/1100/1280/1920px) y en móvil — sin solapes, sin texto ilegible.
+
 ## 7. Riesgos
 
 - Verificación visual en este entorno ya documentada como punto débil en otras specs (bug de render
@@ -420,3 +461,4 @@ expulsara a mano, lo que bloqueaba la copia hasta volver a montarlo. Ya no depen
 | 8 | 2026-10-14 | Fase 4, fila 4 "Contexto" implementada — ver §6.7. Actualidad institucional (spec 039) + Contexto mediático (spec 009) + Términos en tendencia (spec 025, selector real de 2 ventanas en vez de las 3 del documento) + Protocolos de actuación (spec 042, sin pill de estado inventada), como `DataCard`. **Fase 4 completa** (las 4 filas de Inteligencia). Queda la Fase 5 (Configuración de ciudad, pantallas móviles nuevas, accesibilidad) |
 | 9 | 2026-10-14 | **Fase 5 implementada — ver §6.8. Rediseño completo del documento, cerrado.** Configuración de ciudad (4 cifras reales, no las 5 fabricadas del documento); `TabBar` a 5 pestañas con las pantallas móviles nuevas "Capas" (mismo `#controls` real, pantalla completa por CSS) y "Barrios" (ranking honesto de los 19 distritos por Pulso/Altimetría/Riesgo de agua real, sin la puntuación de bienestar inventada del documento — decisión explícita del usuario); pase de accesibilidad WCAG 2.2 AA (2 nombres accesibles corregidos + hallazgo real: el token `--text-muted` de Fase 1 no pasaba 4.5:1 en ningún fondo, aclarado de `#5c635e` a `#7f867f` en los ~48 sitios que lo usan). `estado` pasa a `Implemented` |
 | 10 | 2026-10-14 | **Hallazgo post-Fase 5, ver §6.9**: revisando el sitio publicado se vio que los 5 paneles fijos de `/mapa` y las ~15 leyendas de capa (`.info-panel`, nunca mencionados en ninguna fase) seguían con la tarjeta clara original sobre el mapa ya oscuro — la vista más usada de la app. Restyle a los tokens de Mirall v2 sin tocar estructura/lógica; limpieza de paso de un bloque CSS muerto (spec 044, huérfano desde la Fase 4). `#alert-modal` queda anotado como pendiente, fuera de esta pasada |
+| 11 | 2026-10-14 | **Lote de 6 bugs reales reportados por el usuario, ver §6.10**: SideMenu no reservaba su ancho real (tapaba el contenido al expandirse); logo duplicado (TopBar + SideMenu); descriptor del logo casi ilegible; hueco muerto en la TopBar a resoluciones anchas (corte real por media query, no por `esMovil()`); reloj solo visible con el menú abierto, ahora siempre en la TopBar; `#movilidad-avisos-panel` ilegible (mismo patrón que `.info-panel`, nunca tocada por el rediseño); Agenda de eventos mostraba eventos ya terminados, filtrado por `fechaFin`. Pendientes explícitos: filtro de "ya ha pasado" en avisos de movilidad (sin fecha de fin real en los datos, decisión del usuario: no inventar una regla) y ampliación de Protocolos de actuación (borrador de 5 protocolos nuevos entregado, pendiente de confirmación antes de integrar) |

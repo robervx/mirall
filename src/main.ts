@@ -1690,18 +1690,25 @@ function renderAgendaPanel(panel: AgendaPanel, snapshot: SnapshotAgenda): void {
     ? `<p class="mv2-card__estado--error">${iconoSvg('triangle-alert', 14)}<span>Agenda posiblemente desactualizada — la fuente parece haber cambiado de estructura. Mostrando el último dato bueno conocido.</span></p>`
     : '';
 
+  // Petición explícita del usuario (2026-10-14): quitar todo lo que ya ha
+  // pasado — un evento cuenta como pasado cuando su `fechaFin` real queda
+  // detrás de "ahora", no solo su día de inicio (un concierto de las 22h a
+  // las 02h del día siguiente sigue vigente a medianoche).
+  const ahora = Date.now();
+  const eventosVigentes = snapshot.eventos.filter((ev) => new Date(ev.fechaFin).getTime() >= ahora);
+
   // spec 027 v4 §9 — sección propia con los eventos que generan afluencia/tráfico/
   // cortes reales (fútbol como local, Roig Arena, carreras), ordenados por fecha.
   // No se excluyen de la agrupación por distrito de más abajo — es una prioridad
   // visual añadida, no un reemplazo.
-  const eventosImpacto = snapshot.eventos
+  const eventosImpacto = eventosVigentes
     .filter((ev) => ev.impactoViaPublica)
     .sort((a, b) => a.fechaInicio.localeCompare(b.fechaInicio));
   const seccionImpacto = renderGrupoAgenda('⚠ Impacto en vía pública', eventosImpacto);
 
   const porDistrito = new Map<string, { nombre: string; eventos: EventoAgenda[] }>();
   const generales: EventoAgenda[] = [];
-  for (const ev of snapshot.eventos) {
+  for (const ev of eventosVigentes) {
     if (ev.distritosMencionados.length === 0) {
       generales.push(ev);
       continue;
@@ -1719,11 +1726,11 @@ function renderAgendaPanel(panel: AgendaPanel, snapshot: SnapshotAgenda): void {
     .join('');
 
   const listaHtml = [seccionImpacto, gruposDistrito, renderGrupoAgenda('València (general)', generales)].join('');
-  const vacio = '<div class="mv2-card__estado">Sin eventos en la agenda ahora mismo.</div>';
+  const vacio = '<div class="mv2-card__estado">Sin eventos próximos en la agenda ahora mismo.</div>';
   panel.list.innerHTML = avisoSospechoso + (listaHtml || (avisoSospechoso ? '' : vacio));
 
   const meta = panel.root.querySelector('#agenda-panel-meta')!;
-  meta.textContent = `${metaFrescuraCorta('valencia.es', snapshot.fetchedAt)} · ${snapshot.eventos.length} eventos`;
+  meta.textContent = `${metaFrescuraCorta('valencia.es', snapshot.fetchedAt)} · ${eventosVigentes.length} eventos`;
   meta.classList.toggle('mv2-card__meta--stale', snapshot.estructuraSospechosa);
 }
 
@@ -1744,12 +1751,25 @@ interface MovilidadPanel {
 function buildMovilidadPanel(): MovilidadPanel {
   const root = document.createElement('div');
   root.id = 'movilidad-avisos-panel';
+  // Bug real reportado por el usuario (2026-10-14): esta tarjeta no tenía
+  // `.mv2-card` (nunca entró en ninguna fase del rediseño, igual que el
+  // hallazgo de spec 056 §6.9 con `.info-panel`) — sin ningún color
+  // explícito, el texto heredaba el negro por defecto del navegador sobre
+  // el fondo ya oscuro de la página: prácticamente ilegible.
+  root.className = 'mv2-card';
+  root.dataset.vistaInteligenciaCard = '';
+  root.dataset.categoria = 'movilidad';
   root.hidden = true;
   root.innerHTML = `
-    <div class="media-panel__header">Incidencias y previsiones de movilidad</div>
-    <div class="agenda-panel__aviso">Contenido extraído por scraping de valencia.es (Ayuntamiento de València) — no es una API ni un dataset oficial.</div>
-    <div class="media-panel__list" id="movilidad-avisos-panel-list"></div>
-    <div class="info-panel__meta" id="movilidad-avisos-panel-meta"></div>
+    <header class="mv2-card__header">
+      <span class="mv2-card__header-icon">${iconoSvg('construction', 16)}</span>
+      <h3 class="mv2-card__title">Incidencias y previsiones de movilidad</h3>
+    </header>
+    <div class="mv2-card__body">
+      <div class="agenda-panel__aviso">Contenido extraído por scraping de valencia.es (Ayuntamiento de València) — no es una API ni un dataset oficial.</div>
+      <div class="media-panel__list" id="movilidad-avisos-panel-list"></div>
+      <p class="mv2-card__fuente" id="movilidad-avisos-panel-meta"></p>
+    </div>
   `;
   document.body.appendChild(root);
   return { root, list: root.querySelector('#movilidad-avisos-panel-list')! };

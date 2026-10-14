@@ -773,9 +773,33 @@ function buildTopBar(): HTMLElement {
 
   izquierda.append(marca, divider, nav, ciudad);
 
-  // ---- Derecha: alerta crítica · en vivo · campana · ajustes ----
+  // ---- Derecha: reloj · alerta crítica · en vivo · campana · ajustes ----
   const derecha = document.createElement('div');
   derecha.id = 'app-header__derecha';
+
+  // Reloj — petición explícita del usuario (2026-10-14): la hora y el día
+  // tienen que verse siempre, no solo con el SideMenu abierto (donde ya
+  // vivía, §7.12 del documento). Se mantiene también ahí (misma lógica
+  // duplicada a propósito, igual que la etiqueta de ciudad) — aquí es la
+  // única copia garantizada visible en todo momento.
+  const reloj = document.createElement('span');
+  reloj.id = 'app-header__reloj';
+  const relojFecha = document.createElement('span');
+  relojFecha.id = 'app-header__reloj-fecha';
+  const relojHora = document.createElement('span');
+  relojHora.id = 'app-header__reloj-hora';
+  reloj.append(relojFecha, relojHora);
+  const capitalizarReloj = (s: string): string => s.charAt(0).toUpperCase() + s.slice(1);
+  const pintarRelojHeader = (): void => {
+    const ahora = new Date();
+    relojFecha.textContent =
+      capitalizarReloj(
+        ahora.toLocaleDateString('es-ES', { weekday: 'short', day: '2-digit', month: 'short', timeZone: 'Europe/Madrid' }),
+      ) + ' · ';
+    relojHora.textContent = ahora.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Madrid' });
+  };
+  pintarRelojHeader();
+  setInterval(pintarRelojHeader, 1000 * 15);
 
   // Banner persistente de alerta oficial ROJA o NARANJA (petición explícita
   // del usuario, 2026-10-01): "debe ser una alerta permanente durante el
@@ -837,7 +861,7 @@ function buildTopBar(): HTMLElement {
   ajustes.innerHTML = iconoSvg('settings', 18);
   ajustes.addEventListener('click', () => abrirSeccionSidebarCb?.('configuracion'));
 
-  derecha.append(alertaCritica, live, campana, ajustes);
+  derecha.append(reloj, alertaCritica, live, campana, ajustes);
   header.append(izquierda, derecha);
 
   return header;
@@ -904,21 +928,25 @@ function buildSidebar(): void {
   // En móvil la hoja siempre arranca cerrada (si no, taparía el mapa al abrir
   // la app); en escritorio se respeta lo que el usuario dejó (spec 019).
   const expandedInicial = !esMovil() && localStorage.getItem(SIDEBAR_EXPANDED_KEY) === '1';
-  if (expandedInicial) sidebar.classList.add('is-expanded');
+  if (expandedInicial) {
+    sidebar.classList.add('is-expanded');
+    document.documentElement.toggleAttribute('data-sidebar-expandido', true);
+  }
 
-  // Cabecera del SideMenu (lockup + botón de plegar) — solo visible
-  // expandido; en el NavRail plegado no cabe el lockup (72px).
+  // Cabecera del SideMenu (solo el botón de plegar) — solo visible
+  // expandido; en el NavRail plegado no cabe nada de esto (72px). Bug real
+  // reportado por el usuario (2026-10-14): llevaba su propio lockup de marca
+  // (`marcaHtml`) además del de la TopBar — con el SideMenu expandido se
+  // veían los dos logos a la vez, uno debajo del otro. Se retira el de aquí,
+  // la TopBar ya es siempre visible mientras el SideMenu está abierto.
   const cabecera = document.createElement('div');
   cabecera.id = 'app-sidebar__cabecera';
-  const marcaMenu = document.createElement('div');
-  marcaMenu.className = 'marca';
-  marcaMenu.innerHTML = marcaHtml(36);
   const plegar = document.createElement('button');
   plegar.id = 'app-sidebar__toggle';
   plegar.type = 'button';
   plegar.setAttribute('aria-label', 'Plegar menú');
   plegar.innerHTML = iconoSvg('panel-left-close', 18);
-  cabecera.append(marcaMenu, plegar);
+  cabecera.append(plegar);
 
   // Botón que abre el menú desde el NavRail plegado — primer icono del
   // rail (§7.11). Es el mismo toggle, solo cambia qué botón se ve según el
@@ -966,6 +994,13 @@ function buildSidebar(): void {
     abrirDesdeRail.setAttribute('aria-expanded', String(expanded));
     backdrop.hidden = !(expanded && esMovil());
     localStorage.setItem(SIDEBAR_EXPANDED_KEY, expanded ? '1' : '0');
+    // Bug real reportado por el usuario (2026-10-14): `#app-sidebar` es
+    // `position: fixed`, así que expandirlo a 300px no empujaba de por sí el
+    // contenido (`#controls`/`#info-panels`/la página de Inteligencia, que
+    // solo reservaban los 72px del NavRail colapsado) — quedaba tapado por
+    // debajo. Este atributo alimenta `--sidebar-w-activo` en estilos.css,
+    // que esas reglas usan para reservar el ancho real según el estado.
+    document.documentElement.toggleAttribute('data-sidebar-expandido', expanded);
 
     if (expanded && esMovil()) {
       focoPrevio = document.activeElement as HTMLElement | null;
