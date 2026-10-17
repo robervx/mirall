@@ -508,11 +508,25 @@ body.pagina-publica {
   display: flex;
   flex-direction: column;
   opacity: 0;
+  pointer-events: none;
   transition: opacity var(--mv2-dur-slow) var(--mv2-ease);
+}
+
+/* Bug real en producción: `[hidden]` por sí solo no basta — esta regla tiene
+   la misma especificidad que `.menu-movil` de arriba y, como hoja de autor,
+   gana siempre a la hoja por defecto del navegador (donde vive `[hidden] {
+   display: none }`), así que sin este override explícito el panel se queda
+   SIEMPRE en el DOM con `display: flex; position: fixed; inset: 0` — con
+   `hidden` puesto y opacidad 0 (invisible), pero captando todos los clics de
+   toda la página. Con el menú nunca abierto (p. ej. escritorio ancho, donde
+   la hamburguesa ni se muestra) esto tapaba cualquier botón de la landing. */
+.menu-movil[hidden] {
+  display: none;
 }
 
 .menu-movil.is-abierto {
   opacity: 1;
+  pointer-events: auto;
 }
 
 .menu-movil__cabecera {
