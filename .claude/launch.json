@@ -9,6 +9,15 @@
         "cd /Users/Rober/Desktop/vlc-monitor && exec npm run dev"
       ],
       "port": 3000
+    },
+    {
+      "name": "preview",
+      "runtimeExecutable": "bash",
+      "runtimeArgs": [
+        "-lc",
+        "cd /Users/Rober/Desktop/vlc-monitor && exec npm run preview -- --port 4173"
+      ],
+      "port": 4173
     }
   ]
 }

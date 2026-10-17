@@ -1312,19 +1312,19 @@
 
       #alert-modal {
         width: min(420px, 100%);
-        background: #fff;
+        background: var(--surface);
         border-radius: 10px;
         box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
-        border-top: 5px solid #94a3b8;
+        border-top: 5px solid var(--text-secondary);
         overflow: hidden;
       }
 
       #alert-modal.alert-modal--aviso {
-        border-top-color: #f2c744;
+        border-top-color: var(--warning);
       }
 
       #alert-modal.alert-modal--urgente {
-        border-top-color: #d64545;
+        border-top-color: var(--danger);
       }
 
       .alert-modal__header {
@@ -1332,18 +1332,18 @@
         align-items: center;
         justify-content: space-between;
         padding: 10px 12px;
-        border-bottom: 1px solid #eee;
+        border-bottom: 1px solid var(--border);
       }
 
       .alert-modal__contador {
         font-size: 12px;
-        color: #64748b;
+        color: var(--text-secondary);
       }
 
       .alert-modal__cerrar {
         background: transparent;
         border: 0;
-        color: #64748b;
+        color: var(--text-secondary);
         font-size: 16px;
         cursor: pointer;
         padding: 2px 6px;
@@ -1357,19 +1357,19 @@
       .alert-modal__titulo {
         font-size: 15px;
         font-weight: 700;
-        color: #1e293b;
+        color: var(--text-primary);
       }
 
       .alert-modal__desc {
         font-size: 13px;
-        color: #475569;
+        color: var(--text-secondary);
         margin-top: 6px;
         line-height: 1.4;
       }
 
       .alert-modal__momento {
         font-size: 11px;
-        color: #94a3b8;
+        color: var(--text-secondary);
         margin-top: 8px;
       }
 
@@ -1388,15 +1388,15 @@
       }
 
       .alert-modal__ver {
-        background: #fff;
-        border: 1px solid #cbd5e1;
-        color: #334155;
+        background: var(--surface-2);
+        border: 1px solid var(--border);
+        color: var(--text-primary);
       }
 
       .alert-modal__siguiente {
-        background: var(--mirall-navy, #0b1f33);
-        border: 1px solid var(--mirall-navy, #0b1f33);
-        color: #fff;
+        background: var(--accent);
+        border: 1px solid var(--accent);
+        color: var(--accent-ink);
       }
 
       .info-panel--resaltado {

@@ -381,10 +381,10 @@ kiosco, uso diario).
       `.pluviometro-fila`/`.escorrentia-fila`/`.avamet-fila` (spec 044) eliminado — confirmado por `grep`
       que ninguna clase se usa ya en ningún `.ts` del proyecto, código muerto desde que
       `emergencia-meteo-panel.ts` se reescribió en la Fase 4 fila 2 a `.mv2-card`/`.meteo-zona-tabla*`.
-- [x] **Fuera de esta pasada, encontrado pero no corregido todavía**: `#alert-modal` (modal bloqueante de
-      alertas críticas, spec 013 v5) sigue con fondo blanco — es un componente aparte, poco visible (solo
-      durante una alerta activa de verdad) y no era lo que se le enseñó al usuario al pedir este fix;
-      queda anotado aquí para una próxima pasada.
+- [x] **Corregido en una pasada posterior (2026-10-17)**: `#alert-modal` (modal bloqueante de alertas
+      críticas, spec 013 v5) había quedado anotado arriba como pendiente con fondo blanco. Restyle a los
+      tokens de Mirall v2 (`--surface`, `--border`, `--text-primary`, `--text-secondary`, `--warning`,
+      `--danger`, `--accent`/`--accent-ink`), mismo patrón que el resto de esta sección.
 - [x] `npm run typecheck`, `npm run build` y `npm run test` (525/525) verdes.
 - [x] Verificado en navegador, escritorio y móvil: los 5 paneles fijos y varias leyendas (tráfico, riesgo
       de acumulación de agua, altimetría) con datos reales, tarjeta oscura consistente con el resto de la

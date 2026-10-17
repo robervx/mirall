@@ -183,6 +183,19 @@ function pwaPlugin(): Plugin[] {
       // sirve la app o la pantalla de login. El precache solo lleva los assets.
       globPatterns: ['**/*.{js,css,svg,woff2}'],
       cleanupOutdatedCaches: true,
+      // vite-plugin-pwa registra, si no se desactiva aquí, un `NavigationRoute`
+      // (fallback de SPA de una sola página) apuntando a "index.html" — ANTES
+      // que el NetworkFirst de abajo, así que lo tapa para toda navegación por
+      // orden de registro de Workbox (gana la primera ruta que haga match).
+      // Esta es una app multi-página (landing/mapa/proceso/guia-estilos) y
+      // "index.html" ni siquiera está precacheado (ver comentario arriba) —
+      // ese fallback nunca fue intencional y, cuando se dispara, sirve el
+      // index.html de la raíz (la landing) en la URL que sea, p.ej. al
+      // navegar a /mapa. Bug real en producción: con el SW ya instalado de
+      // una visita anterior, pulsar "Abrir el mapa" no llevaba a ningún
+      // sitio visible porque se repintaba la propia landing. Desactivado
+      // explícitamente para que el único navigate handler sea el nuestro.
+      navigateFallback: undefined,
       runtimeCaching: [
         {
           // Nunca cachear autenticación ni la pantalla de login.

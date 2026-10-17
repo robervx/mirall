@@ -70,7 +70,7 @@ export function montarSenalesPanel(): void {
     <header class="mv2-card__header">
       <span class="mv2-card__header-icon">${iconoSvg('radio-tower', 16)}</span>
       <h3 id="senales-ia-panel__titulo" class="mv2-card__title">Señales</h3>
-      <span class="mv2-card__live"><span class="mv2-card__live-dot"></span>EN VIVO</span>
+      <span class="mv2-card__live" id="senales-ia-live"><span class="mv2-card__live-dot"></span>EN VIVO</span>
       <span class="mv2-card__meta" id="senales-ia-meta"></span>
     </header>
     <div class="mv2-card__body" id="senales-ia-body"></div>
@@ -85,6 +85,12 @@ export function montarSenalesPanel(): void {
       const meta = root.querySelector('#senales-ia-meta')!;
       meta.textContent = metaFrescuraCorta('Correlación interna', datos.generadaEn);
       meta.classList.toggle('mv2-card__meta--stale', !datos.fresh);
+      // El badge "EN VIVO" solo tiene sentido si el dato lo es de verdad —
+      // igual que `crearDataCard` (componentes-base.ts), que nunca lo pinta
+      // junto a `stale`. Esta tarjeta no pasa por ese helper (predata la
+      // migración de la spec 056 Fase 4) así que replica aquí el mismo criterio.
+      const live = root.querySelector<HTMLElement>('#senales-ia-live')!;
+      live.hidden = !datos.fresh;
     } catch (err) {
       body.textContent = 'Señales no disponibles ahora mismo.';
       console.error('Fallo al cargar señales correlacionadas:', err);
