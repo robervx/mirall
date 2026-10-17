@@ -596,5 +596,15 @@
   {
     "timestamp": "2026-10-17T21:16:03.420Z",
     "distritosActivos": []
+  },
+  {
+    "timestamp": "2026-10-17T23:47:32.213Z",
+    "distritosActivos": [
+      {
+        "codigo": "03",
+        "nombre": "Extramurs",
+        "anticipacionMin": 12
+      }
+    ]
   }
 ]
