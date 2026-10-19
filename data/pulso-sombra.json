@@ -640,5 +640,25 @@
   {
     "timestamp": "2026-10-19T00:52:01.496Z",
     "distritosActivos": []
+  },
+  {
+    "timestamp": "2026-10-19T05:47:59.673Z",
+    "distritosActivos": [
+      {
+        "codigo": "04",
+        "nombre": "Campanar",
+        "anticipacionMin": 12
+      },
+      {
+        "codigo": "15",
+        "nombre": "Rascanya",
+        "anticipacionMin": 12
+      },
+      {
+        "codigo": "16",
+        "nombre": "Benicalap",
+        "anticipacionMin": 12
+      }
+    ]
   }
 ]
