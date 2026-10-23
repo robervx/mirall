@@ -29958,5 +29958,219 @@
         }
       }
     ]
+  },
+  {
+    "timestamp": "2026-10-23T13:07:30.891Z",
+    "distritos": [
+      {
+        "codigo": "01",
+        "congestion": 0,
+        "muestras": 29,
+        "porEstado": {
+          "fluido": 29,
+          "denso": 0,
+          "congestionado": 0,
+          "cortado": 0
+        }
+      },
+      {
+        "codigo": "02",
+        "congestion": 0.03913043478260869,
+        "muestras": 23,
+        "porEstado": {
+          "fluido": 20,
+          "denso": 3,
+          "congestionado": 0,
+          "cortado": 0
+        }
+      },
+      {
+        "codigo": "03",
+        "congestion": 0.17307692307692307,
+        "muestras": 26,
+        "porEstado": {
+          "fluido": 18,
+          "denso": 5,
+          "congestionado": 0,
+          "cortado": 3
+        }
+      },
+      {
+        "codigo": "04",
+        "congestion": 0.019999999999999997,
+        "muestras": 45,
+        "porEstado": {
+          "fluido": 42,
+          "denso": 3,
+          "congestionado": 0,
+          "cortado": 0
+        }
+      },
+      {
+        "codigo": "05",
+        "congestion": 0,
+        "muestras": 18,
+        "porEstado": {
+          "fluido": 18,
+          "denso": 0,
+          "congestionado": 0,
+          "cortado": 0
+        }
+      },
+      {
+        "codigo": "06",
+        "congestion": 0.017142857142857144,
+        "muestras": 35,
+        "porEstado": {
+          "fluido": 33,
+          "denso": 2,
+          "congestionado": 0,
+          "cortado": 0
+        }
+      },
+      {
+        "codigo": "07",
+        "congestion": 0.031578947368421054,
+        "muestras": 19,
+        "porEstado": {
+          "fluido": 17,
+          "denso": 2,
+          "congestionado": 0,
+          "cortado": 0
+        }
+      },
+      {
+        "codigo": "08",
+        "congestion": 0.12307692307692308,
+        "muestras": 13,
+        "porEstado": {
+          "fluido": 10,
+          "denso": 2,
+          "congestionado": 0,
+          "cortado": 1
+        }
+      },
+      {
+        "codigo": "09",
+        "congestion": 0.012499999999999999,
+        "muestras": 24,
+        "porEstado": {
+          "fluido": 23,
+          "denso": 1,
+          "congestionado": 0,
+          "cortado": 0
+        }
+      },
+      {
+        "codigo": "10",
+        "congestion": 0.0062499999999999995,
+        "muestras": 48,
+        "porEstado": {
+          "fluido": 47,
+          "denso": 1,
+          "congestionado": 0,
+          "cortado": 0
+        }
+      },
+      {
+        "codigo": "11",
+        "congestion": 0,
+        "muestras": 29,
+        "porEstado": {
+          "fluido": 29,
+          "denso": 0,
+          "congestionado": 0,
+          "cortado": 0
+        }
+      },
+      {
+        "codigo": "12",
+        "congestion": 0,
+        "muestras": 29,
+        "porEstado": {
+          "fluido": 29,
+          "denso": 0,
+          "congestionado": 0,
+          "cortado": 0
+        }
+      },
+      {
+        "codigo": "13",
+        "congestion": 0,
+        "muestras": 15,
+        "porEstado": {
+          "fluido": 15,
+          "denso": 0,
+          "congestionado": 0,
+          "cortado": 0
+        }
+      },
+      {
+        "codigo": "14",
+        "congestion": 0.04285714285714286,
+        "muestras": 7,
+        "porEstado": {
+          "fluido": 6,
+          "denso": 1,
+          "congestionado": 0,
+          "cortado": 0
+        }
+      },
+      {
+        "codigo": "15",
+        "congestion": 0.04615384615384615,
+        "muestras": 13,
+        "porEstado": {
+          "fluido": 11,
+          "denso": 2,
+          "congestionado": 0,
+          "cortado": 0
+        }
+      },
+      {
+        "codigo": "16",
+        "congestion": 0.015789473684210527,
+        "muestras": 19,
+        "porEstado": {
+          "fluido": 18,
+          "denso": 1,
+          "congestionado": 0,
+          "cortado": 0
+        }
+      },
+      {
+        "codigo": "17",
+        "congestion": 0.03,
+        "muestras": 10,
+        "porEstado": {
+          "fluido": 9,
+          "denso": 1,
+          "congestionado": 0,
+          "cortado": 0
+        }
+      },
+      {
+        "codigo": "18",
+        "congestion": 0,
+        "muestras": 3,
+        "porEstado": {
+          "fluido": 3,
+          "denso": 0,
+          "congestionado": 0,
+          "cortado": 0
+        }
+      },
+      {
+        "codigo": "19",
+        "congestion": 0.15,
+        "muestras": 2,
+        "porEstado": {
+          "fluido": 1,
+          "denso": 1,
+          "congestionado": 0,
+          "cortado": 0
+        }
+      }
+    ]
   }
 ]
