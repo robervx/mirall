@@ -1068,5 +1068,15 @@
   {
     "timestamp": "2026-11-11T08:56:03.622Z",
     "distritosActivos": []
+  },
+  {
+    "timestamp": "2026-11-11T16:55:31.513Z",
+    "distritosActivos": [
+      {
+        "codigo": "01",
+        "nombre": "Ciutat Vella",
+        "anticipacionMin": 64
+      }
+    ]
   }
 ]
