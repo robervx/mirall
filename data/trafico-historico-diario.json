@@ -6298,5 +6298,105 @@
         "muestras": 2
       }
     ]
+  },
+  {
+    "fecha": "2026-10-20",
+    "distritos": [
+      {
+        "codigo": "01",
+        "congestionMedia": 0,
+        "muestras": 3
+      },
+      {
+        "codigo": "02",
+        "congestionMedia": 0.01884057971014493,
+        "muestras": 3
+      },
+      {
+        "codigo": "03",
+        "congestionMedia": 0.11538461538461538,
+        "muestras": 3
+      },
+      {
+        "codigo": "04",
+        "congestionMedia": 0,
+        "muestras": 3
+      },
+      {
+        "codigo": "05",
+        "congestionMedia": 0,
+        "muestras": 3
+      },
+      {
+        "codigo": "06",
+        "congestionMedia": 0,
+        "muestras": 3
+      },
+      {
+        "codigo": "07",
+        "congestionMedia": 0,
+        "muestras": 3
+      },
+      {
+        "codigo": "08",
+        "congestionMedia": 0.07692307692307693,
+        "muestras": 3
+      },
+      {
+        "codigo": "09",
+        "congestionMedia": 0,
+        "muestras": 3
+      },
+      {
+        "codigo": "10",
+        "congestionMedia": 0.0020833333333333333,
+        "muestras": 3
+      },
+      {
+        "codigo": "11",
+        "congestionMedia": 0,
+        "muestras": 3
+      },
+      {
+        "codigo": "12",
+        "congestionMedia": 0,
+        "muestras": 3
+      },
+      {
+        "codigo": "13",
+        "congestionMedia": 0,
+        "muestras": 3
+      },
+      {
+        "codigo": "14",
+        "congestionMedia": 0,
+        "muestras": 3
+      },
+      {
+        "codigo": "15",
+        "congestionMedia": 0,
+        "muestras": 3
+      },
+      {
+        "codigo": "16",
+        "congestionMedia": 0,
+        "muestras": 3
+      },
+      {
+        "codigo": "17",
+        "congestionMedia": 0,
+        "muestras": 3
+      },
+      {
+        "codigo": "18",
+        "congestionMedia": 0,
+        "muestras": 3
+      },
+      {
+        "codigo": "19",
+        "congestionMedia": 0,
+        "muestras": 3
+      }
+    ]
   }
 ]
