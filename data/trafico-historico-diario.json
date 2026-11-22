@@ -6598,5 +6598,105 @@
         "muestras": 1
       }
     ]
+  },
+  {
+    "fecha": "2026-10-23",
+    "distritos": [
+      {
+        "codigo": "01",
+        "congestionMedia": 0.005172413793103448,
+        "muestras": 2
+      },
+      {
+        "codigo": "02",
+        "congestionMedia": 0.021739130434782608,
+        "muestras": 2
+      },
+      {
+        "codigo": "03",
+        "congestionMedia": 0.14615384615384613,
+        "muestras": 2
+      },
+      {
+        "codigo": "04",
+        "congestionMedia": 0.003333333333333333,
+        "muestras": 2
+      },
+      {
+        "codigo": "05",
+        "congestionMedia": 0.008333333333333333,
+        "muestras": 2
+      },
+      {
+        "codigo": "06",
+        "congestionMedia": 0,
+        "muestras": 2
+      },
+      {
+        "codigo": "07",
+        "congestionMedia": 0.042105263157894736,
+        "muestras": 2
+      },
+      {
+        "codigo": "08",
+        "congestionMedia": 0.08846153846153847,
+        "muestras": 2
+      },
+      {
+        "codigo": "09",
+        "congestionMedia": 0,
+        "muestras": 2
+      },
+      {
+        "codigo": "10",
+        "congestionMedia": 0,
+        "muestras": 2
+      },
+      {
+        "codigo": "11",
+        "congestionMedia": 0,
+        "muestras": 2
+      },
+      {
+        "codigo": "12",
+        "congestionMedia": 0.005172413793103448,
+        "muestras": 2
+      },
+      {
+        "codigo": "13",
+        "congestionMedia": 0,
+        "muestras": 2
+      },
+      {
+        "codigo": "14",
+        "congestionMedia": 0,
+        "muestras": 2
+      },
+      {
+        "codigo": "15",
+        "congestionMedia": 0.03461538461538461,
+        "muestras": 2
+      },
+      {
+        "codigo": "16",
+        "congestionMedia": 0.007894736842105263,
+        "muestras": 2
+      },
+      {
+        "codigo": "17",
+        "congestionMedia": 0.015,
+        "muestras": 2
+      },
+      {
+        "codigo": "18",
+        "congestionMedia": 0,
+        "muestras": 2
+      },
+      {
+        "codigo": "19",
+        "congestionMedia": 0,
+        "muestras": 2
+      }
+    ]
   }
 ]
